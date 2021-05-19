@@ -1,4 +1,7 @@
-#include<stddef.h> 
+#ifndef LIBFT_H
+# define LIBFT_H
+
+# include<stddef.h> 
 
 int ft_atoi(const char *nptr);
 int ft_isalnum(int c);
@@ -12,14 +15,4 @@ char *ft_strnstr(const char	*big, const char *little, size_t len);
 int ft_tolower(int c);
 int ft_toupper(int c);
 
-
-
-
-
-
-
-
-
-
-
-
+#endif 
