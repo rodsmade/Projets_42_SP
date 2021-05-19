@@ -9,8 +9,7 @@ Tout les projets developpés dans l'école 42 à São Paulo à partir de mai 202
 
 ### Les Projets
 #### Niveau 1:
-- libft
-	Nous construisons notre prope bibliothèque avec les fonctions que nous utiliserons tout au long du reste du programme. Les fonctions commençant par "ft" copient les fonctions C traditionnelles y n'utilisent pas des fonctions externes sauf une utilisation minimale de "write" et "malloc" dans des circonstances spécifiques.
+- **libft:**	Nous construisons notre prope bibliothèque avec les fonctions que nous utiliserons tout au long du reste du programme. Les fonctions commençant par "ft" copient les fonctions C traditionnelles y n'utilisent pas des fonctions externes sauf une utilisation minimale de "write" et "malloc" dans des circonstances spécifiques.
 
 #### Niveau 2:
 - get_next_line
