@@ -8,54 +8,54 @@ _Lorsqu'il y a plus d'un projet dans un nombre, un seul projet doit être sélec
 ## Partie 1 - Les notions obligatoire
 
 ### Les Projets
-	Niveau 1:
-		- libft
-			Nous construisons notre prope bibliothèque avec les fonctions que nous utiliserons tout au long du reste du programme. Les fonctions commençant par "ft" copient les fonctions C traditionnelles y n'utilisent pas des fonctions externes sauf une utilisation minimale de "write" et "malloc" dans des circonstances spécifiques.
+####Niveau 1:
+- libft
+	Nous construisons notre prope bibliothèque avec les fonctions que nous utiliserons tout au long du reste du programme. Les fonctions commençant par "ft" copient les fonctions C traditionnelles y n'utilisent pas des fonctions externes sauf une utilisation minimale de "write" et "malloc" dans des circonstances spécifiques.
 
-	Niveau 2:
-		- get_next_line
-		
-	Niveau 3:		
-		- ft_printf
+####Niveau 2:
+- get_next_line
 	
-	Niveau 4:
-		- born2beroot
-		
-	Niveau 5:
-		- fractol / fdf / epikong
-			Des jeux numériques.
+####Niveau 3:		
+- ft_printf
 
-	Niveau 6:
-		- minitalk / pipex
-		
-	Niveau 7:
-		- push_swap
+####Niveau 4:
+- born2beroot
+	
+####Niveau 5:
+- fractol / fdf / epikong
+	Des jeux numériques.
 
-	Niveau 8:
-		- minishell
+####Niveau 6:
+- minitalk / pipex
+	
+####Niveau 7:
+- push_swap
 
-	Niveau 9:
-		- Philosophers
+####Niveau 8:
+- minishell
 
-	Niveau 10:
-		- netpractice
+####Niveau 9:
+- Philosophers
 
-	Niveau 11:
-		- cub3d / minirt
+####Niveau 10:
+- netpractice
 
-	Niveau 12:
-		- CPP Modules (9 modules pour apprendre la programmation orientée objet)
+####Niveau 11:
+- cub3d / minirt
 
-	Niveau 13:
-		- ft_containers
+####Niveau 12:
+- CPP Modules (9 modules pour apprendre la programmation orientée objet)
 
-	Niveau 14:
-		- inception
+####Niveau 13:
+- ft_containers
 
-	Niveau 15:
-		- webservices / ft_irc
+####Niveau 14:
+- inception
 
-	Niveau 16:
-		- transcendence
+####Niveau 15:
+- webservices / ft_irc
+
+####Niveau 16:
+- transcendence
 
 ## Partie 2 - Le perfectionnement
