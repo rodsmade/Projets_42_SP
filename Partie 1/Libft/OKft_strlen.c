@@ -1,12 +1,14 @@
-int	ft_strlen(char *str)
+#include "libft.h"
+
+size_t ft_strlen(const char *s)
 {
 	int qtd_caracteres;
 
 	qtd_caracteres = 0;
-	while (*str)
+	while (*s)
 	{
 		qtd_caracteres++;
-		str++;
+		s++;
 	}
 	return (qtd_caracteres);
 }

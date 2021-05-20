@@ -44,3 +44,16 @@ int main()
 	printf("* -> %c\n", ft_tolower('*'));
 	return 0;
 }
+
+// FT_STRLEN
+
+#include<stdio.h>
+int main()
+{
+	char *stringe = "Qtos chars tem esse string";
+	if (strlen(stringe) == ft_strlen(stringe))
+		printf("YIS");
+	else
+		printf("YIKES");
+	return 0;
+}
