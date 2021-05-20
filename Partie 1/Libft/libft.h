@@ -1,7 +1,7 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include<stddef.h> 
+# include<unistd.h>
 
 int ft_atoi(const char *nptr);
 int ft_isalnum(int c);
