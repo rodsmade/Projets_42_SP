@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<ctype.h>
 
+// IS _____STH______
 int main()
 {
 	int iterations = 256;
@@ -22,5 +23,24 @@ int main()
 		printf("ALL OK ! ! ! Way to go.\n");
 	else
 		printf("Capotou ): see log above. %d\n", all_ok);
+	return 0;
+}
+
+// TO UPPER / LOWER
+#include<stdio.h>
+
+int main()
+{
+	printf("A -> %c\n", ft_tolower('A'));
+	printf("B -> %c\n", ft_tolower('B'));
+	printf("C -> %c\n", ft_tolower('C'));
+	printf("Z -> %c\n", ft_tolower('Z'));
+	printf("a -> %c\n", ft_tolower('a'));
+	printf("b -> %c\n", ft_tolower('b'));
+	printf("c -> %c\n", ft_tolower('c'));
+	printf("z -> %c\n", ft_tolower('z'));
+	printf("  -> %c\n", ft_tolower(' '));
+	printf("@ -> %c\n", ft_tolower('@'));
+	printf("* -> %c\n", ft_tolower('*'));
 	return 0;
 }
