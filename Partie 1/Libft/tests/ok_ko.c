@@ -57,3 +57,16 @@ int main()
 		printf("YIKES");
 	return 0;
 }
+
+// ATOI
+
+#include<stdlib.h>
+#include<stdio.h>
+int main()
+{
+	char *p = " 	2147483647 a a a ";
+	printf("String: %s:\n", p);
+	printf("atoi:         %i\n", atoi(p));
+	printf("ft_atoi:      %i\n", ft_atoi(p));
+	return (0);
+}
