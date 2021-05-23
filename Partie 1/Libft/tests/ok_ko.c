@@ -70,3 +70,18 @@ int main()
 	printf("ft_atoi:      %i\n", ft_atoi(p));
 	return (0);
 }
+
+// STRNSTR
+
+#include <stdio.h>
+
+int main(void)
+{
+	char *haystack = "minha haystack ahahaha mimos";
+	char *needle = "ack";
+	int length = 2;
+
+	printf("Resultado:	%s\n", ft_strnstr(haystack, needle, length));
+	return (0);
+}
+
