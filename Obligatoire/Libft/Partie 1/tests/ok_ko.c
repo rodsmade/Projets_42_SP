@@ -85,3 +85,23 @@ int main(void)
 	return (0);
 }
 
+// STRLCPY
+// OBS: COMPILAR COM -lbsd: "compila ft_strlcpy.c OKft_strlen.c -lbsd"
+
+#include <bsd/string.h>
+#include <stdio.h>
+
+int main()
+{
+	char *source1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	char *source2 = "abcdefghijklmnopqrstuvwxyz";
+	char dest1[26];
+	char dest2[26];
+	size_t dest_size = 229;
+	
+	printf("resultado1 (normal)    : %li\n", strlcpy(dest1, source1, dest_size));
+	printf("resultado2 (ft_strlcpy): %li\n", ft_strlcpy(dest2, source2, dest_size));
+	printf("dest1: %s\n", dest1);
+	printf("dest2: %s\n", dest2);
+	return 0;
+}
