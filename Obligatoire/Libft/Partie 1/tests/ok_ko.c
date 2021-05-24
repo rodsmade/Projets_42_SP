@@ -105,3 +105,20 @@ int main()
 	printf("dest2: %s\n", dest2);
 	return 0;
 }
+
+// STRLCAT
+// OBS: COMPILAR COM -lbsd: "compila ft_strlcpy.c OKft_strlen.c -lbsd"
+// TABELINHA VERDADE HANDY AF:
+// Before :                || After :
+// dst   | src   | size    || dst      | return
+// ------------------------||--------------------
+// dst\0 | src\0 | 0       || dst\0    | 3
+// dst\0 | src\0 | 1       || dst\0    | 4
+// dst\0 | src\0 | 2       || dst\0    | 5
+// dst\0 | src\0 | 3       || dst\0    | 6
+// dst\0 | src\0 | 4       || dst\0    | 6
+// dst\0 | src\0 | 5       || dsts\0   | 6
+// dst\0 | src\0 | 6       || dstsr\0  | 6
+// dst\0 | src\0 | 7       || dstsrc\0 | 6
+// dst\0 | src\0 | 8       || dstsrc\0 | 6
+
