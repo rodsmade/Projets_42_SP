@@ -127,13 +127,37 @@ int main()
 // (SU)BZERO
 
 #include<stdio.h>
+#include<string.h>
 
 int main()
 {
 	// ATENCAO NUNCA MAIS DECLARAR STRING COMO CHAR *S = "LALALA" PQ ASSIM DA RUIM CARAI
-	char s[] = "AAAAAA";
+	char str[90];
+	char *s = strcpy(str, "AAAAAAAA");
 	printf("s antes: %s\n", s);
 	ft_bzero(s, 5);
 	printf("s despues: %s\n", s);
 	return 0;
 }
+
+// MEMSET
+#include<stdio.h>
+#include<string.h>
+
+int main()
+{
+	int n = 0;
+	// ATENCAO NUNCA MAIS DECLARAR STRING COMO CHAR *S = "LALALA" PQ ASSIM DA RUIM CARAI
+	char str[90];
+	while(n < 6)
+	{
+		char *s = strcpy(str, "AAAAAAAA");
+		printf("n = %i\n", n);
+		printf("s antes: %s, n = %i\n", s, n);
+		ft_memset(s, 'c', n);
+		printf("s despues: %s\n", s);
+		n++;
+	}
+	return 0;
+}
+
