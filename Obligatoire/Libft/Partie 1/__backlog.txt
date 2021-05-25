@@ -1,6 +1,8 @@
-[OK!] testar ft_strlcpy.c
-[ ] escrever script pra remover comentários (usar sed?)
-[ ] passar a norminette em tudo
-[ ] arranjar outras fontes de teste
-[ ] testar ft_strlcpy.c pois alterei o while
-[ ] testar ft_strncmp.c pois tá NOK ???? 
+24/05/2021
+	[OK!] testar ft_strlcpy.c
+	[OK!] testar ft_strlcpy.c pois alterei o while
+	[ ] escrever script pra remover comentários (usar sed?)
+	[ ] passar a norminette em tudo
+	[ ] arranjar outras fontes de teste
+	[ ] testar ft_strncmp.c pois tá NOK -- alguns caso de teste dando divergência
+	[ ] testar ft_strlcat.c pois não testei ainda 
