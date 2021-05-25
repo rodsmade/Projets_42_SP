@@ -124,3 +124,16 @@ int main()
 // dst\0 | src\0 | 7       || dstsrc\0 | 6
 // dst\0 | src\0 | 8       || dstsrc\0 | 6
 
+// (SU)BZERO
+
+#include<stdio.h>
+
+int main()
+{
+	// ATENCAO NUNCA MAIS DECLARAR STRING COMO CHAR *S = "LALALA" PQ ASSIM DA RUIM CARAI
+	char s[] = "AAAAAA";
+	printf("s antes: %s\n", s);
+	ft_bzero(s, 5);
+	printf("s despues: %s\n", s);
+	return 0;
+}
