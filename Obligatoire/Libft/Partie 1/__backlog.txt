@@ -1,4 +1,4 @@
-[ ] testar ft_strlcpy.c
+[OK!] testar ft_strlcpy.c
 [ ] escrever script pra remover comentários (usar sed?)
 [ ] passar a norminette em tudo
 [ ] arranjar outras fontes de teste
