@@ -87,6 +87,7 @@ int main(void)
 
 // STRLCPY
 // OBS: COMPILAR COM -lbsd: "compila ft_strlcpy.c OKft_strlen.c -lbsd"
+// OBS: COMPILAR COM ft_strlen.c
 
 #include <bsd/string.h>
 #include <stdio.h>
@@ -108,6 +109,7 @@ int main()
 
 // STRLCAT
 // OBS: COMPILAR COM -lbsd: "compila ft_strlcpy.c OKft_strlen.c -lbsd"
+// OBS: COMPILAR COM ft_strlen.c
 // TABELINHA VERDADE HANDY AF:
 // Before :                || After :
 // dst   | src   | size    || dst      | return
