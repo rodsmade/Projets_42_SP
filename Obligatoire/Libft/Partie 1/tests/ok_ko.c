@@ -234,3 +234,21 @@ int main()
 		printf("mem: %i\n", memcmp(that, this, n));
 	}
 }
+
+// MEMMOVE
+
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+	char mem1[5];
+	char dest_ft[5];
+	//char dest_notft[5];
+	char *src = strcpy(mem1, "eita");
+	if (ft_memmove(dest_ft, src, 2) == memmove(dest_ft, src, 2))
+		printf("OK! :)\n");
+	else
+		printf("NOK :(\n");
+	return 0;
+}
+
