@@ -175,3 +175,18 @@ int main()
 		printf("NOK! :(\n");
 	return 0;
 }
+
+// STRRCHAR
+
+#include<string.h>
+#include<stdio.h>
+int main()
+{
+	char pool[200];
+	char *haystack = strcpy(pool, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+	if (ft_strrchr(haystack, 'a') == strrchr(haystack, 'a'))
+		printf("OK! :)\n");
+	else
+		printf("NOK! :(\n");
+	return 0;
+}
