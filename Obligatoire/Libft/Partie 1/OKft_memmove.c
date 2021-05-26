@@ -7,16 +7,24 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 // The memmove() function returns a pointer to dest.
 {
 	unsigned int	i;
-	char *copy_src;
-	char *copy_dest;
 
-	i = 0;
-	copy_src = (char *) src;
-	copy_dest = (char *) dest;
-	while (i < n)
+	if (dest < src)
 	{
-		copy_dest[i] = copy_src[i];
-		i++;
+		i = 0;
+		while (i < n)
+		{
+			((char *) dest)[i] = ((char *) src)[i];
+			i++;
+		}
 	}
-	return ((void *) copy_dest);
+	else
+	{
+		i = n;
+		while (i > 0)
+		{
+			((char *) dest)[i - 1] = ((char *) src)[i - 1];
+			i--;
+		}
+	}
+	return (dest);
 }

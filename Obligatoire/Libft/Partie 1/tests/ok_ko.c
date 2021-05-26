@@ -235,20 +235,40 @@ int main()
 	}
 }
 
-// MEMMOVE
+// MEMMOVE e MEMCPY
 
 #include <stdio.h>
 #include <string.h>
+void print_elements(char *array, int size)
+{
+  int i;
+  printf ("Elements : ");
+  for (i = 0; i < size; i++) {
+    printf ("%c, ", array[i]);
+  }
+  printf ("\n");
+}
 int main()
 {
-	char mem1[5];
-	char dest_ft[5];
-	//char dest_notft[5];
-	char *src = strcpy(mem1, "eita");
-	if (ft_memmove(dest_ft, src, 2) == memmove(dest_ft, src, 2))
-		printf("OK! :)\n");
-	else
-		printf("NOK :(\n");
-	return 0;
+// works fine:
+  printf("Works fine:\n");
+  char c_array[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+  print_elements(c_array, sizeof(c_array));
+  printf("After memcpy()\n");
+  ft_memcpy((void *)&c_array[1], (void *)&c_array[3], 5);
+  print_elements(c_array, sizeof(c_array));
+// doesn't work well
+  printf("Doesn't work fine:\n");
+  char c_array2[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+  print_elements(c_array2, sizeof(c_array2));
+  printf("After memcpy()\n");
+  ft_memcpy((void *)&c_array2[5], (void *)&c_array2[3], 5);
+  print_elements(c_array2, sizeof(c_array2));
+// doesn't work well
+  printf("Works fine:\n");
+  char c_array3[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+  print_elements(c_array3, sizeof(c_array3));
+  printf("After memmove()\n");
+  memmove((void *)&c_array3[5], (void *)&c_array3[3], 5);
+  print_elements(c_array3, sizeof(c_array3));
 }
-
