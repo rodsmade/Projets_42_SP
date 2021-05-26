@@ -207,3 +207,30 @@ int main()
 		printf("NOK! :(\n");
 	return 0;
 }
+
+// STRCMP
+
+#include<string.h>
+#include<stdio.h>
+
+int main()
+{
+	char pool[200];
+	char pool2[200];
+	char *this = strcpy(pool, "aaaaCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+	char *that = strcpy(pool2, " ABCDEq   FGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+	unsigned int n = 26;
+
+	if (ft_memcmp(this, that, n) == memcmp(that, this, n))
+	{
+		printf("OK! :)\n");
+		printf("ft : %i\n", ft_memcmp(this, that, n));
+		printf("mem: %i\n", memcmp(that, this, n));
+	}
+	else
+	{
+		printf("NOK! :(\n");
+		printf("ft : %i\n", ft_memcmp(this, that, n));
+		printf("mem: %i\n", memcmp(that, this, n));
+	}
+}
