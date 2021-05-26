@@ -190,3 +190,20 @@ int main()
 		printf("NOK! :(\n");
 	return 0;
 }
+
+// MEMCHR
+
+#include<string.h>
+#include<stdio.h>
+int main()
+{
+	char pool[200];
+	char *haystack = strcpy(pool, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+	unsigned int n = 26;
+
+	if (ft_memchr(haystack, 'A', n) == memchr(haystack, 'A', n))
+		printf("OK! :)\n");
+	else
+		printf("NOK! :(\n");
+	return 0;
+}
