@@ -11,6 +11,8 @@
 27/05/2021
 	[x] instalar a norminette
 	[ ] passar a norminette em tudo - partie 1
+	[x] escrever script pra remover tds os arquivos que não serão submetidos
+		find . -type f -not \( -name '*.c' -o -name '*.h' -o -name 'Makefile' \) -delete
 	[ ] escrever script pra remover comentários (usar sed?)
 	[ ] escrever script pra remover OK dos nomes das functions
 	[ ] arranjar outras fontes de teste
