@@ -6,9 +6,13 @@
 	--
 
 26/05/2021
+	--
+
+27/05/2021
+	[x] instalar a norminette
+	[ ] passar a norminette em tudo - partie 1
 	[ ] escrever script pra remover comentários (usar sed?)
 	[ ] escrever script pra remover OK dos nomes das functions
-	[ ] passar a norminette em tudo
 	[ ] arranjar outras fontes de teste
 	[ ] testar ft_strncmp.c pois tá NOK -- alguns caso de teste dando divergência
 	[ ] testar ft_strlcat.c pois não testei ainda

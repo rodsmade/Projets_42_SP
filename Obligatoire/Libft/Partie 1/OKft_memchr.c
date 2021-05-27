@@ -10,7 +10,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	unsigned char	needle;
 
 	i = 0;
-	haystack = (unsigned char*) s;
+	haystack = (unsigned char *) s;
 	needle = (unsigned char) c;
 	while (i < n)
 	{
