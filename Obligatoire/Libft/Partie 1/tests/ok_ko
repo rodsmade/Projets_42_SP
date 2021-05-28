@@ -272,3 +272,68 @@ int main()
   memmove((void *)&c_array3[5], (void *)&c_array3[3], 5);
   print_elements(c_array3, sizeof(c_array3));
 }
+
+// STRNCMP
+
+#include <stdio.h>
+#include <bsd/string.h>
+int	all_ok = 0;
+int	total_runs = 0;
+void valida_resultado(const char *s1, const char *s2, size_t n)
+{
+	total_runs++;
+	if (ft_strncmp(s1, s2, n) != strncmp(s1, s2, n))
+	{
+		all_ok = all_ok + 1;
+		printf("Result: NOK! :(		s1 = %s; s2 = %s; n = %I64li.\n", s1, s2, n);
+	}
+	return;
+}
+int main()
+{
+	char		*s1 = "abcdefghij";
+	char		*s2 = "abcdefghij";
+	int			n = 10;
+	while (n >= 0)
+	{
+		s1 = "abcdefghij";
+		s2 = "abcdefghij";
+		valida_resultado(s1, s2, n);
+		s1 = "abcdefghij";
+		s2 = "bbcdefghij";
+		valida_resultado(s1, s2, n);
+		s1 = "abcdefghij";
+		s2 = "aacdefghij";
+		valida_resultado(s1, s2, n);
+		s1 = "abcde";
+		s2 = "abcdefghij";
+		valida_resultado(s1, s2, n);
+		s1 = "abcde";
+		s2 = "aacdefghij";
+		valida_resultado(s1, s2, n);
+		s1 = "abcde";
+		s2 = "bbcdefghij";
+		valida_resultado(s1, s2, n);
+		s1 = "abcdefghij";
+		s2 = "abcde";
+		valida_resultado(s1, s2, n);
+		s1 = "abcdefghij";
+		s2 = "aacde";
+		valida_resultado(s1, s2, n);
+		s1 = "abcdefghij";
+		s2 = "bbcde";
+		valida_resultado(s1, s2, n);
+		s1 = "";
+		s2 = "abcdefghij";
+		valida_resultado(s1, s2, n);
+		s1 = "abcdefghij";
+		s2 = "";
+		valida_resultado(s1, s2, n);
+		n--;
+	}
+	if (all_ok == 0)
+		printf("\n\n\n\n\nS U C E S S O O o 0 o 0 O 0 o O o ! ! ! ! ! 🎉🎉🎉\n");
+	else
+		printf("\n\n\n\n\nx_x F A I L x_x\n%i errors were found in your code!\nTry again.", all_ok);
+	return (0);
+}

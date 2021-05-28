@@ -1,10 +1,9 @@
 #include "libft.h"
-
 int	ft_atoi(const char *nptr)
 {
-	int number;
-	int i;
-	int signal;
+	int	number;
+	int	i;
+	int	signal;
 
 	signal = 1;
 	number = 0;
