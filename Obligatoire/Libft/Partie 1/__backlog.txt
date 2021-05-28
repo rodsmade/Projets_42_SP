@@ -10,10 +10,12 @@
 
 27/05/2021
 	[x] instalar a norminette
-	[ ] passar a norminette em tudo - partie 1
+	[x] passar a norminette em tudo - partie 1
 	[x] escrever script pra remover tds os arquivos que não serão submetidos
 		find . -type f -not \( -name '*.c' -o -name '*.h' -o -name 'Makefile' -o -name '.gitignore' -o -name 'README.md' -o -name '.git/*' \) -not -path "./.git/*" -delete
-	[ ] escrever script pra remover comentários (usar sed?)
+	[x] escrever script pra remover comentários (usar sed?)
+		find . -type f -name '.c' | xargs sed -i "s/^\s\/\/.*//g; /^$/ d"
+			(( tem o drawback de remover todas as linhas em branco então tem q ver isso aí ))
 	[ ] escrever script pra remover OK dos nomes das functions
 	[ ] arranjar outras fontes de teste
 	[ ] testar ft_strncmp.c pois tá NOK -- alguns caso de teste dando divergência
