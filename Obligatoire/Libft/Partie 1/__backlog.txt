@@ -16,7 +16,9 @@
 	[x] escrever script pra remover comentários (usar sed?)
 		find . -type f -name '.c' | xargs sed -i "s/^\s\/\/.*//g; /^$/ d"
 			(( tem o drawback de remover todas as linhas em branco então tem q ver isso aí ))
-	[ ] escrever script pra remover OK dos nomes das functions
+	[x] escrever script pra remover OK dos nomes das functions
+		rename 's/OK//g' *.c
+			(( tive q instalar esse rename mas eh isto paz ))
 	[ ] arranjar outras fontes de teste
 	[ ] testar ft_strncmp.c pois tá NOK -- alguns caso de teste dando divergência
 	[ ] testar ft_strlcat.c pois não testei ainda
