@@ -2,27 +2,31 @@
 
 char	**ft_split(char const *s, char c)
 {
-	char	**array_of_pointers;
+	char	**halves;
 	int		cleft;
 
-	array_of_pointers = malloc(2 * sizeof(char *));
+	halves = malloc(2 * sizeof(char *));
 	//  find delimiter point
 	while (s[cleft] != c)
 		cleft++;
 	// joga s pro delimiter c, vai ser usado mais na frente
 	s += cleft;
 	// não engloba o delimiter c
-	array_of_pointers[0] = malloc(cleft * sizeof(char) + 1);
+	halves[0] = malloc(cleft * sizeof(char) + 1);
 	// engloba o delimiter c
-	array_of_pointers[1] = malloc((ft_strlen(s) - cleft) * sizeof(char) + 1);
-	array_of_pointers[0][cleft] = '\0';
+	halves[1] = malloc((ft_strlen(s) - cleft) * sizeof(char) + 1);
+	if (halves == NULL || halves[0] == NULL || halves[1] == NULL)
+		return (NULL);
+	halves[0][cleft] = '\0';
 	while (--cleft >= 0)
-		array_of_pointers[0][cleft] = s[cleft];
+		halves[0][cleft] = s[cleft];
 	while (*s)
 	{
-		array_of_pointers[1][cleft] = *s;
+		halves[1][cleft] = *s;
 		s++;
 		cleft++;
+		if (*(s + 1) == '\0')
+			halves[1][cleft + 1] = '\0';
 	}
-	return (array_of_pointers);
+	return (halves);
 }
