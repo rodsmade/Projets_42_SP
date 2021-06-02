@@ -284,3 +284,23 @@ int main()
 	printf("dest: %s\n", s);
 	return 0;
 }
+
+// STRDUP
+
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+	char pool[200];
+	char *original;
+	char *copia;
+
+	original = strcpy(pool, "pamonhaaaaa");
+	copia = ft_strdup(original);
+	printf("Original: %s\n", original);
+	printf("Copia: %s\n", copia);
+	ft_bzero(original, ft_strlen(original));
+	printf("Original: %s\n", original);
+	printf("Copia: %s\n", copia);
+	return(0);
+}

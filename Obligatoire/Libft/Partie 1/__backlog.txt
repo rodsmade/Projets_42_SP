@@ -39,8 +39,8 @@
 	[ ] arranjar outras fontes de teste
 	[ ] Funções NOK:
 		[OK] calloc
-		[ ] memccpy
-		[ ] strdup
+		[OK] memccpy
+		[OK] strdup
 		[ ] strlcat
 		[ ] strncmp
 		[ ] putnbr_fd	>> BL0CKED, testar todas as outras antes de tertar essa
