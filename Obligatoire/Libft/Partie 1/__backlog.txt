@@ -29,12 +29,15 @@
 	[ ] testar ft_strdup.c pois não testei ainda
 
 01/06/2021
+	[x] deletar o arquivo ft_itoa wtf binário achei q ja tivessse deletado
+
+02/06/2021
 	[ ] mto provavelmente corrigir o size - 1 dentro de strlcpy !!!!
 		>>>> essa correção aí
 		>>>> remover o strlen de dentro do strlcpy
+		>>>> remover a main !!
 	[ ] na trim, na parte que diz trim = (char *) ft_memmove(trim + i, trim + i + 1, ft_strlen(trim) - 1);
 		>>>> provavelmente eh pra ser (trim, trim + 1 (fixo), ft_strlen etc).
 		>>>> no while tb acho que quero while (trim[0] = c) fixo sempre.
 		>>>> olha direitinho a left trim q deu bom
-	[ ] deletar o arquivo ft_itoa wtf binário achei q ja tivessse deletado
-
+	[ ] testar a ft_putbnr_fd pq afff algo de errado n esta certo
