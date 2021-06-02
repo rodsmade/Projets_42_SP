@@ -27,3 +27,11 @@
 	[ ] testar ft_memccpy.c pois não testei ainda
 	[ ] testar ft_calloc.c pois não testei ainda
 	[ ] testar ft_strdup.c pois não testei ainda
+
+01/06/2021
+	[ ] mto provavelmente corrigir o size - 1 dentro de strlcpy !!!!
+	[ ] na trim, na parte que diz trim = (char *) ft_memmove(trim + i, trim + i + 1, ft_strlen(trim) - 1);
+		>>>> provavelmente eh pra ser (trim, trim + 1 (fixo), ft_strlen etc).
+		>>>> no while tb acho que quero while (trim[0] = c) fixo sempre.
+		>>>> olha direitinho a left trim q deu bom
+
