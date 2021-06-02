@@ -17,7 +17,7 @@
 		find . -type f -name '.c' | xargs sed -i "s/\s\/\/.*//g"
 			(( tem o drawback de remover todas as linhas em branco então tem q ver isso aí ))
 	[x] escrever script pra remover OK dos nomes das functions
-		rename 's/OK//g' *.c
+		rename 's/^OK//g' *.c
 			(( tive q instalar esse rename mas eh isto paz ))
 
 28/05/2021
@@ -38,12 +38,12 @@
 	[ ] testar a ft_putbnr_fd pq afff algo de errado n esta certo
 	[ ] arranjar outras fontes de teste
 	[ ] Funções NOK:
-		[ ] calloc
+		[OK] calloc
 		[ ] memccpy
 		[ ] strdup
 		[ ] strlcat
 		[ ] strncmp
-		[ ] putnbr_fd
+		[ ] putnbr_fd	>> BL0CKED, testar todas as outras antes de tertar essa
 		[ ] split
 		[ ] strjoin
 		[ ] strtrim
