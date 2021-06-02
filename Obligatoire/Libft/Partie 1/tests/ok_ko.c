@@ -272,3 +272,15 @@ int main()
   memmove((void *)&c_array3[5], (void *)&c_array3[3], 5);
   print_elements(c_array3, sizeof(c_array3));
 }
+
+// MEMCCPY
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+	char result[100];
+	char *s = strcpy(result, "01234567890123456789");
+	printf("retorno: %s\n", (char *) ft_memccpy(s, "camiseta", 'e', 8));
+	printf("dest: %s\n", s);
+	return 0;
+}
