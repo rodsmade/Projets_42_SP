@@ -21,12 +21,7 @@
 			(( tive q instalar esse rename mas eh isto paz ))
 
 28/05/2021
-	[ ] arranjar outras fontes de teste
-	[ ] testar ft_strncmp.c pois tá NOK -- alguns caso de teste dando divergência
-	[ ] testar ft_strlcat.c pois não testei ainda
-	[ ] testar ft_memccpy.c pois não testei ainda
-	[ ] testar ft_calloc.c pois não testei ainda
-	[ ] testar ft_strdup.c pois não testei ainda
+	--
 
 01/06/2021
 	[x] deletar o arquivo ft_itoa wtf binário achei q ja tivessse deletado
@@ -41,3 +36,18 @@
 		>>>> no while tb acho que quero while (trim[0] = c) fixo sempre.
 		>>>> olha direitinho a left trim q deu bom
 	[ ] testar a ft_putbnr_fd pq afff algo de errado n esta certo
+	[ ] arranjar outras fontes de teste
+	[ ] Funções NOK:
+		[ ] calloc
+		[ ] memccpy
+		[ ] strdup
+		[ ] strlcat
+		[ ] strncmp
+		[ ] putnbr_fd
+		[ ] split
+		[ ] strjoin
+		[ ] strtrim
+		[ ] substr
+		[ ] 
+		[ ] 
+
