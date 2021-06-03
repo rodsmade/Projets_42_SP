@@ -42,7 +42,7 @@
 		[OK] memccpy
 		[OK] strdup
 		[ ] strlcat
-		[ ] strncmp
+		[OK] strncmp
 		[ ] putnbr_fd	>> BL0CKED, testar todas as outras antes de tertar essa
 		[ ] split
 		[ ] strjoin
