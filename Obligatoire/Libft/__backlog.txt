@@ -36,8 +36,8 @@
 10/06/2021
 	[ ] Funções NOK:
 		[OK] split
+		[OK] strjoin
 		[ ] strlcat
-		[ ] strjoin
 		[ ] strtrim
 		[ ] substr
 		[ ] putnbr_fd	>> BL0CKED, testar todas as outras antes de tertar essa

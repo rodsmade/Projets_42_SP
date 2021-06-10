@@ -318,3 +318,15 @@ int main(){
 	printf("retorno 1: '%s'\n", retorno[1]);
 	return 0;
 }
+
+// STRJOIN
+
+#include <stdio.h>
+int main()
+{
+	char *string1 = "And then the furthermost shake drove a murthering stake in ";
+	char *string2 = "and cleft me right down through my center";
+	char *string3 = ".\nAnd i shouldn't say so, but i know that it was then and never.";
+	printf("Resultado > %s\n", ft_strjoin(ft_strjoin(string1, string2), string3));
+	return 0;
+}
