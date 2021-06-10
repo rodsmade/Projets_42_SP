@@ -336,6 +336,8 @@ int main()
 	else
 		printf("\n\n\n\n\nx_x F A I L x_x\n%i errors were found in your code!\nTry again.", all_ok);
 	return (0);
+}
+
 // MEMCCPY
 #include <stdio.h>
 #include <string.h>
