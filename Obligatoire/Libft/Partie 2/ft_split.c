@@ -8,6 +8,7 @@ char	**ft_split(char const *s, char c)
 //	char	*half0;
 //	char	*half1;
 	int		cleft;
+	int		i;
 
 	halves = malloc(2 * sizeof(*halves));
 	//  find delimiter point
@@ -23,17 +24,17 @@ char	**ft_split(char const *s, char c)
 	if (halves[0] == NULL || halves[1] == NULL)
 		return (NULL);
 	halves[0][cleft] = '\0';
+	halves[1][ft_strlen(s) - cleft] = '\0';
 	// ATE AQUI TA DANDO BOM PARECE, RETOMAR A PARTIR DAQUI AMANHA
-	s += cleft;
-	while (--cleft >= 0)
-		halves[0][cleft] = s[cleft];
-	while (*s)
+	i = 0;
+	while (s[i])
 	{
-		halves[1][cleft] = *s;
-		s++;
-		cleft++;
-		if (*(s + 1) == '\0')
-			halves[1][cleft + 1] = '\0';
+		if (i < cleft)
+			// não inclui o delimiter c
+			halves[0][i] = s[i];
+		else
+			halves[1][i - cleft] = s[i];
+		i++;
 	}
 	return (halves);
 }
@@ -51,7 +52,14 @@ size_t ft_strlen(const char *s)
 	return (qtd_caracteres);
 }
 
+#include <stdio.h>
 int main(){
-	ft_split("and then the futhermost shake drove a murthering stake |in and cleft me right down to my center", '|');
+	char	**retorno;
+	char	*split_this = "and then the futhermost shake drove a murthering stake |in and cleft me right down to my center";
+	char	delimiter = '|';
+	retorno = ft_split(split_this, delimiter);
+	printf("Delimiter: '%c'\n", delimiter);
+	printf("retorno 0: '%s'\n", retorno[0]);
+	printf("retorno 1: '%s'\n", retorno[1]);
 	return 0;
 }

@@ -27,6 +27,20 @@
 	[x] deletar o arquivo ft_itoa wtf binário achei q ja tivessse deletado
 
 02/06/2021
+	[ ] Funções NOK:
+		[OK] calloc
+		[OK] memccpy
+		[OK] strdup
+		[OK] strncmp
+
+10/06/2021
+	[ ] Funções NOK:
+		[OK] split
+		[ ] strlcat
+		[ ] strjoin
+		[ ] strtrim
+		[ ] substr
+		[ ] putnbr_fd	>> BL0CKED, testar todas as outras antes de tertar essa
 	[ ] mto provavelmente corrigir o size - 1 dentro de strlcpy !!!!
 		>>>> essa correção aí
 		>>>> remover o strlen de dentro do strlcpy
@@ -37,17 +51,3 @@
 		>>>> olha direitinho a left trim q deu bom
 	[ ] testar a ft_putbnr_fd pq afff algo de errado n esta certo
 	[ ] arranjar outras fontes de teste
-	[ ] Funções NOK:
-		[OK] calloc
-		[OK] memccpy
-		[OK] strdup
-		[ ] strlcat
-		[OK] strncmp
-		[ ] putnbr_fd	>> BL0CKED, testar todas as outras antes de tertar essa
-		[ ] split
-		[ ] strjoin
-		[ ] strtrim
-		[ ] substr
-		[ ] 
-		[ ] 
-
