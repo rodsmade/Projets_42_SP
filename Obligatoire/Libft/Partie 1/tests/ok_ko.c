@@ -304,3 +304,17 @@ int main()
 	printf("Copia: %s\n", copia);
 	return(0);
 }
+
+// SPLIT
+
+#include <stdio.h>
+int main(){
+	char	**retorno;
+	char	*split_this = "and then the futhermost shake drove a murthering stake |in and cleft me right down to my center";
+	char	delimiter = '|';
+	retorno = ft_split(split_this, delimiter);
+	printf("Delimiter: '%c'\n", delimiter);
+	printf("retorno 0: '%s'\n", retorno[0]);
+	printf("retorno 1: '%s'\n", retorno[1]);
+	return 0;
+}

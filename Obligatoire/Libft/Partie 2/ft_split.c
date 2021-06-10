@@ -38,28 +38,3 @@ char	**ft_split(char const *s, char c)
 	}
 	return (halves);
 }
-
-size_t ft_strlen(const char *s)
-{
-	int qtd_caracteres;
-
-	qtd_caracteres = 0;
-	while (*s)
-	{
-		qtd_caracteres++;
-		s++;
-	}
-	return (qtd_caracteres);
-}
-
-#include <stdio.h>
-int main(){
-	char	**retorno;
-	char	*split_this = "and then the futhermost shake drove a murthering stake |in and cleft me right down to my center";
-	char	delimiter = '|';
-	retorno = ft_split(split_this, delimiter);
-	printf("Delimiter: '%c'\n", delimiter);
-	printf("retorno 0: '%s'\n", retorno[0]);
-	printf("retorno 1: '%s'\n", retorno[1]);
-	return 0;
-}
