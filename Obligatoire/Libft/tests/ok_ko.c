@@ -273,7 +273,6 @@ int main()
   print_elements(c_array3, sizeof(c_array3));
 }
 
-<<<<<<< HEAD:Obligatoire/Libft/Partie 1/tests/ok_ko
 // STRNCMP
 
 #include <stdio.h>
@@ -337,7 +336,6 @@ int main()
 	else
 		printf("\n\n\n\n\nx_x F A I L x_x\n%i errors were found in your code!\nTry again.", all_ok);
 	return (0);
-=======
 // MEMCCPY
 #include <stdio.h>
 #include <string.h>
@@ -394,5 +392,4 @@ int main()
 	char *string3 = ".\nAnd i shouldn't say so, but i know that it was then and never.";
 	printf("Resultado > %s\n", ft_strjoin(ft_strjoin(string1, string2), string3));
 	return 0;
->>>>>>> main:Obligatoire/Libft/tests/ok_ko.c
 }

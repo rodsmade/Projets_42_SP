@@ -21,16 +21,3 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	joint[length_s1 + length_s2] = '\0';
 	return (joint);
 }
-
-size_t ft_strlen(const char *s)
-{
-	int qtd_caracteres;
-
-	qtd_caracteres = 0;
-	while (*s)
-	{
-		qtd_caracteres++;
-		s++;
-	}
-	return (qtd_caracteres);
-}

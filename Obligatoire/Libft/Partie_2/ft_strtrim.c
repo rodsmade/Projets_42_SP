@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "../libft.h"
 
 int		belongs_to_set(char c, char const *set);
 
@@ -14,14 +14,16 @@ int		belongs_to_set(char c, char const *set);
 // 5. return s1;
 char	*ft_strtr(char const *s1, char const *set)
 {
-	char	*trim;
-	int		i;
+	char			*trim;
+	int				i;
+	unsigned int	s1length;
 
-	trim = malloc((ft_strlen(s1) + 1) * sizeof(char));
+	s1length = ft_strlen(s1);
+	trim = malloc((s1length + 1) * sizeof(char));
 	if (trim == NULL)
 		return (NULL);
 	// size_t	ft_strlcpy(char *dst, const char *src, size_t dest_size)
-	if (ft_strlcpy(trim, s1, ft_strlen(s1)) != ft_strlen(s1))
+	if (ft_strlcpy(trim, s1, s1length) != s1length)
 		return (NULL);
 	// começar de trás pra frente parece inteligente
 	i = ft_strlen(trim) - 1;
@@ -50,4 +52,13 @@ int	belongs_to_set(char c, char const *set)
 		set++;
 	}
 	return (0);
+}
+
+#include <stdio.h>
+int main()
+{
+	char *string_to_trim = "aaaa adja aj kja lalalla jfdjsf a aa a a";
+	char *chars_to_trim_out = "a ";
+	printf("Result > %s\n", ft_strtr(string_to_trim, chars_to_trim_out));
+	return 0;
 }

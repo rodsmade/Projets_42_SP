@@ -1,10 +1,7 @@
 #include "libft.h"
-<<<<<<< HEAD:Obligatoire/Libft/Partie 1/ft_strlcpy.c
-=======
 
 size_t ft_strlen(const char *s);
 
->>>>>>> main:Obligatoire/Libft/Partie 1/OKft_strlcpy.c
 size_t	ft_strlcpy(char *dst, const char *src, size_t dest_size)
 {
 	unsigned int	i;
@@ -14,6 +11,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dest_size)
 	chars_written = 0;
 	if (*src == '\0')
 		return (0);
+	// TODO: testar! troquei *src por src[i]
 	while (src[i] && i < dest_size - 1)
 	{
 		dst[i] = src[i];

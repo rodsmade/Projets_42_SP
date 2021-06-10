@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-void	*ft_calloc(size_t nmemb, size_t size);
-=======
 #include "libft.h"
 
 void *ft_calloc(size_t nmemb, size_t size)
@@ -15,4 +12,3 @@ void *ft_calloc(size_t nmemb, size_t size)
 	ft_bzero(allocdmem, nmemb * size);
 	return (allocdmem);
 }
->>>>>>> main
