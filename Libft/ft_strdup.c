@@ -8,7 +8,9 @@ char	*ft_strdup(const char *s)
 	char 			*newstr;
 
 	strlength = ft_strlen(s);
-	newstr = malloc ((strlength + 1) * sizeof(const char));
+	newstr = ft_calloc((strlength + 1), sizeof(const char));
+	if (newstr == NULL)
+		return (NULL);
 	// void	*ft_memcpy(void *dest, const void *src, size_t n)
 	newstr = ft_memcpy(newstr, s, strlength);
 	return (newstr);
