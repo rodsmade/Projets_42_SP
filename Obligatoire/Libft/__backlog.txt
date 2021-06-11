@@ -37,14 +37,17 @@
 	[ ] Funções NOK:
 		[OK] split
 		[OK] strjoin
+
+10/06/2021
+	[X] mto provavelmente corrigir o size - 1 dentro de strlcpy !!!!
+		>>>> essa correção aí
+		>>>> [OK] remover o strlen de dentro do strlcpy
+		>>>> [OK] remover a main !!
+	[ ] Funções NOK:
 		[ ] strlcat
 		[ ] strtrim
 		[ ] substr
 		[ ] putnbr_fd	>> BL0CKED, testar todas as outras antes de tertar essa
-	[ ] mto provavelmente corrigir o size - 1 dentro de strlcpy !!!!
-		>>>> essa correção aí
-		>>>> remover o strlen de dentro do strlcpy
-		>>>> remover a main !!
 	[ ] na trim, na parte que diz trim = (char *) ft_memmove(trim + i, trim + i + 1, ft_strlen(trim) - 1);
 		>>>> provavelmente eh pra ser (trim, trim + 1 (fixo), ft_strlen etc).
 		>>>> no while tb acho que quero while (trim[0] = c) fixo sempre.
