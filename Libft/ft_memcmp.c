@@ -14,17 +14,10 @@ If n is zero, the return value is zero.*/
 	this = (unsigned char*) s1;
 	that = (unsigned char*) s2;
 	i = 0;
-	if (n == 0)
-		return (0);
 	while (i < n)
 	{
 		if (*this != *that)
-		{
-			if (*this < *that)
-				return (*this - *that);
-			else
-				return (*that - *this);
-		}
+			return (*this - *that);
 		this++;
 		that++;
 		i++;
