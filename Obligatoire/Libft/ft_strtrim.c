@@ -27,8 +27,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (NULL);
 	// size_t	ft_strlcpy(char *dst, const char *src, size_t dest_size)
 	// revisar isso que tá estranho, strlcpy devolve length de s1! sempre vai dar positivo essa porra
-	if (ft_strlcpy(trim, s1, s1length) != s1length)
-		return (NULL);
+	ft_strlcpy(trim, s1, s1length);
 	// começar de trás pra frente parece inteligente
 	i = s1length - 1;
 	while (belongs_to_set(trim[i], set))
@@ -38,9 +37,9 @@ char	*ft_strtrim(char const *s1, char const *set)
 	}
 	// agora frente p trás
 	i = 0;
-	while (belongs_to_set(trim[i], set))
+	while (belongs_to_set(trim[0], set))
 	{
-		trim = (char *) ft_memmove(trim + i, trim + i + 1, ft_strlen(trim) - 1);
+		trim = (char *) ft_memmove(trim, trim + 1, ft_strlen(trim) - 1);
 		i++;
 	}
 	return (trim);
@@ -58,23 +57,22 @@ int	belongs_to_set(char c, char const *set)
 	return (0);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dest_size)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	unsigned int	i;
-	unsigned int	chars_written;
 
 	i = 0;
-	chars_written = 0;
 	if (*src == '\0')
 		return (0);
 	// TODO: testar! troquei *src por src[i]
-	while (src[i] && i < dest_size - 1)
+	while (src[i] && i < size - 1)
 	{
 		dst[i] = src[i];
-		chars_written++;
 		i++;
 	}
-	dst[chars_written] = '\0';
+	dst[i] = '\0';
+	// revisar esse retorno!!!! eh isso msm?? n devia ser chars written ou algo assim?
+	// resp.: não o manual fala explicitamente q eh o size de src
 	return (ft_strlen(src));
 }
 
@@ -123,8 +121,11 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 #include <stdio.h>
 int main()
 {
-	char *string_to_trim = "aaaa adja aj kja lalalla jfdjsf a aa a a";
-	char *chars_to_trim_out = "a ";
-	printf("Result > '%s'\n", ft_strtrim(string_to_trim, chars_to_trim_out));
+	char string_to_trim[100];
+	char chars_to_trim_out[100];
+	ft_strlcpy(string_to_trim, "aaaa adja aj kja lalalla jfdjsf a aa a a", 100);
+	ft_strlcpy(chars_to_trim_out, " a", 100);
+	ft_strtrim(string_to_trim, chars_to_trim_out);
+//	printf("Result > '%s'\n", ft_strtrim(string_to_trim, chars_to_trim_out));
 	return 0;
 }

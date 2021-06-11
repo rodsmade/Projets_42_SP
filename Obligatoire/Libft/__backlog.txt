@@ -44,8 +44,8 @@
 		>>>> [OK] remover o strlen de dentro do strlcpy
 		>>>> [OK] remover a main !!
 	[ ] Funções NOK:
-		[ ] strlcat
 		[ ] strtrim
+		[ ] strlcat
 		[ ] substr
 		[ ] putnbr_fd	>> BL0CKED, testar todas as outras antes de tertar essa
 	[ ] na trim, na parte que diz trim = (char *) ft_memmove(trim + i, trim + i + 1, ft_strlen(trim) - 1);
