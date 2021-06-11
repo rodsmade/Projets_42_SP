@@ -1,7 +1,7 @@
 // hasn't yet been tested!
 #include "libft.h"
 
-size_t	strlcat(char *dst, const char *src, size_t size)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 // size = SOURCE'S SIZE GODDANGIT not really
 // size = amount of memory that dest occupies, whether fully-occupied (all filled in plus '\0' - that's an assumption) or otherwise.
 // (man) Also note that strlcpy() and strlcat() only operate on true “C” strings. This means (...) for strlcat() both src and dst must be NUL-terminated.
