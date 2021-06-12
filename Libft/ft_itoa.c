@@ -39,9 +39,9 @@ char	*ft_itoa(int n)
 	long int		big_n;
 	unsigned int	i;
 
-	// // tratar quando n = 0 pqp
-	// if (n == 0)
-		// return ("0");
+	// tratar quando n = 0 
+	if (n == 0)
+		return ("0");
 	big_n = n;
 	if (is_negative(n))
 		big_n *= -1;
