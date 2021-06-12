@@ -9,7 +9,7 @@ int	ft_atoi(const char *nptr)
 	signal = 1;
 	number = 0;
 	i = 0;
-	while ((nptr[i] >= '\t' && nptr[i] <= '\r') || nptr[i] == ' ')
+	while ((nptr[i] >= '\t' && nptr[i] <= '\r') || nptr[i] == ' ' || nptr[i] == '+')
 		i++;
 	if ((nptr[i] == '-' && ft_isdigit(nptr[i + 1])) || ft_isdigit(nptr[i]))
 	{

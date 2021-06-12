@@ -11,41 +11,55 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	// It will append at most size - strlen(dst) - 1 bytes, NUL-terminating the result.
 	unsigned int	i;
 	unsigned int	j;
-	unsigned int	null_found;
-	unsigned int	remainder;
-	unsigned int	chars_written;
+	unsigned int	dstlength;
 
+	dstlength = ft_strlen(dst);
+	if (size == 0)
+		return (dstlength);
 	i = 0;
-	j = 0;
-	null_found = 0;
-	remainder = 0;
-	chars_written = 0;
-	// scans string looking for a null character; the remaining [(size - 1) - strlen(dest)] in dest will be filled with what's in source;
 	while (i < size - 1)
 	{
 		if (dst[i] == '\0')
-			null_found = 1;
+		{
+			j = 0;
+			while((i + j < size - 1) && src[j])
+			{
+				dst[i + j] = src[j];
+				j++;
+			}
+			dst[i + j] = '\0';
+			return(dstlength + j);
+		}
 		i++;
 	}
-	if (size == 0 || !null_found)
-		return ft_strlen(dst);	// BC IM ASSUMING IT >>>IS<<< NULL-TERMINATED BC MANUAL SAYS SO
-	else if (null_found)
-	{
-		remainder = (size - 1) - ft_strlen(dst);
-		// while there are chars left in dest or source, whichever comes first
-		while(j < remainder || src[j])
-		{
-			dst[i + j] = src[j];
-			j++;
-			i++;
-			chars_written++;
-		}
-		dst[chars_written] = '\0';
-	}
+	// it the loop completes it means dst is fully occupied
+	return (dstlength);
 	// So there are two cases in which dst will not be null-terminated by strlcat.
 	// One is that dst is a null-terminated string of exactly size - 1 bytes, in which case it is not modified and continues to be null-terminated.
 	// The second case is that dst was not null-terminated initially, and in that case it will still be unterminated after the call to strlcat.
 	// (man) The strlcpy() and strlcat() functions return the total length of the string they tried to create. For strlcat() that means the initial length of dst plus the length of src.
 	// return = min(size, strlen(dst)) + strlen(src)
-	return(ft_strlen(dst) + chars_written);
+}
+
+#include <stdio.h>
+int main()
+{
+	char destino[100];
+	char fonte[100];
+	int n = 20;
+
+	ft_strlcpy(destino, "destino", 100);
+	ft_strlcpy(fonte, "fonte", 100);
+	printf("dest: >| %s |<; source: >| %s |<, size: %i, return: %li\n", destino, fonte, n, ft_strlcat(destino, fonte, n));
+// 	while(++n < 21)
+// 	{
+// 		ft_strlcpy(destino, "destino", 100);
+// 		ft_strlcpy(fonte, "fonte", 100);
+// 		ft_strlcat(destino, fonte, n);
+// 		printf("dest: >| %s |<; source: >| %s |<, size: %i, return: %li\n", destino, fonte, n, ft_strlcat(destino, fonte, n));
+// 		ft_bzero(destino, 100);
+// 		ft_bzero(fonte, 100);
+// 	}
+
+	return 0;
 }

@@ -53,18 +53,6 @@ int	belongs_to_set(char c, char const *set)
 	return (0);
 }
 
-#include <stdio.h>
-int main()
-{
-	char s1_trim[] = " \nBLABL ABL0\n \n";
-   char set_trim[] = " BL0  \n";
-
-   char *teste_trim1 = ft_strtrim(s1_trim, set_trim);
-   printf("teste1: %s\n", teste_trim1);
-   free(teste_trim1);
-	return 0;
-}
-
 // #include <bsd/string.h>
 // #include <stdio.h>
 
