@@ -41,7 +41,7 @@ char	*ft_itoa(int n)
 
 	// tratar quando n = 0 
 	if (n == 0)
-		return ("0");
+		return ("0\0");
 	big_n = n;
 	if (is_negative(n))
 		big_n *= -1;
