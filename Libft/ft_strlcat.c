@@ -40,26 +40,3 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	// (man) The strlcpy() and strlcat() functions return the total length of the string they tried to create. For strlcat() that means the initial length of dst plus the length of src.
 	// return = min(size, strlen(dst)) + strlen(src)
 }
-
-#include <stdio.h>
-int main()
-{
-	char destino[100];
-	char fonte[100];
-	int n = 20;
-
-	ft_strlcpy(destino, "destino", 100);
-	ft_strlcpy(fonte, "fonte", 100);
-	printf("dest: >| %s |<; source: >| %s |<, size: %i, return: %li\n", destino, fonte, n, ft_strlcat(destino, fonte, n));
-// 	while(++n < 21)
-// 	{
-// 		ft_strlcpy(destino, "destino", 100);
-// 		ft_strlcpy(fonte, "fonte", 100);
-// 		ft_strlcat(destino, fonte, n);
-// 		printf("dest: >| %s |<; source: >| %s |<, size: %i, return: %li\n", destino, fonte, n, ft_strlcat(destino, fonte, n));
-// 		ft_bzero(destino, 100);
-// 		ft_bzero(fonte, 100);
-// 	}
-
-	return 0;
-}
