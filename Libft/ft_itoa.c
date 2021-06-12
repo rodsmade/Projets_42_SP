@@ -1,40 +1,4 @@
-#include <unistd.h>
-#include <stdlib.h>
-
-size_t ft_strlen(const char *s)
-{
-	int qtd_caracteres;
-
-	qtd_caracteres = 0;
-	while (*s)
-	{
-		qtd_caracteres++;
-		s++;
-	}
-	return (qtd_caracteres);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*joint;
-	int		i;
-	int		length_s1;
-	int		length_s2;
-
-	length_s1 = ft_strlen(s1);
-	length_s2 = ft_strlen(s2);
-	joint = malloc((length_s1 + length_s2 + 1) * sizeof(char));
-	if (joint == NULL)
-		return (NULL);
-	i = -1;
-	while (s1[++i])
-		joint[i] = s1[i];
-	i = -1;
-	while (s2[++i])
-		joint[i + length_s1] = s2[i];
-	joint[length_s1 + length_s2] = '\0';
-	return (joint);
-}
+#include "libft.h"
 
 static size_t is_negative(int n)
 {
@@ -97,18 +61,4 @@ char	*ft_itoa(int n)
 	if (is_negative(n))
 		result = ft_strjoin("-", result);
 	return (result);
-}
-
-#include <stdio.h>
-int    main(void)
-{
-    printf("%s\n", ft_itoa(1));
-    printf("%s\n", ft_itoa(15454));
-    printf("%s\n", ft_itoa(2));
-    printf("%s\n", ft_itoa(123123));
-    printf("%s\n", ft_itoa(2147483647));
-    printf("%s\n", ft_itoa(-123123));
-    printf("%s\n", ft_itoa(-2147483647));
-    printf("%s\n", ft_itoa(-2147483648));
-    return (0);
 }
