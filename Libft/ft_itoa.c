@@ -1,7 +1,6 @@
 #include "libft.h"
 
 static long int	ft_power(int nb, int power);
-static char		*ft_left_trim(char const *s1, char const c);
 
 char	*ft_itoa(int n)
 {
@@ -28,7 +27,8 @@ char	*ft_itoa(int n)
 		needle++;
 	}
 	result[10] = '\0';
-	result = ft_left_trim(result, '0');
+	while (result[0] == '0')
+		result++;
 	if (n < 0)
 		result = ft_strjoin("-", result);
 	return (result);
@@ -42,35 +42,4 @@ static long int	ft_power(int nb, int power)
 		return (1);
 	else
 		return (nb * ft_power(nb, power - 1));
-}
-
-static char	*ft_left_trim(char const *s1, char const c)
-{
-	char			*trim;
-	int				i;
-	unsigned int	length;
-
-	length = ft_strlen(s1);
-	trim = malloc((ft_strlen(s1) + 1) * sizeof(char));
-	if (trim == NULL)
-		return (NULL);
-	// size_t	ft_strlcpy(char *dst, const char *src, size_t dest_size)
-	if (ft_strlcpy(trim, s1, length) != length)
-		return (NULL);
-	i = 0;
-	while (trim[0] == c)
-	{
-		trim = (char *) ft_memmove(trim, trim + 1, ft_strlen(trim) - 1);
-		trim[length - 1 - i] = '\0';
-		i++;
-	}
-	return (trim);
-}
-
-#include <stdio.h>
-int    main(void)
-{
-    printf("%s\n", ft_itoa(123143));
-    return (0);
-    
 }
