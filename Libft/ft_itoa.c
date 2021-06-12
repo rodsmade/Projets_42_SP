@@ -66,3 +66,11 @@ static char	*ft_left_trim(char const *s1, char const c)
 	}
 	return (trim);
 }
+
+#include <stdio.h>
+int    main(void)
+{
+    printf("%s\n", ft_itoa(123143));
+    return (0);
+    
+}

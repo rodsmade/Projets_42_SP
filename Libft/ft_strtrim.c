@@ -14,44 +14,54 @@ int		belongs_to_set(char c, char const *set);
 // 5. return s1;
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char			*trim;
-	int				i;
-	unsigned int	s1length;
+	size_t i;
 
-	s1length = ft_strlen(s1);
-	trim = malloc((s1length + 1) * sizeof(char));
-	if (trim == NULL)
+	if (s1 == NULL || set == NULL)
 		return (NULL);
-	// size_t	ft_strlcpy(char *dst, const char *src, size_t dest_size)
-	// revisar isso que tá estranho, strlcpy devolve length de s1! sempre vai dar positivo essa porra
-	ft_strlcpy(trim, s1, s1length + 1);
-	// começar de trás pra frente parece inteligente
-	i = s1length - 1;
-	while (belongs_to_set(trim[i], set))
-	{
-		trim[i] = '\0';
+	while (ft_strchr(set, *s1) && *s1)
+		s1++;
+	i = ft_strlen(s1);
+	while (ft_strchr(set, s1[i]) && i)
 		i--;
-	}
-	// agora frente p trás
-	while (belongs_to_set(trim[0], set))
-	{
-		trim = (char *) ft_memmove(trim, trim + 1, ft_strlen(trim) - 1);
-		trim[ft_strlen(trim) - 1] = '\0';
-	}
-	return (trim);
+	return (ft_substr(s1, 0, i + 1));
+	// char			*trim;
+	// int				i;
+	// unsigned int	s1length;
+
+	// s1length = ft_strlen(s1);
+	// trim = malloc((s1length + 1) * sizeof(char));
+	// if (trim == NULL)
+	// 	return (NULL);
+	// // size_t	ft_strlcpy(char *dst, const char *src, size_t dest_size)
+	// // revisar isso que tá estranho, strlcpy devolve length de s1! sempre vai dar positivo essa porra
+	// ft_strlcpy(trim, s1, s1length + 1);
+	// // começar de trás pra frente parece inteligente
+	// i = s1length - 1;
+	// while (belongs_to_set(trim[i], set))
+	// {
+	// 	trim[i] = '\0';
+	// 	i--;
+	// }
+	// // agora frente p trás
+	// while (belongs_to_set(trim[0], set))
+	// {
+	// 	trim = (char *) ft_memmove(trim, trim + 1, ft_strlen(trim) - 1);
+	// 	trim[ft_strlen(trim) - 1] = '\0';
+	// }
+	// return (trim);
 }
 
 // 1. belongs to set
-int	belongs_to_set(char c, char const *set)
-{
-	while (*set)
-	{
-		if (*set == c)
-			return (1);
-		set++;
-	}
-	return (0);
-}
+// int	belongs_to_set(char c, char const *set)
+// {
+// 	while (*set)
+// 	{
+// 		if (*set == c)
+// 			return (1);
+// 		set++;
+// 	}
+// 	return (0);
+// }
 
 // #include <bsd/string.h>
 // #include <stdio.h>
