@@ -2,7 +2,6 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	// o manual é MUITO confuso e só consegui entender olhando o código fonte do projeto de open source da apple
 	size_t	srclen;
 	size_t	dstlen;
 	size_t	i;

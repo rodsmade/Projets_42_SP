@@ -13,7 +13,5 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 		i++;
 	}
 	dst[i] = '\0';
-	// revisar esse retorno!!!! eh isso msm?? n devia ser chars written ou algo assim?
-	// resp.: não o manual fala explicitamente q eh o size de src
 	return (ft_strlen(src));
 }

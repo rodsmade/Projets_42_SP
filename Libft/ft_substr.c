@@ -28,14 +28,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (p);
 }
 
-// 				start															'\0'
-// 0		1		2		3		4		5		6		7		8		9		10
-// start = 2;
-// strlen = 10;
-// len = 3;
-// (strlen - start) = 8 = a partir do start termina certinho no 9. EXATAMENTE O QUE CABE. ou seje, o  '\0' de 'p' terá q ser depois disso
-// se len <= (strlen - start)
-// 	-> vou copiar tudo de s.
-// 	-> p[length] = '\0'
-// caso contrário
-// 	-> p[strlen - start + 1] = '\0'
