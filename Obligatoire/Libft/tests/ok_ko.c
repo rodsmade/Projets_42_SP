@@ -123,7 +123,29 @@ int main()
 // dst\0 | src\0 | 6       || dstsr\0  | 6
 // dst\0 | src\0 | 7       || dstsrc\0 | 6
 // dst\0 | src\0 | 8       || dstsrc\0 | 6
+#include <stdio.h>
+int main()
+{
+	char destino[100];
+	char fonte[100];
+	int n = 20;
 
+	ft_strlcpy(destino, "destino", 100);
+	ft_strlcpy(fonte, "fonte", 100);
+	printf("dest: >| %s |<; source: >| %s |<, size: %i, return: %li\n", destino, fonte, n, ft_strlcat(destino, fonte, n));
+// o loop por algum motivo tá zoando o resultado
+// 	while(++n < 21)
+// 	{
+// 		ft_strlcpy(destino, "destino", 100);
+// 		ft_strlcpy(fonte, "fonte", 100);
+// 		ft_strlcat(destino, fonte, n);
+// 		printf("dest: >| %s |<; source: >| %s |<, size: %i, return: %li\n", destino, fonte, n, ft_strlcat(destino, fonte, n));
+// 		ft_bzero(destino, 100);
+// 		ft_bzero(fonte, 100);
+// 	}
+
+	return 0;
+}
 // (SU)BZERO
 
 #include<stdio.h>
