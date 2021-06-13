@@ -1,6 +1,6 @@
 #include "libft.h"
 
-static size_t is_negative(int n)
+static size_t	is_negative(int n)
 {
 	if (n < 0)
 		return (1);
@@ -8,9 +8,9 @@ static size_t is_negative(int n)
 		return (0);
 }
 
-static size_t count_digits(size_t n)
+static size_t	count_digits(size_t n)
 {
-	unsigned int digits;
+	unsigned int	digits;
 
 	if (n == 0)
 		return (1);

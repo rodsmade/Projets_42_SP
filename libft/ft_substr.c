@@ -27,4 +27,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		p[chars_left_in_s + 1] = '\0';
 	return (p);
 }
-

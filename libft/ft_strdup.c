@@ -3,7 +3,7 @@
 char	*ft_strdup(const char *s)
 {
 	unsigned int	strlength;
-	char 			*newstr;
+	char			*newstr;
 
 	strlength = ft_strlen(s);
 	newstr = ft_calloc((strlength + 1), sizeof(const char));

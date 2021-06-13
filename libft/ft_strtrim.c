@@ -4,7 +4,7 @@ int		belongs_to_set(char c, char const *set);
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t i;
+	size_t	i;
 
 	if (s1 == NULL || set == NULL)
 		return (NULL);
@@ -14,9 +14,4 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (ft_strchr(set, s1[i]) && i)
 		i--;
 	return (ft_substr(s1, 0, i + 1));
-
 }
-
-
-
-	

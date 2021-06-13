@@ -2,8 +2,8 @@
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	unsigned int i;
-	unsigned int j;
+	unsigned int	i;
+	unsigned int	j;
 
 	if (*needle == '\0')
 		return ((char *) haystack);
@@ -17,7 +17,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 			if (needle[j] == '\0')
 				return ((char *) &(haystack[i]));
 			else if (needle[j] != haystack[i + j] || haystack[i + j] == '\0')
-				break;
+				break ;
 		}
 		i++;
 	}

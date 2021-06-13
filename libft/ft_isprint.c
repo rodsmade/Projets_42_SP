@@ -1,4 +1,4 @@
-int ft_isprint(int c)
+int	ft_isprint(int c)
 {
 	if (c == ' ')
 		return (64);
@@ -8,9 +8,9 @@ int ft_isprint(int c)
 	else if (c >= '0' && c <= '9')
 		return (4);
 	else if ((c >= 'A' && c <= 'Z'))
-			return (1);
+		return (1);
 	else if ((c >= 'a' && c <= 'z'))
-			return (2);
+		return (2);
 	else
 		return (0);
 }

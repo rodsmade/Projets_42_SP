@@ -10,8 +10,8 @@ If n is zero, the return value is zero.*/
 	unsigned char	*that;
 	unsigned int	i;
 
-	this = (unsigned char*) s1;
-	that = (unsigned char*) s2;
+	this = (unsigned char *) s1;
+	that = (unsigned char *) s2;
 	i = 0;
 	while (i < n)
 	{

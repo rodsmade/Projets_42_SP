@@ -2,7 +2,7 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int length;
+	int	length;
 
 	length = ft_strlen(s);
 	while (length >= 0)

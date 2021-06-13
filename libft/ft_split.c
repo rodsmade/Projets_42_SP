@@ -1,18 +1,11 @@
 #include "libft.h"
 
-// a string original pode ter n vezes o delimitador
-// se a string tiver só ' 's e o delimitador for ' ', o retorno deve ser um ponteiro vazio (strdup("");)
-// o delimitador é descartado sempre
-// se todos os caracteres forem iguais ao delimitador, então retorno strdup("");
-// se for "banana         abacate" e delimitador = ' '; o resultado é 2 strings: "banana" e "abacate";
-
-// [OK] 1. função que conta qtos delimitadores tem (vai dizer qtos strings existirão no final)
 static size_t	count_delimiters(char const *s, char delimiter)
 {
 	size_t	count;
 
 	count = 0;
-	while(*s)
+	while (*s)
 	{
 		if (*s == delimiter)
 			count++;
@@ -21,7 +14,6 @@ static size_t	count_delimiters(char const *s, char delimiter)
 	return (count);
 }
 
-// [OK] 2. conta quantas palavras (válidas) existem
 static size_t	count_words(char const *s, char delimiter)
 {
 	size_t	words;
@@ -29,7 +21,7 @@ static size_t	count_words(char const *s, char delimiter)
 	words = 0;
 	while (*s == delimiter)
 		s++;
-	while(ft_strchr(s, delimiter) != NULL)
+	while (ft_strchr(s, delimiter) != NULL)
 	{
 		words++;
 		s = ft_strchr(s, delimiter);
@@ -41,8 +33,7 @@ static size_t	count_words(char const *s, char delimiter)
 	return (words);
 }
 
-// 3. função que alloca e cria o array de uma palavra por vez 
-static char		*get_new_word(char const *ptr, char delimiter)
+static char	*get_new_word(char const *ptr, char delimiter)
 {
 	size_t	length;
 	char	*word;
@@ -64,7 +55,7 @@ static char		*get_new_word(char const *ptr, char delimiter)
 	return (word);
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**morsels;
 	size_t	slength;
