@@ -368,3 +368,47 @@ int    main(void)
     printf("%s\n", ft_itoa(-2147483648));
     return (0);
 }
+
+// SPLIT
+#include <stdio.h>
+int main()
+{
+	char **morsels;
+	morsels = ft_split("and then the furthermost shake drove a murthering stake in and cleft me right down to my center!       ", ' ');
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	return 0;
+}
