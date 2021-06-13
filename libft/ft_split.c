@@ -1,4 +1,91 @@
 #include "libft.h"
+
+// AREA DE FUNCOES PARA CONSEGUIR DEBUGAR
+size_t ft_strlen(const char *s)
+{
+	int qtd_caracteres;
+
+	qtd_caracteres = 0;
+	while (*s)
+	{
+		qtd_caracteres++;
+		s++;
+	}
+	return (qtd_caracteres);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	unsigned int	i;
+	char			*c;
+
+	i = 0;
+	c = (char*) s;
+	while (i < n)
+	{
+		c[i] = '\0';
+		i++;
+	}
+	return;
+}
+
+void *ft_calloc(size_t nmemb, size_t size)
+{
+	void	*allocdmem;
+
+	allocdmem = (void *) malloc (nmemb * size);
+	if (allocdmem == NULL)
+		return (NULL);
+	ft_bzero(allocdmem, nmemb * size);
+	return (allocdmem);
+}
+
+void	*ft_memcpy(void *dest, const void *src, size_t n)
+{
+	unsigned int	i;
+
+	if (dest == NULL && src == NULL)
+		return (NULL);
+	i = 0;
+	while (i < n)
+	{
+		((char *) dest)[i] = ((char *) src)[i];
+		i++;
+	}
+	return (dest);
+}
+
+char	*ft_strdup(const char *s)
+{
+	unsigned int	strlength;
+	char 			*newstr;
+
+	strlength = ft_strlen(s);
+	newstr = ft_calloc((strlength + 1), sizeof(const char));
+	if (newstr == NULL)
+		return (NULL);
+	newstr = ft_memcpy(newstr, s, strlength);
+	return (newstr);
+}
+
+char *ft_strchr(const char *s, int c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == c)
+			return ((char *)s + i);
+		i++;
+	}
+	if (s[i] == c)
+		return ((char *)s + i);
+	return (NULL);
+}
+
+// FIM DA AREA DE FUNÇÕES PARA CONSEGUIR DEBUGAR
+
 // a string original pode ter n vezes o delimitador
 // se a string tiver só ' 's e o delimitador for ' ', o retorno deve ser um ponteiro vazio (strdup("");)
 // o delimitador é descartado sempre
@@ -26,6 +113,8 @@ static size_t	count_words(char const *s, char delimiter)
 	size_t	words;
 
 	words = 0;
+	while (*s == delimiter)
+		s++;
 	while(ft_strchr(s, delimiter) != NULL)
 	{
 		words++;
@@ -45,6 +134,8 @@ static char		*get_new_word(char const *ptr, char delimiter)
 	char	*word;
 
 	length = 0;
+	while (*ptr == delimiter)
+		ptr++;
 	while (ptr[length] != delimiter && ptr[length])
 		length++;
 	word = ft_calloc(length + 1, sizeof(char));
@@ -80,7 +171,7 @@ char			**ft_split(char const *s, char c)
 	{
 		morsels[0] = get_new_word(s, c);
 		s = ft_strchr(s, c);
-		while (*s == c)
+		while (s && *s == c)
 			s++;
 		morsels++;
 	}
@@ -91,7 +182,7 @@ char			**ft_split(char const *s, char c)
 int main()
 {
 	char **morsels;
-	morsels = ft_split("and", ' ');
+	morsels = ft_split("       and   ", ' ');
 	printf("%s\n", *morsels);
 	return 0;
 }
