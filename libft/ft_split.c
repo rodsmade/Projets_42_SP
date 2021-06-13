@@ -86,3 +86,12 @@ char			**ft_split(char const *s, char c)
 	}
 	return (morsels - word_count);
 }
+
+#include <stdio.h>
+int main()
+{
+	char **morsels;
+	morsels = ft_split("and", ' ');
+	printf("%s\n", *morsels);
+	return 0;
+}
