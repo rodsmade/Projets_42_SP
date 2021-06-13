@@ -1,91 +1,5 @@
 #include "libft.h"
 
-// AREA DE FUNCOES PARA CONSEGUIR DEBUGAR
-size_t ft_strlen(const char *s)
-{
-	int qtd_caracteres;
-
-	qtd_caracteres = 0;
-	while (*s)
-	{
-		qtd_caracteres++;
-		s++;
-	}
-	return (qtd_caracteres);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	unsigned int	i;
-	char			*c;
-
-	i = 0;
-	c = (char*) s;
-	while (i < n)
-	{
-		c[i] = '\0';
-		i++;
-	}
-	return;
-}
-
-void *ft_calloc(size_t nmemb, size_t size)
-{
-	void	*allocdmem;
-
-	allocdmem = (void *) malloc (nmemb * size);
-	if (allocdmem == NULL)
-		return (NULL);
-	ft_bzero(allocdmem, nmemb * size);
-	return (allocdmem);
-}
-
-void	*ft_memcpy(void *dest, const void *src, size_t n)
-{
-	unsigned int	i;
-
-	if (dest == NULL && src == NULL)
-		return (NULL);
-	i = 0;
-	while (i < n)
-	{
-		((char *) dest)[i] = ((char *) src)[i];
-		i++;
-	}
-	return (dest);
-}
-
-char	*ft_strdup(const char *s)
-{
-	unsigned int	strlength;
-	char 			*newstr;
-
-	strlength = ft_strlen(s);
-	newstr = ft_calloc((strlength + 1), sizeof(const char));
-	if (newstr == NULL)
-		return (NULL);
-	newstr = ft_memcpy(newstr, s, strlength);
-	return (newstr);
-}
-
-char *ft_strchr(const char *s, int c)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == c)
-			return ((char *)s + i);
-		i++;
-	}
-	if (s[i] == c)
-		return ((char *)s + i);
-	return (NULL);
-}
-
-// FIM DA AREA DE FUNÇÕES PARA CONSEGUIR DEBUGAR
-
 // a string original pode ter n vezes o delimitador
 // se a string tiver só ' 's e o delimitador for ' ', o retorno deve ser um ponteiro vazio (strdup("");)
 // o delimitador é descartado sempre
@@ -176,13 +90,4 @@ char			**ft_split(char const *s, char c)
 		morsels++;
 	}
 	return (morsels - word_count);
-}
-
-#include <stdio.h>
-int main()
-{
-	char **morsels;
-	morsels = ft_split("       and   ", ' ');
-	printf("%s\n", *morsels);
-	return 0;
 }
