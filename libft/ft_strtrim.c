@@ -1,7 +1,5 @@
 #include "libft.h"
 
-int		belongs_to_set(char c, char const *set);
-
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t	i;
