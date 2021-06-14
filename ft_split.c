@@ -20,7 +20,7 @@ static size_t	count_words(char const *s, char delimiter)
 
 	while (*s == delimiter)
 		s++;
-	words = 0;
+	words = 1;
 	while (ft_strchr(s, delimiter) != NULL)
 	{
 		words++;
@@ -65,6 +65,7 @@ char	**ft_split(char const *s, char c)
 		morsels[0] = ft_strdup("");
 		return (morsels);
 	}
+	s = ft_strtrim(s, &c);
 	word_count = count_words(s, c);
 	morsels = malloc((word_count + 1) * sizeof(*morsels));
 	if (morsels == NULL)
