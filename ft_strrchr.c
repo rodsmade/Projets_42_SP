@@ -7,7 +7,7 @@ char	*ft_strrchr(const char *s, int c)
 	length = ft_strlen(s);
 	while (length >= 0)
 	{
-		if (s[length] == c)
+		if (s[length] == (unsigned char) c)
 			return ((char *) s + length);
 		length--;
 	}
