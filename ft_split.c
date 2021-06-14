@@ -18,9 +18,9 @@ static size_t	count_words(char const *s, char delimiter)
 {
 	size_t	words;
 
-	words = 0;
 	while (*s == delimiter)
 		s++;
+	words = 0;
 	while (ft_strchr(s, delimiter) != NULL)
 	{
 		words++;
@@ -28,8 +28,6 @@ static size_t	count_words(char const *s, char delimiter)
 		while (*s == delimiter)
 			s++;
 	}
-	if (*s != delimiter && *s)
-		words++;
 	return (words);
 }
 
@@ -58,26 +56,26 @@ static char	*get_new_word(char const *ptr, char delimiter)
 char	**ft_split(char const *s, char c)
 {
 	char	**morsels;
-	size_t	slength;
-	size_t	delim_count;
 	size_t	word_count;
 	size_t	i;
 
-	slength = ft_strlen(s);
-	delim_count = count_delimiters(s, c);
+	if (ft_strlen(s) == count_delimiters(s, c))
+	{
+		morsels = malloc(1 * sizeof(*morsels));
+		morsels[0] = ft_strdup("");
+		return (morsels);
+	}
 	word_count = count_words(s, c);
-	if (word_count == 0 || slength == delim_count)
-		return (NULL);
 	morsels = malloc((word_count + 1) * sizeof(*morsels));
 	if (morsels == NULL)
 		return (NULL);
 	i = 0;
 	while (++i <= word_count)
 	{
-		morsels[0] = get_new_word(s, c);
-		s = ft_strchr(s, c);
 		while (s && *s == c)
 			s++;
+		morsels[0] = get_new_word(s, c);
+		s = ft_strchr(s, c);
 		morsels++;
 	}
 	return (morsels - word_count);
