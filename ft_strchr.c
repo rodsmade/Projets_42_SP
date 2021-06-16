@@ -8,7 +8,7 @@ char	*ft_strchr(const char *s, int c)
 	while (s[i])
 	{
 		if (s[i] == (unsigned char) c)
-			return ((void *)s + i);
+			return ((char *)s + i);
 		i++;
 	}
 	if (s[i] == (unsigned char) c)
