@@ -65,6 +65,8 @@ char	**ft_split(char const *s, char delimiter)
 		while(s[word_length] != delimiter && s[word_length])
 			word_length++;
 		morsels[0] = ft_substr(s, 0, word_length);
+		if (morsels[0] == NULL)
+			return (NULL);
 		s += word_length;
 		morsels++;
 	}
