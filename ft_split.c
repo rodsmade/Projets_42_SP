@@ -64,11 +64,10 @@ char	**ft_split(char const *s, char delimiter)
 		word_length = 0;
 		while(s[word_length] != delimiter && s[word_length])
 			word_length++;
-		morsels[0] = ft_substr(s, 0, word_length);
-		if (morsels[0] == NULL)
+		morsels[i - 1] = ft_substr(s, 0, word_length);
+		if (morsels[i - 1] == NULL)
 			return (NULL);
 		s += word_length;
-		morsels++;
 	}
 
 	//devolver palavras
