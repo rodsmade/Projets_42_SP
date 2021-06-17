@@ -51,7 +51,7 @@ char	**ft_split(char const *s, char delimiter)
 	word_count = count_words(s, delimiter);
 
 	// alocar memória
-	morsels = malloc(word_count * sizeof(*morsels));
+	morsels = malloc((word_count + 1) * sizeof(*morsels));
 	if (morsels == NULL)
 		return (NULL);
 
@@ -70,5 +70,6 @@ char	**ft_split(char const *s, char delimiter)
 	}
 
 	//devolver palavras
-	return (morsels);
+	morsels = 0;
+	return (morsels - word_count);
 }
