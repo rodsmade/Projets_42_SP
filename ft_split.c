@@ -194,7 +194,7 @@ char	**ft_split(char const *s, char delimiter)
 	}
 
 	//devolver palavras
-	morsels[word_length] = 0;
+	morsels[word_length] = NULL;
 	return (morsels);
 }
 
