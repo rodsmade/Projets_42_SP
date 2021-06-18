@@ -137,28 +137,6 @@ static int	count_words(const char *s, char delimiter)
 	return (word_count);
 }
 
-// static char	*get_new_word(char const *ptr, char delimiter)
-// {
-// 	size_t	length;
-// 	char	*word;
-
-// 	length = 0;
-// 	while (*ptr == delimiter)
-// 		ptr++;
-// 	while (ptr[length] != delimiter && ptr[length])
-// 		length++;
-// 	word = ft_calloc(length + 1, sizeof(char));
-// 	if (word == NULL)
-// 		return (NULL);
-// 	word[length] = '\0';
-// 	while (length > 0)
-// 	{
-// 		word[length - 1] = ptr[length - 1];
-// 		length--;
-// 	}
-// 	return (word);
-// }
-
 char	**ft_split(char const *s, char delimiter)
 {
 	char	**morsels;
@@ -194,7 +172,7 @@ char	**ft_split(char const *s, char delimiter)
 	}
 
 	//devolver palavras
-	morsels[word_length] = NULL;
+	morsels[word_count] = NULL;
 	return (morsels);
 }
 
