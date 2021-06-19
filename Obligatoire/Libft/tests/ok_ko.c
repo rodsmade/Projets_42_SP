@@ -352,3 +352,63 @@ int main()
 	printf("Resultado > %s\n", ft_strjoin(ft_strjoin(string1, string2), string3));
 	return 0;
 }
+
+// ITOA
+
+#include <stdio.h>
+int    main(void)
+{
+    printf("%s\n", ft_itoa(1));
+    printf("%s\n", ft_itoa(15454));
+    printf("%s\n", ft_itoa(2));
+    printf("%s\n", ft_itoa(123123));
+    printf("%s\n", ft_itoa(2147483647));
+    printf("%s\n", ft_itoa(-123123));
+    printf("%s\n", ft_itoa(-2147483647));
+    printf("%s\n", ft_itoa(-2147483648));
+    return (0);
+}
+
+// SPLIT
+#include <stdio.h>
+int main()
+{
+	char **morsels;
+	morsels = ft_split("and then the furthermost shake drove a murthering stake in and cleft me right down to my center!       ", ' ');
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	morsels++;
+	printf("%s\n", *morsels);
+	return 0;
+}

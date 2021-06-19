@@ -14,8 +14,7 @@
 	[x] escrever script pra remover tds os arquivos que não serão submetidos
 		find . -type f -not \( -name '*.c' -o -name '*.h' -o -name 'Makefile' -o -name '.gitignore' -o -name 'README.md' -o -name '.git/*' \) -not -path "./.git/*" -delete
 	[x] escrever script pra remover comentários (usar sed?)
-		find . -type f -name '.c' | xargs sed -i "s/\s\/\/.*//g"
-			(( tem o drawback de remover todas as linhas em branco então tem q ver isso aí ))
+		find . -type f -name '*.c' | xargs sed -i " /\s\/\/.*/ d; /\/\/.*/ d"
 	[x] escrever script pra remover OK dos nomes das functions
 		rename 's/^OK//g' *.c
 			(( tive q instalar esse rename mas eh isto paz ))
