@@ -127,6 +127,8 @@ static int	count_words(const char *s, char delimiter)
 {
 	size_t	word_count;
 
+	if (*s == '\0')
+		return (0);
 	word_count = 1;
 	while((s = ft_strchr(s, delimiter)) && *s)
 	{
