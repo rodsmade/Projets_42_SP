@@ -175,6 +175,7 @@ char	**ft_split(char const *s, char delimiter)
 
 	//devolver palavras
 	morsels[word_count] = NULL;
+	free(s);
 	return (morsels);
 }
 
