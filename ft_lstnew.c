@@ -17,10 +17,10 @@ t_list	*ft_lstnew(void *content)
 	return (newitem);
 }
 
-#include <stdio.h>
-int main()
-{
-	t_list *newitem = ft_lstnew((void *) "Hello world?");
-	printf("%s\n", (char *) newitem->content);
-	return (0);
-}
+// #include <stdio.h>
+// int main()
+// {
+// 	t_list *newitem = ft_lstnew((void *) "Hello world?");
+// 	printf("%s\n", (char *) newitem->content);
+// 	return (0);
+// }

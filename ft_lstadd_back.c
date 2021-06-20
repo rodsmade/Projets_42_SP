@@ -1,6 +1,6 @@
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_lstadd_back(t_list **lst, t_list *new)
 // Parameters #1. The address of a pointer to the first link of
 // a list.
 // #2. The address of a pointer to the element to be
@@ -8,3 +8,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 // Return value None
 // External functs. None
 // Description Adds the element ’new’ at the end of the list.
+{
+	ft_lstadd_front(ft_lstlast(*lst), new);
+	return ;
+}
