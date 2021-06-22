@@ -32,7 +32,9 @@ SOURCES =	ft_atoi.c \
 			ft_substr.c \
 			ft_tolower.c \
 			ft_toupper.c
-SOURCES_B =	ft_lstclear.c \
+SOURCES_B =	ft_lstadd_back \
+			ft_lstadd_front \
+			ft_lstclear.c \
 			ft_lstdelone.c \
 			ft_lstiter.c \
 			ft_lstlast.c \
