@@ -32,13 +32,13 @@ SOURCES =	ft_atoi.c \
 			ft_substr.c \
 			ft_tolower.c \
 			ft_toupper.c
-SOURCES_B =	ft_lstclear \
-			ft_lstdelone \
-			ft_lstiter \
-			*ft_lstlast \
-			*ft_lstnew \
-			ft_lstsize \
-			*ft_lstmap
+SOURCES_B =	ft_lstclear.c \
+			ft_lstdelone.c \
+			ft_lstiter.c \
+			ft_lstlast.c \
+			ft_lstnew.c \
+			ft_lstsize.c \
+			ft_lstmap.c
 OBJECTS = $(SOURCES:.c=.o)
 OBJECTS_B = $(SOURCES_B:.c=.o)
 LIBFT_A = libft.a
