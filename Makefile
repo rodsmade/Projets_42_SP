@@ -60,11 +60,11 @@ $(OBJECTS_B):	$(SOURCES_B)
 	$(CC) $(FLAGS) -c $(SOURCES_B)
 
 clean:
-	$(RM) $(OBJECTS)
+	$(RM) $(OBJECTS) $(OBJECTS_B)
 
 fclean: clean
 	$(RM) $(LIBFT_A)
 
 re: fclean all
 
-.PHONY:	all clean fclean re
+.PHONY:	all clean fclean re bonus
