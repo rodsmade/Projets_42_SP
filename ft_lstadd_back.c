@@ -9,6 +9,11 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 // External functs. None
 // Description Adds the element ’new’ at the end of the list.
 {
-	ft_lstadd_front(ft_lstlast(*lst), new);
+	t_list	*last_element;
+	t_list	*new_element;
+
+	last_element = ft_lstlast(*lst);
+	new_element = ft_lstnew(new->content);
+	last_element->next = new_element;
 	return ;
 }
