@@ -39,25 +39,38 @@ SOURCES =	ft_atoi.c \
 			ft_substr.c \
 			ft_tolower.c \
 			ft_toupper.c
+SOURCES_B =	ft_lstclear \
+			ft_lstdelone \
+			ft_lstiter \
+			*ft_lstlast \
+			*ft_lstnew \
+			ft_lstsize \
+			*ft_lstmap
 OBJECTS = $(SOURCES:.c=.o)
-NAME = libft.a
+OBJECTS_B = $(SOURCES_B:.c=.o)
+LIBFT_A = libft.a
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
-all:	$(NAME)
+all:	$(LIBFT_A)
 
-$(NAME): $(OBJECTS)
-	ar -rcs $(NAME) $(OBJECTS)
+bonus:	$(LIBFT_A)
+
+$(LIBFT_A): $(OBJECTS) $(OBJECTS_B)
+	ar -rcs $(LIBFT_A) $(OBJECTS) $(OBJECTS_B)
 
 $(OBJECTS):	$(SOURCES)
 	$(CC) $(FLAGS) -c $(SOURCES)
+
+$(OBJECTS_B):	$(SOURCES_B)
+	$(CC) $(FLAGS) -c $(SOURCES_B)
 
 clean:
 	$(RM) $(OBJECTS)
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(LIBFT_A)
 
 re: fclean all
 
