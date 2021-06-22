@@ -7,13 +7,6 @@ SOURCES =	ft_atoi.c \
 			ft_isdigit.c \
 			ft_isprint.c \
 			ft_itoa.c \
-			ft_lstclear \
-			ft_lstdelone \
-			ft_lstiter \
-			*ft_lstlast \
-			*ft_lstnew \
-			ft_lstsize \
-			*ft_lstmap \
 			ft_memccpy.c \
 			ft_memchr.c \
 			ft_memcmp.c \
