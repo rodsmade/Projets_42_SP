@@ -108,7 +108,7 @@ char	**ft_split(char const *s, char delimiter)
 		while (s[length] != delimiter && s[length])
 			length++;
 		// montar palavra
-		morsels[i] = malloc(length * sizeof(char *) + 1);
+		morsels[i] = malloc(length * sizeof(char) + 1);
 		if (morsels[i] == NULL)
 			return (rollback(morsels));
 		morsels[i][length] = '\0';
