@@ -68,7 +68,7 @@ static int	count_words(const char *s, char delimiter)
 	words = 0;
 	if (*s == '\0' || delimiter == '\0')
 		return (words);
-	while(*s == delimiter)
+	while(*s == delimiter && *s)
 		s++;
 	while(*s)
 	{
