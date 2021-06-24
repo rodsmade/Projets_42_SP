@@ -12,7 +12,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 // Finally, the pointer to the list must be set to
 // NULL.
 {
-	t_list	**temp;
+	t_list	*temp;
 
 	while (*lst)
 	{
