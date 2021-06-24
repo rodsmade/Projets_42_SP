@@ -121,7 +121,7 @@ char	**ft_split(char const *s, char delimiter)
 			morsels[i][length - 1] = s[length - 1];
 			length--;
 		}
-		while (*s != delimiter)
+		while (*s != delimiter && *s)
 			s++;
 		while (*s == delimiter && *s)
 			s++;
