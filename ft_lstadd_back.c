@@ -10,10 +10,12 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 // Description Adds the element ’new’ at the end of the list.
 {
 	t_list	*last_element;
-	t_list	*new_element;
 
-	last_element = ft_lstlast(*lst);
-	new_element = ft_lstnew(new->content);
-	last_element->next = new_element;
-	return ;
+	if (*lst == NULL)
+		*lst = new;
+	else
+	{
+		last_element = ft_lstlast(*lst);
+		last_element->next = new;
+	}
 }
