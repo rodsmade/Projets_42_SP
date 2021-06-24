@@ -97,7 +97,7 @@ char	**ft_split(char const *s, char delimiter)
 	size_t	i;
 
 	words = count_words(s, delimiter);
-	morsels = malloc((words + 1) * sizeof(*morsels));
+	morsels = (char **) malloc((words + 1) * sizeof(char *));
 	while (*s == delimiter)
 			s++;
 	i = 0;
@@ -108,7 +108,7 @@ char	**ft_split(char const *s, char delimiter)
 		while (s[length] != delimiter && s[length])
 			length++;
 		// montar palavra
-		morsels[i] = malloc(length * sizeof(char) + 1);
+		morsels[i] = (char *) malloc(length * sizeof(char) + 1);
 		if (morsels[i] == NULL)
 			return (rollback(morsels));
 		morsels[i][length] = '\0';
@@ -152,5 +152,8 @@ char	**ft_split(char const *s, char delimiter)
 // 	int i = -1;
 // 	while(++i < a)
 // 		printf("palavra %i>\t%s\n", i, morsels[i]);
+// 	while (--i >= 0)
+// 		free(morsels[i]);
+// 	free(morsels);
 // 	return 0;
 // }
