@@ -35,6 +35,7 @@ char	**write_words(char **morsels, const char *s, char delimiter)
 	size_t	length;
 	size_t	i;
 
+	i = 0;
 	while (*s)
 	{
 		length = 0;
