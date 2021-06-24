@@ -123,7 +123,7 @@ char	**ft_split(char const *s, char delimiter)
 		}
 		while (*s != delimiter)
 			s++;
-		while (*s == delimiter)
+		while (*s == delimiter && *s)
 			s++;
 		i++;
 	}
