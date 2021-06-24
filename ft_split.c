@@ -98,6 +98,8 @@ char	**ft_split(char const *s, char delimiter)
 
 	words = count_words(s, delimiter);
 	morsels = (char **) malloc((words + 1) * sizeof(char *));
+	if (morsels == NULL)
+		return (NULL);
 	while (*s == delimiter)
 			s++;
 	i = 0;
