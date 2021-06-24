@@ -102,7 +102,7 @@ char	**ft_split(char const *s, char delimiter)
 	morsels = (char **) malloc((words + 1) * sizeof(char *));
 	if (morsels == NULL)
 		return (NULL);
-	while (*s == delimiter)
+	while (*s == delimiter && *s)
 			s++;
 	i = 0;
 	while (*s)
@@ -131,33 +131,33 @@ char	**ft_split(char const *s, char delimiter)
 	return (morsels);
 }
 
-// #include<stdio.h>
-// int main()
-// {
-// 	int a;
-// 	a = count_words("        and then the furthermost shake drove a murthering stake in and       ", ' ');
-// 	// printf("COUNT> %i\n", a);
-// 	// a = count_words("        and       ", ' ');
-// 	// printf("COUNT> %i\n", a);
-// 	// a = count_words("        and", ' ');
-// 	// printf("COUNT> %i\n", a);
-// 	// a = count_words("and       ", ' ');
-// 	// printf("COUNT> %i\n", a);
-// 	// a = count_words("and", ' ');
-// 	// printf("COUNT> %i\n", a);
-// 	// a = count_words("        and then the furthermost shake drove a murthering stake in and       ", '\0');
-// 	// printf("COUNT> %i\n", a);
-// 	// a = count_words("           ", ' ');
-// 	// printf("COUNT> %i\n", a);
-// 	// a = count_words("", ' ');
-// 	// printf("COUNT> %i\n", a);
-// 	char **morsels;
-// 	morsels = ft_split("        and then the furthermost shake drove a murthering stake in and       ", ' ');
-// 	int i = -1;
-// 	while(++i < a)
-// 		printf("palavra %i>\t%s\n", i, morsels[i]);
-// 	while (--i >= 0)
-// 		free(morsels[i]);
-// 	free(morsels);
-// 	return 0;
-// }
+#include<stdio.h>
+int main()
+{
+	int a;
+	a = count_words("        and then the furthermost shake drove a murthering stake in and       ", ' ');
+	// printf("COUNT> %i\n", a);
+	// a = count_words("        and       ", ' ');
+	// printf("COUNT> %i\n", a);
+	// a = count_words("        and", ' ');
+	// printf("COUNT> %i\n", a);
+	// a = count_words("and       ", ' ');
+	// printf("COUNT> %i\n", a);
+	// a = count_words("and", ' ');
+	// printf("COUNT> %i\n", a);
+	// a = count_words("        and then the furthermost shake drove a murthering stake in and       ", '\0');
+	// printf("COUNT> %i\n", a);
+	// a = count_words("           ", ' ');
+	// printf("COUNT> %i\n", a);
+	// a = count_words("", ' ');
+	// printf("COUNT> %i\n", a);
+	char **morsels;
+	morsels = ft_split("        and then the furthermost shake drove a murthering stake in and       ", ' ');
+	int i = -1;
+	while(++i < a)
+		printf("palavra %i>\t%s\n", i, morsels[i]);
+	while (--i >= 0)
+		free(morsels[i]);
+	free(morsels);
+	return 0;
+}
