@@ -1,0 +1,8 @@
+# des scripts utiles
+
+[x] supprimer les fichiers inutiles 
+	find . -type f -not \( -name '*.c' -o -name '*.h' -o -name 'Makefile' -o -name '.gitignore' -o -name 'README.md' -o -name '.git/*' \) -not -path "./.git/*" -delete
+[x] supprimer les commentaires
+	find . -type f -name '*.c' | xargs sed -i " /\s\/\/.*/ d; /\/\/.*/ d"
+[x] changer les noms des fonctions
+	rename 's/^OK//g' *.c
