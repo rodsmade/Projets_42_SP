@@ -1,13 +1,13 @@
-#include "get_next_line.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <strings.h>
 
-///////////////////////////////////////////////////////////////////////////////////////
-int		BUFFER_SIZE = 10;
-FILE	*fptr;
-char	*file_path = "./only_skin";
+char	*file_name = "./only_skin";
+int		BUFFER_SIZE = 5;
+FILE	*fp;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 size_t	ft_strlen(const char *s)
 {
@@ -22,106 +22,106 @@ size_t	ft_strlen(const char *s)
 	return (qtd_caracteres);
 }
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	srclen;
-	size_t	dstlen;
-	size_t	i;
+	char	*joint;
+	int		i;
+	int		length_s1;
+	int		length_s2;
 
-	srclen = ft_strlen(src);
-	dstlen = 0;
-	while (dst[dstlen] && dstlen < size)
-		dstlen++;
-	i = 0;
-	if (dstlen < size)
-	{
-		while ((i + dstlen) < (size - 1) && src[i])
-		{
-			dst[i + dstlen] = src[i];
-				i++;
-		}
-		dst[i + dstlen] = '\0';
-	}
-	return (dstlen + srclen);
+	length_s1 = ft_strlen(s1);
+	length_s2 = ft_strlen(s2);
+	joint = malloc((length_s1 + length_s2 + 1) * sizeof(char));
+	if (joint == NULL)
+		return (NULL);
+	i = -1;
+	while (s1[++i])
+		joint[i] = s1[i];
+	i = -1;
+	while (s2[++i])
+		joint[i + length_s1] = s2[i];
+	joint[length_s1 + length_s2] = '\0';
+	return (joint);
 }
-///////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 int line_found(char *buffer)
 {
 	int i;
 
+	if (buffer == NULL)
+		return (0);
 	i = -1;
-	while(++i < BUFFER_SIZE)
+	while(++i < BUFFER_SIZE && buffer[i])
 		if (buffer[i] == '\n')
 			return (i);
 	return (0); 
 }
 
-int	get_next_line(const int fd, char **line)
-/**
- * retornos possiveis:
- * 	0:> EOF has been reached
- * 	1:> a line has been read
- * 	-1:> an error occurred
- **/
+int get_next_line(int fd, char **line)
 {
-	static char	*checkpoint;	// vai existir por toda a duração do main q chama gnl...
-	ssize_t		read_return;
-	int			caret;
-	// int			BUFFER_SIZE = 5;
+	static char	*read_output;
+	int read_return = 0;
+	int found_line;
+	//char	*one_line;
 
-	// abre o arquivo que eu quero
-	fptr = fopen(file_path, "r");
-	printf("File descriptor is: %i\n\n\n\n", fptr->_fileno);
-	*line = '\0';
-	// args protection
-	if (fd < 0 || !line || BUFFER_SIZE <= 0)
+	read_output = malloc(1);
+	if (read_output == NULL)
 		return (-1);
-	while((read_return = read(fd, checkpoint, BUFFER_SIZE)) > 0
-		&& !(caret = line_found(checkpoint)))
+	*read_output = '\0';
+
+	*line = malloc(1);
+	if (*line == NULL)
+		return (-1);
+	**line = '\0';
+
+	found_line = line_found(read_output);
+	read_return = read(fd, read_output, BUFFER_SIZE);
+
+	while (read_return > 0 && !found_line)
 	{
-		if (read_return < BUFFER_SIZE)
-			checkpoint[read_return] = '\0';
-		ft_strlcat(*line, checkpoint, BUFFER_SIZE);
-		// SE SIM, copia td até a line break
-		// bota um '\0'
-		// salva o seu checkpoint. o checkpoint eh um ponteiro
-		// encerra a execução
-		// SE NÃO, continua lendo até encontrar......
-		// printf("read return: %i\n", read_return);
-		// if (read_return < BUFFER_SIZE)
-		// 	read_o utput[read_return] = '\0';
-		// printf("||%s||\n", checkpoint);
+		if (!found_line)
+		{
+			// printf(" >>> read return: %i\n", read_return);
+			// printf("     found line: %i\n", found_line);
+			read_output[read_return] = '\0';
+			// printf(" >>> linha lida: ||%s||\n", read_output);
+			
+			*line = ft_strjoin(*line, read_output);
+
+			read_return = read(fd, read_output, BUFFER_SIZE);
+			found_line = line_found(read_output);
+		}
 	}
-	if (read_return < 0)
-		return (-1);
-	ft_strlcat(*line, checkpoint, caret);
-	checkpoint = checkpoint + caret;
-	return (0);
+	read_output[found_line] = '\0';
+	*line = ft_strjoin(*line, read_output);
+
+	// printf("\nsaiu do while, read_return: %i\n", read_return);
+	// printf("found line: %i\n", found_line);
+	// printf("one_line: ||%s||\n", *line);
+
+	return (read_return);
 }
 
-//////////////////////////////////////////////////////////////////////////////////////
 int main(void)
 {
 	char	**line;
 	int		gnl_return;
+	int		i = 0;
 
-	// eu já sei de antemão quantas linhas existem no arquivo então
 	line = malloc((211 + 1) * sizeof(*line));
-	if (line == NULL)
-		return (-1);
-	line[211] = NULL;
-	// chama gnl em loop, até dar ruim ou até chegar ao fim do arquivo
-	int i = 0;
-	while((gnl_return = get_next_line(3, line)) > 0)
-	{
-		printf("gnl_return: %i\n", gnl_return);
-		printf("Line read: ||%s||\n", line[i]);
-		i++;
-	}
-	printf("fim do loop gnl: %i\n", gnl_return);
+	fp = fopen(file_name, "r");
+	printf("\nFile descriptor is: %i\n\n\n\n", fp->_fileno);
 
-	// fecha o arquivo e encerra execução
-	fclose(fptr);
+	gnl_return = get_next_line(fp->_fileno, line + i);
+	while (gnl_return > 0)
+	{
+		printf("Linha lida: ||%s||\n", line[i]);
+		i++;
+		gnl_return = get_next_line(fp->_fileno, line + i);
+	}
+
+	fclose(fp);
 	return (0);
 }
