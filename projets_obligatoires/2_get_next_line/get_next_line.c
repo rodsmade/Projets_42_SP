@@ -1,127 +1,59 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <strings.h>
+#include "get_next_line.h"
 
-char	*file_name = "./only_skin";
-int		BUFFER_SIZE = 5;
-FILE	*fp;
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-size_t	ft_strlen(const char *s)
-{
-	int	qtd_caracteres;
-
-	qtd_caracteres = 0;
-	while (*s)
-	{
-		qtd_caracteres++;
-		s++;
-	}
-	return (qtd_caracteres);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*joint;
-	int		i;
-	int		length_s1;
-	int		length_s2;
-
-	length_s1 = ft_strlen(s1);
-	length_s2 = ft_strlen(s2);
-	joint = malloc((length_s1 + length_s2 + 1) * sizeof(char));
-	if (joint == NULL)
-		return (NULL);
-	i = -1;
-	while (s1[++i])
-		joint[i] = s1[i];
-	i = -1;
-	while (s2[++i])
-		joint[i + length_s1] = s2[i];
-	joint[length_s1 + length_s2] = '\0';
-	return (joint);
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-int line_found(char *buffer)
+static int has_return_char(char *string)
 {
 	int i;
 
-	if (buffer == NULL)
-		return (0);
-	i = -1;
-	while(++i < BUFFER_SIZE && buffer[i])
-		if (buffer[i] == '\n')
+	i = 0;
+	while(string[i])
+	{
+		if (string[i] == '\n')
 			return (i);
-	return (0); 
-}
-
-int get_next_line(int fd, char **line)
-{
-	static char	*read_output;
-	int read_return = 0;
-	int found_line;
-	//char	*one_line;
-
-	read_output = malloc(1);
-	if (read_output == NULL)
-		return (-1);
-	*read_output = '\0';
-
-	*line = malloc(1);
-	if (*line == NULL)
-		return (-1);
-	**line = '\0';
-
-	found_line = line_found(read_output);
-	read_return = read(fd, read_output, BUFFER_SIZE);
-
-	while (read_return > 0 && !found_line)
-	{
-		if (!found_line)
-		{
-			// printf(" >>> read return: %i\n", read_return);
-			// printf("     found line: %i\n", found_line);
-			read_output[read_return] = '\0';
-			// printf(" >>> linha lida: ||%s||\n", read_output);
-			
-			*line = ft_strjoin(*line, read_output);
-
-			read_return = read(fd, read_output, BUFFER_SIZE);
-			found_line = line_found(read_output);
-		}
-	}
-	read_output[found_line] = '\0';
-	*line = ft_strjoin(*line, read_output);
-
-	// printf("\nsaiu do while, read_return: %i\n", read_return);
-	// printf("found line: %i\n", found_line);
-	// printf("one_line: ||%s||\n", *line);
-
-	return (read_return);
-}
-
-int main(void)
-{
-	char	**line;
-	int		gnl_return;
-	int		i = 0;
-
-	line = malloc((211 + 1) * sizeof(*line));
-	fp = fopen(file_name, "r");
-	printf("\nFile descriptor is: %i\n\n\n\n", fp->_fileno);
-
-	gnl_return = get_next_line(fp->_fileno, line + i);
-	while (gnl_return > 0)
-	{
-		printf("Linha lida: ||%s||\n", line[i]);
 		i++;
-		gnl_return = get_next_line(fp->_fileno, line + i);
+	}
+	return (0);
+}
+
+static void saves_the_rest(char *string)
+{
+	// TODO
+}
+
+char *get_next_line(int fd)
+{
+	char		*retorno_gnl;	// acho q vou precisar de um malloc 
+	char		*read_output[BUFFER_SIZE + 1];
+	int			read_return;
+	int			wheres_the_return;
+	static char	*rest = NULL;
+
+	if(has_return_char(rest))
+	{
+		// TODO fim 1 
+	}
+	while(read_return = read(fd, read_output, BUFFER_SIZE) > 0)
+	{
+		read_output[read_return] = '\0';
+		if (wheres_the_return = has_return_char(read_output))
+		{
+			ft_strlcat(retorno_gnl, read_output, wheres_the_return + 1);
+			saves_the_rest(read_output[wheres_the_return]);
+			// Important: You should always return the line that has been read followed by a ’\n’
+			// unless you have reached end of file and there is no ’\n’.
+			return (retorno_gnl);
+		}
+		ft_strlcat(retorno_gnl, read_output, BUFFER_SIZE);
+	}
+	// se saiu do while eh pq atingiu EOF. ainda tem algo a ser lido em read_output?
+	// EOF: read_return == 0
+	if (read_return != 0)
+	// deu algum ruim
+		return (NULL);
+	if (wheres_the_return = has_return_char(read_output))
+	{
+		ft_strlcat(retorno_gnl, read_output, wheres_the_return);
+		saves_the_rest(read_output[wheres_the_return]);
+		return (retorno_gnl);
 	}
 
-	fclose(fp);
-	return (0);
 }

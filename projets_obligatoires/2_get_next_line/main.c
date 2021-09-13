@@ -1,48 +1,34 @@
-#include "get_next_line.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <strings.h>
+#include "get_next_line.h"
 
-// int	BUFFER_SIZE; // escolhi passar o buffer_size como argv por praticidade
+int	 BUFFER_SIZE = 25;
+char	*g_file_name = "./ole/textos_testes";
+FILE	*g_fp;
 
-int main(void)
+char	*get_next_line(int fd);
+
+int main()
 {
-	char	*file_path = "./testin";
-	char	**line;
-	int		gnl_return;
-	FILE	*fptr;
+	char	*line;
+	int count = 0;
+	// char *read_output;
+	// int	read_return;
 
-	// if (argc != 2)
-	// {
-	// 	printf("ERRRRROUU!!\n");
+	// read_output = malloc(1);
+	// if (read_output == NULL)
 	// 	return (-1);
-	// }
+	// *read_output = '\0';
 
-	// // buffer_size vem do argv e não da compilação
-	// BUFFER_SIZE = atoi(argv[1]);
-	
-	// abre o arquivo que eu quero
-	fptr = fopen(file_path, "r");
-	printf("File descriptor is: %i\n\n\n\n", fptr->_fileno);
-
-	// eu já sei de antemão quantas linhas existem no arquivo então
-	line = malloc((211 + 1) * sizeof(*line));
-	if (line == NULL)
-		return (-1);
-	line[211] = NULL;
-
-	// chama gnl em loop, até dar ruim ou até chegar ao fim do arquivo
-	int i = 0;
-	while((gnl_return = get_next_line(fptr->_fileno, line)) > 0)
+	g_fp = fopen(g_file_name, "r");
+	line = get_next_line(g_fp->_fileno);
+	while ((line = get_next_line(g_fp->_fileno)) != NULL)
 	{
-		printf("gnl_return: %i\n", gnl_return);
-		printf("Line read: ||%s||\n", line[i]);
-		i++;
+		printf("Linha %i:\t%s\n", count, line);
+		count++;
 	}
-	printf("fim do loop gnl: %i\n", gnl_return);
+	printf("\n\n\n fim\n");
 
-	// fecha o arquivo e encerra execução
-	fclose(fptr);
 	return (0);
 }

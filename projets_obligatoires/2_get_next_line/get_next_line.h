@@ -2,10 +2,9 @@
 # define GET_NEXT_LINE_H
 
 # include <unistd.h>
-# include <stdlib.h>
+# include <stdio.h>
 
-size_t	ft_strlen(const char *s);
-size_t	ft_strlcat(char *dst, const char *src, size_t size);
-int		get_next_line(int fd, char **line);
+extern int BUFFER_SIZE;
+char	*get_next_line(int fd);
 
-#endif
+# endif
