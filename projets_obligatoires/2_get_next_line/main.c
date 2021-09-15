@@ -1,9 +1,10 @@
 #include <stdio.h>	// FILE, fopen()
+#include <stdio.h> // printf()
 
 char	*g_file_name = "./ole/only_skin";
 FILE	*g_fp;
 
-char	*get_next_line(int fd, int try);
+char	*get_next_line(int fd);
 
 int main()
 {
@@ -13,7 +14,7 @@ int main()
 	
 	while(++i < 10)
 	{
-		printf("%i texto lido: >>> %s\n", i, get_next_line(g_fp->_fileno, i));
+		printf("%i texto lido: >>> %s\n", i, get_next_line(g_fp->_fileno));
 	}
 	fclose(g_fp);
 	return (0);
