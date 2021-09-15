@@ -1,21 +1,22 @@
 #include <stdio.h>	// FILE, fopen()
 #include <stdio.h> // printf()
 
-char	*g_file_name = "./ole/only_skin";
+char	*g_file_name = "./ole/textos_testes";
 FILE	*g_fp;
 
 char	*get_next_line(int fd);
 
 int main()
 {
-	int i = -1;
+	char	*linha;
 
 	g_fp = fopen(g_file_name, "r");
 	
-	while(++i < 10)
+	while((linha = get_next_line(g_fp->_fileno)) != NULL)
 	{
-		printf("%i texto lido: >>> %s\n", i, get_next_line(g_fp->_fileno));
+		printf("linha lida: >>> %s", linha);
 	}
+	
 	fclose(g_fp);
 	return (0);
 }
