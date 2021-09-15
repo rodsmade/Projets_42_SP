@@ -16,9 +16,20 @@ static int has_nl_char(char *string)
 	return (0);
 }
 
-static void saves_the_rest(char *rest, char *string, int size)
+//	saves_the_rest(read_output, read_return, wheres_the_newline);
+static char	*saves_the_rest(char *string, int buff_size)
 {
-	// TODO
+	char	*rest;
+	int		i;
+
+	rest = malloc((buff_size + 1) * sizeof(char));
+	if (rest == NULL)
+		return (NULL);
+	i = -1;
+	while (++i < buff_size)
+		rest[i] = string[i];
+	rest[i] = '\0';
+	return (rest);
 }
 
 // talvez passar o gnl como argumento pq no caso do rest, se achar nl, tem q appendar no gnl_retorno
@@ -31,6 +42,13 @@ char	*appends_to_gnlret(char *gnl_return, char *string, int size)
 	if (copia == NULL)
 		return (NULL);
 	ft_strlcpy(copia, string, size);
+	if(gnl_return == NULL)
+	{
+		gnl_return = malloc(sizeof(char));
+		if(gnl_return == NULL)
+			return (NULL);
+		gnl_return = '\0';
+	}
 	gnl_return = ft_strjoin(gnl_return, copia);
 	free(copia);
 	return (gnl_return);
@@ -46,7 +64,8 @@ char *get_next_line(int fd)
 				// eu posso usar malloc com uma var estática? o ponteiro apontando pra lugar x da Heap vai ficar guardado, mas na próxima execução da função, esse endereço da heap vai ter o que eu preciso q tenha?
 				// a resposta é que eu vou tentar fazer sim com o malloc e se der ruim pedir apoio da comunidade
 
-	if(wheres_the_newline = has_nl_char(rest))
+	gnl_return = NULL;
+	if((wheres_the_newline = has_nl_char(rest)))
 	{
 		gnl_return = appends_to_gnlret(gnl_return, rest, wheres_the_newline);
 		rest += wheres_the_newline;
@@ -54,15 +73,15 @@ char *get_next_line(int fd)
 	}
 
 	// ATENÇÃO: AQUI o rest OU é NULL, OU não tem um return dentro !!!111!11!!
-	while(read_return = read(fd, read_output, BUFFER_SIZE) > 0)
+	while((read_return = read(fd, read_output, BUFFER_SIZE)) > 0)
 	{
 		read_output[read_return] = '\0';
-		if (wheres_the_newline = has_nl_char(read_output))
+		if ((wheres_the_newline = has_nl_char(read_output)))
 		{
 			// Important: You should always return the line that has been read followed by a ’\n’
 			// unless you have reached end of file and there is no ’\n’.
 			gnl_return = appends_to_gnlret(gnl_return, read_output, wheres_the_newline);
-			saves_the_rest(rest, read_output, wheres_the_newline);
+			rest = saves_the_rest(read_output + wheres_the_newline + 1, read_return - wheres_the_newline);
 			return (gnl_return);
 		}
 		gnl_return = appends_to_gnlret(gnl_return, read_output, BUFFER_SIZE);
@@ -72,8 +91,8 @@ char *get_next_line(int fd)
 	if (read_return != 0)
 	// deu algum ruim
 		return (NULL);
-	read_output(read_return) = '\0';
-	if (wheres_the_newline = has_nl_char(read_output))
+	read_output[read_return] = '\0';
+	if ((wheres_the_newline = has_nl_char(read_output)))
 		appends_to_gnlret(gnl_return, read_output, wheres_the_newline);
 		// append read_output to gnl_return
 	return (gnl_return);
