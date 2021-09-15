@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include "get_next_line.h"
 
-int	 BUFFER_SIZE = 25;
+// int	 BUFFER_SIZE = 25;
 char	*g_file_name = "./ole/textos_testes";
 FILE	*g_fp;
 
