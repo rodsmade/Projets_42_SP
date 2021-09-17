@@ -13,6 +13,34 @@ size_t	ft_strlen(const char *s)
 	return (qtd_caracteres);
 }
 
+void	*ft_memcpy(void *dest, const void *src, size_t n)
+{
+	unsigned int	i;
+
+	if (dest == NULL && src == NULL)
+		return (NULL);
+	i = 0;
+	while (i < n)
+	{
+		((char *) dest)[i] = ((char *) src)[i];
+		i++;
+	}
+	return (dest);
+}
+
+char	*ft_strdup(const char *s)
+{
+	unsigned int	strlength;
+	char			*newstr;
+
+	strlength = ft_strlen(s);
+	newstr = calloc(strlength + 1, sizeof(const char));
+	if (newstr == NULL)
+		return (NULL);
+	newstr = ft_memcpy(newstr, s, strlength);
+	return (newstr);
+}
+
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*joint;

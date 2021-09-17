@@ -5,6 +5,8 @@
 # include <stdlib.h> // malloc()
 
 char	*get_next_line(int fd);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
+char	*ft_strdup(const char *s);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 char	*ft_strjoin(char const *s1, char const *s2);
 

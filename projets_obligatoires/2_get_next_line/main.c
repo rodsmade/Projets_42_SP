@@ -14,9 +14,35 @@ int main()
 	
 	while((linha = get_next_line(g_fp->_fileno)) != NULL)
 	{
-		printf("linha lida: >>> %s", linha);
+		printf(">>> %s", linha);
 	}
 	
 	fclose(g_fp);
 	return (0);
 }
+
+// #include "get_next_line.h"
+// #include "stdio.h"
+// #include "unistd.h"
+// # include "fcntl.h"
+
+// int main (void)
+// {
+//     int fd;
+//     char *texticulo;
+//     int i;
+
+//     i = 1;
+//     fd = open("ole/textos_testes", O_RDONLY);
+
+//     while (i)
+//     {
+//     texticulo = get_next_line(fd);
+//     printf("&%s|",texticulo);
+//     if (!texticulo)
+//         i = 0;
+//     //free(texticulo);
+//     texticulo = 0;
+//     }
+//     close(fd);
+// }
