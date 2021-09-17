@@ -1,7 +1,7 @@
 #include <stdio.h>	// FILE, fopen()
 #include <stdio.h> // printf()
 
-char	*g_file_name = "./ole/textos_testes";
+char	*g_file_name = "./ole/only_skin";
 FILE	*g_fp;
 
 char	*get_next_line(int fd);
