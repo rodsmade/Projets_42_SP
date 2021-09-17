@@ -60,6 +60,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[++i])
 		joint[i + length_s1] = s2[i];
 	joint[length_s1 + length_s2] = '\0';
+	free((char *)s1);
 	return (joint);
 }
 

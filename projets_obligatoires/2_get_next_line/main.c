@@ -1,7 +1,8 @@
 #include <stdio.h>	// FILE, fopen()
 #include <stdio.h> // printf()
+#include <stdlib.h> // free()
 
-char	*g_file_name = "./ole/only_skin";
+char	*g_file_name = "./textos_testes";
 FILE	*g_fp;
 
 char	*get_next_line(int fd);
@@ -15,6 +16,7 @@ int main()
 	while((linha = get_next_line(g_fp->_fileno)) != NULL)
 	{
 		printf(">>> %s", linha);
+		free(linha);
 	}
 	
 	fclose(g_fp);
