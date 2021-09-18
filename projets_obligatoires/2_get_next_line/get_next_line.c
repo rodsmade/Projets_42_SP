@@ -1,26 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/17 18:30:04 by roaraujo          #+#    #+#             */
+/*   Updated: 2021/09/17 19:25:42 by roaraujo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-static int	contains_nl(char *string)
-// true if return >= 0; false otherwise
+static void	*free_n_null(char **s1, char **s2, char **s3)
 {
-	int i;
-
-	if(!string)
-		return (-1);
-	i = 0;
-	while(string[i])
+	if (s1)
 	{
-		if(string[i] == '\n')
-			return (i);
-		i++;
+		if (*s1)
+			free(*s1);
+		*s1 = NULL;
 	}
-	return (-1);
-}
-
-static void	*free_n_quit(char *string)
-{
-	if(string)
-		free(string);
+	if (s2)
+	{
+		if (*s2)
+			free(*s2);
+		*s2 = NULL;
+	}
+	if (s3)
+	{
+		if (*s3)
+			free(*s3);
+		*s3 = NULL;
+	}
 	return (NULL);
 }
 
@@ -29,10 +40,10 @@ static char	*copy_up_to_nl(char *string)
 	char	*copy;
 	int		nl_pos;
 
-	nl_pos = 0;
-	if(!string)	
+	nl_pos = contains_nl(string);
+	if (!string)
 		return (NULL);
-	if(!((nl_pos = contains_nl(string)) >= 0))
+	if (!(nl_pos >= 0))
 		return (string);
 	copy = malloc((nl_pos + 2) * sizeof(char));
 	if (copy == NULL)
@@ -49,19 +60,34 @@ static char	*save_past_first_nl(char *source)
 	int		nl_pos;
 	int		strlen;
 
-	if(!((nl_pos = contains_nl(source)) >= 0))
+	nl_pos = contains_nl(source);
+	if (!(nl_pos >= 0))
 		return (NULL);
 	dest = malloc(((strlen = ft_strlen(source)) - nl_pos) * sizeof(char));
-	if(dest == NULL)
+	if (dest == NULL)
 		return (NULL);
 	dest[strlen - nl_pos - 1] = '\0';
 	ft_strlcpy(dest, source + nl_pos + 1, strlen - nl_pos);
 	return (dest);
 }
 
-char		*get_next_line(int fd)
+static char	*return_line(char **rest, char **buffer, char **line, int i)
 {
-	// não preciso checar se tem ou se não tem algo no resto. parto da premissa de que tem, e vou dando strjoin.
+	if (i == 0)
+	{
+		free_n_null(rest, buffer, NULL);
+		if (*line && **line)
+			return (*line);
+		return (free_n_null(line, NULL, NULL));
+	}
+	free_n_null(rest, buffer, NULL);
+	*rest = save_past_first_nl(*line);
+	*line = copy_up_to_nl(*line);
+	return (*line);
+}
+
+char	*get_next_line(int fd)
+{
 	static char	*rest;
 	char		*buffer;
 	char		*line;
@@ -70,36 +96,17 @@ char		*get_next_line(int fd)
 	if (!rest)
 		rest = ft_strdup("");
 	line = ft_strdup(rest);
-	chars_read = BUFFER_SIZE;
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (buffer == NULL)
 		return (NULL);
-	while(chars_read == BUFFER_SIZE && contains_nl(line) < 0)
+	chars_read = BUFFER_SIZE;
+	while (chars_read == BUFFER_SIZE && !(contains_nl(line) >= 0))
 	{
 		chars_read = read(fd, buffer, BUFFER_SIZE);
-		if(chars_read < 0)
-		{
-			free(rest);
-			rest = NULL;
-			free(buffer);
-			return (free_n_quit(line));
-		}
+		if (chars_read < 0)
+			return (free_n_null(&line, &rest, &buffer));
 		buffer[chars_read] = '\0';
-		if (!line)
-			line = ft_strdup("");
 		line = ft_strjoin(line, buffer);
 	}
-	free(buffer);
-	if (chars_read == 0)
-	{
-		free(rest);
-		rest = NULL;
-		if (line && *line)
-			return (line);
-		return (free_n_quit(line));
-	}
-	free(rest);
-	rest = save_past_first_nl(line);
-	line = copy_up_to_nl(line);
-	return (line);
+	return (return_line(&rest, &buffer, &line, chars_read));
 }

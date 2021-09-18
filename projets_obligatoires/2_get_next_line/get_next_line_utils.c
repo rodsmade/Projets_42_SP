@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/17 18:30:10 by roaraujo          #+#    #+#             */
+/*   Updated: 2021/09/17 19:27:04 by roaraujo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
@@ -13,31 +25,23 @@ size_t	ft_strlen(const char *s)
 	return (qtd_caracteres);
 }
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
-{
-	unsigned int	i;
-
-	if (dest == NULL && src == NULL)
-		return (NULL);
-	i = 0;
-	while (i < n)
-	{
-		((char *) dest)[i] = ((char *) src)[i];
-		i++;
-	}
-	return (dest);
-}
-
 char	*ft_strdup(const char *s)
 {
 	unsigned int	strlength;
 	char			*newstr;
+	unsigned int	i;
 
 	strlength = ft_strlen(s);
-	newstr = calloc(strlength + 1, sizeof(const char));
+	newstr = malloc((strlength + 1) * sizeof(const char));
 	if (newstr == NULL)
 		return (NULL);
-	newstr = ft_memcpy(newstr, s, strlength);
+	newstr[strlength] = '\0';
+	i = 0;
+	while (i < strlength)
+	{
+		((char *) newstr)[i] = ((char *) s)[i];
+		i++;
+	}
 	return (newstr);
 }
 
@@ -78,4 +82,20 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	}
 	dst[i] = '\0';
 	return (ft_strlen(src));
+}
+
+int	contains_nl(char *string)
+{
+	int	i;
+
+	if (!string)
+		return (-1);
+	i = 0;
+	while (string[i])
+	{
+		if (string[i] == '\n')
+			return (i);
+		i++;
+	}
+	return (-1);
 }
