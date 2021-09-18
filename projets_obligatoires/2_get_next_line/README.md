@@ -1,5 +1,5 @@
 # get_next_line
-This project introduces the concepts of static variables, dynamic memory allocation, file descriptors and macros while solving one symple task: that of using Linux standard function `read()` to scan a file for *single lines* (strings of chars with a single trailing `\n` (new line character))
+This project introduces the concepts of _static variables_, _dynamic memory allocation_, _file descriptors_ and _macros_ while solving one symple task: that of using Linux standard function `read()` to scan a file for _single lines_ (i.e. strings of chars with a single trailing `\n` (new line character)).
 
 ## Files
 * ```get_next_line.c```
@@ -29,3 +29,5 @@ To run the program, enter the following in the command prompt:
 ```
 
 You should expect to see the lyrics to Only Skin by Joanna Newsom printed in your terminal window. How cool is that?!
+
+![Ys album cover](ys.png)
