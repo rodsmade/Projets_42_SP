@@ -12,7 +12,7 @@ This project introduces the concepts of _static variables_, _dynamic memory allo
 	header file
 
 * ```only_skin``` 
-	sample text file (and mindblowing lyrical masterpiece too!) for testing purposes. File size: **6940 bytes**; `\n` count: **251**.
+	sample text file (also lyrical masterpiece) for testing purposes. File size: **6940 bytes**; new line char count: **251**.
 
 * ```main.c``` 
 	printing loop iterating over the file. calls get_next_line to fetch each line, then prints.

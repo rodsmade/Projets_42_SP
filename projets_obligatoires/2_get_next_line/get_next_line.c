@@ -6,13 +6,16 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 18:30:04 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/09/17 19:25:42 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/09/18 10:41:14 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 static void	*free_n_null(char **s1, char **s2, char **s3)
+/**
+ * frees up allocated memory and set pointers to NULL
+*/
 {
 	if (s1)
 	{
@@ -36,6 +39,9 @@ static void	*free_n_null(char **s1, char **s2, char **s3)
 }
 
 static char	*copy_up_to_nl(char *string)
+/**
+ * ties up the line up to the first \n found in the string.
+*/
 {
 	char	*copy;
 	int		nl_pos;
@@ -55,6 +61,12 @@ static char	*copy_up_to_nl(char *string)
 }
 
 static char	*save_past_first_nl(char *source)
+/**
+ * Everything else inside the buffer past the first \n found
+ * is saved in the static variable `rest`. This guarantees
+ * that the beginning of the next line is not lost between
+ * function calls.
+*/
 {
 	char	*dest;
 	int		nl_pos;
@@ -72,6 +84,12 @@ static char	*save_past_first_nl(char *source)
 }
 
 static char	*return_line(char **rest, char **buffer, char **line, int i)
+/**
+ * Wraps up the execution of get_next_line. Frees memory if need be,
+ * then ties up the current read line and stores what's left from the buffer
+ * in the static variable `rest` so as to resume the reading of the file
+ * in the next function call.
+*/
 {
 	if (i == 0)
 	{
@@ -93,6 +111,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	int			chars_read;
 
+	// initialize variables
 	if (!rest)
 		rest = ft_strdup("");
 	line = ft_strdup(rest);
@@ -100,12 +119,18 @@ char	*get_next_line(int fd)
 	if (buffer == NULL)
 		return (NULL);
 	chars_read = BUFFER_SIZE;
+
+	// loop using read() as long as no \n is found
 	while (chars_read == BUFFER_SIZE && !(contains_nl(line) >= 0))
 	{
 		chars_read = read(fd, buffer, BUFFER_SIZE);
+		
+		// terminate execution if file reading goes awry
 		if (chars_read < 0)
 			return (free_n_null(&line, &rest, &buffer));
 		buffer[chars_read] = '\0';
+
+		// concatenates buffer read with the line that's being built up
 		line = ft_strjoin(line, buffer);
 	}
 	return (return_line(&rest, &buffer, &line, chars_read));

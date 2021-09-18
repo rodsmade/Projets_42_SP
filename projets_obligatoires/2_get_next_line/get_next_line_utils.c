@@ -6,13 +6,16 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 18:30:10 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/09/17 19:27:04 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/09/18 10:51:48 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
+/**
+ * Returns the length of a valid string
+*/
 {
 	int	qtd_caracteres;
 
@@ -26,6 +29,9 @@ size_t	ft_strlen(const char *s)
 }
 
 char	*ft_strdup(const char *s)
+/**
+ * duplicates one string into another. allocates memory using malloc.
+*/
 {
 	unsigned int	strlength;
 	char			*newstr;
@@ -46,6 +52,10 @@ char	*ft_strdup(const char *s)
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
+/**
+ * concatenates two strings of fixed length into one.
+ * allocates memory using malloc.
+*/
 {
 	char	*joint;
 	int		i;
@@ -69,6 +79,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 }
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+/**
+ * copies (up to size bytes) the content of one string (src) into another (dst).
+ * overwrites the contents of dst.
+*/
 {
 	unsigned int	i;
 
@@ -85,6 +99,11 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 }
 
 int	contains_nl(char *string)
+/**
+ * scans a string for single line character (\n).
+ * if found, returns its position (>= 0).
+ * otherwise, returns -1.
+*/
 {
 	int	i;
 

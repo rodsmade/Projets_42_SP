@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 09:13:16 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/09/18 10:14:09 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/09/18 10:30:09 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ FILE	*g_fp;
 char	*get_next_line(int fd);
 
 int main()
-/*
+/**
 *	- Function main() opens a file in a file descriptor (fd / _fileno).
 *	- This file contains text meant to be read one line at a time by means
 *	of function get_next_line().
