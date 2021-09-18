@@ -2,7 +2,7 @@
 #include <stdio.h> // printf()
 #include <stdlib.h> // free()
 
-char	*g_file_name = "./textos_testes";
+char	*g_file_name = "./only_skin";
 FILE	*g_fp;
 
 char	*get_next_line(int fd);
