@@ -1,5 +1,5 @@
 # get_next_line
-This project introduces the concepts of _static variables_, _dynamic memory allocation_, _file descriptors_ and _macros_ while solving one symple task: that of using Linux standard function `read()` to scan a file for _single lines_ (i.e. strings of chars with a single trailing `\n` (new line character)).
+This project introduces the concepts of _static variables_, _dynamic memory allocation_, _file descriptors_ and _macros_ while solving one simple task: that of using the Linux standard function `read()` to scan a file for _single lines_ (i.e. strings of chars with a single trailing `\n` (new line character)).
 
 ## Files
 * ```get_next_line.c```
@@ -18,7 +18,7 @@ This project introduces the concepts of _static variables_, _dynamic memory allo
 	printing loop iterating over the file. calls get_next_line to fetch each line, then prints.
 
 ## Run the program
-On your terminal, make sure to be on the same level as *.c files, then run the command:
+On your terminal, make sure to be on the same level as the *.c files, then run the command:
 ```c
 gcc get_next_line_utils.c get_next_line.c main.c -D BUFFER_SIZE=42 -o get_next_line
 ```
