@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 18:30:04 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/09/18 10:41:14 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/09/20 18:00:12 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ static char	*save_past_first_nl(char *source)
 static char	*return_line(char **rest, char **buffer, char **line, int i)
 /**
  * Wraps up the execution of get_next_line. Frees memory if need be,
- * then ties up the current read line and stores what's left from the buffer
- * in the static variable `rest` so as to resume the reading of the file
- * in the next function call.
+ * then ties up the current read line to be returned,
+ * and stores what's left from the buffer in the static variable `rest`
+ * so as to have the beginning of the next line saved for the next function call.
 */
 {
 	if (i == 0)
