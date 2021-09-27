@@ -1,5 +1,11 @@
 #include <stdio.h>
 #include <stdarg.h>
+#include <unistd.h>
+
+unsigned int	print_char(va_list args_list);
+unsigned int	convert_format(const char *formatStr, va_list args_list);
+unsigned int	print_int(va_list args_list);
+unsigned int	print_char(va_list args_list);
 
 int	ft_printf(const char *formatString, ...)
 {
@@ -15,35 +21,44 @@ int	ft_printf(const char *formatString, ...)
 		if (*formatString != '%')
 			write_count += write(1, formatString, 1);
 		else
-		{
-			// eu acho que tenho que passar a lista ou o endereço da lista pra dentro dessa de conversão
-			write_count += convert_format(formatString, write_count);
-		}
+			// eu tenho que passar a lista ou o endereço da lista pra dentro dessa de conversão
+			write_count += convert_format(++formatString, args_list);
 		formatString++;
 	}
 	va_end(args_list);
 	return (write_count);
 }
 
-unsigned int	convert_format(const char *formatString, unsigned int count)
+unsigned int	convert_format(const char *formatStr, va_list args_list)
 {
-	if (*formatString == 'c')
-		count += print_char(formatString, count);
-	if (*formatString == 's')
-		count += print_string(formatString, count);
-	if (*formatString == 'p')
-		count += print_pointer(formatString, count);
-	if (*formatString == 'd')
-		count += print_double(formatString, count);
-	if (*formatString == 'i')
-		count += print_int(formatString, count);
-	if (*formatString == 'u')
-		count += print_udecimal(formatString, count);
-	if (*formatString == 'x')
-		count += print_uhex_lowercase(formatString, count);
-	if (*formatString == 'X')
-		count += print_uhex_uppercase(formatString, count);
-	if (*formatString == '%')
-		count += print_percent_sign(formatString, count);
-	return (count);
+	if (*formatStr == 'i')
+		return (print_int(args_list));
+	if (*formatStr == 'c')
+		return (print_char(args_list));
+	return (0);
+}
+
+unsigned int	print_char(va_list args_list)
+{
+	int	n;
+
+	n = va_arg(args_list, int);
+	return (write(1, &n, 1));
+}
+
+unsigned int	print_int(va_list args_list)
+{
+	int	n;
+
+	n = va_arg(args_list, int);
+	// converts to ascii
+	n += 48;
+	return (write(1, &n, 1));
+}
+
+int main()
+{
+	// print_ints(5, 'a', 'b', 'x');
+	ft_printf("Teste: %i\n", 9);
+	return (0);
 }
