@@ -4,9 +4,10 @@
 
 unsigned int	print_char(va_list args_list);
 unsigned int	convert_format(const char *formatStr, va_list args_list);
-unsigned int	print_int(va_list args_list);
+unsigned int	print_signed_decimal(va_list args_list);
 unsigned int	print_char(va_list args_list);
 unsigned int	print_string(va_list args_list);
+unsigned int	print_percent_sign(void);
 
 int	ft_printf(const char *formatString, ...)
 {
@@ -32,20 +33,29 @@ int	ft_printf(const char *formatString, ...)
 
 unsigned int	convert_format(const char *formatStr, va_list args_list)
 {
-	if (*formatStr == 'i')
-		return (print_int(args_list));
+	if (*formatStr == 'i' || *formatStr == 'd')
+		return (print_signed_decimal(args_list));
 	if (*formatStr == 'c')
 		return (print_char(args_list));
 	if (*formatStr == 's')
 		return (print_string(args_list));
+	if (*formatStr == '%')
+		return (print_percent_sign());
 	return (0);
 }
 
-unsigned int	print_int(va_list args_list)
+unsigned int	print_signed_decimal(va_list args_list)
 {
 	int	n;
+	int	chars_written;
 
 	n = va_arg(args_list, int);
+	chars_written = 0;
+	if (n < 0)
+	{
+		chars_written++;
+		
+	}
 	// converts to ascii
 	n += 48;
 	return (write(1, &n, 1));
@@ -74,9 +84,14 @@ unsigned int	print_string(va_list args_list)
 	return (chars_written);
 }
 
+unsigned int	print_percent_sign(void)
+{
+	return (write(1, "%", 1));
+}
+
 int main()
 {
 	// print_ints(5, 'a', 'b', 'x');
-	ft_printf("Teste: %s\ne air funcionar ???\n", "eheita jesus");
+	ft_printf("Teste: %%\ne air funcionar ???\n", "eheita jesus");
 	return (0);
 }
