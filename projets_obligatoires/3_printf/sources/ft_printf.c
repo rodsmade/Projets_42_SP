@@ -1,6 +1,5 @@
-#include <stdio.h>
-#include <stdarg.h>
-#include <unistd.h>
+#include "libft.h"
+#include "printf.h"
 
 unsigned int	print_char(va_list args_list);
 unsigned int	convert_format(const char *formatStr, va_list args_list);
@@ -46,19 +45,11 @@ unsigned int	convert_format(const char *formatStr, va_list args_list)
 
 unsigned int	print_signed_decimal(va_list args_list)
 {
-	int	n;
-	int	chars_written;
+	char	*int_to_alpha;
 
-	n = va_arg(args_list, int);
-	chars_written = 0;
-	if (n < 0)
-	{
-		chars_written++;
-		
-	}
-	// converts to ascii
-	n += 48;
-	return (write(1, &n, 1));
+	int_to_alpha = ft_itoa(va_arg(args_list, int));
+	ft_putstr_fd(int_to_alpha, 1);
+	return (ft_strlen(int_to_alpha));
 }
 
 unsigned int	print_char(va_list args_list)
