@@ -1,4 +1,4 @@
-#include "../headerfiles/libft.h"
+#include "libft.h"
 
 static size_t	is_negative(int n)
 {

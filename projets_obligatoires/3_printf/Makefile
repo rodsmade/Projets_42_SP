@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 18:03:20 by roaraujo          #+#    #+#              #
-#    Updated: 2021/09/30 17:46:09 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/10/01 12:38:29 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ LIBFT = ./libft
 all: libft printf
 
 libft:	ft_itoa.o \
+		ft_itoh.o \
 		ft_putstr_fd.o \
 		ft_strlen.o
 

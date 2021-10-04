@@ -6,6 +6,7 @@ unsigned int	convert_format(const char *formatStr, va_list args_list);
 unsigned int	print_signed_decimal(va_list args_list);
 unsigned int	print_char(va_list args_list);
 unsigned int	print_string(va_list args_list);
+unsigned int	print_hex(va_list args_list, char xcase);
 unsigned int	print_percent_sign(void);
 
 int	ft_printf(const char *formatString, ...)
@@ -38,10 +39,8 @@ unsigned int	convert_format(const char *formatStr, va_list args_list)
 		return (print_char(args_list));
 	if (*formatStr == 's')
 		return (print_string(args_list));
-	if (*formatStr == 'x')
-		return (print_hex_lower(args_list));
-	if (*formatStr == 'X')
-		return (print_hex_upper(args_list));
+	if (*formatStr == 'x' || *formatStr == 'X')
+		return (print_hex(args_list, *formatStr));
 	if (*formatStr == '%')
 		return (print_percent_sign());
 	return (0);
@@ -79,17 +78,20 @@ unsigned int	print_string(va_list args_list)
 	return (chars_written);
 }
 
-unsigned int	print_hex_lower(va_list args_list)
+unsigned int	print_hex(va_list args_list, char xcase)
 {
-	char	*string;
+	char	*int_to_hex;
 	int		chars_written;
 
-	string = va_arg(args_list, char *);
 	chars_written = 0;
-	while (*string)
+	if (xcase == 'x')
+		int_to_hex = ft_itoh(va_arg(args_list, int), HEXALOW);
+	else
+		int_to_hex = ft_itoh(va_arg(args_list, int), HEXAUPP);
+	while (*int_to_hex)
 	{
-		chars_written += write(1, string, 1);
-		string++;
+		chars_written += write(1, int_to_hex, 1);
+		int_to_hex++;
 	}
 	return (chars_written);
 }
