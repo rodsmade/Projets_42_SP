@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/04 19:44:22 by roaraujo          #+#    #+#              #
-#    Updated: 2021/10/04 20:07:31 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/10/05 12:37:59 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,16 +77,16 @@ OBJECTS = $(addprefix $(OBJS_PATH), $(OBJ_FILES))
 all: $(LIBNAME)
 
 $(LIBNAME): $(OBJECTS)
-	ar -rcs $(LIBS_PATH)$(LIBNAME) $(OBJECTS)
+	@ar -rcs $(LIBS_PATH)$(LIBNAME) $(OBJECTS)
 
 $(OBJS_PATH)%.o : $(SRCS_PATH)%.c $(HEADERS_PATH)*.h
-	$(CC) $(FLAGS) -c -I $(HEADERS_PATH) $< -o $@
+	@$(CC) $(FLAGS) -c -I $(HEADERS_PATH) $< -o $@
 
 clean:
-	$(RM) $(OBJECTS)
+	@$(RM) $(OBJECTS)
 
 fclean: clean
-	$(RM) $(LIBS_PATH)$(LIBNAME)
+	@$(RM) $(LIBS_PATH)$(LIBNAME)
 
 re: fclean all
 

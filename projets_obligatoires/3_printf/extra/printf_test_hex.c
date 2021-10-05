@@ -2,7 +2,7 @@
 
 int main() {
 	int data = 29;
-	printf("%x\n", -10);	// just print data
+	printf("%x\n", -1);	// just print data
 	printf("%x\n", 0);	// just print data
 	printf("%x\n", 13);	// just print data
 	printf("%x\n", -6565);	// just print data

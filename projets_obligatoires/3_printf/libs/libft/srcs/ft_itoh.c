@@ -1,26 +1,26 @@
 #include "libft.h"
 
-char	*ft_itoh(unsigned long long int n, char *base)
+char	*ft_itoh(unsigned int n, char *base_str)
 {
-	char					*a;
-	unsigned long long int	nbr;
-	size_t					size;
-	int						b_len;
+	unsigned int	int_to_hex;
+	size_t			digits;
+	int				base;
+	char			*result;
 
-	b_len = ft_strlen(base);
-	nbr = n;
-	size = 1;
-	while (n /= b_len)
-		size++;
-	if (!(a = (char *)malloc(size + 1)))
+	base = ft_strlen(base_str);
+	int_to_hex = n;
+	digits = 1;
+	while (n /= base)
+		digits++;
+	if (!(result = (char *)malloc(digits + 1)))
 		return (0);
-	a[size--] = '\0';
-	while (nbr > 0)
+	result[digits--] = '\0';
+	while (int_to_hex > 0)
 	{
-		a[size--] = base[nbr % b_len];
-		nbr /= b_len;
+		result[digits--] = base_str[int_to_hex % base];
+		int_to_hex /= base;
 	}
-	if (size == 0 && a[1] == '\0')
-		a[0] = '0';
-	return (a);
+	if (digits == 0 && result[1] == '\0')
+		result[0] = '0';
+	return (result);
 }
