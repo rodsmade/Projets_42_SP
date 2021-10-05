@@ -104,6 +104,6 @@ unsigned int	print_percent_sign(void)
 int main()
 {
 	// print_ints(5, 'a', 'b', 'x');
-	ft_printf("Teste: %%\ne air funcionar ???\n", "eheita jesus");
+	ft_printf("Teste: %% aaaaaa %% %% %s\ne air funcionar ???\n", "eheita jesus");
 	return (0);
 }

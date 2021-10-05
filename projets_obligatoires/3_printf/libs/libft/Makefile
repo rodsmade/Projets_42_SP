@@ -1,7 +1,20 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/10/04 19:44:22 by roaraujo          #+#    #+#              #
+#    Updated: 2021/10/04 20:07:31 by roaraujo         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 # PATH VARIABLES
-HEADERS_PATH = ../../headerfiles
+HEADERS_PATH = ../../headerfiles/
 SRCS_PATH = ./srcs/
 OBJS_PATH = ./objs/
+LIBS_PATH = ../
 
 # COMPILATION
 CC = gcc
@@ -60,19 +73,20 @@ SOURCES = $(addprefix $(SRCS_PATH), $(SRC_FILES))
 OBJ_FILES = $(patsubst %.c, %.o, $(SRC_FILES))
 OBJECTS = $(addprefix $(OBJS_PATH), $(OBJ_FILES))
 
+# TARGETS
 all: $(LIBNAME)
 
 $(LIBNAME): $(OBJECTS)
-	ar -rcs $(LIBNAME) $(OBJECTS)
+	ar -rcs $(LIBS_PATH)$(LIBNAME) $(OBJECTS)
 
-$(OBJS_PATH)%.o : $(SRCS_PATH)%.c $(HEADERS_PATH)
-	$(CC) $(FLAGS) -c $(INCLUDES) $< -o $@ -I $(HEADERS_PATH)
+$(OBJS_PATH)%.o : $(SRCS_PATH)%.c $(HEADERS_PATH)*.h
+	$(CC) $(FLAGS) -c -I $(HEADERS_PATH) $< -o $@
 
 clean:
 	$(RM) $(OBJECTS)
 
 fclean: clean
-	$(RM) $(LIBNAME)
+	$(RM) $(LIBS_PATH)$(LIBNAME)
 
 re: fclean all
 
