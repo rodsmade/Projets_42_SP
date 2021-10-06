@@ -6,11 +6,10 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 10:55:56 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/10/06 11:58:07 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/10/06 12:52:11 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "printf.h"
 
 unsigned int	convert_format(const char *formatStr, va_list args_list);
@@ -133,25 +132,4 @@ unsigned int	print_pointer(unsigned long int arg)
 unsigned int	print_percent_sign(void)
 {
 	return (write(1, "%", 1));
-}
-
-
-#include <stdio.h>
-int main()
-{
-	char	*ptr;
-	char	aaa = '*';
-	ptr = &aaa;
-
-	ft_printf("------------------------------------------------------\nQue comecem os testes:\n");
-	ft_printf("i: %i\t\t\t--\tinput: 42\n", 42);
-	ft_printf("d: %d\t\t\t--\tinput: 42\n", 42);
-	ft_printf("u: %u\t\t\t--\tinput: -42\n", -42);
-	ft_printf("c: %c\t\t\t--\tinput: 42\n", 42);
-	ft_printf("s: %s\t--\tinput: Quarenta e dois\n", "Quarenta e dois");
-	ft_printf("x: %x\t\t\t--\tinput: 42\n", 42);
-	ft_printf("X: %X\t\t\t--\tinput: 42\n", 42);
-	ft_printf("p: %p\t--\tinput: um ponteiro sla\n", ptr);
-	ft_printf("percent: %%\t\t--\tinput: void\n");
-	return (0);
 }
