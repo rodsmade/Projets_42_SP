@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoh.c                                          :+:      :+:    :+:   */
+/*   ft_ulitohex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 10:54:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/10/06 10:54:23 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/10/06 11:55:21 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_itoh(unsigned int n, char *base_str)
+char	*ft_ulitohex(unsigned long int n, char *base_str)
 {
-	unsigned int	int_to_hex;
-	size_t			digits;
-	int				base;
-	char			*result;
+	unsigned long int	int_to_hex;
+	size_t				digits;
+	int					base;
+	char				*result;
 
 	base = ft_strlen(base_str);
 	int_to_hex = n;

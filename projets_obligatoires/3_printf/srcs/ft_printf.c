@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 10:55:56 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/10/06 11:38:03 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/10/06 11:58:07 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,9 @@ unsigned int	print_unsigned_hex(unsigned int arg, char xcase)
 
 	chars_written = 0;
 	if (xcase == 'x')
-		int_to_hex = ft_itoh(arg, HEXALOW);
+		int_to_hex = ft_uitohex(arg, HEXALOW);
 	else
-		int_to_hex = ft_itoh(arg, HEXAUPP);
+		int_to_hex = ft_uitohex(arg, HEXAUPP);
 	while (*int_to_hex)
 	{
 		chars_written += write(1, int_to_hex, 1);
@@ -124,8 +124,8 @@ unsigned int	print_pointer(unsigned long int arg)
 	char			*ptr_to_hex;
 
 	chars_written = write(1, "0x", 2);
-	// TODO: essa conv vai dar ruim pq itoh converte só uint!!!
-	ptr_to_hex = ft_itoh(arg, HEXALOW);
+	// TODO: essa conv vai dar ruim pq itohex converte só uint!!!
+	ptr_to_hex = ft_ulitohex(arg, HEXALOW);
 	chars_written = write(1, ptr_to_hex, ft_strlen(ptr_to_hex));
 	return (chars_written);
 }
@@ -135,6 +135,8 @@ unsigned int	print_percent_sign(void)
 	return (write(1, "%", 1));
 }
 
+
+#include <stdio.h>
 int main()
 {
 	char	*ptr;
@@ -149,7 +151,7 @@ int main()
 	ft_printf("s: %s\t--\tinput: Quarenta e dois\n", "Quarenta e dois");
 	ft_printf("x: %x\t\t\t--\tinput: 42\n", 42);
 	ft_printf("X: %X\t\t\t--\tinput: 42\n", 42);
-	ft_printf("p: %p\t\t--\tinput: um ponteiro sla\n", ptr);
+	ft_printf("p: %p\t--\tinput: um ponteiro sla\n", ptr);
 	ft_printf("percent: %%\t\t--\tinput: void\n");
 	return (0);
 }
