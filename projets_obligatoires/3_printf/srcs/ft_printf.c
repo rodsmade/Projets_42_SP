@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 10:55:56 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/10/06 10:55:58 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/10/06 11:38:03 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 #include "printf.h"
 
 unsigned int	convert_format(const char *formatStr, va_list args_list);
-unsigned int	print_char(va_list args_list);
-unsigned int	print_signed_decimal(va_list args_list);
-unsigned int	print_unsigned_decimal(va_list args_list);
-unsigned int	print_unsigned_hex(va_list args_list, char xcase);
+unsigned int	print_char(int arg);
 unsigned int	print_percent_sign(void);
-unsigned int	print_string(va_list args_list);
+unsigned int	print_pointer(unsigned long int arg);
+unsigned int	print_signed_decimal(int arg);
+unsigned int	print_string(char *arg);
+unsigned int	print_unsigned_decimal(unsigned int arg);
+unsigned int	print_unsigned_hex(unsigned int arg, char xcase);
 
 int	ft_printf(const char *formatString, ...)
 {
@@ -46,74 +47,69 @@ int	ft_printf(const char *formatString, ...)
 unsigned int	convert_format(const char *formatStr, va_list args_list)
 {
 	if (*formatStr == 'i' || *formatStr == 'd')
-		return (print_signed_decimal(args_list));
+		return (print_signed_decimal(va_arg(args_list, int)));
 	if (*formatStr == 'u')
-		return (print_unsigned_decimal(args_list));
+		return (print_unsigned_decimal(va_arg(args_list, unsigned int)));
 	if (*formatStr == 'c')
-		return (print_char(args_list));
+		return (print_char(va_arg(args_list, int)));
 	if (*formatStr == 's')
-		return (print_string(args_list));
+		return (print_string(va_arg(args_list, char *)));
 	if (*formatStr == 'x' || *formatStr == 'X')
-		return (print_unsigned_hex(args_list, *formatStr));
+		return (print_unsigned_hex(va_arg(args_list, unsigned int), *formatStr));
 	if (*formatStr == 'p')
-		return (print_pointer(args_list));
+		return (print_pointer(va_arg(args_list, unsigned long int)));
 	if (*formatStr == '%')
 		return (print_percent_sign());
 	return (0);
 }
 
-unsigned int	print_signed_decimal(va_list args_list)
+unsigned int	print_signed_decimal(int arg)
 {
 	char	*int_to_alpha;
 	// ao invés de guardar em um int, guarda em um struct 
 
-	int_to_alpha = ft_itoa(va_arg(args_list, int));
+	int_to_alpha = ft_itoa(arg);
 	ft_putstr_fd(int_to_alpha, 1);
 	return (ft_strlen(int_to_alpha));
 }
 
-unsigned int	print_unsigned_decimal(va_list args_list)
+unsigned int	print_unsigned_decimal(unsigned int arg)
 {
 	char	*int_to_alpha;
 
-	int_to_alpha = ft_itoa(va_arg(args_list, unsigned int));
+	int_to_alpha = ft_itoa(arg);
 	ft_putstr_fd(int_to_alpha, 1);
 	return (ft_strlen(int_to_alpha));
 }
 
-unsigned int	print_char(va_list args_list)
+unsigned int	print_char(int arg)
 {
-	char	c;
-
-	c = va_arg(args_list, int);
-	return (write(1, &c, 1));
+	return (write(1, &arg, 1));
 }
 
-unsigned int	print_string(va_list args_list)
+unsigned int	print_string(char *arg)
 {
-	char			*string;
 	unsigned int	chars_written;
 
-	string = va_arg(args_list, char *);
 	chars_written = 0;
-	while (*string)
+	while (*arg)
 	{
-		chars_written += write(1, string, 1);
-		string++;
+		chars_written += write(1, arg, 1);
+		arg++;
 	}
 	return (chars_written);
 }
 
-unsigned int	print_unsigned_hex(va_list args_list, char xcase)
+unsigned int	print_unsigned_hex(unsigned int arg, char xcase)
 {
 	char			*int_to_hex;
 	unsigned int	chars_written;
 
 	chars_written = 0;
 	if (xcase == 'x')
-		int_to_hex = ft_itoh(va_arg(args_list, unsigned int), HEXALOW);
+		int_to_hex = ft_itoh(arg, HEXALOW);
 	else
-		int_to_hex = ft_itoh(va_arg(args_list, unsigned int), HEXAUPP);
+		int_to_hex = ft_itoh(arg, HEXAUPP);
 	while (*int_to_hex)
 	{
 		chars_written += write(1, int_to_hex, 1);
@@ -122,15 +118,16 @@ unsigned int	print_unsigned_hex(va_list args_list, char xcase)
 	return (chars_written);
 }
 
-unsigned int	print_pointer(va_list args_list)
+unsigned int	print_pointer(unsigned long int arg)
 {
-	unsigned int	count;
-	void			*pointer;
+	unsigned int	chars_written;
+	char			*ptr_to_hex;
 
-	pointer = va_arg(args_list, void *);
-	count = write(1, "0x", 2);
-
-
+	chars_written = write(1, "0x", 2);
+	// TODO: essa conv vai dar ruim pq itoh converte só uint!!!
+	ptr_to_hex = ft_itoh(arg, HEXALOW);
+	chars_written = write(1, ptr_to_hex, ft_strlen(ptr_to_hex));
+	return (chars_written);
 }
 
 unsigned int	print_percent_sign(void)
@@ -140,7 +137,19 @@ unsigned int	print_percent_sign(void)
 
 int main()
 {
-	// print_ints(5, 'a', 'b', 'x');
-	ft_printf("Teste: %x\ne air funcionar ???\n", -1);
+	char	*ptr;
+	char	aaa = '*';
+	ptr = &aaa;
+
+	ft_printf("------------------------------------------------------\nQue comecem os testes:\n");
+	ft_printf("i: %i\t\t\t--\tinput: 42\n", 42);
+	ft_printf("d: %d\t\t\t--\tinput: 42\n", 42);
+	ft_printf("u: %u\t\t\t--\tinput: -42\n", -42);
+	ft_printf("c: %c\t\t\t--\tinput: 42\n", 42);
+	ft_printf("s: %s\t--\tinput: Quarenta e dois\n", "Quarenta e dois");
+	ft_printf("x: %x\t\t\t--\tinput: 42\n", 42);
+	ft_printf("X: %X\t\t\t--\tinput: 42\n", 42);
+	ft_printf("p: %p\t\t--\tinput: um ponteiro sla\n", ptr);
+	ft_printf("percent: %%\t\t--\tinput: void\n");
 	return (0);
 }
