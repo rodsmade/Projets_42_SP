@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 18:03:20 by roaraujo          #+#    #+#              #
-#    Updated: 2021/10/06 13:11:37 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/10/06 13:13:45 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ $(OBJS_PATH)%.o : $(SRCS_PATH)%.c $(HEADERS_PATH)*.h
 # creates the executable file ft_printf_test to test development
 main:	./main.c
 	@$(MKDIR) $(BINS_PATH)
-	@$(CC) $(CFLAGS) main.c $(LIBS_PATH)libprintf.a $(LIBS_PATH)libft.a -I $(HEADERS_PATH) -o $(BINS_PATH)ft_printf_test
+	@$(CC) $(CFLAGS) $< $(LIBS_PATH)libprintf.a $(LIBS_PATH)libft.a -I $(HEADERS_PATH) -o $(BINS_PATH)ft_printf_test
 
 run: main
 	@$(BINS_PATH)ft_printf_test
