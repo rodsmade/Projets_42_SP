@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 10:55:56 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/10/07 16:08:57 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/10/07 17:19:48 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,10 @@ unsigned int	print_string(char *arg)
 	int				i;
 
 	if (arg == NULL)
-		return (0);
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
 	chars_written = 0;
 	i = 0;
 	while (arg[i])
@@ -135,10 +138,14 @@ unsigned int	print_pointer(unsigned long int arg)
 	unsigned int	chars_written;
 	char			*ptr_to_hex;
 
+	if (arg == 0)
+	{
+		write(1, "(nil)", 5);
+		return (5);
+	}
 	chars_written = write(1, "0x", 2);
-	// TODO: essa conv vai dar ruim pq itohex converte só uint!!!
 	ptr_to_hex = ft_ulitohex(arg, HEXALOW);
-	chars_written = write(1, ptr_to_hex, ft_strlen(ptr_to_hex));
+	chars_written += write(1, ptr_to_hex, ft_strlen(ptr_to_hex));
 	free(ptr_to_hex);
 	return (chars_written);
 }
