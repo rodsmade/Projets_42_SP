@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 18:03:20 by roaraujo          #+#    #+#              #
-#    Updated: 2021/10/07 16:22:32 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/10/07 16:32:02 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ libft:
 $(LIBNAME): $(OBJECTS)
 	@cp $(LIBS_PATH)libft.a $(LIBS_PATH)$(LIBNAME)
 	@ar -rcs $(LIBS_PATH)$(LIBNAME) $(OBJECTS)
+	@cp $(LIBS_PATH)$(LIBNAME) ./$(LIBNAME)
 
 # creates object files for ft_printf (libftprintf)
 $(OBJS_PATH)%.o : $(SRCS_PATH)%.c $(HEADERS_PATH)*.h
