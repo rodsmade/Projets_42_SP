@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 18:03:20 by roaraujo          #+#    #+#              #
-#    Updated: 2021/10/07 14:11:29 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/10/07 16:22:32 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ libft:
 	@cd $(LIBS_PATH)libft && $(MAKE)
 
 $(LIBNAME): $(OBJECTS)
+	@cp $(LIBS_PATH)libft.a $(LIBS_PATH)$(LIBNAME)
 	@ar -rcs $(LIBS_PATH)$(LIBNAME) $(OBJECTS)
 
 # creates object files for ft_printf (libftprintf)
@@ -50,7 +51,7 @@ $(OBJS_PATH)%.o : $(SRCS_PATH)%.c $(HEADERS_PATH)*.h
 # creates the executable file ft_printf_test to test development
 main:	./main.c
 	@$(MKDIR) $(BINS_PATH)
-	@$(CC) $(CFLAGS) $< $(LIBS_PATH)$(LIBNAME) $(LIBS_PATH)libft.a -I $(HEADERS_PATH) -o $(BINS_PATH)ft_printf_test
+	@$(CC) $(CFLAGS) $< $(LIBS_PATH)$(LIBNAME) -I $(HEADERS_PATH) -o $(BINS_PATH)ft_printf_test
 
 run: main
 	@$(BINS_PATH)ft_printf_test

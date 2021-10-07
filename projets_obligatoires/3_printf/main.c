@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "printf.h"
+#include "ft_printf.h"
 
 int main()
 {
