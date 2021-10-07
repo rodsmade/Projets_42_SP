@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 18:03:20 by roaraujo          #+#    #+#              #
-#    Updated: 2021/10/06 13:13:45 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/10/07 14:11:29 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ RM = rm -f
 MKDIR = mkdir -p
 
 # FILES
-LIBNAME = libprintf.a
+LIBNAME = libftprintf.a
 SRC_FILES = ft_printf.c
 SOURCES = $(addprefix $(SRCS_PATH), $(SRC_FILES))
 OBJ_FILES = $(patsubst %.c, %.o, $(SRC_FILES))
@@ -42,7 +42,7 @@ libft:
 $(LIBNAME): $(OBJECTS)
 	@ar -rcs $(LIBS_PATH)$(LIBNAME) $(OBJECTS)
 
-# creates object files for ft_printf (libprintf)
+# creates object files for ft_printf (libftprintf)
 $(OBJS_PATH)%.o : $(SRCS_PATH)%.c $(HEADERS_PATH)*.h
 	@$(MKDIR) $(OBJS_PATH)
 	@$(CC) $(FLAGS) -c $< -I $(HEADERS_PATH) -o $@
@@ -50,7 +50,7 @@ $(OBJS_PATH)%.o : $(SRCS_PATH)%.c $(HEADERS_PATH)*.h
 # creates the executable file ft_printf_test to test development
 main:	./main.c
 	@$(MKDIR) $(BINS_PATH)
-	@$(CC) $(CFLAGS) $< $(LIBS_PATH)libprintf.a $(LIBS_PATH)libft.a -I $(HEADERS_PATH) -o $(BINS_PATH)ft_printf_test
+	@$(CC) $(CFLAGS) $< $(LIBS_PATH)$(LIBNAME) $(LIBS_PATH)libft.a -I $(HEADERS_PATH) -o $(BINS_PATH)ft_printf_test
 
 run: main
 	@$(BINS_PATH)ft_printf_test
