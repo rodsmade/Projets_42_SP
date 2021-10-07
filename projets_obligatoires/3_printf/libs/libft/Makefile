@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/04 19:44:22 by roaraujo          #+#    #+#              #
-#    Updated: 2021/10/06 11:51:41 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/10/07 17:35:37 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,7 @@ SRC_FILES =	ft_atoi.c \
 			ft_substr.c \
 			ft_tolower.c \
 			ft_toupper.c \
+			ft_uitoa.c \
 			ft_uitohex.c \
 			ft_ulitohex.c
 SOURCES = $(addprefix $(SRCS_PATH), $(SRC_FILES))

@@ -37,12 +37,20 @@ int main()
 	// result_printf = printf("%p\n", potero);
 	// printf("Meu result: %i\nResult printf: %i\n", meu_result, result_printf);
 
-	// TESTE DE PONTEIRO = 0
+	// // TESTE DE PONTEIRO = 0
+	// int meu_result;
+	// int result_printf;
+
+	// meu_result = ft_printf("%p\n", 0);
+	// result_printf = printf("%p\n", 0);
+	// printf("Meu result: %i\nResult printf: %i\n", meu_result, result_printf);
+
+	// TESTE DE %u
 	int meu_result;
 	int result_printf;
 
-	meu_result = ft_printf("%p\n", 0);
-	result_printf = printf("%p\n", 0);
+	meu_result = ft_printf("%u\n", -1);
+	result_printf = printf("%u\n", -1);
 	printf("Meu result: %i\nResult printf: %i\n", meu_result, result_printf);
 
 	return (0);

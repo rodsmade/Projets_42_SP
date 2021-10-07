@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 10:55:56 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/10/07 17:19:48 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/10/07 17:35:11 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ unsigned int	print_unsigned_decimal(unsigned int arg)
 	char	*int_to_alpha;
 	int		length;
 
-	int_to_alpha = ft_itoa(arg);
+	int_to_alpha = ft_uitoa(arg);
 	ft_putstr_fd(int_to_alpha, 1);
 	length = ft_strlen(int_to_alpha);
 	free(int_to_alpha);
