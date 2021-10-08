@@ -45,12 +45,36 @@ int main()
 	// result_printf = printf("%p\n", 0);
 	// printf("Meu result: %i\nResult printf: %i\n", meu_result, result_printf);
 
-	// TESTE DE %u
+	// // TESTE DE %u
+	// int meu_result;
+	// int result_printf;
+
+	// meu_result = ft_printf("%u\n", -1);
+	// result_printf = printf("%u\n", -1);
+	// printf("Meu result: %i\nResult printf: %i\n", meu_result, result_printf);
+
+	// TESTE DE #xX
 	int meu_result;
 	int result_printf;
 
-	meu_result = ft_printf("%u\n", -1);
-	result_printf = printf("%u\n", -1);
+	printf("\nFlag: %%x\n");
+	meu_result = ft_printf("%x\n", -1);
+	result_printf = printf("%x\n", -1);
+	printf("Meu result: %i\nResult printf: %i\n", meu_result, result_printf);
+
+	printf("\nFlag: %%#x\n");
+	meu_result = ft_printf("%#x\n", -1);
+	result_printf = printf("%#x\n", -1);
+	printf("Meu result: %i\nResult printf: %i\n", meu_result, result_printf);
+
+	printf("\nFlag: %%X\n");
+	meu_result = ft_printf("%X\n", -1);
+	result_printf = printf("%X\n", -1);
+	printf("Meu result: %i\nResult printf: %i\n", meu_result, result_printf);
+
+	printf("\nFlag: %%#X\n");
+	meu_result = ft_printf("%#X\n", -1);
+	result_printf = printf("%#X\n", -1);
 	printf("Meu result: %i\nResult printf: %i\n", meu_result, result_printf);
 
 	return (0);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: coder <coder@student.42.fr>                +#+  +:+       +#+         #
+#    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 18:03:20 by roaraujo          #+#    #+#              #
-#    Updated: 2021/10/08 02:51:18 by coder            ###   ########.fr        #
+#    Updated: 2021/10/08 11:40:44 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ OBJ_FILES = $(patsubst %.c, %.o, $(SRC_FILES))
 OBJECTS = $(addprefix $(OBJS_PATH), $(OBJ_FILES))
 
 # TARGETS
+# MANDATORY
 all: libft $(LIBNAME)
 
 # compiles libft all over
@@ -50,6 +51,10 @@ $(OBJS_PATH)%.o : $(SRCS_PATH)%.c $(HEADERS_PATH)*.h
 	@$(MKDIR) $(OBJS_PATH)
 	@$(CC) $(FLAGS) -c $< -I $(HEADERS_PATH) -o $@
 
+#BONUS
+bonus: all
+
+# RUN
 # creates the executable file ft_printf_test to test development
 main:	./main.c
 	@$(MKDIR) $(BINS_PATH)
@@ -58,6 +63,7 @@ main:	./main.c
 run: main
 	@$(BINS_PATH)ft_printf_test
 
+# SANITIZE
 clean:
 	@$(RM) $(OBJECTS)
 	@cd $(LIBS_PATH)libft && $(MAKE) $@
