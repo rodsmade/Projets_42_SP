@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: coder <coder@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/04 19:44:22 by roaraujo          #+#    #+#              #
-#    Updated: 2021/10/07 17:35:37 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/10/08 02:07:37 by coder            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ FLAGS = -Wall -Wextra -Werror
 
 # BASH COMMANDS
 RM = rm -f
+MKDIR = mkdir -p
 
 # FILES
 LIBNAME = libft.a
@@ -76,7 +77,10 @@ OBJ_FILES = $(patsubst %.c, %.o, $(SRC_FILES))
 OBJECTS = $(addprefix $(OBJS_PATH), $(OBJ_FILES))
 
 # TARGETS
-all: $(LIBNAME)
+all: prep $(LIBNAME)
+
+prep:
+	@$(MKDIR) $(SRCS_PATH) $(OBJS_PATH)
 
 $(LIBNAME): $(OBJECTS)
 	@ar -rcs $(LIBS_PATH)$(LIBNAME) $(OBJECTS)

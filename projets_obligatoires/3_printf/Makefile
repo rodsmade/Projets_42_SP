@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: coder <coder@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 18:03:20 by roaraujo          #+#    #+#              #
-#    Updated: 2021/10/07 16:32:02 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/10/08 02:51:18 by coder            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ libft:
 $(LIBNAME): $(OBJECTS)
 	@cp $(LIBS_PATH)libft.a $(LIBS_PATH)$(LIBNAME)
 	@ar -rcs $(LIBS_PATH)$(LIBNAME) $(OBJECTS)
+#	pra ajustar pro tripouille funcionar, ñ eh obrigatório porém 
 	@cp $(LIBS_PATH)$(LIBNAME) ./$(LIBNAME)
 
 # creates object files for ft_printf (libftprintf)
@@ -64,6 +65,8 @@ clean:
 fclean: clean
 	@$(RM) $(BINS_PATH)*
 	@$(RM) $(LIBS_PATH)$(LIBNAME)
+#	pra limpar o ajuste q faz o tripouille funcionar
+	@$(RM) ./$(LIBNAME)
 	@cd $(LIBS_PATH)libft && $(MAKE) $@
 
 re: fclean all
