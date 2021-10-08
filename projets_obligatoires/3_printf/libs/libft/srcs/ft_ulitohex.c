@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 10:54:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/10/08 20:24:51 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/10/08 20:27:56 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ char	*ft_ulitohex(unsigned long int n, char *base_str)
 	base_length = ft_strlen(base_str);
 	int_to_hex = n;
 	digits = count_digits(n, base_length);
-	if (!(result = (char *)malloc(digits + 1)))
+	result = (char *)malloc(digits + 1);
+	if (!result)
 		return (0);
 	result[digits--] = '\0';
 	while (int_to_hex > 0)
