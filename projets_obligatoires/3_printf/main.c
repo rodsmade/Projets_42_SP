@@ -53,29 +53,42 @@ int main()
 	// result_printf = printf("%u\n", -1);
 	// printf("Meu result: %i\nResult printf: %i\n", meu_result, result_printf);
 
-	// TESTE DE #xX
+	// // TESTE DE #xX
+	// int meu_result;
+	// int result_printf;
+
+	// printf("\nFlag: %%x\n");
+	// meu_result = ft_printf("%x\n", -1);
+	// result_printf = printf("%x\n", -1);
+	// printf("Meu result: %i\nResult printf: %i\n", meu_result, result_printf);
+
+	// printf("\nFlag: %%#x\n");
+	// meu_result = ft_printf("%#x\n", -1);
+	// result_printf = printf("%#x\n", -1);
+	// printf("Meu result: %i\nResult printf: %i\n", meu_result, result_printf);
+
+	// printf("\nFlag: %%X\n");
+	// meu_result = ft_printf("%X\n", -1);
+	// result_printf = printf("%X\n", -1);
+	// printf("Meu result: %i\nResult printf: %i\n", meu_result, result_printf);
+
+	// printf("\nFlag: %%#X\n");
+	// meu_result = ft_printf("%#X\n", -1);
+	// result_printf = printf("%#X\n", -1);
+	// printf("Meu result: %i\nResult printf: %i\n", meu_result, result_printf);
+
+	// TESTE DE HASH %HX
 	int meu_result;
 	int result_printf;
-
-	printf("\nFlag: %%x\n");
-	meu_result = ft_printf("%x\n", -1);
-	result_printf = printf("%x\n", -1);
-	printf("Meu result: %i\nResult printf: %i\n", meu_result, result_printf);
-
-	printf("\nFlag: %%#x\n");
-	meu_result = ft_printf("%#x\n", -1);
-	result_printf = printf("%#x\n", -1);
-	printf("Meu result: %i\nResult printf: %i\n", meu_result, result_printf);
-
-	printf("\nFlag: %%X\n");
-	meu_result = ft_printf("%X\n", -1);
-	result_printf = printf("%X\n", -1);
-	printf("Meu result: %i\nResult printf: %i\n", meu_result, result_printf);
-
-	printf("\nFlag: %%#X\n");
-	meu_result = ft_printf("%#X\n", -1);
-	result_printf = printf("%#X\n", -1);
-	printf("Meu result: %i\nResult printf: %i\n", meu_result, result_printf);
+	meu_result = printf("%#x\n", 10);
+	result_printf = printf("%#x\n", 0);
+	printf("%i\n", meu_result);
+	printf("%i\n", result_printf);
+	printf("----- minha: \n");
+	meu_result = ft_printf("%#x\n", 10);
+	result_printf = ft_printf("%#x\n", 0);
+	printf("%i\n", meu_result);
+	printf("%i\n", result_printf);
 
 	return (0);
 }

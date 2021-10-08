@@ -1,0 +1,68 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_print_utils_2.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/08 17:20:25 by roaraujo          #+#    #+#             */
+/*   Updated: 2021/10/08 17:22:58 by roaraujo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+unsigned int	print_signed_decimal(int arg);
+unsigned int	print_unsigned_decimal(unsigned int arg);
+unsigned int	print_unsigned_hex(unsigned int arg, char xcase);
+
+unsigned int	print_signed_decimal(int arg)
+{
+	char	*int_to_alpha;
+	int		length;
+	// ao invés de guardar em um int, guarda em um struct 
+
+	int_to_alpha = ft_itoa(arg);
+	ft_putstr_fd(int_to_alpha, 1);
+	length = ft_strlen(int_to_alpha);
+	free(int_to_alpha);
+	return (length);
+}
+
+unsigned int	print_unsigned_decimal(unsigned int arg)
+{
+	char	*int_to_alpha;
+	int		length;
+
+	int_to_alpha = ft_uitoa(arg);
+	ft_putstr_fd(int_to_alpha, 1);
+	length = ft_strlen(int_to_alpha);
+	free(int_to_alpha);
+	return (length);
+}
+
+unsigned int	print_unsigned_hex(unsigned int arg, char xcase)
+{
+	char			*int_to_hex;
+	unsigned int	chars_written;
+	int				i;
+
+	chars_written = 0;
+	if (all_flags.hash == 1)
+	{
+		chars_written += write(1, "0", 1);
+		if (arg == 0)
+			return (1);
+		chars_written += write(1, &xcase, 1);
+	}
+	if (xcase == 'x')
+		int_to_hex = ft_uitohex(arg, HEXALOW);
+	else
+		int_to_hex = ft_uitohex(arg, HEXAUPP);
+	i = 0;
+	while (int_to_hex[i])
+	{
+		chars_written += write(1, &int_to_hex[i], 1);
+		i++;
+	}
+	free(int_to_hex);
+	return (chars_written);
+}
