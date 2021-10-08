@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 18:03:20 by roaraujo          #+#    #+#              #
-#    Updated: 2021/10/08 11:40:44 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/10/08 18:56:09 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,9 @@ MKDIR = mkdir -p
 
 # FILES
 LIBNAME = libftprintf.a
-SRC_FILES = ft_printf.c
+SRC_FILES = ft_printf.c \
+			ft_printf_print_utils_1.c \
+			ft_printf_print_utils_2.c
 SOURCES = $(addprefix $(SRCS_PATH), $(SRC_FILES))
 OBJ_FILES = $(patsubst %.c, %.o, $(SRC_FILES))
 OBJECTS = $(addprefix $(OBJS_PATH), $(OBJ_FILES))

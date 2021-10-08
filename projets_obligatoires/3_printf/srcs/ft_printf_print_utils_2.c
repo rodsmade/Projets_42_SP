@@ -6,19 +6,16 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:20:25 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/10/08 17:22:58 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/10/08 19:19:10 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	print_signed_decimal(int arg);
-unsigned int	print_unsigned_decimal(unsigned int arg);
-unsigned int	print_unsigned_hex(unsigned int arg, char xcase);
+#include "ft_printf.h"
 
 unsigned int	print_signed_decimal(int arg)
 {
 	char	*int_to_alpha;
 	int		length;
-	// ao invés de guardar em um int, guarda em um struct 
 
 	int_to_alpha = ft_itoa(arg);
 	ft_putstr_fd(int_to_alpha, 1);
@@ -39,14 +36,14 @@ unsigned int	print_unsigned_decimal(unsigned int arg)
 	return (length);
 }
 
-unsigned int	print_unsigned_hex(unsigned int arg, char xcase)
+unsigned int	print_unsigned_hex(unsigned int arg, char xcase, t_flags flags)
 {
 	char			*int_to_hex;
 	unsigned int	chars_written;
 	int				i;
 
 	chars_written = 0;
-	if (all_flags.hash == 1)
+	if (flags.hash == 1)
 	{
 		chars_written += write(1, "0", 1);
 		if (arg == 0)

@@ -6,14 +6,11 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:20:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/10/08 17:24:36 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/10/08 18:52:19 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	print_char(int arg);
-unsigned int	print_percent_sign(void);
-unsigned int	print_pointer(unsigned long int arg);
-unsigned int	print_string(char *arg);
+#include "ft_printf.h"
 
 unsigned int	print_char(int arg)
 {

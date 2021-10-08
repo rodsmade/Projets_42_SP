@@ -6,27 +6,26 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 10:55:56 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/10/08 17:23:19 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/10/08 19:19:53 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-flags	all_flags;
-
-unsigned int	convert_format(const char *formatStr, va_list args_list);
-int				capture_flags(const char *formatStr);
-void			initialise_flags(void);
+void			initialise_flags(t_flags *flags);
+unsigned int	convert_format(const char *formatStr,
+					va_list args,
+					t_flags flags);
+int				capture_flags(const char *formatStr, t_flags *flags);
 
 int	ft_printf(const char *formatString, ...)
 {
 	unsigned int	write_count;
-	va_list			args_list;
+	va_list			args;
 	int				offset;
+	t_flags			flags;
 
-	// faz a lista apontar pro primeiro argumento da função;
-	// o seja: inicializa args_list;
-	va_start(args_list, formatString);
+	va_start(args, formatString);
 	write_count = 0;
 	while (*formatString)
 	{
@@ -34,53 +33,58 @@ int	ft_printf(const char *formatString, ...)
 			write_count += write(1, formatString, 1);
 		else
 		{
-			initialise_flags();
+			initialise_flags(&flags);
 			formatString++;
-			offset = capture_flags(formatString);
+			offset = capture_flags(formatString, &flags);
 			formatString += offset;
-			write_count += convert_format(formatString, args_list);
+			write_count += convert_format(formatString, args, flags);
 		}
 		formatString++;
 	}
-	va_end(args_list);
+	va_end(args);
 	return (write_count);
 }
 
-void			initialise_flags(void)
+void	initialise_flags(t_flags *flags)
 {
-	all_flags.blank = 0;
-	all_flags.dash = 0;
-	all_flags.field_width = 0;
-	all_flags.hash = 0;
-	all_flags.plus = 0;
-	all_flags.precision = 0;
-	all_flags.zero = 0;
+	(*flags).blank = 0;
+	(*flags).dash = 0;
+	(*flags).field_width = 0;
+	(*flags).hash = 0;
+	(*flags).plus = 0;
+	(*flags).precision = 0;
+	(*flags).zero = 0;
 	return ;
 }
 
-unsigned int	convert_format(const char *formatStr, va_list args_list)
+unsigned int	convert_format(	const char *formatStr,
+								va_list args,
+								t_flags flags)
 {
 	int	offset;
 
-	offset = capture_flags(formatStr);
+	offset = capture_flags(formatStr, &flags);
 	if (formatStr[offset] == 'i' || formatStr[offset] == 'd')
-		return (print_signed_decimal(va_arg(args_list, int)));
+		return (print_signed_decimal(va_arg(args, int)));
 	if (formatStr[offset] == 'u')
-		return (print_unsigned_decimal(va_arg(args_list, unsigned int)));
+		return (print_unsigned_decimal(va_arg(args, unsigned int)));
 	if (formatStr[offset] == 'c')
-		return (print_char(va_arg(args_list, int)));
+		return (print_char(va_arg(args, int)));
 	if (formatStr[offset] == 's')
-		return (print_string(va_arg(args_list, char *)));
+		return (print_string(va_arg(args, char *)));
 	if (formatStr[offset] == 'x' || formatStr[offset] == 'X')
-		return (print_unsigned_hex(va_arg(args_list, unsigned int), formatStr[offset]));
+		return (print_unsigned_hex(
+				va_arg(args, unsigned int),
+				formatStr[offset],
+				flags));
 	if (formatStr[offset] == 'p')
-		return (print_pointer(va_arg(args_list, unsigned long int)));
+		return (print_pointer(va_arg(args, unsigned long int)));
 	if (formatStr[offset] == '%')
 		return (print_percent_sign());
 	return (offset);
 }
 
-int				capture_flags(const char *formatStr)
+int	capture_flags(const char *formatStr, t_flags *flags)
 {
 	int	i;
 
@@ -88,7 +92,7 @@ int				capture_flags(const char *formatStr)
 	while (ft_strchr(FLAGS, formatStr[i]))
 	{
 		if (formatStr[i] == '#')
-			all_flags.hash = 1;
+			(*flags).hash = 1;
 		i++;
 	}
 	return (i);
