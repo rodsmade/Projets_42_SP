@@ -6,9 +6,13 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:20:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/10/11 20:04:59 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/10/11 20:36:20 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/**
+ * Print utilitaries 1 - prints chars, percent signs, pointers and strings.
+ * */
 
 #include "ft_printf.h"
 
@@ -24,37 +28,20 @@ unsigned int	print_percent_sign(void)
 
 unsigned int	print_pointer(unsigned long int arg)
 {
-	unsigned int	chars_written;
-	char			*ptr_to_hex;
+	char	*ptr_to_hex;
 
 	if (arg == 0)
-	{
-		write(1, "(nil)", 5);
-		return (5);
-	}
-	chars_written = write(1, "0x", 2);
+		// original printf's behaviour in linux
+		return (write(1, "(nil)", 5));
+	write(1, "0x", 2);
 	ptr_to_hex = ft_ulitohex(arg, HEXALOW);
-	chars_written += write(1, ptr_to_hex, ft_strlen(ptr_to_hex));
 	free(ptr_to_hex);
-	return (chars_written);
+	return (2 + write(1, ptr_to_hex, ft_strlen(ptr_to_hex)));
 }
 
 unsigned int	print_string(char *arg)
 {
-	unsigned int	chars_written;
-	int				i;
-
 	if (arg == NULL)
-	{
-		write(1, "(null)", 6);
-		return (6);
-	}
-	chars_written = 0;
-	i = 0;
-	while (arg[i])
-	{
-		chars_written += write(1, &arg[i], 1);
-		i++;
-	}
-	return (chars_written);
+		return (write(1, "(null)", 6));
+	return (write(1, arg, ft_strlen(arg)));
 }
