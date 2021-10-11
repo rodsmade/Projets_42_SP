@@ -6,9 +6,13 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:20:25 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/10/11 20:02:13 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/10/11 20:38:40 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/**
+ * Print utilitaries 2 - prints signed/unsigned decimals, and hexadecimals (unsigned).
+ * */
 
 #include "ft_printf.h"
 
