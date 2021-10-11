@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:20:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/10/10 22:34:38 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/10/11 14:42:00 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ unsigned int	print_pointer(unsigned long int arg)
 
 	if (arg == 0)
 	{
-		write(1, "0x0", 5);
-		return (5);
+		write(1, "0x0", 3);
+		return (3);
 	}
 	chars_written = write(1, "0x", 2);
 	ptr_to_hex = ft_ulitohex(arg, HEXALOW);
