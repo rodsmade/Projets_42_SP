@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:20:25 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/10/08 19:19:10 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/10/11 20:02:13 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ unsigned int	print_unsigned_hex(unsigned int arg, char xcase, t_flags flags)
 {
 	char			*int_to_hex;
 	unsigned int	chars_written;
-	int				i;
 
 	chars_written = 0;
 	if (flags.hash == 1)
@@ -54,12 +53,7 @@ unsigned int	print_unsigned_hex(unsigned int arg, char xcase, t_flags flags)
 		int_to_hex = ft_uitohex(arg, HEXALOW);
 	else
 		int_to_hex = ft_uitohex(arg, HEXAUPP);
-	i = 0;
-	while (int_to_hex[i])
-	{
-		chars_written += write(1, &int_to_hex[i], 1);
-		i++;
-	}
+	chars_written += write(1, int_to_hex, ft_strlen(int_to_hex));
 	free(int_to_hex);
 	return (chars_written);
 }

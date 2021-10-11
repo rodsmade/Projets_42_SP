@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 18:03:20 by roaraujo          #+#    #+#              #
-#    Updated: 2021/10/08 18:56:09 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/10/11 17:59:11 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,50 +33,50 @@ SRC_FILES = ft_printf.c \
 SOURCES = $(addprefix $(SRCS_PATH), $(SRC_FILES))
 OBJ_FILES = $(patsubst %.c, %.o, $(SRC_FILES))
 OBJECTS = $(addprefix $(OBJS_PATH), $(OBJ_FILES))
+EXECUTABLE = ft_printf_test
 
 # TARGETS
-# MANDATORY
 all: libft $(LIBNAME)
 
-# compiles libft all over
+# -> compiles libft all over
 libft:
 	@cd $(LIBS_PATH)libft && $(MAKE)
 
+# -> creates static library libftprintf.a inside ./libs/
 $(LIBNAME): $(OBJECTS)
 	@cp $(LIBS_PATH)libft.a $(LIBS_PATH)$(LIBNAME)
 	@ar -rcs $(LIBS_PATH)$(LIBNAME) $(OBJECTS)
-#	pra ajustar pro tripouille funcionar, ñ eh obrigatório porém 
-	@cp $(LIBS_PATH)$(LIBNAME) ./$(LIBNAME)
 
-# creates object files for ft_printf (libftprintf)
+# -> creates object files for ft_printf (libftprintf)
 $(OBJS_PATH)%.o : $(SRCS_PATH)%.c $(HEADERS_PATH)*.h
 	@$(MKDIR) $(OBJS_PATH)
 	@$(CC) $(FLAGS) -c $< -I $(HEADERS_PATH) -o $@
 
-#BONUS
+# -> mandatory flag
 bonus: all
 
 # RUN
-# creates the executable file ft_printf_test to test development
+# -> creates the executable file $(EXECUTABLE) to test development
 main:	./main.c
 	@$(MKDIR) $(BINS_PATH)
-	@$(CC) $(CFLAGS) $< $(LIBS_PATH)$(LIBNAME) -I $(HEADERS_PATH) -o $(BINS_PATH)ft_printf_test
+	@$(CC) $(CFLAGS) $< $(LIBS_PATH)$(LIBNAME) -I $(HEADERS_PATH) -o $(BINS_PATH)$(EXECUTABLE)
 
-run: main
-	@$(BINS_PATH)ft_printf_test
+run: $(LIBNAME) $(HEADERS_PATH)ft_printf.h main
+	@$(BINS_PATH)$(EXECUTABLE)
 
 # SANITIZE
+# -> deletes all .o files; also runs libft's clean target
 clean:
 	@$(RM) $(OBJECTS)
 	@cd $(LIBS_PATH)libft && $(MAKE) $@
 
+# -> deletes .o files + static library file + executable; also runs libft's fclean target
 fclean: clean
-	@$(RM) $(BINS_PATH)*
+	@$(RM) $(BINS_PATH)$(EXECUTABLE)
 	@$(RM) $(LIBS_PATH)$(LIBNAME)
-#	pra limpar o ajuste q faz o tripouille funcionar
-	@$(RM) ./$(LIBNAME)
 	@cd $(LIBS_PATH)libft && $(MAKE) $@
 
+# -> 
 re: fclean all
 
 .PHONY: all run clean fclean re
