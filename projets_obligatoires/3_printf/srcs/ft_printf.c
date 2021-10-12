@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 10:55:56 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/10/11 21:48:11 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/10/11 21:59:04 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,33 @@ int	ft_printf(const char *formatString, ...)
  * is converted into a printable output and printed on the terminal.
  * */
 {
-	unsigned int	write_count;
+	unsigned int	chars_written;
 	va_list			args;
-	int				offset;
 	t_flags			flags;
 
 	va_start(args, formatString);
-	write_count = 0;
+	chars_written = 0;
 	while (*formatString)
 	{
 		if (*formatString != '%')
-			write_count += write(1, formatString, 1);
+			chars_written += write(1, formatString, 1);
 		else
 		{
-			if (*(formatString + 1) == '\0')
+			formatString++;
+			if (*formatString == '\0')
 			// original printf's behaviour in Linux (not MacOS)
 				return (-1);
 			initialise_flags(&flags);
-			formatString++;
-			offset = capture_flags(formatString, &flags);
-			formatString += offset;
-			write_count += convert_format(formatString, args, flags);
+			formatString += capture_flags(formatString, &flags);
+			if (*formatString == '\0')
+			// original printf's behaviour in Linux (not MacOS)
+				return (-1);
+			chars_written += convert_format(formatString, args, flags);
 		}
 		formatString++;
 	}
 	va_end(args);
-	return (write_count);
+	return (chars_written);
 }
 
 void	initialise_flags(t_flags *flags)
