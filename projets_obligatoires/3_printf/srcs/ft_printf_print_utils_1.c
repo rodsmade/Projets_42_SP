@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:20:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/10/11 20:36:20 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/10/11 21:30:06 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,16 @@ unsigned int	print_percent_sign(void)
 
 unsigned int	print_pointer(unsigned long int arg)
 {
-	char	*ptr_to_hex;
+	unsigned int	chars_written;
+	char			*ptr_to_hex;
 
 	if (arg == 0)
-		// original printf's behaviour in linux
 		return (write(1, "(nil)", 5));
-	write(1, "0x", 2);
+	chars_written = write(1, "0x", 2);
 	ptr_to_hex = ft_ulitohex(arg, HEXALOW);
+	chars_written += write(1, ptr_to_hex, ft_strlen(ptr_to_hex));
 	free(ptr_to_hex);
-	return (2 + write(1, ptr_to_hex, ft_strlen(ptr_to_hex)));
+	return (chars_written);
 }
 
 unsigned int	print_string(char *arg)

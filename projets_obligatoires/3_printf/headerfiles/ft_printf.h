@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 19:15:15 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/10/08 19:18:48 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/10/11 21:13:26 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 
 # define HEXALOW	"0123456789abcdef"
 # define HEXAUPP	"0123456789ABCDEF"
-# define FLAGS		"#"
+# define FORMATS	"cspdiuxX%"
+# define FLAGS		"#0+- ."
 
 typedef struct flags
 {
