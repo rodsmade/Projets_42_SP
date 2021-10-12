@@ -6,19 +6,24 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 10:55:56 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/10/11 17:41:27 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/10/11 21:48:11 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void			initialise_flags(t_flags *flags);
-unsigned int	convert_format(const char *formatStr,
-					va_list args,
-					t_flags flags);
-int				capture_flags(const char *formatStr, t_flags *flags);
+static void			initialise_flags(t_flags *flags);
+static unsigned int	convert_format(const char *formatStr, va_list args, t_flags flags);
+static int			capture_flags(const char *formatStr, t_flags *flags);
 
 int	ft_printf(const char *formatString, ...)
+/**
+ * This is the variadic function that simulates the behaviour of original libC's printf.
+ * Basically it needs to initialise a variable argument list (va_list), and then
+ * based off the format string (1st argument), the function should determine 
+ * what type must be used to retrieve the next argument in the list, which in turn
+ * is converted into a printable output and printed on the terminal.
+ * */
 {
 	unsigned int	write_count;
 	va_list			args;
@@ -34,6 +39,7 @@ int	ft_printf(const char *formatString, ...)
 		else
 		{
 			if (*(formatString + 1) == '\0')
+			// original printf's behaviour in Linux (not MacOS)
 				return (-1);
 			initialise_flags(&flags);
 			formatString++;
@@ -48,6 +54,13 @@ int	ft_printf(const char *formatString, ...)
 }
 
 void	initialise_flags(t_flags *flags)
+/**
+ * This function initialises the struct that keeps tracks of flags being passed on.
+ * Because it is impossible to determine which flags will be passed on in the format string
+ * from start, the t_flag struct is used to signal which flags are present
+ * and must be implemented along with the corresponding argument (in boolean logic, 0 for
+ * not present and 1 for present).
+ * */
 {
 	(*flags).blank = 0;
 	(*flags).dash = 0;
@@ -59,9 +72,12 @@ void	initialise_flags(t_flags *flags)
 	return ;
 }
 
-unsigned int	convert_format(	const char *formatStr,
-								va_list args,
-								t_flags flags)
+unsigned int	convert_format(	const char *formatStr, va_list args, t_flags flags)
+/**
+ * This function acts as a router to direct the next argument in the list
+ * towards the function that will convert and print it on the terminal.
+ * If no recognisable format character follows, nothing is printed.
+ * */
 {
 	int	offset;
 
@@ -75,10 +91,7 @@ unsigned int	convert_format(	const char *formatStr,
 	if (formatStr[offset] == 's')
 		return (print_string(va_arg(args, char *)));
 	if (formatStr[offset] == 'x' || formatStr[offset] == 'X')
-		return (print_unsigned_hex(
-				va_arg(args, unsigned int),
-				formatStr[offset],
-				flags));
+		return (print_unsigned_hex(va_arg(args, unsigned int), formatStr[offset], flags));
 	if (formatStr[offset] == 'p')
 		return (print_pointer(va_arg(args, unsigned long int)));
 	if (formatStr[offset] == '%')
