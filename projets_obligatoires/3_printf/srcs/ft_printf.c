@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 10:55:56 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/10/11 21:59:04 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/10/11 22:11:04 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,27 +80,30 @@ unsigned int	convert_format(	const char *formatStr, va_list args, t_flags flags)
  * If no recognisable format character follows, nothing is printed.
  * */
 {
-	int	offset;
-
-	offset = capture_flags(formatStr, &flags);
-	if (formatStr[offset] == 'i' || formatStr[offset] == 'd')
+	if (*formatStr == 'i' || *formatStr == 'd')
 		return (print_signed_decimal(va_arg(args, int)));
-	if (formatStr[offset] == 'u')
+	if (*formatStr == 'u')
 		return (print_unsigned_decimal(va_arg(args, unsigned int)));
-	if (formatStr[offset] == 'c')
+	if (*formatStr == 'c')
 		return (print_char(va_arg(args, int)));
-	if (formatStr[offset] == 's')
+	if (*formatStr == 's')
 		return (print_string(va_arg(args, char *)));
-	if (formatStr[offset] == 'x' || formatStr[offset] == 'X')
-		return (print_unsigned_hex(va_arg(args, unsigned int), formatStr[offset], flags));
-	if (formatStr[offset] == 'p')
+	if (*formatStr == 'x' || *formatStr == 'X')
+		return (print_unsigned_hex(va_arg(args, unsigned int), *formatStr, flags));
+	if (*formatStr == 'p')
 		return (print_pointer(va_arg(args, unsigned long int)));
-	if (formatStr[offset] == '%')
+	if (*formatStr == '%')
 		return (print_percent_sign());
-	return (offset);
+	return (0);
 }
 
 int	capture_flags(const char *formatStr, t_flags *flags)
+/**
+ * This function reads the characters that come right after the % sign in the format
+ * and updates the struct flags to signal the presence of the flag found.
+ * Returns the offset by which format string must be incremented to land
+ * in the char immediately all flag chars.
+ * */
 {
 	int	i;
 
