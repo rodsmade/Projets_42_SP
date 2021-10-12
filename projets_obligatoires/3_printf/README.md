@@ -1,8 +1,8 @@
 # ft_printf
-The main goal is to reproduce the behaviour of the beloved _printf_ function from the tradicional LibC/stdio.h library, while introducing the concepts of _variadic arguments_ in C functions. This was also a great opportunity to learn how to take the most out of the *Make* build automation tool, and how to organise a bigger project using a _directory tree_ to make the project tidier, neater and more understandable.
+	The main goal is to reproduce the behaviour of the beloved _printf_ function in the traditional stdio.h (LibC) library, while introducing the concepts of _variadic arguments_ in C functions. This was also a great opportunity to learn how to take the most out of the *Make* build automation tool, and how to organise a bigger project using a _directory tree_ to make the project tidier, neater and more understandable.
 
-## sth about the scope of the project and the bonus should go in here maybe?
-	TO DO.
+## Scope of project + bonus part
+	As I've been pressed for time, 
 
 ## Directories
 * ```bin/```
