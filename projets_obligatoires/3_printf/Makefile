@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 18:03:20 by roaraujo          #+#    #+#              #
-#    Updated: 2021/10/11 17:59:11 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/10/12 13:53:54 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ FLAGS = -Wall -Wextra -Werror
 # BASH COMMANDS
 RM = rm -f
 MKDIR = mkdir -p
+MAKE_NOPRINT = $(MAKE) --no-print-directory
 
 # FILES
 LIBNAME = libftprintf.a
@@ -40,7 +41,7 @@ all: libft $(LIBNAME)
 
 # -> compiles libft all over
 libft:
-	@cd $(LIBS_PATH)libft && $(MAKE)
+	@cd $(LIBS_PATH)libft && $(MAKE_NOPRINT)
 
 # -> creates static library libftprintf.a inside ./libs/
 $(LIBNAME): $(OBJECTS)
@@ -52,7 +53,7 @@ $(OBJS_PATH)%.o : $(SRCS_PATH)%.c $(HEADERS_PATH)*.h
 	@$(MKDIR) $(OBJS_PATH)
 	@$(CC) $(FLAGS) -c $< -I $(HEADERS_PATH) -o $@
 
-# -> mandatory flag
+# -> mandatory flag for project submission
 bonus: all
 
 # RUN
@@ -61,20 +62,21 @@ main:	./main.c
 	@$(MKDIR) $(BINS_PATH)
 	@$(CC) $(CFLAGS) $< $(LIBS_PATH)$(LIBNAME) -I $(HEADERS_PATH) -o $(BINS_PATH)$(EXECUTABLE)
 
-run: $(LIBNAME) $(HEADERS_PATH)ft_printf.h main
+run: all main
 	@$(BINS_PATH)$(EXECUTABLE)
+	@$(MAKE_NOPRINT) fclean
 
 # SANITIZE
 # -> deletes all .o files; also runs libft's clean target
 clean:
 	@$(RM) $(OBJECTS)
-	@cd $(LIBS_PATH)libft && $(MAKE) $@
+	@cd $(LIBS_PATH)libft && $(MAKE_NOPRINT) $@
 
 # -> deletes .o files + static library file + executable; also runs libft's fclean target
 fclean: clean
 	@$(RM) $(BINS_PATH)$(EXECUTABLE)
 	@$(RM) $(LIBS_PATH)$(LIBNAME)
-	@cd $(LIBS_PATH)libft && $(MAKE) $@
+	@cd $(LIBS_PATH)libft && $(MAKE_NOPRINT) $@
 
 # -> 
 re: fclean all
