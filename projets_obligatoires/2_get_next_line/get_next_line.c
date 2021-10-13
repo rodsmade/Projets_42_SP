@@ -12,9 +12,52 @@
 
 #include "get_next_line.h"
 
+static void	*free_n_null(char **s1, char **s2, char **s3);
+static char	*copy_up_to_nl(char *string);
+static char	*save_past_first_nl(char *source);
+static char	*return_line(char **rest, char **buffer, char **line, int i);
+
+char	*get_next_line(int fd)
+/**
+ *	This function reads from a file descriptor and returns one line read
+ *	per call, defined henceforth as a string ending in \n, unless EOF
+ *	is reached and no \n is present, in which case all tha has been read
+ *	is returned at once.
+*/
+{
+	static char	*rest;
+	char		*buffer;
+	char		*line;
+	int			chars_read;
+
+	// initialize variables
+	if (!rest)
+		rest = ft_strdup("");
+	line = ft_strdup(rest);
+	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (buffer == NULL)
+		return (NULL);
+	chars_read = BUFFER_SIZE;
+
+	// loop using read() as long as no \n is found
+	while (chars_read == BUFFER_SIZE && !(contains_nl(line) >= 0))
+	{
+		chars_read = read(fd, buffer, BUFFER_SIZE);
+		
+		// terminate execution if file reading goes awry
+		if (chars_read < 0)
+			return (free_n_null(&line, &rest, &buffer));
+		buffer[chars_read] = '\0';
+
+		// concatenates buffer read with the line that's being built up
+		line = ft_strjoin(line, buffer);
+	}
+	return (return_line(&rest, &buffer, &line, chars_read));
+}
+
 static void	*free_n_null(char **s1, char **s2, char **s3)
 /**
- * frees up allocated memory and set pointers to NULL
+ *	frees up allocated memory and sets pointers to NULL
 */
 {
 	if (s1)
@@ -62,10 +105,10 @@ static char	*copy_up_to_nl(char *string)
 
 static char	*save_past_first_nl(char *source)
 /**
- * Everything else inside the buffer past the first \n found
- * is saved in the static variable `rest`. This guarantees
- * that the beginning of the next line is not lost between
- * function calls.
+ *	Everything else inside the buffer past the first \n found
+ *	is saved in the static variable `rest`. This guarantees
+ *	that the beginning of the next line is not lost between
+ *	function calls.
 */
 {
 	char	*dest;
@@ -85,10 +128,10 @@ static char	*save_past_first_nl(char *source)
 
 static char	*return_line(char **rest, char **buffer, char **line, int i)
 /**
- * Wraps up the execution of get_next_line. Frees memory if need be,
- * then ties up the current read line to be returned,
- * and stores what's left from the buffer in the static variable `rest`
- * so as to have the beginning of the next line saved for the next function call.
+ *	Wraps up the execution of get_next_line. Frees memory if need be,
+ *	then ties up the current read line to be returned,
+ *	and stores what's left from the buffer in the static variable `rest`
+ *	so as to have the beginning of the next line saved for the next function call.
 */
 {
 	if (i == 0)
@@ -104,34 +147,3 @@ static char	*return_line(char **rest, char **buffer, char **line, int i)
 	return (*line);
 }
 
-char	*get_next_line(int fd)
-{
-	static char	*rest;
-	char		*buffer;
-	char		*line;
-	int			chars_read;
-
-	// initialize variables
-	if (!rest)
-		rest = ft_strdup("");
-	line = ft_strdup(rest);
-	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (buffer == NULL)
-		return (NULL);
-	chars_read = BUFFER_SIZE;
-
-	// loop using read() as long as no \n is found
-	while (chars_read == BUFFER_SIZE && !(contains_nl(line) >= 0))
-	{
-		chars_read = read(fd, buffer, BUFFER_SIZE);
-		
-		// terminate execution if file reading goes awry
-		if (chars_read < 0)
-			return (free_n_null(&line, &rest, &buffer));
-		buffer[chars_read] = '\0';
-
-		// concatenates buffer read with the line that's being built up
-		line = ft_strjoin(line, buffer);
-	}
-	return (return_line(&rest, &buffer, &line, chars_read));
-}
