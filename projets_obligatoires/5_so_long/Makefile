@@ -63,13 +63,11 @@ run: all main
 # -> deletes all .o files; also runs libft's clean target
 clean:
 	@$(RM) $(OBJECTS)
-	@cd $(LIBS_PATH)libft && $(MAKE_NOPRINT) $@
 
 # -> deletes .o files + static library file + executable; also runs libft's fclean target
 fclean: clean
 	@$(RM) $(BINS_PATH)$(EXECUTABLE)
 	@$(RM) $(LIBS_PATH)$(LIBNAME)
-	@cd $(LIBS_PATH)libft && $(MAKE_NOPRINT) $@
 
 # -> 
 re: fclean all
