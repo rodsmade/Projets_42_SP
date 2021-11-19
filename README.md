@@ -1,7 +1,8 @@
-[English 🇬🇧](#en-uk) | [Français 🇫🇷](#fr) | [Português 🇧🇷](#pt-br)
+[English 💂](#en-uk) | [Français 🥐](#fr) | [Português 🌵](#pt-br)
 
 # <a name="en-uk"></a>42SP Projects
-
+All projects developed a 42 school São Paulo since May 2021.
+Lorem ipsum dolor sit amet etc.
 
 # <a name="fr"></a>Projets à 42SP
 Tout les projets developpés dans l'école 42 à São Paulo à partir de mai 2021.
@@ -67,3 +68,4 @@ Tout les projets developpés dans l'école 42 à São Paulo à partir de mai 202
 
 # <a name="pt-br"></a>Projetos na 42SP
 Todos os projedos desenvolvidos na escola 42 em São Paulo, desde maio de 2021 até o momento presente.
+Lorem ipsum etc.
