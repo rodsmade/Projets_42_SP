@@ -1,4 +1,4 @@
-[English 💂](#en-uk) | [Français 🥐](#fr) | [Português 🌵](#pt-br)
+English 💂 | [Français 🥐](https://github.com/rodsmade/Projets_42_SP/blob/main/README_fr.md) | [Português 🌵](https://github.com/rodsmade/Projets_42_SP/blob/main/README_ptbr.md)
 
 # <a name="en-uk"></a>42SP Projects
 All projects developed a 42 school São Paulo since May 2021.
