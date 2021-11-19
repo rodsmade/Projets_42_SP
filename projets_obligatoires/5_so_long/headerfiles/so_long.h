@@ -27,6 +27,8 @@
 // include do printf()
 # include <stdio.h>
 
+# define VALID_MAP_CHARS	"EPC10"
+
 int	so_long(int argc, char *argv[]);
 
 #endif

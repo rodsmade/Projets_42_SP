@@ -12,9 +12,9 @@
 
 #include "so_long.h"
 
-static int	valid_input(char *map);
+static int	valid_input(int argc, char *map);
 
-static int	valid_input(char *map)
+static int	valid_input(int argc, char *map)
 {
 	/*
 	◦ The map must be composed of only 5 possible characters: 0 for an empty
@@ -26,37 +26,45 @@ static int	valid_input(char *map)
 	◦ The map must be rectangular.
 	◦ You must be able to parse any kind of map, as long as it respects the rules of the map.
 	*/
-	int fd;
-	char *linha_lida;
-	// char *resources_path;
+	int		fd;
+	int		count_EPC[3] = {0, 0, 0};
+	char	*linha_lida;
 
-	// resources_path = "../resources/maps/";
-	// resources_path = ft_strjoin(resources_path, map);
-	// printf("Resources path depois do join: %s\n", resources_path);
+	if (argc != 2)
+	{
+		printf("Error\nInvalid number of arguments (only one accepted).\n");
+		return (0);
+	}
 	fd = open(map, O_RDONLY);
-	printf("Linha lida: %s\n", linha_lida = ft_get_next_line(fd));
-	printf("Linha lida: %s\n", linha_lida = ft_get_next_line(fd));
-	printf("Linha lida: %s\n", linha_lida = ft_get_next_line(fd));
-	printf("Linha lida: %s\n", linha_lida = ft_get_next_line(fd));
-	printf("Linha lida: %s\n", linha_lida = ft_get_next_line(fd));
-	// read_one_by_one{
-	// 	if 'E' then exit_count++;
-	// 	if 'P' then start_pos++;
-	// 	if 'C' then collect_count++;
-	// }
-	// if (exit_count < 1 || collect_count < 1 || start_pos != 1)
-	// {
-	// 	printf("Error\n");
-	// 	if (exit_count < 1)
-	// 		printf("Map has no exits!\n");
-	// 	if (collect_count < 1)
-	// 		printf("Map has no collectibles!\n");
-	// 	if (start_pos != 1)
-	// 		printf("Map has more than one starting position!\n");
-	// 	return (-1);
-	// }
-	if (linha_lida == NULL)
-		return(0);
+	while ((linha_lida = ft_get_next_line(fd)) != NULL)
+	{
+		while (*linha_lida != '\0' && *linha_lida != '\n')
+		{
+			if (!ft_strchr(VALID_MAP_CHARS, *linha_lida))
+			{
+				printf("Error\nMap contains invalid characters (._.)\n");
+				return (0);
+			}
+			if (*linha_lida == 'E')
+				count_EPC[0]++;
+			if (*linha_lida == 'P')
+				count_EPC[1]++;
+			if (*linha_lida == 'C')
+				count_EPC[2]++;
+			linha_lida++;
+		}
+	}
+	if (count_EPC[0] < 1 || count_EPC[1] != 1 || count_EPC[2] < 1)
+	{
+		printf("Error\n");
+		if (count_EPC[0] < 1)
+			printf("Map has no exits!\n");
+		if (count_EPC[1] != 1)
+			printf("Map has more than one starting position!\n");
+		if (count_EPC[2] < 1)
+			printf("Map has no collectibles!\n");
+		return (0);
+	}
 	return (1);
 }
 
@@ -67,19 +75,11 @@ int		so_long(int argc, char *argv[])
 	void	*win_ptr;
 	int		x, y;
 
-	if (argc != 2)
-	{
-		printf("Error\nInvalid number of arguments (pass only one).\n");
+	if (!valid_input(argc, argv[1]))
 		return (-1);
-	}
-	if (!valid_input(argv[1]))
-	{
-		printf("Mapa invalido!\n");
-		return (-1);
-	}
 	printf("Mapa válido! aeeee\n");
 	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, 1255, 600, "ma fenetre");
+	win_ptr = mlx_new_window(mlx_ptr, 250, 250, "ma fenetre");
 	x=0;
 	while (x++ < 50)
 	{
