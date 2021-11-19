@@ -29,6 +29,12 @@
 
 # define VALID_MAP_CHARS	"EPC10"
 
+// TYPEDEFS:
+typedef struct	s_mlxptrs {
+	void	*mlx;
+	void	*window;
+}				t_mlxptrs;
+
 int	so_long(int argc, char *argv[]);
 
 #endif

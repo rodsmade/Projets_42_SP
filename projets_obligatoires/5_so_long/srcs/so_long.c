@@ -126,25 +126,29 @@ static int	valid_input(int argc, char *map_path)
 	return (1);
 }
 
+// int	game_close(int keycode, t_vars *vars)
+// {
+// 	mlx_destroy_window(vars->mlx, vars->win);
+// }
+
 // int	so_long(int argc, char *argv[])
 int		so_long(int argc, char *argv[])
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
+	t_mlxptrs	mlx_ptrs;
 	int		x, y;
 
 	if (!valid_input(argc, argv[1]))
 		return (-1);
 	printf("Mapa válido! aeeee\n");
-	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, 250, 250, "ma fenetre");
+	mlx_ptrs.mlx = mlx_init();
+	mlx_ptrs.window = mlx_new_window(mlx_ptrs.mlx, 250, 250, "ma fenetre");
 	x=0;
 	while (x++ < 50)
 	{
 		y=0;
 		while (y++ < 50)
-			mlx_pixel_put(mlx_ptr, win_ptr, x, y, 0xFFFF00);
+			mlx_pixel_put(mlx_ptrs.mlx, mlx_ptrs.window, x, y, 0xFFFF00);
 	}
-	mlx_loop(mlx_ptr);
+	mlx_loop(mlx_ptrs.mlx);
 	return 0;
 }
