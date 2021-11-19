@@ -126,22 +126,28 @@ static int	valid_input(int argc, char *map_path)
 	return (1);
 }
 
-// int	game_close(int keycode, t_vars *vars)
-// {
-// 	mlx_destroy_window(vars->mlx, vars->win);
-// }
+int	game_close(t_mlxptrs *mlx_ptrs)
+{
+	printf("1\n");
+	mlx_destroy_window(mlx_ptrs->mlx, mlx_ptrs->window);
+	printf("2\n");
+	exit (0);
+}
 
-// int	so_long(int argc, char *argv[])
 int		so_long(int argc, char *argv[])
 {
 	t_mlxptrs	mlx_ptrs;
 	int		x, y;
+	void *window2;
 
 	if (!valid_input(argc, argv[1]))
 		return (-1);
 	printf("Mapa válido! aeeee\n");
 	mlx_ptrs.mlx = mlx_init();
 	mlx_ptrs.window = mlx_new_window(mlx_ptrs.mlx, 250, 250, "ma fenetre");
+	window2 = mlx_new_window(mlx_ptrs.mlx, 250, 250, "ma fenetre 2");
+	
+	//desenha quadrado amarelo na tela só de zoas
 	x=0;
 	while (x++ < 50)
 	{
@@ -149,6 +155,18 @@ int		so_long(int argc, char *argv[])
 		while (y++ < 50)
 			mlx_pixel_put(mlx_ptrs.mlx, mlx_ptrs.window, x, y, 0xFFFF00);
 	}
+	x=0;
+	while (x++ < 50)
+	{
+		y=0;
+		while (y++ < 50)
+			mlx_pixel_put(mlx_ptrs.mlx, window2, x, y, 0xFFA500);
+	}
+
+	// hook um toque do mouse (evento 4 mask 1L<<2) fechar a janela (BAD BAD NOT GOOD)
+	mlx_hook(mlx_ptrs.window, 17, 1L<<5, game_close, &mlx_ptrs);
+
+	// loop que captura os eventos
 	mlx_loop(mlx_ptrs.mlx);
 	return 0;
 }
