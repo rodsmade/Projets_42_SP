@@ -35,16 +35,21 @@ OBJECTS = $(addprefix $(OBJS_PATH), $(OBJ_FILES))
 EXECUTABLE = so_long
 
 # TARGETS
-all: $(LIBNAME)
+all: libft $(LIBNAME)
+
+# -> compiles libft all over
+libft:
+	@cd $(LIBS_PATH)libft && $(MAKE_NOPRINT)
 
 # -> creates static library libso_long.a inside ./libs/
 $(LIBNAME): $(OBJECTS)
+	@cp $(LIBS_PATH)libft.a $(LIBS_PATH)$(LIBNAME)
 	@ar -rcs $(LIBS_PATH)$(LIBNAME) $(OBJECTS)
 
 # -> creates object files for libso_long
 $(OBJS_PATH)%.o : $(SRCS_PATH)%.c $(HEADERS_PATH)*.h
 	@$(MKDIR) $(OBJS_PATH)
-	@$(CC) $(FLAGS) -c $< -I $(HEADERS_PATH) -o $@ -L$(LIBS_PATH) -lmlx
+	@$(CC) $(FLAGS) -c $< -I $(HEADERS_PATH) -o $@ -lmlx
 
 # -> mandatory flag for project submission
 bonus: all
@@ -56,7 +61,7 @@ main:	./main.c
 	@$(CC) $(CFLAGS) $< -L$(LIBS_PATH) -lso_long -lmlx -lXext -lX11 -I $(HEADERS_PATH) -o $(BINS_PATH)$(EXECUTABLE)
 
 run: all main
-	@$(BINS_PATH)$(EXECUTABLE)
+	@$(BINS_PATH)$(EXECUTABLE) ./resources/maps/map1.ber
 	@$(MAKE_NOPRINT) fclean
 
 # SANITIZE

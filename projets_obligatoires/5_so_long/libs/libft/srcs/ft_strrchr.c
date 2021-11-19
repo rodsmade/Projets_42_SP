@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/08 19:15:15 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/11/17 18:14:59 by roaraujo         ###   ########.fr       */
+/*   Created: 2021/10/06 10:55:35 by roaraujo          #+#    #+#             */
+/*   Updated: 2021/10/06 10:55:36 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "libft.h"
 
-// libft
-# include "libft.h"
-// includes da função open()
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
+char	*ft_strrchr(const char *s, int c)
+{
+	int	length;
 
-// include do printf
-# include <stdio.h>
-
-int	so_long(int argc, char *argv[]);
-
-#endif
+	length = ft_strlen(s);
+	while (length >= 0)
+	{
+		if (s[length] == (unsigned char) c)
+			return ((char *) s + length);
+		length--;
+	}
+	return (NULL);
+}

@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/08 19:15:15 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/11/17 18:14:59 by roaraujo         ###   ########.fr       */
+/*   Created: 2021/10/06 10:55:26 by roaraujo          #+#    #+#             */
+/*   Updated: 2021/10/06 10:55:27 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "libft.h"
 
-// libft
-# include "libft.h"
-// includes da função open()
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
+{
+	size_t	srclen;
+	size_t	dstlen;
+	size_t	i;
 
-// include do printf
-# include <stdio.h>
-
-int	so_long(int argc, char *argv[]);
-
-#endif
+	srclen = ft_strlen(src);
+	dstlen = 0;
+	while (dst[dstlen] && dstlen < size)
+		dstlen++;
+	i = 0;
+	if (dstlen < size)
+	{
+		while ((i + dstlen) < (size - 1) && src[i])
+		{
+			dst[i + dstlen] = src[i];
+			i++;
+		}
+		dst[i + dstlen] = '\0';
+	}
+	return (dstlen + srclen);
+}

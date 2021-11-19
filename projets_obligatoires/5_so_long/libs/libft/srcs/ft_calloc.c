@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/08 19:15:15 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/11/17 18:14:59 by roaraujo         ###   ########.fr       */
+/*   Created: 2021/10/06 10:53:56 by roaraujo          #+#    #+#             */
+/*   Updated: 2021/10/06 10:53:57 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "libft.h"
 
-// libft
-# include "libft.h"
-// includes da função open()
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*allocdmem;
 
-// include do printf
-# include <stdio.h>
-
-int	so_long(int argc, char *argv[]);
-
-#endif
+	allocdmem = (void *) malloc (nmemb * size);
+	if (allocdmem == NULL)
+		return (NULL);
+	ft_bzero(allocdmem, nmemb * size);
+	return (allocdmem);
+}

@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/08 19:15:15 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/11/17 18:14:59 by roaraujo         ###   ########.fr       */
+/*   Created: 2021/10/06 10:54:11 by roaraujo          #+#    #+#             */
+/*   Updated: 2021/10/06 10:54:13 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
-
-// libft
-# include "libft.h"
-// includes da função open()
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-
-// include do printf
-# include <stdio.h>
-
-int	so_long(int argc, char *argv[]);
-
-#endif
+int	ft_isprint(int c)
+{
+	if (c == ' ')
+		return (64);
+	else if ((c >= 33 && c <= 47) || (c >= 58 && c <= 64)
+		|| (c >= 91 && c <= 96) || (c >= 123 && c <= 126))
+		return (16);
+	else if (c >= '0' && c <= '9')
+		return (4);
+	else if ((c >= 'A' && c <= 'Z'))
+		return (1);
+	else if ((c >= 'a' && c <= 'z'))
+		return (2);
+	else
+		return (0);
+}

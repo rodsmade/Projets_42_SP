@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/08 19:15:15 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/11/17 18:14:59 by roaraujo         ###   ########.fr       */
+/*   Created: 2021/09/17 18:30:10 by roaraujo          #+#    #+#             */
+/*   Updated: 2021/09/18 10:51:48 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "libft.h"
 
-// libft
-# include "libft.h"
-// includes da função open()
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
+int	contains_nl(char *string)
+/**
+ * scans a string for single line character (\n).
+ * if found, returns its position (>= 0).
+ * otherwise, returns -1.
+*/
+{
+	int	i;
 
-// include do printf
-# include <stdio.h>
-
-int	so_long(int argc, char *argv[]);
-
-#endif
+	if (!string)
+		return (-1);
+	i = 0;
+	while (string[i])
+	{
+		if (string[i] == '\n')
+			return (i);
+		i++;
+	}
+	return (-1);
+}
