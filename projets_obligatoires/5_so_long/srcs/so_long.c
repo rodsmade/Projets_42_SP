@@ -12,36 +12,104 @@
 
 #include "so_long.h"
 
-static int	valid_input(int argc, char *map);
+static int	valid_input(int argc, char *map_path);
 
-static int	valid_input(int argc, char *map)
+static int	valid_input(int argc, char *map_path)
 {
-	int		fd;
-	int		count_EPC[3] = {0, 0, 0};
-	char	*linha_lida;
+	int			fd;
+	int 		i;
+	int			count_EPC[3] = {0, 0, 0};
+	char		*line_read;
+	char		*backup;
+	size_t		row_length;
 
+	// passou qtd certa de argumentos?
 	if (argc != 2)
 	{
 		printf("Error\nInvalid number of arguments (only one accepted).\n");
 		return (0);
 	}
-	fd = open(map, O_RDONLY);
-	while ((linha_lida = ft_get_next_line(fd)) != NULL)
+
+	// extensão fo mapa é .ber?
+	if (ft_strncmp(map_path + ft_strlen(map_path) - 4, ".ber", 4) != 0)
 	{
-		while (*linha_lida != '\0' && *linha_lida != '\n')
+		printf("Error\nMap format invalid (only .ber allowed)\n");
+		return (0);
+	}
+
+	// abre o mapa e conta o tamanho da primeia linha
+	fd = open(map_path, O_RDONLY);
+	line_read = ft_get_next_line(fd);
+	if (line_read == NULL)
+	{
+		printf("Error\nMap is empty ! ! !\n");
+		return (0);
+	}
+	printf("retorno primeiro gnl: %s\n", line_read);
+	backup = line_read;
+	line_read = ft_strtrim(line_read, "\n");
+	printf("teste\n");
+	row_length = ft_strlen(line_read);
+
+	// se primeiro e último chars são = 1
+	if (*line_read != '1' || *(line_read + row_length - 1) != '1')
+	{
+		printf("Error\nMap must be surrounded by walls. 1\n");
+		return (0);
+	}
+	i = -1;
+	while (line_read[++i])
+	{
+		if (line_read[i] != '1')
 		{
-			if (!ft_strchr(VALID_MAP_CHARS, *linha_lida))
+			printf("Error\nMap must be surrounded by walls. 2\n");
+			return (0);
+		}
+	}
+	
+	while (line_read != NULL)
+	{
+		// printf("Entrou no while\n");
+		if (ft_strlen(line_read) != row_length)
+		{
+			printf("Error\nMap must be rectangular!\n");
+			return (0);
+		}
+		i = -1;
+		while (line_read[++i] != '\0')
+		{
+			if (!ft_strchr(VALID_MAP_CHARS, line_read[i]))
 			{
 				printf("Error\nMap contains invalid characters (._.)\n");
 				return (0);
 			}
-			if (*linha_lida == 'E')
+			if (line_read[i] == 'E')
 				count_EPC[0]++;
-			if (*linha_lida == 'P')
+			if (line_read[i] == 'P')
 				count_EPC[1]++;
-			if (*linha_lida == 'C')
+			if (line_read[i] == 'C')
 				count_EPC[2]++;
-			linha_lida++;
+		}
+		backup = line_read;
+		line_read = ft_get_next_line(fd);
+		if (line_read == NULL)
+		{
+			i = -1;
+			while (backup[++i])
+			{
+				if (backup[i] != '1')
+				{
+					printf("Error\nMap must be surrounded by walls. 2\n");
+					return (0);
+				}
+			}
+		}
+
+		line_read = ft_strtrim(line_read, "\n");
+		if (line_read != NULL && (*line_read != '1' || *(line_read + row_length - 1) != '1'))
+		{
+			printf("Error\nMap must be surrounded by walls 3\n");
+			return (0);
 		}
 	}
 	if (count_EPC[0] < 1 || count_EPC[1] != 1 || count_EPC[2] < 1)
