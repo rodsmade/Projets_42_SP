@@ -16,16 +16,6 @@ static int	valid_input(int argc, char *map);
 
 static int	valid_input(int argc, char *map)
 {
-	/*
-	◦ The map must be composed of only 5 possible characters: 0 for an empty
-		space, 1 for a wall, C for a collectible, E for map exit and P for the player’s
-		starting position.
-	◦ The map must be closed/surrounded by walls, if not the program must return an error.
-	◦ Map must have at least one exit, one collectible, and one starting position.
-	◦ You don’t need to check if there’s a valid path in the map.
-	◦ The map must be rectangular.
-	◦ You must be able to parse any kind of map, as long as it respects the rules of the map.
-	*/
 	int		fd;
 	int		count_EPC[3] = {0, 0, 0};
 	char	*linha_lida;
