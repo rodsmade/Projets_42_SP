@@ -6,11 +6,10 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:11:48 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/11/17 21:13:38 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/11/18 22:01:56 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
 #include "so_long.h"
 
 static int	valid_input(char *map);
@@ -35,6 +34,10 @@ static int	valid_input(char *map)
 	// resources_path = ft_strjoin(resources_path, map);
 	// printf("Resources path depois do join: %s\n", resources_path);
 	fd = open(map, O_RDONLY);
+	printf("Linha lida: %s\n", linha_lida = ft_get_next_line(fd));
+	printf("Linha lida: %s\n", linha_lida = ft_get_next_line(fd));
+	printf("Linha lida: %s\n", linha_lida = ft_get_next_line(fd));
+	printf("Linha lida: %s\n", linha_lida = ft_get_next_line(fd));
 	printf("Linha lida: %s\n", linha_lida = ft_get_next_line(fd));
 	// read_one_by_one{
 	// 	if 'E' then exit_count++;
