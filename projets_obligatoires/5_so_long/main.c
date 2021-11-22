@@ -113,8 +113,9 @@
 // 	mlx_loop(vars.mlx);
 // }
 
-// IMPLEMENTANDO um hook de uma tecla específica para fechar a janela:
+// // IMPLEMENTANDO um hook de uma tecla específica para fechar a janela:
 #include <mlx.h>
+#include <stdio.h>
 
 typedef struct	s_data {
 	void	*img;
@@ -127,7 +128,12 @@ typedef struct	s_data {
 typedef struct	s_vars {
 	void	*mlx;
 	void	*win;
+	int		win_height;
+	int		win_length;
+	t_data	*img_data;
 }				t_vars;
+
+int RAINBOW[8] = {0xDFFF00, 0xFFBF00, 0xFF7F50, 0xDE3163, 0x8E44AD, 0x6495ED, 0x40E0D0, 0x9FE2BF};
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -137,10 +143,69 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-int	close(int keycode, t_vars *vars)
+int	detect_keystroke(int keycode, t_vars *vars)
 {
+	if (keycode == 65361 || keycode == 97)
+		printf("Movimento detectado para esquerda!\n");
+	if (keycode == 65362 || keycode == 119)
+		printf("Movimento detectado para cima!\n");
+	if (keycode == 65363 || keycode == 100)
+		printf("Movimento detectado para direita!\n");
+	if (keycode == 65364 || keycode == 115)
+		printf("Movimento detectado para baixo!\n");
 	if (keycode == 65307)
 		mlx_destroy_window(vars->mlx, vars->win);
+}
+
+int	close_window(t_vars *vars)
+{
+	mlx_destroy_window(vars->mlx, vars->win);
+}
+
+int	resize(int keycode, t_vars *vars)
+{
+	printf("Resize request captured; keycode: %i\n", keycode);
+}
+
+int	focus_in(t_vars *vars)
+{
+	printf("Focus in capturado\n");
+}
+
+int	focus_out(t_vars *vars)
+{
+	printf("Focus out capturado\n");
+}
+
+int	enter_notf(t_vars *vars)
+{
+	printf("mouse entrou na janela\n");
+}
+
+int	leave_notf(t_vars *vars)
+{
+	printf("mouse saiu da janela\n");
+}
+
+#include <unistd.h>
+int render_next_frame(t_vars *vars)
+{
+	int x, y;
+	static int i = 0;
+	// printa a imagem que eu montei na tela
+	x=0;
+	while (x++ < vars->win_length)
+	{
+		y=0;
+		while (y++ < vars->win_height)
+			my_mlx_pixel_put(vars->img_data, x, y, RAINBOW[i]);
+	}
+	i++;
+	if (i > 7)
+		i = 0;
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->img_data->img, 0, 0);
+	printf("qqq\n");
+	sleep(1);
 }
 
 int	main(void)
@@ -150,27 +215,31 @@ int	main(void)
 	int		x, y;
 
 	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 250, 250, "Hello world!");
-	img.img = mlx_new_image(vars.mlx, 250, 250);
+	vars.win_height = 250;
+	vars.win_length = 250;
+	vars.win = mlx_new_window(vars.mlx, vars.win_length, vars.win_height, "Hello world!");
+	img.img = mlx_new_image(vars.mlx, vars.win_length, vars.win_height);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 								&img.endian);
-	
-	x=0;
-	while (x++ < 50)
-	{
-		y=0;
-		while (y++ < 50)
-			my_mlx_pixel_put(&img, x, y, 0xFFFF00);
-	}
-	x=100;
-	while (x++ < 150)
-	{
-		y=100;
-		while (y++ < 150)
-			my_mlx_pixel_put(&img, x, y, 0xFFA500);
-	}
+	vars.img_data = &img;
 
-	mlx_hook(vars.win, 2, 1L<<0, close, &vars);
-	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
+	// hook para capturar tecla apertada e decidir se move, se fecha
+	mlx_hook(vars.win, 2, 1L<<0, detect_keystroke, &vars);
+	// hook para capturar resize da janela e printar
+	// era pra printar coisa no resize mas n consegui fazer isso acontecer ????
+	mlx_hook(vars.win, 25, 1L<<18, resize, &vars);
+	// hook para capturar foco in/out da janela
+	mlx_hook(vars.win, 9, 1L<<21, focus_in, &vars);
+	mlx_hook(vars.win, 10, 1L<<21, focus_out, &vars);
+	// hook para capturar mouse entrando na janela
+	mlx_hook(vars.win, 7, 1L<<4, enter_notf, &vars);
+	// hook para capturar mouse saindo da janela
+	mlx_hook(vars.win, 8, 1L<<5, leave_notf, &vars);
+	// hook para fechar janela no x
+	mlx_hook(vars.win, 17, 0, close_window, &vars);
+
+	// hook pra executar enquanto nenhum outro hook estiver sendo executado
+	mlx_loop_hook(vars.mlx, render_next_frame, &vars);
+
 	mlx_loop(vars.mlx);
 }
