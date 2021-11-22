@@ -59,8 +59,35 @@
 // }
 
 
-// IMPLEMENTANDO minilibx_key_hook, que faz com que qualquer tecla dispare a função que vc passar.
-// a função tem que receber como parâmetro um in que é o código da tecla q foi apertada.
+// // IMPLEMENTANDO minilibx_key_hook, que faz com que qualquer tecla dispare a função que vc passar. essa funçao recebe um ponteiro pra uma janela onde ficará escutando o evento, e um parãmetro genérico (void *param) que é um ponteiro para algum parãmetro que você queira passar para dentro da sua funçao arbitrária
+// // a função arbitrária tem que receber como parâmetro um int que é o código da tecla q foi apertada.
+// #include <mlx.h>
+// #include <stdio.h>
+
+// typedef struct	s_vars {
+// 	void	*mlx;
+// 	void	*win;
+// }				t_vars;
+
+// int	key_hook(int keycode, t_vars *vars)
+// {
+// 	printf("Pressed key code: %i\n", keycode);
+// }
+
+// int	main(void)
+// {
+// 	t_vars	vars;
+
+// 	vars.mlx = mlx_init();
+// 	vars.win = mlx_new_window(vars.mlx, 640, 480, "Hello world!");
+// 	// captura toda e qualquer tecla na janela aberta, e chama a função key_hook
+// 	mlx_key_hook(vars.win, key_hook, &vars);
+// 	mlx_loop(vars.mlx);
+// }
+
+// IMPLEMENTANDO minilibx_mouse_hook, que faz com que o clique dos botões do mouse dispare a função arbitrária que vc passar.
+// os cliques possíveis são: botão esquerdo, direito, botão do meio, rolar pra cima e rolar pra baixo (ver cheatsheet)
+// a função arbitrária tem que receber como parâmetro um in que é o código do botão q foi apertada, e x e y que são a posição do mouse em pixels na hr q o botão foi clicado.
 #include <mlx.h>
 #include <stdio.h>
 
@@ -69,9 +96,10 @@ typedef struct	s_vars {
 	void	*win;
 }				t_vars;
 
-int	key_hook(int keycode, t_vars *vars)
+int	mouse_hook(int button,int x,int y,void *param)
 {
-	printf("Pressed key code: %i\n", keycode);
+	printf("Mouse button clicked: %i\n", button);
+	printf("Mouse position when clicked: (x: %i; y: %i)\n", x, y);
 }
 
 int	main(void)
@@ -81,6 +109,6 @@ int	main(void)
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, 640, 480, "Hello world!");
 	// captura toda e qualquer tecla na janela aberta, e chama a função key_hook
-	mlx_key_hook(vars.win, key_hook, &vars);
+	mlx_mouse_hook(vars.win, mouse_hook, &vars);
 	mlx_loop(vars.mlx);
 }
