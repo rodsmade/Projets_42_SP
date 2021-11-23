@@ -231,19 +231,20 @@ int render_everyfin(t_vars *vars){
 		while (y++ < vars->win_height)
 			my_mlx_pixel_put(vars->img_data, x, y, RAINBOW[i]);
 	}
-	i++;
+	// i++;
 	if (i > 7)
 		i = 0;
 	if (vars->win != NULL)
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->img_data->img, 0, 0);
-	sleep(1);
+	// sleep(1);
 	return (0);
 }
 
-int	expose_hook()
+int	expose_hook(t_vars *vars)
 {
 	static int i=0;
 	printf("entrou e agr %i\n", i++);
+	render_everyfin(vars);
 }
 
 int	main(void){
@@ -283,7 +284,7 @@ int	main(void){
 	mlx_hook(vars.win, 17, 0, &close_window, &vars);
 
 	// expose hook wtf
-	mlx_expose_hook (vars.win, &expose_hook, NULL);
+	mlx_expose_hook (vars.win, &expose_hook, &vars);
 
 	// CAPTURA DO NÃO-EVENTO
 	// hook pra executar enquanto nenhum outro hook estiver sendo executado
