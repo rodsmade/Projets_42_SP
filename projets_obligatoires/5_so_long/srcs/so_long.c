@@ -14,6 +14,26 @@
 
 static int	valid_input(int argc, char *map_path);
 
+static int check_args_count(int argc)
+{
+	if (argc != 2)
+	{
+		printf("Error\nInvalid number of arguments (only one accepted).\n");
+		return (0);
+	}
+	return(1);
+}
+
+static int	is_ber(char *map_path)
+{
+	if (ft_strncmp(map_path + ft_strlen(map_path) - 4, ".ber", 4) != 0)
+	{
+		printf("Error\nMap format invalid (only .ber allowed)\n");
+		return (0);
+	}
+	return (1);
+}
+
 static int	valid_input(int argc, char *map_path)
 {
 	int			fd;
@@ -24,20 +44,12 @@ static int	valid_input(int argc, char *map_path)
 	size_t		row_length;
 
 	// passou qtd certa de argumentos?
-	if (argc != 2)
-	{
-		printf("Error\nInvalid number of arguments (only one accepted).\n");
-		return (0);
-	}
-
-	// extensão fo mapa é .ber?
-	if (ft_strncmp(map_path + ft_strlen(map_path) - 4, ".ber", 4) != 0)
-	{
-		printf("Error\nMap format invalid (only .ber allowed)\n");
-		return (0);
-	}
-
-	// abre o mapa e conta o tamanho da primeia linha
+	if (!check_args_count(argc))
+		return (1);
+	// extensão do mapa é .ber?
+	if (!is_ber(map_path))
+		return (1);
+	// abre o mapa e conta o tamanho da primeira linha
 	fd = open(map_path, O_RDONLY);
 	line_read = ft_get_next_line(fd);
 	if (line_read == NULL)
@@ -126,14 +138,6 @@ static int	valid_input(int argc, char *map_path)
 	return (1);
 }
 
-int	game_close(t_mlxptrs *mlx_ptrs)
-{
-	printf("1\n");
-	mlx_destroy_window(mlx_ptrs->mlx, mlx_ptrs->window);
-	printf("2\n");
-	exit (0);
-}
-
 int		so_long(int argc, char *argv[])
 {
 	t_mlxptrs	mlx_ptrs;
@@ -164,9 +168,6 @@ int		so_long(int argc, char *argv[])
 		while (y++ < 50)
 			mlx_pixel_put(mlx_ptrs.mlx, window2, x, y, 0xFFA500);
 	}
-
-	// hook um toque do mouse (evento 4 mask 1L<<2) fechar a janela (BAD BAD NOT GOOD)
-	mlx_hook(mlx_ptrs.window, 17, 1L<<5, game_close, &mlx_ptrs);
 
 	// loop que captura os eventos
 	mlx_loop(mlx_ptrs.mlx);
