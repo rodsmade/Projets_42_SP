@@ -16,6 +16,9 @@
 // minilibx
 #include <mlx.h>
 
+// Xlib keycode - keysymbol mapping
+# include <X11/keysym.h>
+
 // libft
 # include "libft.h"
 
@@ -28,6 +31,8 @@
 # include <stdio.h>
 
 # define VALID_MAP_CHARS	"EPC10"
+# define MLX_ERROR			1
+
 
 // TYPEDEFS:
 typedef struct	s_mlxptrs {

@@ -145,7 +145,9 @@ int		so_long(int argc, char *argv[])
 	printf("Mapa válido! aeeee\n");
 	mlx_ptrs.mlx = mlx_init();
 	mlx_ptrs.window = mlx_new_window(mlx_ptrs.mlx, 250, 250, "ma fenetre");
+	// TODO: check if mlx_ptrs.window == NULL
 	window2 = mlx_new_window(mlx_ptrs.mlx, 250, 250, "ma fenetre 2");
+	// TODO: check if window2 == NULL
 	
 	//desenha quadrado amarelo na tela só de zoas
 	x=0;
@@ -168,7 +170,7 @@ int		so_long(int argc, char *argv[])
 
 	// loop que captura os eventos
 	mlx_loop(mlx_ptrs.mlx);
-	mlx_destroy_display(mlx_ptr);
-	free(mlx_ptr);
+	mlx_destroy_display(mlx_ptrs.mlx);
+	free(mlx_ptrs.mlx);
 	return 0;
 }
