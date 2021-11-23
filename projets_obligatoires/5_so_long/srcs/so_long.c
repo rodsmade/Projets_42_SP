@@ -168,5 +168,7 @@ int		so_long(int argc, char *argv[])
 
 	// loop que captura os eventos
 	mlx_loop(mlx_ptrs.mlx);
+	mlx_destroy_display(mlx_ptr);
+	free(mlx_ptr);
 	return 0;
 }
