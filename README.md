@@ -4,35 +4,33 @@ English 💂 | [Français 🥐](https://github.com/rodsmade/Projets_42_SP/blob/m
 All projects developed a 42 school São Paulo since May 2021.
 Lorem ipsum dolor sit amet etc.
 
-# <a name="fr"></a>Projets à 42SP
-Tout les projets developpés dans l'école 42 à São Paulo à partir de mai 2021.
-
 ![image](https://user-images.githubusercontent.com/49699403/118574469-e319f180-b75a-11eb-98c3-86f9c84fb180.png)
 
-> Lorsqu'il y a plus d'un projet dans un nombre, un seul projet doit être sélectionné.
+> Projects under the same number are candidates for that level, thus only one needs to be picked by the student.
 
-## Partie 1 - Les notions obligatoire
+## Partie 1 - Base program
 
-### Les Projets
-#### Niveau 1:
-- **libft:**   Nous construisons notre prope bibliothèque avec les fonctions que nous utiliserons tout au long du reste du programme. Les fonctions commençant par "ft" copient les fonctions C traditionnelles y n'utilisent pas des fonctions externes sauf une utilisation minimale de "write" et "malloc" dans des circonstances spécifiques.
+### Phase 1
+#### Level 1:
+- **libft**          Build your own basic C static library, which will be used throughout the rest of the program. The ```ft_*``` functions mostly mimic the behaviour of the traditional C functions, and must be written using at most ```write()``` and ```malloc()```.
 
-#### Niveau 2:
-- get_next_line
+#### Level 2:
+- **get_next_line**  Read from a file descriptor and deliver one line -- ```\n```-terminated string of chars.
+
+#### Level 3:
+- **ft_printf**      ASDASD
+
+#### Level 4:
+- **born2beroot**    adjasdashdaskjh
        
-#### Niveau 3:         
-- ft_printf
-
-#### Niveau 4:
-- born2beroot
-       
-#### Niveau 5:
+#### Level 5:
 - fractol / fdf / epikong
        Des jeux numériques.
 
 #### Niveau 6:
 - minitalk / pipex
-       
+
+### Phase 2
 #### Niveau 7:
 - push_swap
 
@@ -48,6 +46,7 @@ Tout les projets developpés dans l'école 42 à São Paulo à partir de mai 202
 #### Niveau 11:
 - cub3d / minirt
 
+### Phase 3
 #### Niveau 12:
 - CPP Modules (9 modules pour apprendre la programmation orientée objet)
 
@@ -63,9 +62,5 @@ Tout les projets developpés dans l'école 42 à São Paulo à partir de mai 202
 #### Niveau 16:
 - transcendence
 
-## Partie 2 - Le perfectionnement
+## Partie 2 - Honing skills
 
-
-# <a name="pt-br"></a>Projetos na 42SP
-Todos os projedos desenvolvidos na escola 42 em São Paulo, desde maio de 2021 até o momento presente.
-Lorem ipsum etc.
