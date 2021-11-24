@@ -1,9 +1,5 @@
 [English 💂](https://github.com/rodsmade/Projets_42_SP/blob/main/README.md) | Français 🥐 | [Português 🌵](https://github.com/rodsmade/Projets_42_SP/blob/main/README_ptbr.md)
 
-# <a name="en-uk"></a>42SP Projects
-All projects developed a 42 school São Paulo since May 2021.
-Lorem ipsum dolor sit amet etc.
-
 # <a name="fr"></a>Projets à 42SP
 Tout les projets developpés dans l'école 42 à São Paulo à partir de mai 2021.
 
@@ -65,7 +61,3 @@ Tout les projets developpés dans l'école 42 à São Paulo à partir de mai 202
 
 ## Partie 2 - Le perfectionnement
 
-
-# <a name="pt-br"></a>Projetos na 42SP
-Todos os projedos desenvolvidos na escola 42 em São Paulo, desde maio de 2021 até o momento presente.
-Lorem ipsum etc.
