@@ -146,7 +146,7 @@ int	main(void)
 }
 */
 
-
+/*
 // IMPLEMENTANDO um hook de uma tecla específica para fechar a janela:
 #include <mlx.h>
 #include <stdio.h>
@@ -186,10 +186,7 @@ int	detect_keystroke(int keycode, t_vars *vars){
 	if (keycode == 65364 || keycode == 115)
 		printf("Movimento detectado para baixo!\n");
 	if (keycode == XK_Escape)
-	{
-		mlx_destroy_window(vars->mlx, vars->win);
-		vars->win = NULL;
-	}
+		close_window(vars);
 	return (0);
 }
 
@@ -298,34 +295,122 @@ int	main(void){
 	mlx_destroy_display(vars.mlx);
 	free(vars.mlx);
 }
+*/
 
-/*
+
 // COMO RENDERIZAR UMA IMAGEM SOCORR
 #include <mlx.h>
 
+typedef struct	s_player {
+	char	*sprite_path;
+	void	*img;
+	int		x_position;
+	int		y_position;
+	int		width;
+	int		height;
+}				t_player;
+
+typedef struct	s_img {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_width;
+	int		endian;
+}				t_img;
+
+typedef struct	s_win {
+	void	*win_ptr;
+	int		width;
+	int		height;
+}				t_win;
+
+typedef struct	s_vars {
+	void		*mlx;
+	t_win		*win;
+	t_player	*player;
+}				t_vars;
+
+// TODO: criar struct do mapa que guarda a qtd de linhas e colunas pra caluclar altura e largura da janela 
+
+int	close_window(t_vars *vars){
+	mlx_destroy_window(vars->mlx, vars->win);
+	vars->win = NULL;
+}
+
+int	detect_keystroke(int keycode, t_vars *vars){
+	if (keycode == 65361 || keycode == 97)
+		{
+			// printf("Movimento detectado para esquerda!\n");
+
+		}
+	if (keycode == 65362 || keycode == 119)
+		{
+			// printf("Movimento detectado para cima!\n");
+
+		}
+	if (keycode == 65363 || keycode == 100)
+		{
+			// printf("Movimento detectado para direita!\n");
+
+		}
+	if (keycode == 65364 || keycode == 115)
+		{
+			// printf("Movimento detectado para baixo!\n");
+
+		}
+	if (keycode == XK_Escape)
+		close_window(vars);
+	return (0);
+}
+
 int	main(void)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*relative_path = "../resources/images/Chanut-Role-Playing-Elf.xpm";
-	int		img_width;
-	int		img_height;
+	t_player	player;
+	t_win	win;
+	t_vars	global;
 
-	mlx = mlx_init();
-	if (mlx_ptr == NULL)
+	// startando a struct
+	// TODO: criar uma função "initialize" que malloca as structs dependentes e também inicializa tudo (calloc!!!!)
+	global.win = &win;
+	global.player = &player;
+
+	// init mlx
+	global.mlx = mlx_init();
+	if (global.mlx == NULL)
 		return (MLX_ERROR);
-	img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
-	win = mlx_new_window(mlx, img_width, img_height, "Ma fenetre");
-	if (win == NULL)
+
+
+	// init window
+	global.win->win_ptr = mlx_new_window(global.mlx, 500,
+										500, "Ma fenetre");
+	if (global.win->win_ptr == NULL)
 	{
-		free(win);
+		free(global.win->win_ptr);
 		return(MLX_ERROR);
 	}
-	mlx_put_image_to_window(mlx, win, img, 0, 0);
+	global.win->width = 500;
+	global.win->height = 500;
 
-	mlx_loop(mlx);
-	mlx_destroy_display(mlx_ptr);
-	free(mlx_ptr);
+	// init player
+	global.player->sprite_path = "./resources/images/lucca_sprites_1.xpm";
+	global.player->x_position = global.win->width / 2;
+	global.player->y_position = global.win->height / 2;
+	global.player->img = mlx_xpm_file_to_image(global.mlx, global.player->sprite_path,
+								&global.player->width, &global.player->height);
+	printf("teste\n");
+
+	// draw player on window
+	mlx_put_image_to_window(global.mlx, global.win->win_ptr, global.player->img, 
+							global.player->x_position, global.player->y_position);
+
+	// HOOKS
+	// hook para fechar janela no x
+	mlx_hook(global.win->win_ptr, 17, 0, &close_window, &global);
+	// hook para capturar tecla apertada e decidir se move, se fecha
+	mlx_hook(global.win->win_ptr, 2, 1L<<0, &detect_keystroke, &global);
+
+	mlx_loop(global.mlx);
+
+	mlx_destroy_display(global.mlx);
+	free(global.mlx);
 }
-*/

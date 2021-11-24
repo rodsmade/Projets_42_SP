@@ -32,6 +32,7 @@
 
 # define VALID_MAP_CHARS	"EPC10"
 # define MLX_ERROR			1
+# define TILE				50
 
 
 // TYPEDEFS:
