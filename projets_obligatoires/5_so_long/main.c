@@ -301,7 +301,7 @@ int	main(void){
 // COMO RENDERIZAR UMA IMAGEM SOCORR
 #include <mlx.h>
 
-typedef struct	s_player {
+typedef struct	s_player{
 	char	*sprite_path;
 	void	*img;
 	int		x_position;
@@ -310,27 +310,36 @@ typedef struct	s_player {
 	int		height;
 }				t_player;
 
-typedef struct	s_img {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_width;
-	int		endian;
-}				t_img;
+// acho q essa t_img na vdd só precisa se for usar aquela função de pixel put otimizada my_pixel_put
+// typedef struct	s_img{
+// 	void	*img;
+// 	char	*addr;
+// 	int		bits_per_pixel;
+// 	int		line_width;
+// 	int		endian;
+// }				t_img;
 
-typedef struct	s_win {
+typedef struct	s_win{
 	void	*win_ptr;
 	int		width;
 	int		height;
 }				t_win;
 
-typedef struct	s_vars {
+typedef struct	s_vars{
 	void		*mlx;
 	t_win		*win;
 	t_player	*player;
 }				t_vars;
 
 // TODO: criar struct do mapa que guarda a qtd de linhas e colunas pra caluclar altura e largura da janela 
+typedef struct	s_map{
+	int		cols;
+	int		rows;
+	char	*floor_path;
+	char	*wall_path;
+	char	*collectible_path;
+	char	*exit_path;
+}				t_map;
 
 static int	close_window(t_vars *global){
 	mlx_destroy_window(global->mlx, global->win->win_ptr);
@@ -339,42 +348,21 @@ static int	close_window(t_vars *global){
 
 int	detect_keystroke(int keycode, t_vars *global){
 	if (keycode == 65361 || keycode == 97)
-		{
-			// printf("Movimento detectado para esquerda!\n");
 			global->player->x_position -= 50;
-			printf("Player ( x, y ) => ( %i, %i )\n", 
-						global->player->x_position, global->player->y_position);
-		}
 	if (keycode == 65362 || keycode == 119)
-		{
-			// printf("Movimento detectado para cima!\n");
 			global->player->y_position -= 50;
-			printf("Player ( x, y ) => ( %i, %i )\n", 
-						global->player->x_position, global->player->y_position);
-		}
 	if (keycode == 65363 || keycode == 100)
-		{
-			// printf("Movimento detectado para direita!\n");
 			global->player->x_position += 50;
-			printf("Player ( x, y ) => ( %i, %i )\n", 
-						global->player->x_position, global->player->y_position);
-		}
 	if (keycode == 65364 || keycode == 115)
-		{
-			// printf("Movimento detectado para baixo!\n");
 			global->player->y_position += 50;
-			printf("Player ( x, y ) => ( %i, %i )\n", 
-						global->player->x_position, global->player->y_position);
-		}
 	if (keycode == XK_Escape)
 		close_window(global);
+	else
+		mlx_clear_window(global->mlx, global->win->win_ptr);
 	return (0);
 }
 
 int render_everything(t_vars *global){
-	
-	global->player->img = mlx_xpm_file_to_image(global->mlx, global->player->sprite_path,
-								&global->player->width, &global->player->height);
 	if (global->win->win_ptr != NULL)
 		mlx_put_image_to_window(global->mlx, global->win->win_ptr, global->player->img,
 								global->player->x_position, global->player->y_position);
@@ -414,6 +402,8 @@ int	main(void)
 	global.player->sprite_path = "./resources/images/lucca_sprites_1.xpm";
 	global.player->x_position = global.win->width / 2;
 	global.player->y_position = global.win->height / 2;
+	global.player->img = mlx_xpm_file_to_image(global.mlx, global.player->sprite_path,
+								&global.player->width, &global.player->height);
 
 	printf("teste\n");
 	// HOOKS
