@@ -3,8 +3,8 @@
 #include "so_long.h"
 
 int	close_window(t_game *game){
-	mlx_destroy_window(game->mlx, game->window);
-	game->window = NULL;
+	mlx_destroy_window(game->mlx, game->window->win_ptr);
+	game->window->win_ptr = NULL;
 	return (0);
 }
 

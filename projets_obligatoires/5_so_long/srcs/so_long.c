@@ -60,7 +60,6 @@ static int	valid_input(int argc, char *map_path)
 	printf("retorno primeiro gnl: %s\n", line_read);
 	backup = line_read;
 	line_read = ft_strtrim(line_read, "\n");
-	printf("teste\n");
 	row_length = ft_strlen(line_read);
 
 	// se primeiro e último chars são != 1

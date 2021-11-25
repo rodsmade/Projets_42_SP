@@ -33,7 +33,6 @@ int		render_everything(t_game *game){
 	if (game->window->win_ptr != NULL){
 		mlx_put_image_to_window(game->mlx, game->window->win_ptr, game->player->img,
 								game->player->x_position, game->player->y_position);
-		printf("teste chegou aqui ???\n");
 	}
 	return (0);
 }
