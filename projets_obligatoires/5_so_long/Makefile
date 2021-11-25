@@ -31,6 +31,7 @@ LIBNAME = libso_long.a
 SRC_FILES = so_long.c \
 			movement_utils.c \
 			render_utils.c \
+			initialise_utils.c \
 			hooks_utils.c
 SOURCES = $(addprefix $(SRCS_PATH), $(SRC_FILES))
 OBJ_FILES = $(patsubst %.c, %.o, $(SRC_FILES))
@@ -64,7 +65,7 @@ main:	./main.c
 	@$(CC) $(CFLAGS) $< -L$(LIBS_PATH) -lso_long -lmlx -lXext -lX11 -I $(HEADERS_PATH) -o $(BINS_PATH)$(EXECUTABLE)
 
 run: all main
-	@$(BINS_PATH)$(EXECUTABLE) ./resources/maps/map1.berr
+	@$(BINS_PATH)$(EXECUTABLE) ./resources/maps/map1.ber
 	@$(MAKE_NOPRINT) fclean
 
 # SANITIZE

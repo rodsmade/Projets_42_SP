@@ -45,7 +45,16 @@ typedef struct	s_player{
 	int		y_position;
 	int		width;
 	int		height;
+	int		collec_count;
 }				t_player;
+
+typedef struct	s_collectible{
+	int		total;
+	int		width;
+	int		height;
+	char	*sprite_path;
+	void	*img;
+}				t_collectible;
 
 // acho q essa t_img na vdd só precisa se for usar aquela função de pixel put otimizada my_pixel_put
 // typedef struct	s_img{
@@ -63,16 +72,15 @@ typedef struct	s_window{
 }				t_window;
 
 typedef struct	s_map{
-	char	*map_path; //ñ sei se é útil mas vai que
-	void	*img;
 	int		cols;
 	int		rows;
-	int		sprite_width;
-	int		sprite_height;
+	int		tile_width;
+	int		tile_height;
+	char	*map_path; //ñ sei se é útil mas vai que
+	char	*exit_path;
 	char	*floor_path;
 	char	*wall_path;
-	char	*collectible_path;
-	char	*exit_path;
+	t_list	*rows_list;
 }				t_map;
 
 typedef struct	s_game{
@@ -94,8 +102,11 @@ void	move_up(t_game *game);
 // render_utils
 int		render_everything(t_game *game);
 
-// other_utils_sort_later
+// hooks_utils
 int		close_window(t_game *game);
 int		detect_keystroke(int keycode, t_game *game);
+
+// initialise_utils
+int		game_init(t_game *game);
 
 #endif

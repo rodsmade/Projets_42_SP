@@ -145,24 +145,27 @@ int		so_long(int argc, char *argv[])
 	t_game		game;
 
 	// VALIDA MAPA
+	printf("DEBUG: 1 - VALIDA MAPA - entrou\n");
 	if (!input_is_valid(argc, argv[1]))
 		return (-1);
-	printf("Mapa válido! aeeee\n");
+	printf("DEBUG: 1 - VALIDA MAPA - saiu\n");
 
 	// INICIALIZA STRUCT DO JOGO
+	printf("DEBUG: 2 - INICIALIZA STRUCT DO JOGO - entrou\n");
 	// TODO: transformar isso numa função "initialize" que malloca as structs dependentes e também inicializa tudo (calloc!!!!)
-	game.map = ft_calloc(1, sizeof(t_map));
-	game.window = ft_calloc(1, sizeof(t_window));
-	game.player = ft_calloc(1, sizeof(t_player));
-	game.window->width = 500;
-	game.window->height = 500;
+	if (!game_init(&game))
+		return (-1);
+	printf("DEBUG: 2 - INICIALIZA STRUCT DO JOGO - saiu\n");
 
 	// INICIALIZA MLX
+	printf("DEBUG: 3 - INICIALIZA MLX - entrou\n");
 	game.mlx = mlx_init();
 	if (game.mlx == NULL)
 		return (MLX_ERROR);
+	printf("DEBUG: 3 - INICIALIZA MLX - saiu\n");
 	
 	// INICIALIZA WINDOW
+	printf("DEBUG: 4 - INICIALIZA WINDOW - entrou\n");
 	game.window->win_ptr = mlx_new_window(game.mlx,
 							game.window->width,
 							game.window->height,
@@ -172,8 +175,10 @@ int		so_long(int argc, char *argv[])
 		free(game.window->win_ptr);
 		return(MLX_ERROR);
 	}
+	printf("DEBUG: 4 - INICIALIZA WINDOW - saiu\n");
 	
 	// INICIALIZA PLAYER
+	printf("DEBUG: 5 - INICIALIZA PLAYER - entrou\n");
 	game.player->sprite_path = "./resources/images/lucca_sprites_1.xpm";
 	game.player->x_position = game.window->width / 2;
 	game.player->y_position = game.window->height / 2;
@@ -181,8 +186,10 @@ int		so_long(int argc, char *argv[])
 								game.player->sprite_path,
 								&game.player->width,
 								&game.player->height);
+	printf("DEBUG: 5 - INICIALIZA PLAYER - saiu\n");
 
 	// HOOKS
+	printf("DEBUG: 6 - HOOKS - entrou\n");
 	// hook para fechar janela no x
 	mlx_hook(game.window->win_ptr, 17, 0, &close_window, &game);
 	// hook para capturar tecla apertada e decidir se move, se fecha
@@ -190,11 +197,19 @@ int		so_long(int argc, char *argv[])
 	// CAPTURA DO NÃO-EVENTO
 	// hook pra executar enquanto nenhum outro hook estiver sendo executado
 	mlx_loop_hook(game.mlx, &render_everything, &game);
+	printf("DEBUG: 6 - HOOKS - saiu\n");
 
+	// FAZ O LOOP
+	printf("DEBUG: 7 - FAZ O LOOP - entrou\n");
 	mlx_loop(game.mlx);
+	printf("DEBUG: 7 - FAZ O LOOP - saiu\n");
 
+	// FINALIZA EXECUÇÃO - destroi tudo, libera memória, xauxau
+	printf("DEBUG: 8 - FINALIZA EXECUÇÃO - entrou\n");
+	// TODO: destroy all images! a janela já foi. e o display logo em seguida
 	mlx_destroy_display(game.mlx);
 	free(game.mlx);
+	printf("DEBUG: 8 - FINALIZA EXECUÇÃO - saiu\n");
 
 	return 0;
 }
