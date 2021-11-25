@@ -12,9 +12,7 @@
 
 #include "so_long.h"
 
-static int	valid_input(int argc, char *map_path);
-
-static int check_args_count(int argc)
+static int argc_checks(int argc)
 {
 	if (argc != 2)
 	{
@@ -34,7 +32,7 @@ static int	is_ber(char *map_path)
 	return (1);
 }
 
-static int	valid_input(int argc, char *map_path)
+static int	input_is_valid(int argc, char *map_path)
 {
 	int			fd;
 	int 		i;
@@ -44,20 +42,25 @@ static int	valid_input(int argc, char *map_path)
 	size_t		row_length;
 
 	// passou qtd certa de argumentos?
-	if (!check_args_count(argc))
-		return (1);
+	if (!argc_checks(argc))
+		return (0);
 	// extensão do mapa é .ber?
 	if (!is_ber(map_path))
-		return (1);
+		return (0);
 	// abre o mapa e conta o tamanho da primeira linha
 	fd = open(map_path, O_RDONLY);
+	if (fd == -1)
+	{
+		printf("Error\nError opening map.");
+		return (0);
+	}
+
 	line_read = ft_get_next_line(fd);
 	if (line_read == NULL)
 	{
 		printf("Error\nMap is empty ! ! !\n");
 		return (0);
 	}
-	printf("retorno primeiro gnl: %s\n", line_read);
 	backup = line_read;
 	line_read = ft_strtrim(line_read, "\n");
 	row_length = ft_strlen(line_read);
@@ -141,6 +144,11 @@ int		so_long(int argc, char *argv[])
 {
 	t_game		game;
 
+	// VALIDA MAPA
+	if (!input_is_valid(argc, argv[1]))
+		return (-1);
+	printf("Mapa válido! aeeee\n");
+
 	// INICIALIZA STRUCT DO JOGO
 	// TODO: transformar isso numa função "initialize" que malloca as structs dependentes e também inicializa tudo (calloc!!!!)
 	game.map = ft_calloc(1, sizeof(t_map));
@@ -148,11 +156,6 @@ int		so_long(int argc, char *argv[])
 	game.player = ft_calloc(1, sizeof(t_player));
 	game.window->width = 500;
 	game.window->height = 500;
-
-	// VALIDA MAPA
-	if (!valid_input(argc, argv[1]))
-		return (-1);
-	printf("Mapa válido! aeeee\n");
 
 	// INICIALIZA MLX
 	game.mlx = mlx_init();

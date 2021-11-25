@@ -64,7 +64,7 @@ main:	./main.c
 	@$(CC) $(CFLAGS) $< -L$(LIBS_PATH) -lso_long -lmlx -lXext -lX11 -I $(HEADERS_PATH) -o $(BINS_PATH)$(EXECUTABLE)
 
 run: all main
-	@$(BINS_PATH)$(EXECUTABLE) ./resources/maps/map1.ber
+	@$(BINS_PATH)$(EXECUTABLE) ./resources/maps/map1.berr
 	@$(MAKE_NOPRINT) fclean
 
 # SANITIZE
