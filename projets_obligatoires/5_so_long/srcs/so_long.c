@@ -111,7 +111,7 @@ static int	valid_input(int argc, char *map_path)
 			{
 				if (backup[i] != '1')
 				{
-					printf("Error\nMap must be surrounded by walls. 2\n");
+					printf("Error\nMap must be surrounded by walls. 3\n");
 					return (0);
 				}
 			}
@@ -120,7 +120,7 @@ static int	valid_input(int argc, char *map_path)
 		line_read = ft_strtrim(line_read, "\n");
 		if (line_read != NULL && (*line_read != '1' || *(line_read + row_length - 1) != '1'))
 		{
-			printf("Error\nMap must be surrounded by walls 3\n");
+			printf("Error\nMap must be surrounded by walls 4\n");
 			return (0);
 		}
 	}
@@ -141,25 +141,58 @@ static int	valid_input(int argc, char *map_path)
 int		so_long(int argc, char *argv[])
 {
 	t_game		game;
-	int		x, y;
 
-	// TODO: criar uma função "initialize" que malloca as structs dependentes e também inicializa tudo (calloc!!!!)
+	// INICIALIZA STRUCT DO JOGO
+	// TODO: transformar isso numa função "initialize" que malloca as structs dependentes e também inicializa tudo (calloc!!!!)
 	game.map = ft_calloc(1, sizeof(t_map));
 	game.window = ft_calloc(1, sizeof(t_window));
 	game.player = ft_calloc(1, sizeof(t_player));
+	game.window->width = 500;
+	game.window->height = 500;
 
+	// VALIDA MAPA
 	if (!valid_input(argc, argv[1]))
 		return (-1);
 	printf("Mapa válido! aeeee\n");
+
+	// INICIALIZA MLX
 	game.mlx = mlx_init();
-	game.window->win_ptr = mlx_new_window(game.mlx, 250, 250, "ma fenetre");
-	x=0;
-	while (x++ < 50)
+	if (game.mlx == NULL)
+		return (MLX_ERROR);
+	
+	// INICIALIZA WINDOW
+	game.window->win_ptr = mlx_new_window(game.mlx,
+							game.window->width,
+							game.window->height,
+							"ma fenetre");
+	if (game.window->win_ptr == NULL)
 	{
-		y=0;
-		while (y++ < 50)
-			mlx_pixel_put(game.mlx, game.window->win_ptr, x, y, 0xFFFF00);
+		free(game.window->win_ptr);
+		return(MLX_ERROR);
 	}
+	
+	// INICIALIZA PLAYER
+	game.player->sprite_path = "./resources/images/lucca_sprites_1.xpm";
+	game.player->x_position = game.window->width / 2;
+	game.player->y_position = game.window->height / 2;
+	game.player->img = mlx_xpm_file_to_image(game.mlx,
+								game.player->sprite_path,
+								&game.player->width,
+								&game.player->height);
+
+	// HOOKS
+	// hook para fechar janela no x
+	mlx_hook(game.window->win_ptr, 17, 0, &close_window, &game);
+	// hook para capturar tecla apertada e decidir se move, se fecha
+	mlx_hook(game.window->win_ptr, 2, 1L<<0, &detect_keystroke, &game);
+	// CAPTURA DO NÃO-EVENTO
+	// hook pra executar enquanto nenhum outro hook estiver sendo executado
+	mlx_loop_hook(game.mlx, &render_everything, &game);
+
 	mlx_loop(game.mlx);
+
+	mlx_destroy_display(game.mlx);
+	free(game.mlx);
+
 	return 0;
 }

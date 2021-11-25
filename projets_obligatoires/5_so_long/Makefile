@@ -30,7 +30,8 @@ MAKE_NOPRINT = $(MAKE) --no-print-directory
 LIBNAME = libso_long.a
 SRC_FILES = so_long.c \
 			movement_utils.c \
-			render_utils.c
+			render_utils.c \
+			hooks_utils.c
 SOURCES = $(addprefix $(SRCS_PATH), $(SRC_FILES))
 OBJ_FILES = $(patsubst %.c, %.o, $(SRC_FILES))
 OBJECTS = $(addprefix $(OBJS_PATH), $(OBJ_FILES))

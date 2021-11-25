@@ -86,16 +86,16 @@ typedef struct	s_game{
 int	so_long(int argc, char *argv[]);
 
 // movement_utils
-int		detect_keystroke(int keycode, t_game *game);
 void	move_down(t_game *game);
 void	move_left(t_game *game);
 void	move_right(t_game *game);
 void	move_up(t_game *game);
 
 // render_utils
-int	render_everything(t_game *game);
+int		render_everything(t_game *game);
 
 // other_utils_sort_later
-int	close_window(t_game *game);
+int		close_window(t_game *game);
+int		detect_keystroke(int keycode, t_game *game);
 
 #endif

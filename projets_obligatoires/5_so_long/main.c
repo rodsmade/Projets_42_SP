@@ -412,7 +412,6 @@ int	main(void)
 	if (global.mlx == NULL)
 		return (MLX_ERROR);
 
-
 	// init window
 	global.win->win_ptr = mlx_new_window(global.mlx, 500,
 										500, "Ma fenetre");
