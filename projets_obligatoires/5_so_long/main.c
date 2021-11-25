@@ -1,14 +1,12 @@
 #include "so_long.h"
 
-/*
-#include "so_long.h"
 
 int main(int argc, char *argv[])
 {
 	so_long(argc, argv);
 	return (0);
 }
-*/
+
 
 /*
 // CÓDIGO QUE ABRE UMA JANELA E FAZ PUT PIXEL OTIMIZADO:
@@ -297,7 +295,7 @@ int	main(void){
 }
 */
 
-
+/*
 // COMO RENDERIZAR UMA IMAGEM SOCORR
 #include <mlx.h>
 
@@ -346,15 +344,43 @@ static int	close_window(t_vars *global){
 	global->win->win_ptr = NULL;
 }
 
+static void move_left(t_vars *global)
+{
+	if (global->player->x_position - 50 >= 0)
+		global->player->x_position -= 50;
+	return ;
+}
+
+static void move_up(t_vars *global)
+{
+	if (global->player->y_position - 50 >= 0)
+		global->player->y_position -= 50;
+	return ;
+}
+
+static void move_right(t_vars *global)
+{
+	if (global->player->x_position + 50 <= global->win->width - 50)
+		global->player->x_position += 50;
+	return ;
+}
+
+static void move_down(t_vars *global)
+{
+	if (global->player->y_position + 50 <= global->win->height - 50)
+		global->player->y_position += 50;
+	return ;
+}
+
 int	detect_keystroke(int keycode, t_vars *global){
 	if (keycode == 65361 || keycode == 97)
-			global->player->x_position -= 50;
+			move_left(global);
 	if (keycode == 65362 || keycode == 119)
-			global->player->y_position -= 50;
+			move_up(global);
 	if (keycode == 65363 || keycode == 100)
-			global->player->x_position += 50;
+			move_right(global);
 	if (keycode == 65364 || keycode == 115)
-			global->player->y_position += 50;
+			move_down(global);
 	if (keycode == XK_Escape)
 		close_window(global);
 	else
@@ -405,7 +431,7 @@ int	main(void)
 	global.player->img = mlx_xpm_file_to_image(global.mlx, global.player->sprite_path,
 								&global.player->width, &global.player->height);
 
-	printf("teste\n");
+	// printf("teste\n");
 	// HOOKS
 	// hook para fechar janela no x
 	mlx_hook(global.win->win_ptr, 17, 0, &close_window, &global);
@@ -420,3 +446,4 @@ int	main(void)
 	mlx_destroy_display(global.mlx);
 	free(global.mlx);
 }
+*/

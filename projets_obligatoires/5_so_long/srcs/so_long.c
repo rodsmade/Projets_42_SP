@@ -63,7 +63,7 @@ static int	valid_input(int argc, char *map_path)
 	printf("teste\n");
 	row_length = ft_strlen(line_read);
 
-	// se primeiro e último chars são = 1
+	// se primeiro e último chars são != 1
 	if (*line_read != '1' || *(line_read + row_length - 1) != '1')
 	{
 		printf("Error\nMap must be surrounded by walls. 1\n");
@@ -140,38 +140,26 @@ static int	valid_input(int argc, char *map_path)
 
 int		so_long(int argc, char *argv[])
 {
-	t_mlxptrs	mlx_ptrs;
+	t_game		game;
 	int		x, y;
-	void *window2;
+
+	// TODO: criar uma função "initialize" que malloca as structs dependentes e também inicializa tudo (calloc!!!!)
+	game.map = ft_calloc(1, sizeof(t_map));
+	game.window = ft_calloc(1, sizeof(t_window));
+	game.player = ft_calloc(1, sizeof(t_player));
 
 	if (!valid_input(argc, argv[1]))
 		return (-1);
 	printf("Mapa válido! aeeee\n");
-	mlx_ptrs.mlx = mlx_init();
-	mlx_ptrs.window = mlx_new_window(mlx_ptrs.mlx, 250, 250, "ma fenetre");
-	// TODO: check if mlx_ptrs.window == NULL
-	window2 = mlx_new_window(mlx_ptrs.mlx, 250, 250, "ma fenetre 2");
-	// TODO: check if window2 == NULL
-	
-	//desenha quadrado amarelo na tela só de zoas
+	game.mlx = mlx_init();
+	game.window->win_ptr = mlx_new_window(game.mlx, 250, 250, "ma fenetre");
 	x=0;
 	while (x++ < 50)
 	{
 		y=0;
 		while (y++ < 50)
-			mlx_pixel_put(mlx_ptrs.mlx, mlx_ptrs.window, x, y, 0xFFFF00);
+			mlx_pixel_put(game.mlx, game.window->win_ptr, x, y, 0xFFFF00);
 	}
-	x=0;
-	while (x++ < 50)
-	{
-		y=0;
-		while (y++ < 50)
-			mlx_pixel_put(mlx_ptrs.mlx, window2, x, y, 0xFFA500);
-	}
-
-	// loop que captura os eventos
-	mlx_loop(mlx_ptrs.mlx);
-	mlx_destroy_display(mlx_ptrs.mlx);
-	free(mlx_ptrs.mlx);
+	mlx_loop(game.mlx);
 	return 0;
 }
