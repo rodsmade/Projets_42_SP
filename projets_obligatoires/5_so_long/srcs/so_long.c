@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-static int argc_checks(int argc)
+static int args_check(int argc)
 {
 	if (argc != 2)
 	{
@@ -32,130 +32,90 @@ static int	is_ber(char *map_path)
 	return (1);
 }
 
-static int	input_is_valid(int argc, char *map_path)
+static int	input_is_valid(int argc, char *map_path, t_game *game)
 {
-	int			fd;
-	int 		i;
-	int			count_EPC[3] = {0, 0, 0};
-	char		*line_read;
-	char		*backup;
-	size_t		row_length;
-
 	// passou qtd certa de argumentos?
-	if (!argc_checks(argc))
+	if (!args_check(argc))
 		return (0);
 	// extensão do mapa é .ber?
 	if (!is_ber(map_path))
 		return (0);
-	// abre o mapa e conta o tamanho da primeira linha
-	fd = open(map_path, O_RDONLY);
-	if (fd == -1)
-	{
-		printf("Error\nError opening map.");
-		return (0);
-	}
+	game->map->map_path = ft_strdup(map_path);
+	return (1);
+}
 
-	line_read = ft_get_next_line(fd);
-	if (line_read == NULL)
-	{
-		printf("Error\nMap is empty ! ! !\n");
-		return (0);
-	}
-	backup = line_read;
-	line_read = ft_strtrim(line_read, "\n");
-	row_length = ft_strlen(line_read);
+int		surrounded_by_walls(char* str)
+{
+	int	i;
 
-	// se primeiro e último chars são != 1
-	if (*line_read != '1' || *(line_read + row_length - 1) != '1')
-	{
-		printf("Error\nMap must be surrounded by walls. 1\n");
-		return (0);
-	}
 	i = -1;
-	while (line_read[++i])
+	while (str[++i])
 	{
-		if (line_read[i] != '1')
+		if (str[i] != '1')
 		{
-			printf("Error\nMap must be surrounded by walls. 2\n");
+			if (*str != '1' || str[ft_strlen(str - 1)] != '1')
+			// TODO: com a nova implementação de flush isso aqui perde o sentido, revisitar
+				printf("Error\nMap must be surrounded by walls (1's)\n");
 			return (0);
 		}
-	}
-	
-	while (line_read != NULL)
-	{
-		// printf("Entrou no while\n");
-		if (ft_strlen(line_read) != row_length)
-		{
-			printf("Error\nMap must be rectangular!\n");
-			return (0);
-		}
-		i = -1;
-		while (line_read[++i] != '\0')
-		{
-			if (!ft_strchr(VALID_MAP_CHARS, line_read[i]))
-			{
-				printf("Error\nMap contains invalid characters (._.)\n");
-				return (0);
-			}
-			if (line_read[i] == 'E')
-				count_EPC[0]++;
-			if (line_read[i] == 'P')
-				count_EPC[1]++;
-			if (line_read[i] == 'C')
-				count_EPC[2]++;
-		}
-		backup = line_read;
-		line_read = ft_get_next_line(fd);
-		if (line_read == NULL)
-		{
-			i = -1;
-			while (backup[++i])
-			{
-				if (backup[i] != '1')
-				{
-					printf("Error\nMap must be surrounded by walls. 3\n");
-					return (0);
-				}
-			}
-		}
-
-		line_read = ft_strtrim(line_read, "\n");
-		if (line_read != NULL && (*line_read != '1' || *(line_read + row_length - 1) != '1'))
-		{
-			printf("Error\nMap must be surrounded by walls 4\n");
-			return (0);
-		}
-	}
-	if (count_EPC[0] < 1 || count_EPC[1] != 1 || count_EPC[2] < 1)
-	{
-		printf("Error\n");
-		if (count_EPC[0] < 1)
-			printf("Map has no exits!\n");
-		if (count_EPC[1] != 1)
-			printf("Map has more than one starting position!\n");
-		if (count_EPC[2] < 1)
-			printf("Map has no collectibles!\n");
-		return (0);
 	}
 	return (1);
+}
+
+int		valid_map(t_game *game)
+// ideia: usar a função exit() dentro de uma função tipo flush("String de erro") que vai printar a string de erro, desalocar tudo que tiver de memória, e dar exit() -- it's a system call not a C language keyword.
+{
+	int		fd;
+	int		bytes_read;
+	char 	*buffer;
+	char	*map_file;
+
+	fd = open(game->map->map_path, O_RDONLY);
+	if (fd < 0)
+		flush("nError while opening file", game);
+	map_file = ft_strdup("");
+	if (map_file == NULL)
+		flush("Error while allocating memory for map", game);
+	while(bytes_read > 0)
+	{
+		map_read = ft_strjoin(map_read, buffer);
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+	}
+	if (!*map_read)
+		flush("Map is e m p t y !", game);
+	if (!surrounded_by_walls(map_read))
+		flush("Map must be surrounded by walls");
+
+	// game->map->cols = ft_strlen(ft_strtrim(map_read, "\n"));
+	if (!close(fd))
+		flush("Error while closing fd", game);
+	while ()
+
 }
 
 int		so_long(int argc, char *argv[])
 {
 	t_game		game;
 
-	// VALIDA MAPA
-	printf("DEBUG: 1 - VALIDA MAPA - entrou\n");
-	if (!input_is_valid(argc, argv[1]))
-		return (-1);
-	printf("DEBUG: 1 - VALIDA MAPA - saiu\n");
-
 	// INICIALIZA STRUCT DO JOGO
-	printf("DEBUG: 2 - INICIALIZA STRUCT DO JOGO - entrou\n");
-	// TODO: transformar isso numa função "initialize" que malloca as structs dependentes e também inicializa tudo (calloc!!!!)
+	printf("DEBUG: 0 - INICIALIZA STRUCT DO JOGO - entrou\n");
+	// TODO: com a nova implementação de flush(), isso aqui teria que ser passo 0, e no init bota tudo como NULL, que no flush testa e se != null, dá free.
 	if (!game_init(&game))
 		return (-1);
-	printf("DEBUG: 2 - INICIALIZA STRUCT DO JOGO - saiu\n");
+	printf("DEBUG: 0 - INICIALIZA STRUCT DO JOGO - saiu\n");
+
+
+	// VALIDA INPUT
+	printf("DEBUG: 1 - VALIDA INPUT - entrou\n");
+	if (!input_is_valid(argc, argv[1], &game))
+		return (-1);
+	printf("DEBUG: 1 - VALIDA INPUT - saiu\n");
+
+	// VALIDA MAPA
+	printf("DEBUG: 2 - VALIDA MAPA - entrou\n");
+	if (!valid_map(&game))
+		return(0);
+	printf("DEBUG: 2 - VALIDA MAPA - saiu\n");
 
 	// INICIALIZA MLX
 	printf("DEBUG: 3 - INICIALIZA MLX - entrou\n");

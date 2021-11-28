@@ -31,6 +31,8 @@
 // include do printf()
 # include <stdio.h>
 
+// include do read() e close()
+#include <unistd.h>
 
 // ------------------------- DEFINES (constants) ----------------------------- |
 # define VALID_MAP_CHARS	"EPC10"

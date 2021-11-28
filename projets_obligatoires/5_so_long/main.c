@@ -8,102 +8,101 @@ int main(int argc, char *argv[])
 }
 
 
-/*
-// CÓDIGO QUE ABRE UMA JANELA E FAZ PUT PIXEL OTIMIZADO:
-#include <mlx.h>
 
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_width;
-	int		endian;
-}				t_data;
+// // CÓDIGO QUE ABRE UMA JANELA E FAZ PUT PIXEL OTIMIZADO:
+// #include <mlx.h>
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
+// typedef struct	s_data {
+// 	void	*img;
+// 	char	*addr;
+// 	int		bits_per_pixel;
+// 	int		line_width;
+// 	int		endian;
+// }				t_data;
 
-	dst = data->addr + (y * data->line_width + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
+// void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+// {
+// 	char	*dst;
 
-int	main(void)
-{
-	void	*mlx;
-	void	*mlx_win;
-	t_data	img;
-	int		x, y;
+// 	dst = data->addr + (y * data->line_width + x * (data->bits_per_pixel / 8));
+// 	*(unsigned int*)dst = color;
+// }
 
-	mlx = mlx_init();
-	if (mlx_ptr == NULL)
-		return (MLX_ERROR);
-	mlx_win = mlx_new_window(mlx, 250, 250, "Hello world!");
-	if (mlx_win == NULL)
-	{
-		free(mlx_win);
-		return(MLX_ERROR);
-	}
-	img.img = mlx_new_image(mlx, 250, 250);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_width,
-								&img.endian);
+// int	main(void)
+// {
+// 	void	*mlx;
+// 	void	*mlx_win;
+// 	t_data	img;
+// 	int		x, y;
+
+// 	mlx = mlx_init();
+// 	if (mlx == NULL)
+// 		return (MLX_ERROR);
+// 	mlx_win = mlx_new_window(mlx, 250, 250, "Hello world!");
+// 	if (mlx_win == NULL)
+// 	{
+// 		free(mlx_win);
+// 		return(MLX_ERROR);
+// 	}
+// 	img.img = mlx_new_image(mlx, 250, 250);
+// 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_width,
+// 								&img.endian);
 	
-	x=0;
-	while (x++ < 50)
-	{
-		y=0;
-		while (y++ < 50)
-			my_mlx_pixel_put(&img, x, y, 0xFFFF00);
-	}
-	x=100;
-	while (x++ < 150)
-	{
-		y=100;
-		while (y++ < 150)
-			my_mlx_pixel_put(&img, x, y, 0xFFA500);
-	}
+// 	x=0;
+// 	while (x++ < 50)
+// 	{
+// 		y=0;
+// 		while (y++ < 50)
+// 			my_mlx_pixel_put(&img, x, y, 0xFFFF00);
+// 	}
+// 	x=100;
+// 	while (x++ < 150)
+// 	{
+// 		y=100;
+// 		while (y++ < 150)
+// 			my_mlx_pixel_put(&img, x, y, 0xFFA500);
+// 	}
 
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
-	mlx_destroy_display(mlx_ptr);
-	free(mlx_ptr);
-}
-*/
+// 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+// 	mlx_loop(mlx);
+// 	mlx_destroy_display(mlx);
+// 	free(mlx);
+// }
 
-/*
-// IMPLEMENTANDO minilibx_key_hook, que faz com que qualquer tecla dispare a função que vc passar. essa funçao recebe um ponteiro pra uma janela onde ficará escutando o evento, e um parãmetro genérico (void *param) que é um ponteiro para algum parãmetro que você queira passar para dentro da sua funçao arbitrária
-// a função arbitrária tem que receber como parâmetro um int que é o código da tecla q foi apertada.
-#include <mlx.h>
-#include <stdio.h>
 
-typedef struct	s_vars {
-	void	*mlx;
-	void	*win;
-}				t_vars;
 
-int	key_hook(int keycode, t_vars *vars)
-{
-	printf("Pressed key code: %i\n", keycode);
-}
+// // IMPLEMENTANDO minilibx_key_hook, que faz com que qualquer tecla dispare a função que vc passar. essa funçao recebe um ponteiro pra uma janela onde ficará escutando o evento, e um parãmetro genérico (void *param) que é um ponteiro para algum parãmetro que você queira passar para dentro da sua funçao arbitrária
+// // a função arbitrária tem que receber como parâmetro um int que é o código da tecla q foi apertada.
+// #include <mlx.h>
+// #include <stdio.h>
 
-int	main(void)
-{
-	t_vars	vars;
+// typedef struct	s_vars {
+// 	void	*mlx;
+// 	void	*win;
+// }				t_vars;
 
-	vars.mlx = mlx_init();
-	if (vars.mlx == NULL)
-		return (MLX_ERROR);
-	vars.win = mlx_new_window(vars.mlx, 640, 480, "Hello world!");
-	if (vars.win == NULL)
-	{
-		free(vars.win);
-		return(MLX_ERROR);
-	}
-	// captura toda e qualquer tecla na janela aberta, e chama a função key_hook
-	mlx_key_hook(vars.win, key_hook, &vars);
-	mlx_loop(vars.mlx);
-}
-*/
+// int	key_hook(int keycode, t_vars *vars)
+// {
+// 	printf("Pressed key code: %i\n", keycode);
+// }
+
+// int	main(void)
+// {
+// 	t_vars	vars;
+
+// 	vars.mlx = mlx_init();
+// 	if (vars.mlx == NULL)
+// 		return (MLX_ERROR);
+// 	vars.win = mlx_new_window(vars.mlx, 640, 480, "Hello world!");
+// 	if (vars.win == NULL)
+// 	{
+// 		free(vars.win);
+// 		return(MLX_ERROR);
+// 	}
+// 	// captura toda e qualquer tecla na janela aberta, e chama a função key_hook
+// 	mlx_key_hook(vars.win, key_hook, &vars);
+// 	mlx_loop(vars.mlx);
+// }
 
 /*
 // IMPLEMENTANDO minilibx_mouse_hook, que faz com que o clique dos botões do mouse dispare a função arbitrária que vc passar.
@@ -447,51 +446,49 @@ int	main(void)
 }
 */
 
-/*
-// TESTANDO GRAVAR O MAPA COM LINKED rows_list#include "so_long.h"
-char	catch_char(t_list *list_head, int linha, int coluna)
-{
-	int i = 0; //quero ir até quarta linha, seria elemento [3]
-	int j = 0; //quero ir até sétimo char, seria elemento [6]
+// // TESTANDO GRAVAR O MAPA COM LINKED rows_list#include "so_long.h"
+// char	catch_char(t_list *list_head, int linha, int coluna)
+// {
+// 	int i = 0; //quero ir até quarta linha, seria elemento [3]
+// 	int j = 0; //quero ir até sétimo char, seria elemento [6]
 	
-	while (i++ < linha)
-		list_head = list_head->next;
-	return (ft_strdup((char *) (list_head->content))[coluna]);
-}
+// 	while (i++ < linha)
+// 		list_head = list_head->next;
+// 	return (ft_strdup((char *) (list_head->content))[coluna]);
+// }
 
-//testando linked lists com get next line
-int main(){
-	int fd;
-	char *map_path = "resources/maps/map1.ber";
-	char *linha;
-	t_list *list_head;
-	int list_size;
+// //testando linked lists com get next line
+// int main(){
+// 	int fd;
+// 	char *map_path = "resources/maps/map1.ber";
+// 	char *linha;
+// 	t_list *list_head;
+// 	int list_size;
 
 
-// 	new item: cria um elemento a partir de um conteúdo
-//	add back: attaches um elemento pronto no final de uma lista
-	fd = open(map_path, O_RDONLY);
-	linha = ft_get_next_line(fd);
-	if (linha != NULL)
-		list_head = ft_lstnew(linha);
-	printf("elemento lido: %s\n", (char *) list_head->content);
-	while (linha != NULL)
-	{
-		linha = ft_get_next_line(fd);
-		if (linha == NULL)
-			break ;
-		ft_lstadd_back(&list_head, ft_lstnew(linha));
-	}
-	// while(list_head)
-	// {
-	// 	printf("%s\n", (char *) list_head->content);
-	// 	list_head = list_head->next;
-	// }
-	list_size = ft_lstsize(list_head);
-	printf("list size: %i\n", list_size);
-	printf("map columns: %li\n", ft_strlen(list_head->content));
-	printf("pesquei um: %c\n", catch_char(list_head, 3, 1));
+// // 	new item: cria um elemento a partir de um conteúdo
+// //	add back: attaches um elemento pronto no final de uma lista
+// 	fd = open(map_path, O_RDONLY);
+// 	linha = ft_get_next_line(fd);
+// 	if (linha != NULL)
+// 		list_head = ft_lstnew(linha);
+// 	printf("elemento lido: %s\n", (char *) list_head->content);
+// 	while (linha != NULL)
+// 	{
+// 		linha = ft_get_next_line(fd);
+// 		if (linha == NULL)
+// 			break ;
+// 		ft_lstadd_back(&list_head, ft_lstnew(linha));
+// 	}
+// 	// while(list_head)
+// 	// {
+// 	// 	printf("%s\n", (char *) list_head->content);
+// 	// 	list_head = list_head->next;
+// 	// }
+// 	list_size = ft_lstsize(list_head);
+// 	printf("list size: %i\n", list_size);
+// 	printf("map columns: %li\n", ft_strlen(list_head->content));
+// 	printf("pesquei um: %c\n", catch_char(list_head, 3, 6));
 	
-	return (0);
-}
-*/
+// 	return (0);
+// }

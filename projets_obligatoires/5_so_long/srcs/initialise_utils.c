@@ -17,3 +17,10 @@ int		game_init(t_game *game)
 	game->window->height = game->map->tile_height * ft_lstsize(game->map->rows_list);
 	return (1);
 }
+
+int		flush(char *err_msg, t_game *game)
+{
+	printf("Error\n%s\n", err_msg);
+	// TODO: desaloca tudo que precisa
+	exit();
+}
