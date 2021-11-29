@@ -1,5 +1,6 @@
 #include "so_long.h"
 
+// TODO: mudar o nome do arquivo kakakaka pois flush
 int		game_init(t_game *game)
 {
 	game->map = ft_calloc(1, sizeof(t_map));
@@ -7,11 +8,12 @@ int		game_init(t_game *game)
 	game->player = ft_calloc(1, sizeof(t_player));
 	if (game->map == NULL || game->window == NULL || game->player == NULL)
 		flush("Something wrong happened while allocating memory, aborting game. . .", game);
-	game->map->tile_width = 50;
-	game->map->tile_height = 50;
 	game->map->C_count = 0;
 	game->map->E_count = 0;
 	game->map->P_count = 0;
+	game->map->rows = 0;
+	game->map->tile_width = 50;
+	game->map->tile_height = 50;
 	return (1);
 }
 

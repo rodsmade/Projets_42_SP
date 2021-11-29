@@ -80,6 +80,12 @@ void	char_validation(char *map_str, t_game *game)
 			flush("Invalid char found, only EPC10 allowed", game);
 		map_str++;
 	}
+	if (game->map->C_count < 1)
+		flush("Map has no collectibles", game);
+	if (game->map->E_count < 1)
+		flush("Map has no exit", game);
+	if (game->map->P_count != 1)
+		flush("Map must have no more and no less than one player", game);
 	return ;
 }
 
@@ -118,23 +124,32 @@ int		valid_map(t_game *game)
 			flush("Map must be square/rectangular", game);
 		if (!surrounded_by_walls(*map))
 			flush("Map must be surrounded by walls", game);
+		game->map->rows++;
 		map++;
 	}
-	if (game->map->C_count < 1)
-		flush("Map has no collectibles", game);
-	if (game->map->E_count < 1)
-		flush("Map has no exit", game);
-	if (game->map->P_count != 1)
-		flush("Map must have no more and no less than one player", game);
 	if (close(fd) == -1)
 		flush("Error while closing fd", game);
 	return (1);
+}
+
+void	open_window(t_game *game)
+{
+	game->window->width = game->map->tile_width * game->map->cols;
+	game->window->height = game->map->tile_height * game->map->rows;
+	game->window->win_ptr = mlx_new_window(game->mlx,
+							game->window->width,
+							game->window->height,
+							"ma fenetre");
+	if (game->window->win_ptr == NULL)
+		flush("MLX_ERROR while opening new window", game);
+	return ;
 }
 
 int		so_long(int argc, char *argv[])
 {
 	t_game		game;
 
+	// TODO: refatorar tirando todos os IFs porque eles provavelmente são inúteis dps q implementei o exit(), checar caso a caso
 	// INICIALIZA STRUCT DO JOGO
 	printf("DEBUG: 0 - INICIALIZA STRUCT DO JOGO - entrou\n");
 	// TODO: com a nova implementação de flush(), isso aqui teria que ser passo 0, e no init bota tudo como NULL, que no flush testa e se != null, dá free.
@@ -163,15 +178,7 @@ int		so_long(int argc, char *argv[])
 	
 	// INICIALIZA WINDOW
 	printf("DEBUG: 4 - INICIALIZA WINDOW - entrou\n");
-	game.window->win_ptr = mlx_new_window(game.mlx,
-							game.window->width,
-							game.window->height,
-							"ma fenetre");
-	if (game.window->win_ptr == NULL)
-	{
-		free(game.window->win_ptr);
-		return(MLX_ERROR);
-	}
+	open_window(&game);
 	printf("DEBUG: 4 - INICIALIZA WINDOW - saiu\n");
 	
 	// INICIALIZA PLAYER
