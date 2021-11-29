@@ -7,7 +7,7 @@ int		game_init(t_game *game)
 	game->window = ft_calloc(1, sizeof(t_window));
 	game->player = ft_calloc(1, sizeof(t_player));
 	if (game->map == NULL || game->window == NULL || game->player == NULL)
-		flush("Something wrong happened while allocating memory, aborting game. . .", game);
+		flush("Something wrong happened while allocating memory, closing game. . .", game);
 	game->map->C_count = 0;
 	game->map->E_count = 0;
 	game->map->P_count = 0;

@@ -145,6 +145,17 @@ void	open_window(t_game *game)
 	return ;
 }
 
+void	game_close(t_game *game)
+{
+	mlx_destroy_display(game->mlx);
+	// TODO: destroy images etc? 
+	free(game->map);
+	free(game->window);
+	free(game->player);
+	free(game->mlx);
+	return ;
+}
+
 int		so_long(int argc, char *argv[])
 {
 	t_game		game;
@@ -183,7 +194,7 @@ int		so_long(int argc, char *argv[])
 	
 	// INICIALIZA PLAYER
 	printf("DEBUG: 5 - INICIALIZA PLAYER - entrou\n");
-	game.player->sprite_path = "./resources/images/lucca_sprites_1.xpm";
+	game.player->sprite_path = "./resources/images/vampire.xpm";
 	game.player->x_position = game.window->width / 2;
 	game.player->y_position = game.window->height / 2;
 	game.player->img = mlx_xpm_file_to_image(game.mlx,
@@ -211,8 +222,7 @@ int		so_long(int argc, char *argv[])
 	// FINALIZA EXECUÇÃO - destroi tudo, libera memória, xauxau
 	printf("DEBUG: 8 - FINALIZA EXECUÇÃO - entrou\n");
 	// TODO: destroy all images! a janela já foi. e o display logo em seguida
-	mlx_destroy_display(game.mlx);
-	free(game.mlx);
+	game_close(&game);
 	printf("DEBUG: 8 - FINALIZA EXECUÇÃO - saiu\n");
 
 	return 0;

@@ -17,6 +17,19 @@
 // 	return ;
 // }
 
+void	generate_player_img(t_game *game)
+{
+
+}
+
+void	generate_coin_img(t_game *game)
+{
+	"./resources/images/flask_1.xpm"
+	"./resources/images/flask_2.xpm"
+	"./resources/images/flask_3.xpm"
+	"./resources/images/flask_4.xpm"
+}
+
 int		render_window(t_game *game){
 	if (game->window->win_ptr != NULL)
 	{
