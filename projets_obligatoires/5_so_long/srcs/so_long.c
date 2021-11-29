@@ -47,50 +47,67 @@ static int	input_is_valid(int argc, char *map_path, t_game *game)
 int		surrounded_by_walls(char* str)
 {
 	int	i;
+	int	wall_check;
 
 	i = -1;
+	wall_check = 1;
+	// se tudo for = 1, sucesso! return 1
 	while (str[++i])
 	{
 		if (str[i] != '1')
-		{
-			if (*str != '1' || str[ft_strlen(str - 1)] != '1')
-			// TODO: com a nova implementação de flush isso aqui perde o sentido, revisitar
-				printf("Error\nMap must be surrounded by walls (1's)\n");
-			return (0);
-		}
+			wall_check = 0;
 	}
-	return (1);
+	if (wall_check == 0)
+	// se não for tudo 1, então se ao menos primeiro e ultimo bytes forem = 1, sucesso! return 1
+	{
+		if (*str == '1' && str[i - 1] == '1')
+			wall_check = 1;
+	}
+	return (wall_check);
 }
 
 int		valid_map(t_game *game)
-// ideia: usar a função exit() dentro de uma função tipo flush("String de erro") que vai printar a string de erro, desalocar tudo que tiver de memória, e dar exit() -- it's a system call not a C language keyword.
 {
 	int		fd;
 	int		bytes_read;
 	char 	*buffer;
 	char	*map_file;
+	char	**map;
 
 	fd = open(game->map->map_path, O_RDONLY);
 	if (fd < 0)
 		flush("nError while opening file", game);
 	map_file = ft_strdup("");
-	if (map_file == NULL)
+	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (map_file == NULL || buffer == NULL)
 		flush("Error while allocating memory for map", game);
+	bytes_read = read(fd, buffer, BUFFER_SIZE);
 	while(bytes_read > 0)
 	{
-		map_read = ft_strjoin(map_read, buffer);
+		map_file = ft_strjoin(map_file, buffer);
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 	}
-	if (!*map_read)
+	if (!*map_file)
 		flush("Map is e m p t y !", game);
-	if (!surrounded_by_walls(map_read))
-		flush("Map must be surrounded by walls");
-
-	// game->map->cols = ft_strlen(ft_strtrim(map_read, "\n"));
+	// monta o MAPA
+	map = ft_split(map_file, '\n');
+	if (map == NULL)
+		flush("Error while allocating memory for map", game);
+	// valida linha por linha
+	game->map->cols = ft_strlen(map[0]);
+	while(*map)
+	{
+		if (!surrounded_by_walls(*map))
+			flush("Map must be surrounded by walls", game);
+		printf("line in question: %s\n", *map);
+		printf("line length: %li\n", ft_strlen(*map));
+		if (ft_strlen(*map) != game->map->cols)
+			flush("Map must be square/rectangular", game);
+		map++;
+	}
 	if (!close(fd))
 		flush("Error while closing fd", game);
-	while ()
-
+	return (1);
 }
 
 int		so_long(int argc, char *argv[])
@@ -103,7 +120,6 @@ int		so_long(int argc, char *argv[])
 	if (!game_init(&game))
 		return (-1);
 	printf("DEBUG: 0 - INICIALIZA STRUCT DO JOGO - saiu\n");
-
 
 	// VALIDA INPUT
 	printf("DEBUG: 1 - VALIDA INPUT - entrou\n");

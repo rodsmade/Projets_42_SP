@@ -74,8 +74,8 @@ typedef struct	s_window{
 }				t_window;
 
 typedef struct	s_map{
-	int		cols;
-	int		rows;
+	size_t	cols;
+	size_t	rows;
 	int		tile_width;
 	int		tile_height;
 	char	*map_path; //ñ sei se é útil mas vai que
@@ -110,5 +110,6 @@ int		detect_keystroke(int keycode, t_game *game);
 
 // initialise_utils
 int		game_init(t_game *game);
+void	flush(char *err_msg, t_game *game);
 
 #endif

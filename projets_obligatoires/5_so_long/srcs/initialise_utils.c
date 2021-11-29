@@ -6,21 +6,20 @@ int		game_init(t_game *game)
 	game->window = ft_calloc(1, sizeof(t_window));
 	game->player = ft_calloc(1, sizeof(t_player));
 	if (game->map == NULL || game->window == NULL || game->player == NULL)
-	{
-		printf("Error\nSomething wrong happened while allocating memory, aborting game. . .");
-		return (0);
-	}
+		flush("Something wrong happened while allocating memory, aborting game. . .", game);
 	game->map->tile_width = 50;
 	game->map->tile_height = 50;
-	printf("TESTE\n");
-	game->window->width = game->map->tile_width * ft_strlen((char *) game->map->rows_list->content);
-	game->window->height = game->map->tile_height * ft_lstsize(game->map->rows_list);
 	return (1);
 }
 
-int		flush(char *err_msg, t_game *game)
+void	flush(char *err_msg, t_game *game)
 {
 	printf("Error\n%s\n", err_msg);
-	// TODO: desaloca tudo que precisa
-	exit();
+	if (game->map != NULL)
+		free(game->map);
+	if (game->window != NULL)
+		free(game->window);
+	if (game->player != NULL)
+		free(game->player);
+	exit(0);
 }
