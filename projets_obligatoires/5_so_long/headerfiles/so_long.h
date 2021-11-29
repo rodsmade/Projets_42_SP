@@ -51,7 +51,6 @@ typedef struct	s_player{
 }				t_player;
 
 typedef struct	s_collectible{
-	int		total;
 	int		width;
 	int		height;
 	char	*sprite_path;
@@ -78,6 +77,9 @@ typedef struct	s_map{
 	size_t	rows;
 	int		tile_width;
 	int		tile_height;
+	int		C_count;
+	int		E_count;
+	int		P_count;
 	char	*map_path; //ñ sei se é útil mas vai que
 	char	*exit_path;
 	char	*floor_path;

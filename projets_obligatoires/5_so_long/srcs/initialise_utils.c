@@ -9,6 +9,9 @@ int		game_init(t_game *game)
 		flush("Something wrong happened while allocating memory, aborting game. . .", game);
 	game->map->tile_width = 50;
 	game->map->tile_height = 50;
+	game->map->C_count = 0;
+	game->map->E_count = 0;
+	game->map->P_count = 0;
 	return (1);
 }
 

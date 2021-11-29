@@ -66,46 +66,67 @@ int		surrounded_by_walls(char* str)
 	return (wall_check);
 }
 
+void	char_validation(char *map_str, t_game *game)
+{
+	while(*map_str)
+	{
+		if (*map_str == 'C')
+			game->map->C_count++;
+		if (*map_str == 'E')
+			game->map->E_count++;
+		if (*map_str == 'P')
+			game->map->P_count++;
+		if (*map_str != '\n' && !ft_strchr(VALID_MAP_CHARS, *map_str))
+			flush("Invalid char found, only EPC10 allowed", game);
+		map_str++;
+	}
+	return ;
+}
+
 int		valid_map(t_game *game)
 {
 	int		fd;
-	int		bytes_read;
 	char 	*buffer;
-	char	*map_file;
+	char	*buffer_join;
 	char	**map;
 
 	fd = open(game->map->map_path, O_RDONLY);
 	if (fd < 0)
 		flush("nError while opening file", game);
-	map_file = ft_strdup("");
+	buffer_join = ft_strdup("");
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (map_file == NULL || buffer == NULL)
+	if (buffer_join == NULL || buffer == NULL)
 		flush("Error while allocating memory for map", game);
-	bytes_read = read(fd, buffer, BUFFER_SIZE);
-	while(bytes_read > 0)
+	buffer[read(fd, buffer, BUFFER_SIZE)] = '\0';
+	while(buffer[0] > 0)
 	{
-		map_file = ft_strjoin(map_file, buffer);
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		buffer_join = ft_strjoin(buffer_join, buffer);
+		buffer[read(fd, buffer, BUFFER_SIZE)] = '\0';
 	}
-	if (!*map_file)
+	if (!*buffer_join)
 		flush("Map is e m p t y !", game);
+	char_validation(buffer_join, game);
 	// monta o MAPA
-	map = ft_split(map_file, '\n');
+	map = ft_split(buffer_join, '\n');
 	if (map == NULL)
 		flush("Error while allocating memory for map", game);
 	// valida linha por linha
 	game->map->cols = ft_strlen(map[0]);
 	while(*map)
 	{
-		if (!surrounded_by_walls(*map))
-			flush("Map must be surrounded by walls", game);
-		printf("line in question: %s\n", *map);
-		printf("line length: %li\n", ft_strlen(*map));
 		if (ft_strlen(*map) != game->map->cols)
 			flush("Map must be square/rectangular", game);
+		if (!surrounded_by_walls(*map))
+			flush("Map must be surrounded by walls", game);
 		map++;
 	}
-	if (!close(fd))
+	if (game->map->C_count < 1)
+		flush("Map has no collectibles", game);
+	if (game->map->E_count < 1)
+		flush("Map has no exit", game);
+	if (game->map->P_count != 1)
+		flush("Map must have no more and no less than one player", game);
+	if (close(fd) == -1)
 		flush("Error while closing fd", game);
 	return (1);
 }
