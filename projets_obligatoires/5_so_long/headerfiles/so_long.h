@@ -84,18 +84,21 @@ typedef struct	s_map{
 	char	*exit_path;
 	char	*floor_path;
 	char	*wall_path;
+	char	**map_2D;
+	void	*img;
 	t_list	*rows_list;
 }				t_map;
 
 typedef struct	s_game{
-	void		*mlx;
-	t_window	*window;
-	t_player	*player;
-	t_map		*map;
+	void			*mlx;
+	t_window		*window;
+	t_player		*player;
+	t_collectible	*collectible;
+	t_map			*map;
 }				t_game;
 
 // --------------------------- PROTOTYPES ------------------------------------ |
-int	so_long(int argc, char *argv[]);
+int		so_long(int argc, char *argv[]);
 
 // movement_utils
 void	move_down(t_game *game);
@@ -104,6 +107,8 @@ void	move_right(t_game *game);
 void	move_up(t_game *game);
 
 // render_utils
+void	generate_player_img(t_game *game);
+void	generate_coins_img(t_game *game);
 int		render_everything(t_game *game);
 
 // hooks_utils
@@ -112,6 +117,7 @@ int		detect_keystroke(int keycode, t_game *game);
 
 // initialise_utils
 int		game_init(t_game *game);
+void	game_close(t_game *game);
 void	flush(char *err_msg, t_game *game);
 
 #endif

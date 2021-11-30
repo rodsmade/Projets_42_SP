@@ -94,7 +94,8 @@ int		valid_map(t_game *game)
 	int		fd;
 	char 	*buffer;
 	char	*buffer_join;
-	char	**map;
+	int		i;
+	// char	**map;
 
 	fd = open(game->map->map_path, O_RDONLY);
 	if (fd < 0)
@@ -113,19 +114,19 @@ int		valid_map(t_game *game)
 		flush("Map is e m p t y !", game);
 	char_validation(buffer_join, game);
 	// monta o MAPA
-	map = ft_split(buffer_join, '\n');
-	if (map == NULL)
+	game->map->map_2D = ft_split(buffer_join, '\n');
+	if (game->map->map_2D == NULL)
 		flush("Error while allocating memory for map", game);
 	// valida linha por linha
-	game->map->cols = ft_strlen(map[0]);
-	while(*map)
+	game->map->cols = ft_strlen(game->map->map_2D[0]);
+	i = -1;
+	while(game->map->map_2D[++i])
 	{
-		if (ft_strlen(*map) != game->map->cols)
+		if (ft_strlen(game->map->map_2D[i]) != game->map->cols)
 			flush("Map must be square/rectangular", game);
-		if (!surrounded_by_walls(*map))
+		if (!surrounded_by_walls(game->map->map_2D[i]))
 			flush("Map must be surrounded by walls", game);
 		game->map->rows++;
-		map++;
 	}
 	if (close(fd) == -1)
 		flush("Error while closing fd", game);
@@ -142,17 +143,6 @@ void	open_window(t_game *game)
 							"ma fenetre");
 	if (game->window->win_ptr == NULL)
 		flush("MLX_ERROR while opening new window", game);
-	return ;
-}
-
-void	game_close(t_game *game)
-{
-	mlx_destroy_display(game->mlx);
-	// TODO: destroy images etc? 
-	free(game->map);
-	free(game->window);
-	free(game->player);
-	free(game->mlx);
 	return ;
 }
 
@@ -194,13 +184,8 @@ int		so_long(int argc, char *argv[])
 	
 	// INICIALIZA PLAYER
 	printf("DEBUG: 5 - INICIALIZA PLAYER - entrou\n");
-	game.player->sprite_path = "./resources/images/vampire.xpm";
-	game.player->x_position = game.window->width / 2;
-	game.player->y_position = game.window->height / 2;
-	game.player->img = mlx_xpm_file_to_image(game.mlx,
-								game.player->sprite_path,
-								&game.player->width,
-								&game.player->height);
+	generate_player_img(&game);
+	// generate_coins_img(&game);
 	printf("DEBUG: 5 - INICIALIZA PLAYER - saiu\n");
 
 	// HOOKS

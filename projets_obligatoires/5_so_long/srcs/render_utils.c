@@ -19,32 +19,49 @@
 
 void	generate_player_img(t_game *game)
 {
-
+	game->player->sprite_path = "./resources/images/vampire.xpm";
+	game->player->x_position = game->window->width / 2;
+	game->player->y_position = game->window->height / 2;
+	game->player->img = mlx_xpm_file_to_image(game->mlx,
+								game->player->sprite_path,
+								&game->player->width,
+								&game->player->height);
+	return ;
 }
 
-void	generate_coin_img(t_game *game)
+void	generate_coins_img(t_game *game)
 {
-	"./resources/images/flask_1.xpm"
-	"./resources/images/flask_2.xpm"
-	"./resources/images/flask_3.xpm"
-	"./resources/images/flask_4.xpm"
+	game->collectible->sprite_path = "./resources/images/flask_1.xpm";
+// 	"./resources/images/flask_2.xpm"
+// 	"./resources/images/flask_3.xpm"
+// 	"./resources/images/flask_4.xpm"
+	// game->collectible->x_position = 0;
+	// game->collectible->y_position = 0;
+	game->collectible->img = mlx_xpm_file_to_image(game->mlx,
+								game->collectible->sprite_path,
+								&game->collectible->width,
+								&game->collectible->height);
+	return ;
 }
 
-int		render_window(t_game *game){
+// void	render_map(t_game *game)
+// {
+
+// 	return ;
+// }
+
+int		render_everything(t_game *game){
 	if (game->window->win_ptr != NULL)
 	{
+		// render_map(game);
 		mlx_put_image_to_window(game->mlx, game->window->win_ptr,
 								game->player->img,
 								game->player->x_position,
 								game->player->y_position);
-	}
-	return (0);
-}
-
-int		render_everything(t_game *game){
-	if (game->window->win_ptr != NULL){
-		mlx_put_image_to_window(game->mlx, game->window->win_ptr, game->player->img,
-								game->player->x_position, game->player->y_position);
+		// mlx_put_image_to_window(game->mlx, game->window->win_ptr,
+		// 						game->collectible->img,
+		// 						10,
+		// 						10);
 	}
 	return (0);
 }
