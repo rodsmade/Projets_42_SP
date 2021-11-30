@@ -174,7 +174,7 @@ int		so_long(int argc, char *argv[])
 	printf("DEBUG: 3 - INICIALIZA MLX - entrou\n");
 	game.mlx = mlx_init();
 	if (game.mlx == NULL)
-		return (MLX_ERROR);
+		flush("MLX_ERROR while initialising mlx", &game);
 	printf("DEBUG: 3 - INICIALIZA MLX - saiu\n");
 	
 	// INICIALIZA WINDOW
@@ -182,11 +182,13 @@ int		so_long(int argc, char *argv[])
 	open_window(&game);
 	printf("DEBUG: 4 - INICIALIZA WINDOW - saiu\n");
 	
-	// INICIALIZA PLAYER
-	printf("DEBUG: 5 - INICIALIZA PLAYER - entrou\n");
+	// INICIALIZA IMAGENS
+	printf("DEBUG: 5 - INICIALIZA IMAGENS - entrou\n");
 	generate_player_img(&game);
+	generate_floor_img(&game);
+	generate_wall_img(&game);
 	// generate_coins_img(&game);
-	printf("DEBUG: 5 - INICIALIZA PLAYER - saiu\n");
+	printf("DEBUG: 5 - INICIALIZA IMAGENS - saiu\n");
 
 	// HOOKS
 	printf("DEBUG: 6 - HOOKS - entrou\n");

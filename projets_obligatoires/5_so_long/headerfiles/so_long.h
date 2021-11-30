@@ -77,15 +77,18 @@ typedef struct	s_map{
 	size_t	rows;
 	int		tile_width;
 	int		tile_height;
+	int		tile_x;
+	int		tile_y;
 	int		C_count;
 	int		E_count;
 	int		P_count;
 	char	*map_path; //ñ sei se é útil mas vai que
 	char	*exit_path;
 	char	*floor_path;
+	void	*floor_img;
 	char	*wall_path;
+	void	*wall_img;
 	char	**map_2D;
-	void	*img;
 	t_list	*rows_list;
 }				t_map;
 
@@ -107,8 +110,10 @@ void	move_right(t_game *game);
 void	move_up(t_game *game);
 
 // render_utils
-void	generate_player_img(t_game *game);
 void	generate_coins_img(t_game *game);
+void	generate_floor_img(t_game *game);
+void	generate_player_img(t_game *game);
+void	generate_wall_img(t_game *game);
 int		render_everything(t_game *game);
 
 // hooks_utils

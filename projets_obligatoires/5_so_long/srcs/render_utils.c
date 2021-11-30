@@ -19,13 +19,39 @@
 
 void	generate_player_img(t_game *game)
 {
-	game->player->sprite_path = "./resources/images/vampire.xpm";
-	game->player->x_position = game->window->width / 2;
-	game->player->y_position = game->window->height / 2;
+	game->player->sprite_path = "./resources/images/pikachu64.xpm";
+	game->player->x_position = game->map->tile_width;
+	game->player->y_position = game->map->tile_height;
 	game->player->img = mlx_xpm_file_to_image(game->mlx,
 								game->player->sprite_path,
 								&game->player->width,
 								&game->player->height);
+	if (game->player->img == NULL)
+		flush("MLX_ERROR while creating player image", game);
+	return ;
+}
+
+void	generate_floor_img(t_game *game)
+{
+	game->map->floor_path = "./resources/images/floor64.xpm";
+	game->map->floor_img = mlx_xpm_file_to_image(game->mlx,
+								game->map->floor_path,
+								&game->map->tile_x,
+								&game->map->tile_y);
+	if (game->map->floor_img == NULL)
+		flush("MLX_ERROR while creating wall image", game);
+	return ;
+}
+
+void	generate_wall_img(t_game *game)
+{
+	game->map->wall_path = "./resources/images/stone64.xpm";
+	game->map->wall_img = mlx_xpm_file_to_image(game->mlx,
+								game->map->wall_path,
+								&game->map->tile_x,
+								&game->map->tile_y);
+	if (game->map->wall_img == NULL)
+		flush("MLX_ERROR while creating wall image", game);
 	return ;
 }
 
@@ -44,16 +70,40 @@ void	generate_coins_img(t_game *game)
 	return ;
 }
 
-// void	render_map(t_game *game)
-// {
+void	render_map(t_game *game)
+{
+	int		i;
+	int		j;
 
-// 	return ;
-// }
+	i = 0;
+	while (game->map->map_2D[i])
+	{
+		j = 0;
+		while(game->map->map_2D[i][j])
+		{
+			if (game->map->map_2D[i][j] == '1')
+				mlx_put_image_to_window(game->mlx,
+						game->window->win_ptr,
+						game->map->wall_img,
+						game->map->tile_width * j,
+						game->map->tile_height * i);
+			else
+				mlx_put_image_to_window(game->mlx,
+						game->window->win_ptr,
+						game->map->floor_img,
+						game->map->tile_width * j,
+						game->map->tile_height * i);
+			j++;
+		}
+		i++;
+	}
+	return ;
+}
 
 int		render_everything(t_game *game){
 	if (game->window->win_ptr != NULL)
 	{
-		// render_map(game);
+		render_map(game);
 		mlx_put_image_to_window(game->mlx, game->window->win_ptr,
 								game->player->img,
 								game->player->x_position,

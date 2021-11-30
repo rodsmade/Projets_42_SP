@@ -1,25 +1,25 @@
 #include "so_long.h"
 
 void	move_left(t_game *game){
-	if (game->player->x_position - 50 >= 0)
-		game->player->x_position -= 50;
+	if (game->player->x_position - game->map->tile_width >= 0)
+		game->player->x_position -= game->map->tile_width;
 	return ;
 }
 
 void	move_up(t_game *game){
-	if (game->player->y_position - 50 >= 0)
-		game->player->y_position -= 50;
+	if (game->player->y_position - game->map->tile_height >= 0)
+		game->player->y_position -= game->map->tile_height;
 	return ;
 }
 
 void	move_right(t_game *game){
-	if (game->player->x_position + 50 <= game->window->width - 50)
-		game->player->x_position += 50;
+	if (game->player->x_position + game->map->tile_width <= game->window->width - game->map->tile_width)
+		game->player->x_position += game->map->tile_width;
 	return ;
 }
 
 void	move_down(t_game *game){
-	if (game->player->y_position + 50 <= game->window->height - 50)
-		game->player->y_position += 50;
+	if (game->player->y_position + game->map->tile_height <= game->window->height - game->map->tile_height)
+		game->player->y_position += game->map->tile_height;
 	return ;
 }
