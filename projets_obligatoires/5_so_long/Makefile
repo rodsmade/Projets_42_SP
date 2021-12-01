@@ -31,7 +31,7 @@ LIBNAME = libso_long.a
 SRC_FILES = so_long.c \
 			movement_utils.c \
 			render_utils.c \
-			initialise_utils.c \
+			init_close_utils.c \
 			hooks_utils.c
 SOURCES = $(addprefix $(SRCS_PATH), $(SRC_FILES))
 OBJ_FILES = $(patsubst %.c, %.o, $(SRC_FILES))

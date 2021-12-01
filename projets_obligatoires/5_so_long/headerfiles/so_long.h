@@ -43,8 +43,12 @@
 typedef struct	s_player{
 	char	*sprite_path;
 	void	*img;
-	int		x_position;
-	int		y_position;
+	int		x_position; //pixels, mudar para ===> [i] * 64 <== e multiplicar por 64 no put_image_to_window
+	int		y_position; // [j] * 64   if (find_in_map(i, j) == '1')
+	int		top_tile;
+	int		bottom_tile;
+	int		left_tile;
+	int		right_tile;
 	int		width;
 	int		height;
 	int		collec_count;
@@ -101,7 +105,7 @@ typedef struct	s_game{
 }				t_game;
 
 // --------------------------- PROTOTYPES ------------------------------------ |
-int		so_long(int argc, char *argv[]);
+void	so_long(int argc, char *argv[]);
 
 // movement_utils
 void	move_down(t_game *game);
@@ -121,7 +125,7 @@ int		close_window(t_game *game);
 int		detect_keystroke(int keycode, t_game *game);
 
 // initialise_utils
-int		game_init(t_game *game);
+void	game_init(t_game *game);
 void	game_close(t_game *game);
 void	flush(char *err_msg, t_game *game);
 

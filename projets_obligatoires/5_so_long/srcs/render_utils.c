@@ -70,6 +70,25 @@ void	generate_coins_img(t_game *game)
 	return ;
 }
 
+// void	place_items(t_game *game)
+// {
+// 	int		i;
+// 	int		j;
+
+// 	i = 0;
+// 	while (game->map->map_2D[i])
+// 	{
+// 		j = 0;
+// 		while(game->map->map_2D[i][j])
+// 		{
+// 			if (game->map->map_2D[i][j] == 'C')
+// 				mlx_put_image_to_window(game->mlx, game->window->win_ptr,
+// 						game->map->_img,
+// 						game->map->tile_width * j,
+// 						game->map->tile_height * i);
+// 		}
+// }
+
 void	render_map(t_game *game)
 {
 	int		i;
@@ -82,14 +101,12 @@ void	render_map(t_game *game)
 		while(game->map->map_2D[i][j])
 		{
 			if (game->map->map_2D[i][j] == '1')
-				mlx_put_image_to_window(game->mlx,
-						game->window->win_ptr,
+				mlx_put_image_to_window(game->mlx, game->window->win_ptr,
 						game->map->wall_img,
 						game->map->tile_width * j,
 						game->map->tile_height * i);
 			else
-				mlx_put_image_to_window(game->mlx,
-						game->window->win_ptr,
+				mlx_put_image_to_window(game->mlx, game->window->win_ptr,
 						game->map->floor_img,
 						game->map->tile_width * j,
 						game->map->tile_height * i);
@@ -97,6 +114,7 @@ void	render_map(t_game *game)
 		}
 		i++;
 	}
+	// place_items(game);
 	return ;
 }
 

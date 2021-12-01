@@ -32,7 +32,7 @@ static int	is_ber(char *map_path)
 	return (1);
 }
 
-static int	input_is_valid(int argc, char *map_path, t_game *game)
+static int	input_validation(int argc, char *map_path, t_game *game)
 {
 	// passou qtd certa de argumentos?
 	if (!args_check(argc))
@@ -44,26 +44,27 @@ static int	input_is_valid(int argc, char *map_path, t_game *game)
 	return (1);
 }
 
-int		surrounded_by_walls(char* str)
+int		surrounded_by_walls(t_game *game)
 {
-	int	i;
-	int	wall_check;
+	size_t	i;
 
 	i = -1;
-	wall_check = 1;
-	// se tudo for = 1, sucesso! return 1
-	while (str[++i])
+	// checa paredes laterais
+	while (game->map->map_2D[++i])
 	{
-		if (str[i] != '1')
-			wall_check = 0;
+		if (game->map->map_2D[i][0] != '1'
+			|| game->map->map_2D[i][game->map->cols - 1] != '1')
+			return (0);
 	}
-	if (wall_check == 0)
-	// se não for tudo 1, então se ao menos primeiro e ultimo bytes forem = 1, sucesso! return 1
+	i = -1;
+	// checa paredes de cima e de baixo
+	while (++i < game->map->cols)
 	{
-		if (*str == '1' && str[i - 1] == '1')
-			wall_check = 1;
+		if (game->map->map_2D[0][i] != '1'
+			|| game->map->map_2D[game->map->rows - 1][i] != '1')
+			return (0);
 	}
-	return (wall_check);
+	return (1);
 }
 
 void	char_validation(char *map_str, t_game *game)
@@ -89,13 +90,26 @@ void	char_validation(char *map_str, t_game *game)
 	return ;
 }
 
-int		valid_map(t_game *game)
+int		is_rectangular(t_game *game)
+{
+	int i;
+
+	game->map->cols = ft_strlen(game->map->map_2D[0]);
+	i = -1;
+	while(game->map->map_2D[++i])
+	{
+		if (ft_strlen(game->map->map_2D[i]) != game->map->cols)
+			return (0);
+		game->map->rows++;
+	}
+	return (1);
+}
+
+void	map_validation(t_game *game)
 {
 	int		fd;
 	char 	*buffer;
 	char	*buffer_join;
-	int		i;
-	// char	**map;
 
 	fd = open(game->map->map_path, O_RDONLY);
 	if (fd < 0)
@@ -118,19 +132,13 @@ int		valid_map(t_game *game)
 	if (game->map->map_2D == NULL)
 		flush("Error while allocating memory for map", game);
 	// valida linha por linha
-	game->map->cols = ft_strlen(game->map->map_2D[0]);
-	i = -1;
-	while(game->map->map_2D[++i])
-	{
-		if (ft_strlen(game->map->map_2D[i]) != game->map->cols)
-			flush("Map must be square/rectangular", game);
-		if (!surrounded_by_walls(game->map->map_2D[i]))
-			flush("Map must be surrounded by walls", game);
-		game->map->rows++;
-	}
+	if (!is_rectangular(game))
+		flush("Map must be square/rectangular", game);
+	if (!surrounded_by_walls(game))
+		flush("Map must be surrounded by walls", game);
 	if (close(fd) == -1)
 		flush("Error while closing fd", game);
-	return (1);
+	return ;
 }
 
 void	open_window(t_game *game)
@@ -146,28 +154,24 @@ void	open_window(t_game *game)
 	return ;
 }
 
-int		so_long(int argc, char *argv[])
+void	so_long(int argc, char *argv[])
 {
 	t_game		game;
 
 	// TODO: refatorar tirando todos os IFs porque eles provavelmente são inúteis dps q implementei o exit(), checar caso a caso
 	// INICIALIZA STRUCT DO JOGO
 	printf("DEBUG: 0 - INICIALIZA STRUCT DO JOGO - entrou\n");
-	// TODO: com a nova implementação de flush(), isso aqui teria que ser passo 0, e no init bota tudo como NULL, que no flush testa e se != null, dá free.
-	if (!game_init(&game))
-		return (-1);
+	game_init(&game);
 	printf("DEBUG: 0 - INICIALIZA STRUCT DO JOGO - saiu\n");
 
 	// VALIDA INPUT
 	printf("DEBUG: 1 - VALIDA INPUT - entrou\n");
-	if (!input_is_valid(argc, argv[1], &game))
-		return (-1);
+	input_validation(argc, argv[1], &game);
 	printf("DEBUG: 1 - VALIDA INPUT - saiu\n");
 
 	// VALIDA MAPA
 	printf("DEBUG: 2 - VALIDA MAPA - entrou\n");
-	if (!valid_map(&game))
-		return(0);
+	map_validation(&game);
 	printf("DEBUG: 2 - VALIDA MAPA - saiu\n");
 
 	// INICIALIZA MLX
@@ -212,5 +216,5 @@ int		so_long(int argc, char *argv[])
 	game_close(&game);
 	printf("DEBUG: 8 - FINALIZA EXECUÇÃO - saiu\n");
 
-	return 0;
+	return ;
 }
