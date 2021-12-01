@@ -182,24 +182,24 @@ void	so_long(int argc, char *argv[])
 	printf("DEBUG: 3 - INICIALIZA MLX - saiu\n");
 	
 	// INICIALIZA WINDOW
-	printf("DEBUG: 4 - INICIALIZA WINDOW - entrou\n");
+	printf("DEBUG: 4 - ABRE A JANELA - entrou\n");
 	open_window(&game);
-	printf("DEBUG: 4 - INICIALIZA WINDOW - saiu\n");
+	printf("DEBUG: 4 - ABRE A JANELA - saiu\n");
 	
 	// INICIALIZA IMAGENS
-	printf("DEBUG: 5 - INICIALIZA IMAGENS - entrou\n");
+	printf("DEBUG: 5 - CARREGA IMAGENS - entrou\n");
 	generate_player_img(&game);
 	generate_floor_img(&game);
 	generate_wall_img(&game);
-	// generate_coins_img(&game);
-	printf("DEBUG: 5 - INICIALIZA IMAGENS - saiu\n");
+	generate_collectibles_img(&game);
+	printf("DEBUG: 5 - CARREGA IMAGENS - saiu\n");
 
 	// HOOKS
 	printf("DEBUG: 6 - HOOKS - entrou\n");
 	// hook para fechar janela no x
-	mlx_hook(game.window->win_ptr, 17, 0, &close_window, &game);
+	mlx_hook(game.window->win_ptr, DESTROY_NOTIFY, NO_EVENT_MASK, &close_window, &game);
 	// hook para capturar tecla apertada e decidir se move, se fecha
-	mlx_hook(game.window->win_ptr, 2, 1L<<0, &detect_keystroke, &game);
+	mlx_hook(game.window->win_ptr, KEY_PRESS, KEY_PRESS_MASK, &detect_keystroke, &game);
 	// CAPTURA DO NÃO-EVENTO
 	// hook pra executar enquanto nenhum outro hook estiver sendo executado
 	mlx_loop_hook(game.mlx, &render_everything, &game);

@@ -19,7 +19,7 @@
 
 void	generate_player_img(t_game *game)
 {
-	game->player->sprite_path = "./resources/images/pikachu64.xpm";
+	game->player->sprite_path = "./resources/images/pikachu_64.xpm";
 	game->player->x_position = game->map->tile_width;
 	game->player->y_position = game->map->tile_height;
 	game->player->img = mlx_xpm_file_to_image(game->mlx,
@@ -33,7 +33,7 @@ void	generate_player_img(t_game *game)
 
 void	generate_floor_img(t_game *game)
 {
-	game->map->floor_path = "./resources/images/floor64.xpm";
+	game->map->floor_path = "./resources/images/floor_64.xpm";
 	game->map->floor_img = mlx_xpm_file_to_image(game->mlx,
 								game->map->floor_path,
 								&game->map->tile_x,
@@ -45,7 +45,7 @@ void	generate_floor_img(t_game *game)
 
 void	generate_wall_img(t_game *game)
 {
-	game->map->wall_path = "./resources/images/stone64.xpm";
+	game->map->wall_path = "./resources/images/stone_64.xpm";
 	game->map->wall_img = mlx_xpm_file_to_image(game->mlx,
 								game->map->wall_path,
 								&game->map->tile_x,
@@ -55,18 +55,15 @@ void	generate_wall_img(t_game *game)
 	return ;
 }
 
-void	generate_coins_img(t_game *game)
+void	generate_collectibles_img(t_game *game)
 {
-	game->collectible->sprite_path = "./resources/images/flask_1.xpm";
-// 	"./resources/images/flask_2.xpm"
-// 	"./resources/images/flask_3.xpm"
-// 	"./resources/images/flask_4.xpm"
-	// game->collectible->x_position = 0;
-	// game->collectible->y_position = 0;
+	game->collectible->sprite_path = "./resources/images/pokeball_64.xpm";
 	game->collectible->img = mlx_xpm_file_to_image(game->mlx,
 								game->collectible->sprite_path,
 								&game->collectible->width,
 								&game->collectible->height);
+	if (game->map->wall_img == NULL)
+		flush("MLX_ERROR while creating wall image", game);
 	return ;
 }
 

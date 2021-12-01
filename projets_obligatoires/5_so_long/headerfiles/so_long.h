@@ -38,8 +38,12 @@
 # define VALID_MAP_CHARS	"EPC10"
 # define MLX_ERROR			1
 # define TILE				50
+# define DESTROY_NOTIFY		17
+# define KEY_PRESS			2
+# define NO_EVENT_MASK		0
+# define KEY_PRESS_MASK		1L<<0
 
-// ------------------------- TYPEDEFS (structs) ----------------------------- |
+// ------------------------- TYPEDEFS (structs) ------------------------------ |
 typedef struct	s_player{
 	char	*sprite_path;
 	void	*img;
@@ -61,14 +65,14 @@ typedef struct	s_collectible{
 	void	*img;
 }				t_collectible;
 
-// acho q essa t_img na vdd só precisa se for usar aquela função de pixel put otimizada my_pixel_put
-// typedef struct	s_img{
+// acho q essa t_img_draw na vdd só precisa se for usar aquela função de pixel put otimizada my_pixel_put
+// typedef struct	s_img_draw{
 // 	void	*img;
 // 	char	*addr;
 // 	int		bits_per_pixel;
 // 	int		line_width;
 // 	int		endian;
-// }				t_img;
+// }				t_img_draw;
 
 typedef struct	s_window{
 	void	*win_ptr;
@@ -114,7 +118,7 @@ void	move_right(t_game *game);
 void	move_up(t_game *game);
 
 // render_utils
-void	generate_coins_img(t_game *game);
+void	generate_collectibles_img(t_game *game);
 void	generate_floor_img(t_game *game);
 void	generate_player_img(t_game *game);
 void	generate_wall_img(t_game *game);
