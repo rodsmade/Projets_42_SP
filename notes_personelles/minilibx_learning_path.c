@@ -336,29 +336,29 @@ static int	close_window(t_vars *global){
 
 static void move_left(t_vars *global)
 {
-	if (global->player->x_position - 50 >= 0)
-		global->player->x_position -= 50;
+	if (global->player->pos->x - 50 >= 0)
+		global->player->pos->x -= 50;
 	return ;
 }
 
 static void move_up(t_vars *global)
 {
-	if (global->player->y_position - 50 >= 0)
-		global->player->y_position -= 50;
+	if (global->player->pos->y - 50 >= 0)
+		global->player->pos->y -= 50;
 	return ;
 }
 
 static void move_right(t_vars *global)
 {
-	if (global->player->x_position + 50 <= global->win->width - 50)
-		global->player->x_position += 50;
+	if (global->player->pos->x + 50 <= global->win->width - 50)
+		global->player->pos->x += 50;
 	return ;
 }
 
 static void move_down(t_vars *global)
 {
-	if (global->player->y_position + 50 <= global->win->height - 50)
-		global->player->y_position += 50;
+	if (global->player->pos->y + 50 <= global->win->height - 50)
+		global->player->pos->y += 50;
 	return ;
 }
 
@@ -381,7 +381,7 @@ int	detect_keystroke(int keycode, t_vars *global){
 int render_everything(t_vars *global){
 	if (global->win->win_ptr != NULL)
 		mlx_put_image_to_window(global->mlx, global->win->win_ptr, global->player->img,
-								global->player->x_position, global->player->y_position);
+								global->player->pos->x, global->player->pos->y);
 	// sleep(1);
 	return (0);
 }
@@ -415,8 +415,8 @@ int	main(void)
 
 	// init player
 	global.player->sprite_path = "./resources/images/lucca_sprites_1.xpm";
-	global.player->x_position = global.win->width / 2;
-	global.player->y_position = global.win->height / 2;
+	global.player->pos->x = global.win->width / 2;
+	global.player->pos->y = global.win->height / 2;
 	global.player->img = mlx_xpm_file_to_image(global.mlx, global.player->sprite_path,
 								&global.player->width, &global.player->height);
 

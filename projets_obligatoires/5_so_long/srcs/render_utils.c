@@ -33,8 +33,8 @@ void	generate_floor_img(t_game *game)
 {
 	game->map->floor_img = mlx_xpm_file_to_image(game->mlx,
 								game->map->floor_path,
-								&game->map->tile_x,
-								&game->map->tile_y);
+								&game->map->tile->x,
+								&game->map->tile->y);
 	if (game->map->floor_img == NULL)
 		flush("MLX_ERROR while creating floor image", game);
 	return ;
@@ -44,8 +44,8 @@ void	generate_wall_img(t_game *game)
 {
 	game->map->wall_img = mlx_xpm_file_to_image(game->mlx,
 								game->map->wall_path,
-								&game->map->tile_x,
-								&game->map->tile_y);
+								&game->map->tile->x,
+								&game->map->tile->y);
 	if (game->map->wall_img == NULL)
 		flush("MLX_ERROR while creating wall image", game);
 	return ;
@@ -55,8 +55,8 @@ void	generate_exit_img(t_game *game)
 {
 	game->map->exit_img = mlx_xpm_file_to_image(game->mlx,
 								game->map->exit_path,
-								&game->map->tile_x,
-								&game->map->tile_y);
+								&game->map->tile->x,
+								&game->map->tile->y);
 	if (game->map->exit_img == NULL)
 		flush("MLX_ERROR while creating exit image", game);
 	return ;
