@@ -191,6 +191,7 @@ void	so_long(int argc, char *argv[])
 	generate_player_img(&game);
 	generate_floor_img(&game);
 	generate_wall_img(&game);
+	generate_exit_img(&game);
 	generate_collectibles_img(&game);
 	printf("DEBUG: 5 - CARREGA IMAGENS - saiu\n");
 
@@ -202,7 +203,7 @@ void	so_long(int argc, char *argv[])
 	mlx_hook(game.window->win_ptr, KEY_PRESS, KEY_PRESS_MASK, &detect_keystroke, &game);
 	// CAPTURA DO NÃO-EVENTO
 	// hook pra executar enquanto nenhum outro hook estiver sendo executado
-	mlx_loop_hook(game.mlx, &render_everything, &game);
+	mlx_loop_hook(game.mlx, &render_window, &game);
 	printf("DEBUG: 6 - HOOKS - saiu\n");
 
 	// FAZ O LOOP

@@ -15,6 +15,21 @@ void	game_init(t_game *game)
 	game->map->rows = 0;
 	game->map->tile_width = 64;
 	game->map->tile_height = 64;
+
+	game->player->direction = 'l';
+	game->player->sprite_path = ft_calloc(4, sizeof(char *));
+	if (game->player->sprite_path == NULL)
+		flush("Error allocating memory for player sprite paths", game);
+	game->player->sprite_path[0] = "./resources/images/pikachu_u1_64.xpm";
+	game->player->sprite_path[1] = "./resources/images/pikachu_l1_64.xpm";
+	game->player->sprite_path[2] = "./resources/images/pikachu_d1_64.xpm";
+	game->player->sprite_path[3] = "./resources/images/pikachu_r1_64.xpm";
+
+	
+	game->map->floor_path = "./resources/images/floor_64.xpm";
+	game->map->wall_path = "./resources/images/stone_64.xpm";
+	game->map->exit_path = "./resources/images/exit_64.xpm";
+	game->collectible->sprite_path = "./resources/images/pokeball_64.xpm";
 	return ;
 }
 

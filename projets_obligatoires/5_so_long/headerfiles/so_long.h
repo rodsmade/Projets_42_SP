@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 19:15:15 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/11/18 21:58:34 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/02 15:45:12 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@
 
 // ------------------------- TYPEDEFS (structs) ------------------------------ |
 typedef struct	s_player{
-	char	*sprite_path;
-	void	*img;
+	char	**sprite_path;
+	void	**img;
+	int		direction;
 	int		x_position; //pixels, mudar para ===> [i] * 64 <== e multiplicar por 64 no put_image_to_window
 	int		y_position; // [j] * 64   if (find_in_map(i, j) == '1')
 	int		top_tile;
@@ -92,6 +93,7 @@ typedef struct	s_map{
 	int		P_count;
 	char	*map_path; //ñ sei se é útil mas vai que
 	char	*exit_path;
+	void	*exit_img;
 	char	*floor_path;
 	void	*floor_img;
 	char	*wall_path;
@@ -122,7 +124,8 @@ void	generate_collectibles_img(t_game *game);
 void	generate_floor_img(t_game *game);
 void	generate_player_img(t_game *game);
 void	generate_wall_img(t_game *game);
-int		render_everything(t_game *game);
+void	generate_exit_img(t_game *game);
+int		render_window(t_game *game);
 
 // hooks_utils
 int		close_window(t_game *game);
