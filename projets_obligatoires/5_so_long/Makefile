@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2021/12/02 21:24:54 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/12/03 16:01:10 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ BINS_PATH = ./bin/
 
 # COMPILATION
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -O3
+FLAGS = -Wall -Wextra -Werror -O3 $(DEBUG)
+DEBUG = -g3
 
 # BASH COMMANDS
 RM = rm -f

@@ -7,8 +7,10 @@ void	allocate_memory(t_game *game)
 	game->player = ft_calloc(1, sizeof(t_player));
 	game->player->pos = ft_calloc(1, sizeof(t_coords));
 	game->collectible = ft_calloc(1, sizeof(t_collectible));
+	game->map->tile = ft_calloc(1, sizeof(t_collectible));
 	if (game->map == NULL || game->window == NULL || game->player == NULL
-		|| game->collectible == NULL || game->player->pos == NULL)
+		|| game->collectible == NULL || game->player->pos == NULL
+		|| game->player->pos == NULL)
 		flush("Something wrong happened while allocating memory, closing game. . .", game);
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:11:48 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/02 21:56:25 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/03 15:28:54 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ void	so_long(int argc, char *argv[])
 	// INICIALIZA IMAGENS
 	printf("DEBUG: 5 - CARREGA IMAGENS - entrou\n");
 	generate_player_img(&game);
+	printf("aqui2\n");
 	generate_floor_img(&game);
+	printf("aqui1\n");
 	generate_wall_img(&game);
 	generate_exit_img(&game);
 	generate_collectibles_img(&game);
