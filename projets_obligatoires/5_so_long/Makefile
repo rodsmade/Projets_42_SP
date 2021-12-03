@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2021/12/03 16:01:10 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/12/03 17:05:22 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,8 @@ BINS_PATH = ./bin/
 
 # COMPILATION
 CC = gcc
+DEBUG = -g
 FLAGS = -Wall -Wextra -Werror -O3 $(DEBUG)
-DEBUG = -g3
 
 # BASH COMMANDS
 RM = rm -f
@@ -42,7 +42,7 @@ OBJECTS = $(addprefix $(OBJS_PATH), $(OBJ_FILES))
 EXECUTABLE = so_long
 
 # TARGETS
-all: libft $(LIBNAME)
+all: libft $(LIBNAME) main
 
 # -> compiles libft all over
 libft:
@@ -67,7 +67,7 @@ main:	./main.c
 	@$(MKDIR) $(BINS_PATH)
 	@$(CC) $(CFLAGS) $< -L$(LIBS_PATH) -lso_long -lmlx -lXext -lX11 -I $(HEADERS_PATH) -o $(BINS_PATH)$(EXECUTABLE)
 
-run: all main
+run: all
 	@$(BINS_PATH)$(EXECUTABLE) ./resources/maps/map1.ber
 	@$(MAKE_NOPRINT) fclean
 

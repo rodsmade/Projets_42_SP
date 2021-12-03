@@ -8,28 +8,26 @@ t_coords	find_position(char obj, t_game *game)
 	static size_t	j = -1;
 	t_coords		coords;
 
+	// printf("coords x: %i, y: %i\n", coords.x, coords.y);
+	if (i == game->map->rows && j == game->map->cols)
+	{
+		i = -1;
+		j = -1;
+	}
 	while (game->map->map_2D[++i])
 	{
+		j = -1;
 		while(game->map->map_2D[i][++j])
 		{
 			if (game->map->map_2D[i][j] == obj)
 			{
 				coords.x = i;
 				coords.y = j;
+				return (coords);
 			}
 		}
 	}
-	if (i == game->map->rows && j == game->map->cols)
-	{
-		i = -1;
-		j = -1;
-		return (find_position(obj, game));
-	}
-	else
-	{
-		printf("cade n entrou? x: %i, y: %i\n", coords.x, coords.y);
-		return (coords);
-	}
+	return (find_position(obj, game));
 }
 
 void	open_window(t_game *game)

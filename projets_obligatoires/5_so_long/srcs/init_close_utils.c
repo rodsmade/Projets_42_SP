@@ -40,9 +40,7 @@ void	load_sprites(t_game *game)
 	game->map->wall_path = "./resources/images/stone_64.xpm";
 	game->map->exit_path = "./resources/images/exit_64.xpm";
 	game->collectible->sprite_path = "./resources/images/pokeball_64.xpm";
-	printf("aaaaaaa\n");
 	*(game->player->pos) = find_position('P', game);
-	printf("player pos x: %i, y: %i\n", game->player->pos->x, game->player->pos->y);
 	return ;
 }
 
