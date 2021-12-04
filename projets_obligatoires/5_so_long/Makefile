@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2021/12/03 17:05:22 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/12/05 00:39:14 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ LIBNAME = libso_long.a
 SRC_FILES = so_long.c \
 			movement_utils.c \
 			render_utils.c \
+			render_utils_2.c \
 			init_close_utils.c \
 			hooks_utils.c \
 			map_validation_utils.c \

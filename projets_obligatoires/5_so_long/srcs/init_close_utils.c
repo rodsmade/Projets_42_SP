@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:44 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/04 23:14:46 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/04 23:17:19 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	allocate_memory(t_game *game)
 	game->map->tile = ft_calloc(1, sizeof(t_collectible));
 	if (game->map == NULL || game->window == NULL || game->player == NULL
 		|| game->collectible == NULL || game->player->pos == NULL
-		|| game->player->pos == NULL)
+		|| game->map->tile == NULL)
 		flush("Something wrong happened while allocating memory, closing game. . .", game);
 	return ;
 }

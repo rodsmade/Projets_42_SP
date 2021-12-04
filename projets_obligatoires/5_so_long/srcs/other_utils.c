@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:38 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/04 23:14:40 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/05 00:07:04 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,21 @@
 
 t_coords	find_position(char obj, t_game *game)
 {
-	static t_coords	coords = (t_coords){.x = -1, .y = -1};
+	static t_coords	coords = (t_coords){.x = 0, .y = -1};
 
-	while (game->map->map_2D[++coords.x])
+	coords.y++;
+	while (game->map->map_2D[coords.x])
 	{
-		coords.y = -1;
-		while (game->map->map_2D[coords.x][++coords.y])
+		while (game->map->map_2D[coords.x][coords.y])
 		{
 			if (game->map->map_2D[coords.x][coords.y] == obj)
 				return (coords);
+			coords.y++;
 		}
+		coords.y = 0;
+		coords.x++;
 	}
-	coords.x = -1;
+	coords.x = 0;
 	coords.y = -1;
 	return (coords);
 }

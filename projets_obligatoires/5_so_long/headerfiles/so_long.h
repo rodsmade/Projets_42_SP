@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 19:15:15 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/03 15:55:44 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/05 00:40:03 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,8 @@ void	generate_floor_img(t_game *game);
 void	generate_player_img(t_game *game);
 void	generate_wall_img(t_game *game);
 void	generate_exit_img(t_game *game);
+
+// render_utils_2
 int		render_window(t_game *game);
 
 // hooks_utils
