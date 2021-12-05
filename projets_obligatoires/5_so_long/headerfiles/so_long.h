@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 19:15:15 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/05 00:40:03 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/05 15:49:36 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 // minilibx
 #include <mlx.h>
 
-// Xlib keycode - keysymbol mapping
+// Xlib keycode - keysymbol mapping + events and masks
 # include <X11/keysym.h>
+# include <X11/X.h>
 
 // libft
 # include "libft.h"
@@ -38,10 +39,6 @@
 # define VALID_MAP_CHARS	"EPC10"
 # define MLX_ERROR			1
 # define TILE				50
-# define DESTROY_NOTIFY		17
-# define KEY_PRESS			2
-# define NO_EVENT_MASK		0
-# define KEY_PRESS_MASK		1L<<0
 
 // ------------------------- TYPEDEFS (structs) ------------------------------ |
 typedef struct	s_coords
@@ -148,6 +145,7 @@ void	generate_exit_img(t_game *game);
 
 // render_utils_2
 int		render_window(t_game *game);
+void	render_you_won(t_game *game);
 
 // hooks_utils
 int		close_window(t_game *game);
