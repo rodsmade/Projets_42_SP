@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:11:48 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/04 23:15:04 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/05 15:43:17 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ void	so_long(int argc, char *argv[])
 	// HOOKS
 	printf("DEBUG: 6 - HOOKS - entrou\n");
 	// hook para fechar janela no x
-	mlx_hook(game.window->win_ptr, DESTROY_NOTIFY, NO_EVENT_MASK, &close_window, &game);
+	mlx_hook(game.window->win_ptr, DestroyNotify, NoEventMask, &close_window, &game);
 	// hook para capturar tecla apertada e decidir se move, se fecha
-	mlx_hook(game.window->win_ptr, KEY_PRESS, KEY_PRESS_MASK, &detect_keystroke, &game);
+	mlx_hook(game.window->win_ptr, KeyPress, KeyPressMask, &detect_keystroke, &game);
 	// CAPTURA DO NÃO-EVENTO
 	// hook pra executar enquanto nenhum outro hook estiver sendo executado
 	mlx_loop_hook(game.mlx, &render_window, &game);

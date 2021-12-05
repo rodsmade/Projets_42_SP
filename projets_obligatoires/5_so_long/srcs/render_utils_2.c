@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:58 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/05 00:55:15 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/05 02:27:44 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,12 @@ int		render_window(t_game *game){
 		render_player(game);
 	}
 	return (0);
+}
+
+void	render_you_won(t_game *game)
+{
+	mlx_clear_window(game->mlx, game->window->win_ptr);
+	printf("You Win ! ! ! \n");
+	close_window(game);
+	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:44 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/04 23:17:19 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/05 03:21:52 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,18 @@ void	game_close(t_game *game)
 
 	mlx_destroy_display(game->mlx);
 	// TODO: destroy images etc? 
-	free(game->map);
-	free(game->window);
-	free(game->player);
-	free(game->player->pos);
-	free(game->collectible);
-	free(game->mlx);
 	i = -1;
 	while(game->map->map_2D[++i])
 		free(game->map->map_2D[i]);
 	free(game->map->map_2D);
+	free(game->map->map_path);
+	free(game->map->tile);
+	free(game->map);
+	free(game->window);
+	free(game->player->pos);
+	free(game->player);
+	free(game->collectible);
+	free(game->mlx);
 	return ;
 }
 
