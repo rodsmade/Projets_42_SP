@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2021/12/05 00:39:14 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/12/05 02:39:25 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,16 +16,24 @@ SRCS_PATH = ./srcs/
 OBJS_PATH = ./objs/
 LIBS_PATH = ./libs/
 BINS_PATH = ./bin/
+LOGS_PATH = ./logs/
+LEDGER = valgrind-out.txt
 
 # COMPILATION
 CC = gcc
 DEBUG = -g
 FLAGS = -Wall -Wextra -Werror -O3 $(DEBUG)
+VALGRIND = valgrind --leak-check=full \
+			--show-leak-kinds=all \
+			--track-origins=yes \
+			--verbose \
+			--log-file=$(LOGS_PATH)$(LEDGER)
 
 # BASH COMMANDS
 RM = rm -f
 MKDIR = mkdir -p
 MAKE_NOPRINT = $(MAKE) --no-print-directory
+TOUCH = touch -a
 
 # FILES
 LIBNAME = libso_long.a
@@ -71,6 +79,12 @@ main:	./main.c
 run: all
 	@$(BINS_PATH)$(EXECUTABLE) ./resources/maps/map1.ber
 	@$(MAKE_NOPRINT) fclean
+
+val: all
+	@$(MKDIR) $(LOGS_PATH)
+	@$(TOUCH) $(LOGS_PATH)$(LEDGER)
+	@$(VALGRIND) $(BINS_PATH)$(EXECUTABLE) ./resources/maps/map1.ber
+	--log-file=valgrind-out.txt
 
 # SANITIZE
 # -> deletes all .o files; also runs libft's clean target
