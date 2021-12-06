@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:44 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/06 20:56:38 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/06 21:46:20 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,15 @@ void	load_sprites(t_game *game)
 	game->map->exit_path = "./resources/images/exit_64.xpm";
 	game->collectible->sprite_path = "./resources/images/pokeball_64.xpm";
 	*(game->player->pos) = find_position('P', game);
+	return ;
+}
+
+void	generate_images(t_game *game)
+{
+	generate_player_img(game);
+	generate_floor_img(game);
+	generate_wall_img(game);
+	generate_exit_img(game);
+	generate_collectibles_img(game);
 	return ;
 }

@@ -6,13 +6,22 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:42 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/06 19:10:40 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/06 21:48:04 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // hooks_utils.c maybe?
 
 #include "so_long.h"
+
+void	set_hooks(t_game *game)
+{
+	mlx_hook(game->window->win_ptr, DestroyNotify, NoEventMask, &close_window, game);
+	mlx_hook(game->window->win_ptr, KeyPress, KeyPressMask, &detect_keystroke, game);
+	mlx_loop_hook(game->mlx, &render_window, game);
+
+	return ;
+}
 
 int		close_window(t_game *game)
 {

@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 19:15:15 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/06 21:07:42 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/06 21:48:20 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void	so_long(int argc, char *argv[]);
 void	initialise_values(t_game *game);
 void	allocate_memory(t_game *game);
 void	load_sprites(t_game *game);
+void	generate_images(t_game *game);
 
 // game_close_utils
 void	destroy_images(t_game *game);
@@ -142,6 +143,7 @@ int		render_window(t_game *game);
 void	render_you_won(t_game *game);
 
 // hooks_utils
+void	set_hooks(t_game *game);
 int		close_window(t_game *game);
 int		detect_keystroke(int keycode, t_game *game);
 
