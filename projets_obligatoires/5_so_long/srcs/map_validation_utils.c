@@ -118,5 +118,7 @@ void	map_validation(t_game *game)
 		flush("Map must be surrounded by walls", game);
 	if (close(fd) == -1)
 		flush("Error while closing fd", game);
+	free(buffer);
+	free(buffer_join);
 	return ;
 }

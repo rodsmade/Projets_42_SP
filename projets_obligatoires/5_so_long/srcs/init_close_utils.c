@@ -61,18 +61,26 @@ void	game_close(t_game *game)
 	int		i;
 
 	mlx_destroy_display(game->mlx);
-	// TODO: destroy images etc? 
 	i = -1;
 	while(game->map->map_2D[++i])
 		free(game->map->map_2D[i]);
 	free(game->map->map_2D);
 	free(game->map->map_path);
 	free(game->map->tile);
-	free(game->map);
-	free(game->window);
+	free(game->map->floor_img);
+	free(game->map->wall_img);
+	free(game->map->exit_img);
+	free(game->collectible->img);
+	i = -1;
+	while(++i < 4)
+		mlx_destroy_image(game->mlx, game->player->img[i]);
+	free(game->player->img);
 	free(game->player->pos);
+	free(game->player->sprite_path);
 	free(game->player);
 	free(game->collectible);
+	free(game->map);
+	free(game->window);
 	free(game->mlx);
 	return ;
 }
