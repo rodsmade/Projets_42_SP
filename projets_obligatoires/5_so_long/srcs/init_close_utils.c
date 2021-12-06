@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:44 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/06 19:33:21 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/06 19:43:07 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	game_close(t_game *game)
 	free(game->window);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
-	printf("----> passou\n");
 	return ;
 }
 

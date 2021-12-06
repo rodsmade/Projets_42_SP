@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:54 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/06 19:13:27 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/06 19:48:44 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	move_left(t_game *game)
 {
 	// TODO: investigar pq que segurando uma tecla, o move seguinte ñ é computado !!!!
-	printf("Moves count: %i\n", game->player->moves_count);
 	game->player->direction = 'j';
 	if (game->map->grid[game->player->pos->x][game->player->pos->y - 1] == 'E'
 		&& game->player->collec_count == game->map->C_count)
@@ -35,12 +34,12 @@ void	move_left(t_game *game)
 			game->player->collec_count++;
 		}
 	}
+	printf("Moves count: %i\n", game->player->moves_count);
 	return ;
 }
 
 void	move_up(t_game *game)
 {
-	printf("Moves count: %i\n", game->player->moves_count);
 	game->player->direction = 'i';
 	if (game->map->grid[game->player->pos->x - 1][game->player->pos->y] == 'E'
 			&& game->player->collec_count == game->map->C_count)
@@ -60,12 +59,12 @@ void	move_up(t_game *game)
 			game->player->collec_count++;
 		}
 	}
+	printf("Moves count: %i\n", game->player->moves_count);
 	return ;
 }
 
 void	move_right(t_game *game)
 {
-	printf("Moves count: %i\n", game->player->moves_count);
 	game->player->direction = 'l';
 	if (game->map->grid[game->player->pos->x][game->player->pos->y + 1] == 'E'
 			&& game->player->collec_count == game->map->C_count)
@@ -85,12 +84,12 @@ void	move_right(t_game *game)
 			game->player->collec_count++;
 		}
 	}
+	printf("Moves count: %i\n", game->player->moves_count);
 	return ;
 }
 
 void	move_down(t_game *game)
 {
-	printf("Moves count: %i\n", game->player->moves_count);
 	game->player->direction = 'k';
 	if (game->map->grid[game->player->pos->x + 1][game->player->pos->y] == 'E'
 			&& game->player->collec_count == game->map->C_count)
@@ -110,5 +109,6 @@ void	move_down(t_game *game)
 			game->player->collec_count++;
 		}
 	}
+	printf("Moves count: %i\n", game->player->moves_count);
 	return ;
 }
