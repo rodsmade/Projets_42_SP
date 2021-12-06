@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:58 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/06 19:10:36 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/06 20:46:49 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int		render_window(t_game *game){
 
 void	render_you_won(t_game *game)
 {
-	printf("You Won ! ! ! \n");
+	// printf("You Won ! ! ! \n");
 	close_window(game);
 	return ;
 }

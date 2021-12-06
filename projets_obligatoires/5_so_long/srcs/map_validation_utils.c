@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:47 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/06 18:48:21 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/06 20:45:31 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,26 +89,29 @@ void	map_validation(t_game *game)
 {
 	int		fd;
 	char 	*buffer;
-	char	*buffer_join;
+	char	linear_map[500];
+	int		read_count;
 
 	fd = open(game->map->map_path, O_RDONLY);
 	if (fd < 0)
 		flush("nError while opening file", game);
-	buffer_join = ft_strdup("");
-	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (buffer_join == NULL || buffer == NULL)
+	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	if (buffer == NULL)
 		flush("Error while allocating memory for map", game);
-	buffer[read(fd, buffer, BUFFER_SIZE)] = '\0';
-	while(buffer[0] > 0)
+	buffer[BUFFER_SIZE] = '\0';
+	ft_bzero(linear_map, 500);
+	read_count = read(fd, buffer, BUFFER_SIZE);
+	while(read_count > 0)
 	{
-		buffer_join = ft_strjoin(buffer_join, buffer);
-		buffer[read(fd, buffer, BUFFER_SIZE)] = '\0';
+		buffer[read_count] = '\0';
+		ft_strlcat(linear_map, buffer, 500);
+		read_count = read(fd, buffer, BUFFER_SIZE);
 	}
-	if (!*buffer_join)
+	if (!*linear_map)
 		flush("Map is e m p t y !", game);
-	char_validation(buffer_join, game);
+	char_validation(linear_map, game);
 	// monta o MAPA
-	game->map->grid = ft_split(buffer_join, '\n');
+	game->map->grid = ft_split(linear_map, '\n');
 	if (game->map->grid == NULL)
 		flush("Error while allocating memory for map", game);
 	// valida linha por linha
@@ -119,6 +122,5 @@ void	map_validation(t_game *game)
 	if (close(fd) == -1)
 		flush("Error while closing fd", game);
 	free(buffer);
-	free(buffer_join);
 	return ;
 }

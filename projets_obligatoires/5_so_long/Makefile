@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2021/12/06 19:17:18 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/12/06 20:14:56 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,10 +77,10 @@ main:	./main.c
 	@$(CC) $(CFLAGS) $< -L$(LIBS_PATH) -lso_long -lmlx -lXext -lX11 -I $(HEADERS_PATH) -o $(BINS_PATH)$(EXECUTABLE)
 
 run: all
-	@$(BINS_PATH)$(EXECUTABLE) ./resources/maps/map3.ber
+	@$(BINS_PATH)$(EXECUTABLE) ./resources/maps/map1.ber
 	@$(MAKE_NOPRINT) fclean
 
-val: all
+valgrind: all
 	@$(MKDIR) $(LOGS_PATH)
 	@$(TOUCH) $(LOGS_PATH)$(LEDGER)
 	@$(VALGRIND) $(BINS_PATH)$(EXECUTABLE) ./resources/maps/map1.ber

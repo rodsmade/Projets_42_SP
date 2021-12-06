@@ -1,491 +1,163 @@
-==8254== Memcheck, a memory error detector
-==8254== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==8254== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
-==8254== Command: ./bin/so_long ./resources/maps/map1.ber
-==8254== Parent PID: 8239
-==8254== 
---8254-- 
---8254-- Valgrind options:
---8254--    --leak-check=full
---8254--    --show-leak-kinds=all
---8254--    --track-origins=yes
---8254--    --verbose
---8254--    --log-file=./logs/valgrind-out.txt
---8254-- Contents of /proc/version:
---8254--   Linux version 5.4.0-80-generic (buildd@lcy01-amd64-030) (gcc version 9.3.0 (Ubuntu 9.3.0-17ubuntu1~20.04)) #90-Ubuntu SMP Fri Jul 9 22:49:44 UTC 2021
---8254-- 
---8254-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand
---8254-- Page sizes: currently 4096, max supported 4096
---8254-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
---8254-- Reading syms from /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long
---8254-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-2.31.so
---8254--   Considering /usr/lib/x86_64-linux-gnu/ld-2.31.so ..
---8254--   .. CRC mismatch (computed 975d0390 wanted 30bd717f)
---8254--   Considering /lib/x86_64-linux-gnu/ld-2.31.so ..
---8254--   .. CRC mismatch (computed 975d0390 wanted 30bd717f)
---8254--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.31.so ..
---8254--   .. CRC is valid
---8254-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
---8254--    object doesn't have a symbol table
---8254--    object doesn't have a dynamic symbol table
---8254-- Scheduler: using generic scheduler lock implementation.
---8254-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
-==8254== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-8254-by-???-on-roaraujo-workspace-84fbf4dbcd-j25j6
-==8254== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-8254-by-???-on-roaraujo-workspace-84fbf4dbcd-j25j6
-==8254== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-8254-by-???-on-roaraujo-workspace-84fbf4dbcd-j25j6
-==8254== 
-==8254== TO CONTROL THIS PROCESS USING vgdb (which you probably
-==8254== don't want to do, unless you know exactly what you're doing,
-==8254== or are doing some strange experiment):
-==8254==   /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=8254 ...command...
-==8254== 
-==8254== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-==8254==   /path/to/gdb ./bin/so_long
-==8254== and then give GDB the following command
-==8254==   target remote | /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=8254
-==8254== --pid is optional if only one valgrind process is running
-==8254== 
---8254-- REDIR: 0x4022e10 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c9ce2 (???)
---8254-- REDIR: 0x4022be0 (ld-linux-x86-64.so.2:index) redirected to 0x580c9cfc (???)
---8254-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
---8254--    object doesn't have a symbol table
---8254-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
---8254--    object doesn't have a symbol table
-==8254== WARNING: new redirection conflicts with existing -- ignoring it
---8254--     old: 0x04022e10 (strlen              ) R-> (0000.0) 0x580c9ce2 ???
---8254--     new: 0x04022e10 (strlen              ) R-> (2007.0) 0x0483f060 strlen
---8254-- REDIR: 0x401f5f0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ffd0 (strcmp)
---8254-- REDIR: 0x4023370 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4843a20 (mempcpy)
---8254-- Reading syms from /usr/lib/libnss_wrapper.so
---8254--   Considering /usr/lib/libnss_wrapper.so ..
---8254--   .. CRC mismatch (computed e0dd4e53 wanted f0d8c2b3)
---8254--   Considering /lib/libnss_wrapper.so ..
---8254--   .. CRC mismatch (computed e0dd4e53 wanted f0d8c2b3)
---8254--    object doesn't have a symbol table
---8254-- Reading syms from /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0
---8254--   Considering /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0 ..
---8254--   .. CRC mismatch (computed 7e27e1ef wanted 4ab025b2)
---8254--   Considering /lib/x86_64-linux-gnu/libXext.so.6.4.0 ..
---8254--   .. CRC mismatch (computed 7e27e1ef wanted 4ab025b2)
---8254--    object doesn't have a symbol table
---8254-- Reading syms from /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
---8254--    object doesn't have a symbol table
---8254-- Reading syms from /usr/lib/x86_64-linux-gnu/libc-2.31.so
---8254--   Considering /usr/lib/x86_64-linux-gnu/libc-2.31.so ..
---8254--   .. CRC mismatch (computed 86b78530 wanted e380f01c)
---8254--   Considering /lib/x86_64-linux-gnu/libc-2.31.so ..
---8254--   .. CRC mismatch (computed 86b78530 wanted e380f01c)
---8254--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.31.so ..
---8254--   .. CRC is valid
---8254-- Reading syms from /usr/lib/x86_64-linux-gnu/libdl-2.31.so
---8254--   Considering /usr/lib/x86_64-linux-gnu/libdl-2.31.so ..
---8254--   .. CRC mismatch (computed b5d487d3 wanted 6ef97e7c)
---8254--   Considering /lib/x86_64-linux-gnu/libdl-2.31.so ..
---8254--   .. CRC mismatch (computed b5d487d3 wanted 6ef97e7c)
---8254--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libdl-2.31.so ..
---8254--   .. CRC is valid
---8254-- Reading syms from /usr/lib/x86_64-linux-gnu/libpthread-2.31.so
---8254--   Considering /usr/lib/debug/.build-id/e5/4761f7b554d0fcc1562959665d93dffbebdaf0.debug ..
---8254--   .. build-id is valid
---8254-- Reading syms from /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0
---8254--    object doesn't have a symbol table
---8254-- Reading syms from /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0
---8254--   Considering /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0 ..
---8254--   .. CRC mismatch (computed 7de9b6ad wanted e8a17129)
---8254--   Considering /lib/x86_64-linux-gnu/libXau.so.6.0.0 ..
---8254--   .. CRC mismatch (computed 7de9b6ad wanted e8a17129)
---8254--    object doesn't have a symbol table
---8254-- Reading syms from /usr/lib/x86_64-linux-gnu/libXdmcp.so.6.0.0
---8254--    object doesn't have a symbol table
---8254-- Reading syms from /usr/lib/x86_64-linux-gnu/libbsd.so.0.10.0
---8254--    object doesn't have a symbol table
---8254-- REDIR: 0x4c5e600 (libc.so.6:memmove) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5d900 (libc.so.6:strncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5e930 (libc.so.6:strcasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5d220 (libc.so.6:strcat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5d960 (libc.so.6:rindex) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5fdd0 (libc.so.6:rawmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c7ae60 (libc.so.6:wmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c7a9a0 (libc.so.6:wcscmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5e760 (libc.so.6:mempcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5e590 (libc.so.6:bcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5d890 (libc.so.6:strncmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5d2d0 (libc.so.6:strcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5e6c0 (libc.so.6:memset) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c7a960 (libc.so.6:wcschr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5d7f0 (libc.so.6:strnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5d3b0 (libc.so.6:strcspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5e980 (libc.so.6:strncasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5d350 (libc.so.6:strcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5ead0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c7c0d0 (libc.so.6:wcsnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c7a9e0 (libc.so.6:wcscpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5d9a0 (libc.so.6:strpbrk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5d280 (libc.so.6:index) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5d7b0 (libc.so.6:strlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c66d20 (libc.so.6:memrchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5e9d0 (libc.so.6:strcasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5e550 (libc.so.6:memchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c7aab0 (libc.so.6:wcslen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5dc60 (libc.so.6:strspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5e8d0 (libc.so.6:stpncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5e870 (libc.so.6:stpcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5fe10 (libc.so.6:strchrnul) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4c5ea20 (libc.so.6:strncasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---8254-- REDIR: 0x4d46490 (libc.so.6:__strrchr_avx2) redirected to 0x483ea10 (rindex)
---8254-- REDIR: 0x4d46660 (libc.so.6:__strlen_avx2) redirected to 0x483ef40 (strlen)
---8254-- REDIR: 0x4c58260 (libc.so.6:malloc) redirected to 0x483b780 (malloc)
---8254-- REDIR: 0x4d49650 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4843660 (mempcpy)
---8254-- REDIR: 0x4d41fa0 (libc.so.6:__strncmp_avx2) redirected to 0x483f670 (strncmp)
---8254-- REDIR: 0x4c59c90 (libc.so.6:calloc) redirected to 0x483dce0 (calloc)
---8254-- REDIR: 0x4d49670 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x48429f0 (memmove)
---8254-- REDIR: 0x4c58850 (libc.so.6:free) redirected to 0x483c9d0 (free)
---8254-- REDIR: 0x4d462a0 (libc.so.6:__strchrnul_avx2) redirected to 0x4843540 (strchrnul)
---8254-- REDIR: 0x4cebc90 (libc.so.6:__strcpy_chk) redirected to 0x48435c0 (__strcpy_chk)
---8254-- REDIR: 0x4c59000 (libc.so.6:realloc) redirected to 0x483df30 (realloc)
---8254-- REDIR: 0x4c5e120 (libc.so.6:__GI_strstr) redirected to 0x4843ca0 (__strstr_sse2)
---8254-- REDIR: 0x4d49af0 (libc.so.6:__memset_avx2_unaligned_erms) redirected to 0x48428e0 (memset)
---8254-- REDIR: 0x4d42c50 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x48421e0 (bcmp)
---8254-- REDIR: 0x4d47f30 (libc.so.6:__strncpy_avx2) redirected to 0x483f230 (strncpy)
---8254-- REDIR: 0x4d47ba0 (libc.so.6:__strcpy_avx2) redirected to 0x483f090 (strcpy)
---8254-- REDIR: 0x4d43030 (libc.so.6:__strcasecmp_avx) redirected to 0x483f830 (strcasecmp)
-==8254== Invalid read of size 8
-==8254==    at 0x10F144: game_close (init_close_utils.c:68)
-==8254==    by 0x10EB3E: so_long (so_long.c:81)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==  Address 0x4e2e5c0 is 48 bytes inside a block of size 56 free'd
-==8254==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x10F13F: game_close (init_close_utils.c:67)
-==8254==    by 0x10EB3E: so_long (so_long.c:81)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==  Block was alloc'd at
-==8254==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x10F9D9: ft_calloc (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10F241: allocate_memory (init_close_utils.c:19)
-==8254==    by 0x10E998: so_long (so_long.c:21)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== Invalid read of size 8
-==8254==    at 0x10F163: game_close (init_close_utils.c:72)
-==8254==    by 0x10EB3E: so_long (so_long.c:81)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==  Address 0x4e2e4e0 is 96 bytes inside a block of size 120 free'd
-==8254==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x10F12D: game_close (init_close_utils.c:65)
-==8254==    by 0x10EB3E: so_long (so_long.c:81)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==  Block was alloc'd at
-==8254==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x10F9D9: ft_calloc (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10F21B: allocate_memory (init_close_utils.c:17)
-==8254==    by 0x10E998: so_long (so_long.c:21)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== Invalid read of size 8
-==8254==    at 0x10F181: game_close (init_close_utils.c:72)
-==8254==    by 0x10EB3E: so_long (so_long.c:81)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==  Address 0x4e2e4e0 is 96 bytes inside a block of size 120 free'd
-==8254==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x10F12D: game_close (init_close_utils.c:65)
-==8254==    by 0x10EB3E: so_long (so_long.c:81)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==  Block was alloc'd at
-==8254==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x10F9D9: ft_calloc (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10F21B: allocate_memory (init_close_utils.c:17)
-==8254==    by 0x10E998: so_long (so_long.c:21)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 
-==8254== HEAP SUMMARY:
-==8254==     in use at exit: 2,093 bytes in 24 blocks
-==8254==   total heap usage: 111,387 allocs, 111,363 frees, 3,002,103 bytes allocated
-==8254== 
-==8254== Searching for pointers to 24 not-freed blocks
-==8254== Checked 450,664 bytes
-==8254== 
-==8254== 1 bytes in 1 blocks are definitely lost in loss record 1 of 23
-==8254==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x10F9D9: ft_calloc (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10FDCB: ft_strdup (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10F556: map_validation (map_validation_utils.c:97)
-==8254==    by 0x10E9E7: so_long (so_long.c:33)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 24 bytes in 1 blocks are definitely lost in loss record 2 of 23
-==8254==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x10F9D9: ft_calloc (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10F281: allocate_memory (init_close_utils.c:22)
-==8254==    by 0x10E998: so_long (so_long.c:21)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 26 bytes in 1 blocks are definitely lost in loss record 3 of 23
-==8254==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x10F9D9: ft_calloc (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10FDCB: ft_strdup (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10F4F1: input_validation (map_validation_utils.c:23)
-==8254==    by 0x10E9C7: so_long (so_long.c:28)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 32 bytes in 1 blocks are definitely lost in loss record 4 of 23
-==8254==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x10F9D9: ft_calloc (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10F2EF: load_sprites (init_close_utils.c:44)
-==8254==    by 0x10EA07: so_long (so_long.c:38)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 51 bytes in 1 blocks are definitely lost in loss record 5 of 23
-==8254==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x10F563: map_validation (map_validation_utils.c:98)
-==8254==    by 0x10E9E7: so_long (so_long.c:33)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 88 bytes in 1 blocks are indirectly lost in loss record 6 of 23
-==8254==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x111E4B: mlx_int_new_xshm_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x112172: mlx_new_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111337: mlx_int_parse_xpm (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111771: mlx_xpm_file_to_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10EBDB: generate_player_img (render_utils.c:20)
-==8254==    by 0x10EA73: so_long (so_long.c:55)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 88 bytes in 1 blocks are indirectly lost in loss record 7 of 23
-==8254==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x111E4B: mlx_int_new_xshm_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x112172: mlx_new_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111337: mlx_int_parse_xpm (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111771: mlx_xpm_file_to_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10EBFE: generate_player_img (render_utils.c:24)
-==8254==    by 0x10EA73: so_long (so_long.c:55)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 88 bytes in 1 blocks are indirectly lost in loss record 8 of 23
-==8254==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x111E4B: mlx_int_new_xshm_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x112172: mlx_new_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111337: mlx_int_parse_xpm (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111771: mlx_xpm_file_to_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10EC22: generate_player_img (render_utils.c:28)
-==8254==    by 0x10EA73: so_long (so_long.c:55)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 88 bytes in 1 blocks are indirectly lost in loss record 9 of 23
-==8254==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x111E4B: mlx_int_new_xshm_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x112172: mlx_new_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111337: mlx_int_parse_xpm (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111771: mlx_xpm_file_to_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10EC46: generate_player_img (render_utils.c:32)
-==8254==    by 0x10EA73: so_long (so_long.c:55)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 135 bytes in 2 blocks are definitely lost in loss record 10 of 23
-==8254==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x10FE44: ft_strjoin (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10F58A: map_validation (map_validation_utils.c:104)
-==8254==    by 0x10E9E7: so_long (so_long.c:33)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 136 bytes in 1 blocks are indirectly lost in loss record 11 of 23
-==8254==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x4A72BB3: XShmCreateImage (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
-==8254==    by 0x111E76: mlx_int_new_xshm_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x112172: mlx_new_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111337: mlx_int_parse_xpm (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111771: mlx_xpm_file_to_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10EBDB: generate_player_img (render_utils.c:20)
-==8254==    by 0x10EA73: so_long (so_long.c:55)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 136 bytes in 1 blocks are indirectly lost in loss record 12 of 23
-==8254==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x4A72BB3: XShmCreateImage (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
-==8254==    by 0x111E76: mlx_int_new_xshm_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x112172: mlx_new_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111337: mlx_int_parse_xpm (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111771: mlx_xpm_file_to_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10EBFE: generate_player_img (render_utils.c:24)
-==8254==    by 0x10EA73: so_long (so_long.c:55)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 136 bytes in 1 blocks are indirectly lost in loss record 13 of 23
-==8254==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x4A72BB3: XShmCreateImage (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
-==8254==    by 0x111E76: mlx_int_new_xshm_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x112172: mlx_new_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111337: mlx_int_parse_xpm (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111771: mlx_xpm_file_to_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10EC22: generate_player_img (render_utils.c:28)
-==8254==    by 0x10EA73: so_long (so_long.c:55)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 136 bytes in 1 blocks are indirectly lost in loss record 14 of 23
-==8254==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x4A72BB3: XShmCreateImage (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
-==8254==    by 0x111E76: mlx_int_new_xshm_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x112172: mlx_new_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111337: mlx_int_parse_xpm (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111771: mlx_xpm_file_to_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10EC46: generate_player_img (render_utils.c:32)
-==8254==    by 0x10EA73: so_long (so_long.c:55)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 136 bytes in 1 blocks are indirectly lost in loss record 15 of 23
-==8254==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x4A72BB3: XShmCreateImage (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
-==8254==    by 0x111E76: mlx_int_new_xshm_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x112172: mlx_new_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111337: mlx_int_parse_xpm (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111771: mlx_xpm_file_to_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10ECD4: generate_floor_img (render_utils.c:46)
-==8254==    by 0x10EA7B: so_long (so_long.c:56)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 136 bytes in 1 blocks are indirectly lost in loss record 16 of 23
-==8254==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x4A72BB3: XShmCreateImage (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
-==8254==    by 0x111E76: mlx_int_new_xshm_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x112172: mlx_new_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111337: mlx_int_parse_xpm (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111771: mlx_xpm_file_to_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10ED34: generate_wall_img (render_utils.c:57)
-==8254==    by 0x10EA83: so_long (so_long.c:57)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 136 bytes in 1 blocks are indirectly lost in loss record 17 of 23
-==8254==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x4A72BB3: XShmCreateImage (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
-==8254==    by 0x111E76: mlx_int_new_xshm_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x112172: mlx_new_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111337: mlx_int_parse_xpm (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111771: mlx_xpm_file_to_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10ED94: generate_exit_img (render_utils.c:68)
-==8254==    by 0x10EA8B: so_long (so_long.c:58)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 136 bytes in 1 blocks are indirectly lost in loss record 18 of 23
-==8254==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x4A72BB3: XShmCreateImage (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
-==8254==    by 0x111E76: mlx_int_new_xshm_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x112172: mlx_new_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111337: mlx_int_parse_xpm (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111771: mlx_xpm_file_to_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10EDF3: generate_collectibles_img (render_utils.c:79)
-==8254==    by 0x10EA93: so_long (so_long.c:59)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 19 of 23
-==8254==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x111E4B: mlx_int_new_xshm_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x112172: mlx_new_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111337: mlx_int_parse_xpm (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111771: mlx_xpm_file_to_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10ECD4: generate_floor_img (render_utils.c:46)
-==8254==    by 0x10EA7B: so_long (so_long.c:56)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 20 of 23
-==8254==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x111E4B: mlx_int_new_xshm_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x112172: mlx_new_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111337: mlx_int_parse_xpm (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111771: mlx_xpm_file_to_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10ED34: generate_wall_img (render_utils.c:57)
-==8254==    by 0x10EA83: so_long (so_long.c:57)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 21 of 23
-==8254==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x111E4B: mlx_int_new_xshm_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x112172: mlx_new_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111337: mlx_int_parse_xpm (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111771: mlx_xpm_file_to_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10ED94: generate_exit_img (render_utils.c:68)
-==8254==    by 0x10EA8B: so_long (so_long.c:58)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 22 of 23
-==8254==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x111E4B: mlx_int_new_xshm_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x112172: mlx_new_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111337: mlx_int_parse_xpm (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x111771: mlx_xpm_file_to_image (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10EDF3: generate_collectibles_img (render_utils.c:79)
-==8254==    by 0x10EA93: so_long (so_long.c:59)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 928 (32 direct, 896 indirect) bytes in 1 blocks are definitely lost in loss record 23 of 23
-==8254==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x10F9D9: ft_calloc (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10EBAF: generate_player_img (render_utils.c:17)
-==8254==    by 0x10EA73: so_long (so_long.c:55)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== LEAK SUMMARY:
-==8254==    definitely lost: 653 bytes in 12 blocks
-==8254==    indirectly lost: 1,440 bytes in 12 blocks
-==8254==      possibly lost: 0 bytes in 0 blocks
-==8254==    still reachable: 0 bytes in 0 blocks
-==8254==         suppressed: 0 bytes in 0 blocks
-==8254== 
-==8254== ERROR SUMMARY: 19 errors from 14 contexts (suppressed: 657 from 1)
-==8254== 
-==8254== 1 errors in context 1 of 14:
-==8254== Invalid read of size 8
-==8254==    at 0x10F163: game_close (init_close_utils.c:72)
-==8254==    by 0x10EB3E: so_long (so_long.c:81)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==  Address 0x4e2e4e0 is 96 bytes inside a block of size 120 free'd
-==8254==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x10F12D: game_close (init_close_utils.c:65)
-==8254==    by 0x10EB3E: so_long (so_long.c:81)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==  Block was alloc'd at
-==8254==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x10F9D9: ft_calloc (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10F21B: allocate_memory (init_close_utils.c:17)
-==8254==    by 0x10E998: so_long (so_long.c:21)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 
-==8254== 1 errors in context 2 of 14:
-==8254== Invalid read of size 8
-==8254==    at 0x10F144: game_close (init_close_utils.c:68)
-==8254==    by 0x10EB3E: so_long (so_long.c:81)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==  Address 0x4e2e5c0 is 48 bytes inside a block of size 56 free'd
-==8254==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x10F13F: game_close (init_close_utils.c:67)
-==8254==    by 0x10EB3E: so_long (so_long.c:81)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==  Block was alloc'd at
-==8254==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x10F9D9: ft_calloc (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10F241: allocate_memory (init_close_utils.c:19)
-==8254==    by 0x10E998: so_long (so_long.c:21)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
-==8254== 
-==8254== 6 errors in context 3 of 14:
-==8254== Invalid read of size 8
-==8254==    at 0x10F181: game_close (init_close_utils.c:72)
-==8254==    by 0x10EB3E: so_long (so_long.c:81)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==  Address 0x4e2e4e0 is 96 bytes inside a block of size 120 free'd
-==8254==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x10F12D: game_close (init_close_utils.c:65)
-==8254==    by 0x10EB3E: so_long (so_long.c:81)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==  Block was alloc'd at
-==8254==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==8254==    by 0x10F9D9: ft_calloc (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254==    by 0x10F21B: allocate_memory (init_close_utils.c:17)
-==8254==    by 0x10E998: so_long (so_long.c:21)
-==8254==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
-==8254== 
---8254-- 
---8254-- used_suppression:    657 X on SUSE11 writev uninit padding /usr/lib/x86_64-linux-gnu/valgrind/default.supp:397
-==8254== 
-==8254== ERROR SUMMARY: 19 errors from 14 contexts (suppressed: 657 from 1)
+==5569== Memcheck, a memory error detector
+==5569== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==5569== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==5569== Command: ./bin/so_long ./resources/maps/map1.ber
+==5569== Parent PID: 5550
+==5569== 
+--5569-- 
+--5569-- Valgrind options:
+--5569--    --leak-check=full
+--5569--    --show-leak-kinds=all
+--5569--    --track-origins=yes
+--5569--    --verbose
+--5569--    --log-file=./logs/valgrind-out.txt
+--5569-- Contents of /proc/version:
+--5569--   Linux version 5.4.0-80-generic (buildd@lcy01-amd64-030) (gcc version 9.3.0 (Ubuntu 9.3.0-17ubuntu1~20.04)) #90-Ubuntu SMP Fri Jul 9 22:49:44 UTC 2021
+--5569-- 
+--5569-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand
+--5569-- Page sizes: currently 4096, max supported 4096
+--5569-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
+--5569-- Reading syms from /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long
+--5569-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-2.31.so
+--5569--   Considering /usr/lib/x86_64-linux-gnu/ld-2.31.so ..
+--5569--   .. CRC mismatch (computed 975d0390 wanted 30bd717f)
+--5569--   Considering /lib/x86_64-linux-gnu/ld-2.31.so ..
+--5569--   .. CRC mismatch (computed 975d0390 wanted 30bd717f)
+--5569--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.31.so ..
+--5569--   .. CRC is valid
+--5569-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
+--5569--    object doesn't have a symbol table
+--5569--    object doesn't have a dynamic symbol table
+--5569-- Scheduler: using generic scheduler lock implementation.
+--5569-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
+==5569== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-5569-by-???-on-roaraujo-workspace-84fbf4dbcd-97st4
+==5569== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-5569-by-???-on-roaraujo-workspace-84fbf4dbcd-97st4
+==5569== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-5569-by-???-on-roaraujo-workspace-84fbf4dbcd-97st4
+==5569== 
+==5569== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==5569== don't want to do, unless you know exactly what you're doing,
+==5569== or are doing some strange experiment):
+==5569==   /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=5569 ...command...
+==5569== 
+==5569== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==5569==   /path/to/gdb ./bin/so_long
+==5569== and then give GDB the following command
+==5569==   target remote | /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=5569
+==5569== --pid is optional if only one valgrind process is running
+==5569== 
+--5569-- REDIR: 0x4022e10 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c9ce2 (???)
+--5569-- REDIR: 0x4022be0 (ld-linux-x86-64.so.2:index) redirected to 0x580c9cfc (???)
+--5569-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
+--5569--    object doesn't have a symbol table
+--5569-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
+--5569--    object doesn't have a symbol table
+==5569== WARNING: new redirection conflicts with existing -- ignoring it
+--5569--     old: 0x04022e10 (strlen              ) R-> (0000.0) 0x580c9ce2 ???
+--5569--     new: 0x04022e10 (strlen              ) R-> (2007.0) 0x0483f060 strlen
+--5569-- REDIR: 0x401f5f0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ffd0 (strcmp)
+--5569-- REDIR: 0x4023370 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4843a20 (mempcpy)
+--5569-- Reading syms from /usr/lib/libnss_wrapper.so
+--5569--   Considering /usr/lib/libnss_wrapper.so ..
+--5569--   .. CRC mismatch (computed e0dd4e53 wanted f0d8c2b3)
+--5569--   Considering /lib/libnss_wrapper.so ..
+--5569--   .. CRC mismatch (computed e0dd4e53 wanted f0d8c2b3)
+--5569--    object doesn't have a symbol table
+--5569-- Reading syms from /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0
+--5569--   Considering /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0 ..
+--5569--   .. CRC mismatch (computed 7e27e1ef wanted 4ab025b2)
+--5569--   Considering /lib/x86_64-linux-gnu/libXext.so.6.4.0 ..
+--5569--   .. CRC mismatch (computed 7e27e1ef wanted 4ab025b2)
+--5569--    object doesn't have a symbol table
+--5569-- Reading syms from /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+--5569--    object doesn't have a symbol table
+--5569-- Reading syms from /usr/lib/x86_64-linux-gnu/libc-2.31.so
+--5569--   Considering /usr/lib/x86_64-linux-gnu/libc-2.31.so ..
+--5569--   .. CRC mismatch (computed 86b78530 wanted e380f01c)
+--5569--   Considering /lib/x86_64-linux-gnu/libc-2.31.so ..
+--5569--   .. CRC mismatch (computed 86b78530 wanted e380f01c)
+--5569--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.31.so ..
+--5569--   .. CRC is valid
+--5569-- Reading syms from /usr/lib/x86_64-linux-gnu/libdl-2.31.so
+--5569--   Considering /usr/lib/x86_64-linux-gnu/libdl-2.31.so ..
+--5569--   .. CRC mismatch (computed b5d487d3 wanted 6ef97e7c)
+--5569--   Considering /lib/x86_64-linux-gnu/libdl-2.31.so ..
+--5569--   .. CRC mismatch (computed b5d487d3 wanted 6ef97e7c)
+--5569--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libdl-2.31.so ..
+--5569--   .. CRC is valid
+--5569-- Reading syms from /usr/lib/x86_64-linux-gnu/libpthread-2.31.so
+--5569--   Considering /usr/lib/debug/.build-id/e5/4761f7b554d0fcc1562959665d93dffbebdaf0.debug ..
+--5569--   .. build-id is valid
+--5569-- Reading syms from /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0
+--5569--    object doesn't have a symbol table
+--5569-- Reading syms from /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0
+--5569--   Considering /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0 ..
+--5569--   .. CRC mismatch (computed 7de9b6ad wanted e8a17129)
+--5569--   Considering /lib/x86_64-linux-gnu/libXau.so.6.0.0 ..
+--5569--   .. CRC mismatch (computed 7de9b6ad wanted e8a17129)
+--5569--    object doesn't have a symbol table
+--5569-- Reading syms from /usr/lib/x86_64-linux-gnu/libXdmcp.so.6.0.0
+--5569--    object doesn't have a symbol table
+--5569-- Reading syms from /usr/lib/x86_64-linux-gnu/libbsd.so.0.10.0
+--5569--    object doesn't have a symbol table
+--5569-- REDIR: 0x4c5e600 (libc.so.6:memmove) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5d900 (libc.so.6:strncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5e930 (libc.so.6:strcasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5d220 (libc.so.6:strcat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5d960 (libc.so.6:rindex) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5fdd0 (libc.so.6:rawmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c7ae60 (libc.so.6:wmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c7a9a0 (libc.so.6:wcscmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5e760 (libc.so.6:mempcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5e590 (libc.so.6:bcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5d890 (libc.so.6:strncmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5d2d0 (libc.so.6:strcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5e6c0 (libc.so.6:memset) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c7a960 (libc.so.6:wcschr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5d7f0 (libc.so.6:strnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5d3b0 (libc.so.6:strcspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5e980 (libc.so.6:strncasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5d350 (libc.so.6:strcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5ead0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c7c0d0 (libc.so.6:wcsnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c7a9e0 (libc.so.6:wcscpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5d9a0 (libc.so.6:strpbrk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5d280 (libc.so.6:index) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5d7b0 (libc.so.6:strlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c66d20 (libc.so.6:memrchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5e9d0 (libc.so.6:strcasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5e550 (libc.so.6:memchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c7aab0 (libc.so.6:wcslen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5dc60 (libc.so.6:strspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5e8d0 (libc.so.6:stpncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5e870 (libc.so.6:stpcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5fe10 (libc.so.6:strchrnul) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4c5ea20 (libc.so.6:strncasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--5569-- REDIR: 0x4d46490 (libc.so.6:__strrchr_avx2) redirected to 0x483ea10 (rindex)
+--5569-- REDIR: 0x4c58260 (libc.so.6:malloc) redirected to 0x483b780 (malloc)
+--5569-- REDIR: 0x4c58850 (libc.so.6:free) redirected to 0x483c9d0 (free)
+--5569-- REDIR: 0x4d46660 (libc.so.6:__strlen_avx2) redirected to 0x483ef40 (strlen)
+--5569-- REDIR: 0x4d41fa0 (libc.so.6:__strncmp_avx2) redirected to 0x483f670 (strncmp)
+--5569-- REDIR: 0x4c59c90 (libc.so.6:calloc) redirected to 0x483dce0 (calloc)
+--5569-- REDIR: 0x4d49670 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x48429f0 (memmove)
+--5569-- REDIR: 0x4d462a0 (libc.so.6:__strchrnul_avx2) redirected to 0x4843540 (strchrnul)
+--5569-- REDIR: 0x4cebc90 (libc.so.6:__strcpy_chk) redirected to 0x48435c0 (__strcpy_chk)
+--5569-- REDIR: 0x4d49650 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4843660 (mempcpy)
+--5569-- REDIR: 0x4c59000 (libc.so.6:realloc) redirected to 0x483df30 (realloc)
+--5569-- REDIR: 0x4c5e120 (libc.so.6:__GI_strstr) redirected to 0x4843ca0 (__strstr_sse2)
+--5569-- REDIR: 0x4d49af0 (libc.so.6:__memset_avx2_unaligned_erms) redirected to 0x48428e0 (memset)
+--5569-- REDIR: 0x4d42c50 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x48421e0 (bcmp)
+--5569-- REDIR: 0x4d47f30 (libc.so.6:__strncpy_avx2) redirected to 0x483f230 (strncpy)
+--5569-- REDIR: 0x4d47ba0 (libc.so.6:__strcpy_avx2) redirected to 0x483f090 (strcpy)
+--5569-- REDIR: 0x4d43030 (libc.so.6:__strcasecmp_avx) redirected to 0x483f830 (strcasecmp)
+==5569== 
+==5569== HEAP SUMMARY:
+==5569==     in use at exit: 0 bytes in 0 blocks
+==5569==   total heap usage: 772,462 allocs, 772,462 frees, 20,166,438 bytes allocated
+==5569== 
+==5569== All heap blocks were freed -- no leaks are possible
+==5569== 
+==5569== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 486 from 1)
+--5569-- 
+--5569-- used_suppression:    486 X on SUSE11 writev uninit padding /usr/lib/x86_64-linux-gnu/valgrind/default.supp:397
+==5569== 
+==5569== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 486 from 1)
