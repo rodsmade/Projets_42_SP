@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:54 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/06 19:48:44 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/07 00:02:10 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void	move_left(t_game *game)
 {
-	// TODO: investigar pq que segurando uma tecla, o move seguinte ñ é computado !!!!
+	char	next_pos;
+
+	next_pos = game->map->grid[game->player->pos->x][game->player->pos->y - 1];
 	game->player->direction = 'j';
-	if (game->map->grid[game->player->pos->x][game->player->pos->y - 1] == 'E'
-		&& game->player->collec_count == game->map->C_count)
+	if (next_pos == 'E' && game->player->collec_count == game->map->C_count)
 	{
 		game->player->pos->y--;
 		game->player->moves_count++;
 		render_you_won(game);
 	}
-	if (game->map->grid[game->player->pos->x][game->player->pos->y - 1] != '1'
-		&& game->map->grid[game->player->pos->x][game->player->pos->y - 1] != 'E')
+	if (next_pos != '1' && next_pos != 'E')
 	{
 		game->player->pos->y--;
 		game->player->moves_count++;
@@ -40,16 +40,17 @@ void	move_left(t_game *game)
 
 void	move_up(t_game *game)
 {
+	char	next_pos;
+
+	next_pos = game->map->grid[game->player->pos->x - 1][game->player->pos->y];
 	game->player->direction = 'i';
-	if (game->map->grid[game->player->pos->x - 1][game->player->pos->y] == 'E'
-			&& game->player->collec_count == game->map->C_count)
+	if (next_pos == 'E' && game->player->collec_count == game->map->C_count)
 	{
 		game->player->pos->x--;
 		game->player->moves_count++;
 		render_you_won(game);
 	}
-	if (game->map->grid[game->player->pos->x - 1][game->player->pos->y] != '1'
-		&& game->map->grid[game->player->pos->x - 1][game->player->pos->y] != 'E')
+	if (next_pos != '1' && next_pos != 'E')
 	{
 		game->player->pos->x--;
 		game->player->moves_count++;
@@ -65,16 +66,17 @@ void	move_up(t_game *game)
 
 void	move_right(t_game *game)
 {
+	char	next_pos;
+
+	next_pos = game->map->grid[game->player->pos->x][game->player->pos->y + 1];
 	game->player->direction = 'l';
-	if (game->map->grid[game->player->pos->x][game->player->pos->y + 1] == 'E'
-			&& game->player->collec_count == game->map->C_count)
+	if (next_pos == 'E' && game->player->collec_count == game->map->C_count)
 	{
 		game->player->pos->y++;
 		game->player->moves_count++;
 		render_you_won(game);
 	}
-	if (game->map->grid[game->player->pos->x][game->player->pos->y + 1] != '1'
-		&& game->map->grid[game->player->pos->x][game->player->pos->y + 1] != 'E')
+	if (next_pos != '1' && next_pos != 'E')
 	{
 		game->player->pos->y++;
 		game->player->moves_count++;
@@ -90,16 +92,17 @@ void	move_right(t_game *game)
 
 void	move_down(t_game *game)
 {
+	char	next_pos;
+
+	next_pos = game->map->grid[game->player->pos->x + 1][game->player->pos->y];
 	game->player->direction = 'k';
-	if (game->map->grid[game->player->pos->x + 1][game->player->pos->y] == 'E'
-			&& game->player->collec_count == game->map->C_count)
+	if (next_pos == 'E' && game->player->collec_count == game->map->C_count)
 	{
 		game->player->pos->x++;
 		game->player->moves_count++;
 		render_you_won(game);
 	}
-	if (game->map->grid[game->player->pos->x + 1][game->player->pos->y] != '1'
-		&& game->map->grid[game->player->pos->x + 1][game->player->pos->y] != 'E')
+	if (next_pos != '1' && next_pos != 'E')
 	{
 		game->player->pos->x++;
 		game->player->moves_count++;
