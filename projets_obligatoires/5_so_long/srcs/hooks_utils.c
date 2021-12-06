@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:42 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/05 15:45:32 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/06 19:10:40 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 #include "so_long.h"
 
-int	close_window(t_game *game){
+int		close_window(t_game *game)
+{
 	mlx_destroy_window(game->mlx, game->window->win_ptr);
 	game->window->win_ptr = NULL;
 	return (0);
 }
 
-int		detect_keystroke(int keycode, t_game *game){
+int		detect_keystroke(int keycode, t_game *game)
+{
 	if (keycode == XK_Left || keycode == XK_a)
 		move_left(game);
 	if (keycode == XK_Up || keycode == XK_w)
@@ -31,7 +33,5 @@ int		detect_keystroke(int keycode, t_game *game){
 		move_down(game);
 	if (keycode == XK_Escape)
 		close_window(game);
-	else
-		mlx_clear_window(game->mlx, game->window->win_ptr);
 	return (0);
 }

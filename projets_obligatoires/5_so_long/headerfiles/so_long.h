@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 19:15:15 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/06 18:48:21 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/06 18:57:01 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct	s_player
 	int			width;
 	int			height;
 	int			collec_count;
+	int			moves_count;
 	t_coords	*pos;
 }				t_player;
 

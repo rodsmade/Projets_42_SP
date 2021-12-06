@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:44 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/06 18:48:21 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/06 18:57:49 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	initialise_values(t_game *game)
 	game->map->tile_width = 64;
 	game->map->tile_height = 64;
 	game->player->direction = 'l';
+	game->player->moves_count = 0;
 	return ;
 }
 
@@ -87,6 +88,7 @@ void	game_close(t_game *game)
 
 void	flush(char *err_msg, t_game *game)
 {
+	// TODO: rever isso do flush, se ñ tá esquecendo de dar free em coisa q era pra dar !!!
 	printf("Error\n%s\n", err_msg);
 	if (game->map != NULL)
 		free(game->map);
