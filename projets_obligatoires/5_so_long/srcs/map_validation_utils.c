@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:47 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/04 23:14:52 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/06 18:48:21 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,18 @@ static int	surrounded_by_walls(t_game *game)
 
 	i = -1;
 	// checa paredes laterais
-	while (game->map->map_2D[++i])
+	while (game->map->grid[++i])
 	{
-		if (game->map->map_2D[i][0] != '1'
-			|| game->map->map_2D[i][game->map->cols - 1] != '1')
+		if (game->map->grid[i][0] != '1'
+			|| game->map->grid[i][game->map->cols - 1] != '1')
 			return (0);
 	}
 	i = -1;
 	// checa paredes de cima e de baixo
 	while (++i < game->map->cols)
 	{
-		if (game->map->map_2D[0][i] != '1'
-			|| game->map->map_2D[game->map->rows - 1][i] != '1')
+		if (game->map->grid[0][i] != '1'
+			|| game->map->grid[game->map->rows - 1][i] != '1')
 			return (0);
 	}
 	return (1);
@@ -74,11 +74,11 @@ static int	is_rectangular(t_game *game)
 {
 	int i;
 
-	game->map->cols = ft_strlen(game->map->map_2D[0]);
+	game->map->cols = ft_strlen(game->map->grid[0]);
 	i = -1;
-	while(game->map->map_2D[++i])
+	while(game->map->grid[++i])
 	{
-		if (ft_strlen(game->map->map_2D[i]) != game->map->cols)
+		if (ft_strlen(game->map->grid[i]) != game->map->cols)
 			return (0);
 		game->map->rows++;
 	}
@@ -108,8 +108,8 @@ void	map_validation(t_game *game)
 		flush("Map is e m p t y !", game);
 	char_validation(buffer_join, game);
 	// monta o MAPA
-	game->map->map_2D = ft_split(buffer_join, '\n');
-	if (game->map->map_2D == NULL)
+	game->map->grid = ft_split(buffer_join, '\n');
+	if (game->map->grid == NULL)
 		flush("Error while allocating memory for map", game);
 	// valida linha por linha
 	if (!is_rectangular(game))

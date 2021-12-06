@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 19:15:15 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/05 15:49:36 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/06 18:48:21 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ typedef struct	s_map
 	void		*floor_img;
 	char		*wall_path;
 	void		*wall_img;
-	char		**map_2D;
+	char		**grid;
 	t_coords	*tile;
 	t_list		*rows_list;
 }				t_map;

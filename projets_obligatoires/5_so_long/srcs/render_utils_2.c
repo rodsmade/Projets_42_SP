@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:58 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/05 02:27:44 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/06 18:48:21 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	render_map(t_game *game)
 	int		j;
 
 	i = -1;
-	while (game->map->map_2D[++i])
+	while (game->map->grid[++i])
 	{
 		j = -1;
-		while(game->map->map_2D[i][++j])
+		while(game->map->grid[i][++j])
 		{
-			if (game->map->map_2D[i][j] == '1')
+			if (game->map->grid[i][j] == '1')
 				mlx_put_image_to_window(game->mlx, game->window->win_ptr,
 						game->map->wall_img, game->map->tile_width * j,
 						game->map->tile_height * i);
@@ -53,16 +53,16 @@ int		render_window(t_game *game){
 	{
 		render_map(game);
 		i = -1;
-		while (game->map->map_2D[++i])
+		while (game->map->grid[++i])
 		{
 			j = -1;
-			while(game->map->map_2D[i][++j])
+			while(game->map->grid[i][++j])
 			{
-				if (game->map->map_2D[i][j] == 'E')
+				if (game->map->grid[i][j] == 'E')
 					mlx_put_image_to_window(game->mlx, game->window->win_ptr,
 							game->map->exit_img, game->map->tile_width * j,
 							game->map->tile_height * i);
-				if (game->map->map_2D[i][j] == 'C')
+				if (game->map->grid[i][j] == 'C')
 					mlx_put_image_to_window(game->mlx, game->window->win_ptr,
 							game->collectible->img, game->map->tile_width * j,
 							game->map->tile_height * i);

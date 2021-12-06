@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:44 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/05 03:21:52 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/06 18:48:21 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ void	game_close(t_game *game)
 
 	mlx_destroy_display(game->mlx);
 	i = -1;
-	while(game->map->map_2D[++i])
-		free(game->map->map_2D[i]);
-	free(game->map->map_2D);
+	while(game->map->grid[++i])
+		free(game->map->grid[i]);
+	free(game->map->grid);
 	free(game->map->map_path);
 	free(game->map->tile);
 	free(game->map->floor_img);
