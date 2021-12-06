@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:58 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/05 00:38:37 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/06 19:34:24 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	generate_floor_img(t_game *game)
 								game->map->floor_path,
 								&game->map->tile->x,
 								&game->map->tile->y);
+	// TODO: tirar esse if, ele é inútil aparentemente
 	if (game->map->floor_img == NULL)
 		flush("MLX_ERROR while creating floor image", game);
 	return ;

@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:44 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/06 18:57:49 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/06 19:33:21 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,21 @@ void	game_close(t_game *game)
 {
 	int		i;
 
-	mlx_destroy_display(game->mlx);
 	i = -1;
 	while(game->map->grid[++i])
 		free(game->map->grid[i]);
 	free(game->map->grid);
 	free(game->map->map_path);
 	free(game->map->tile);
-	free(game->map->floor_img);
-	free(game->map->wall_img);
-	free(game->map->exit_img);
-	free(game->collectible->img);
+	mlx_destroy_image(game->mlx, game->map->floor_img);
+	mlx_destroy_image(game->mlx, game->map->wall_img);
+	mlx_destroy_image(game->mlx, game->map->exit_img);
+	mlx_destroy_image(game->mlx, game->collectible->img);
 	i = -1;
 	while(++i < 4)
+	{
 		mlx_destroy_image(game->mlx, game->player->img[i]);
+	}
 	free(game->player->img);
 	free(game->player->pos);
 	free(game->player->sprite_path);
@@ -82,7 +83,9 @@ void	game_close(t_game *game)
 	free(game->collectible);
 	free(game->map);
 	free(game->window);
+	mlx_destroy_display(game->mlx);
 	free(game->mlx);
+	printf("----> passou\n");
 	return ;
 }
 
