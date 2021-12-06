@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:44 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/06 21:46:20 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/07 00:08:07 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	allocate_memory(t_game *game)
 
 void	initialise_values(t_game *game)
 {
-	game->map->C_count = 0;
-	game->map->E_count = 0;
-	game->map->P_count = 0;
+	game->map->c_count = 0;
+	game->map->e_count = 0;
+	game->map->p_count = 0;
 	game->map->rows = 0;
 	game->map->tile_width = 64;
 	game->map->tile_height = 64;
