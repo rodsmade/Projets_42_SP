@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 19:15:15 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/06 20:59:18 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/06 21:07:42 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ void	flush(char *err_msg, t_game *game);
 
 // map_validation_utils
 void	map_validation(t_game *game);
-void	input_validation(int argc, char *map_path, t_game *game);
 
 // movement_utils
 void	move_down(t_game *game);
@@ -148,6 +147,7 @@ int		detect_keystroke(int keycode, t_game *game);
 
 // other_utils
 t_coords	find_position(char obj, t_game *game);
+void		input_validation(int argc, char *map_path, t_game *game);
 void		open_window(t_game *game);
 
 #endif
