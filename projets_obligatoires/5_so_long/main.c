@@ -6,13 +6,13 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:15:05 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/04 23:15:18 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/06 20:51:47 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	so_long(argc, argv);
 	return (0);

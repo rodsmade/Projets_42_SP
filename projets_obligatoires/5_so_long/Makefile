@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2021/12/06 20:14:56 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/12/06 20:56:25 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ SRC_FILES = so_long.c \
 			movement_utils.c \
 			render_utils.c \
 			render_utils_2.c \
-			init_close_utils.c \
+			game_close_utils.c \
+			game_init_utils.c \
 			hooks_utils.c \
 			map_validation_utils.c \
 			other_utils.c

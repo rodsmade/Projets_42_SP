@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 19:15:15 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/06 18:57:01 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/06 20:59:18 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,6 @@ typedef struct	s_collectible
 	void	*img;
 }				t_collectible;
 
-// acho q essa t_img_draw na vdd só precisa se for usar aquela função de pixel put otimizada my_pixel_put
-// typedef struct	s_img_draw{
-// 	void	*img;
-// 	char	*addr;
-// 	int		bits_per_pixel;
-// 	int		line_width;
-// 	int		endian;
-// }				t_img_draw;
-
 typedef struct	s_window
 {
 	void	*win_ptr;
@@ -96,7 +87,7 @@ typedef struct	s_map
 	int			C_count;
 	int			E_count;
 	int			P_count;
-	char		*map_path; //ñ sei se é útil mas vai que
+	char		*map_path;
 	char		*exit_path;
 	void		*exit_img;
 	char		*floor_path;
@@ -120,10 +111,13 @@ typedef struct	s_game
 // --------------------------- PROTOTYPES ------------------------------------ |
 void	so_long(int argc, char *argv[]);
 
-// initialise_utils
+// game_init_utils
 void	initialise_values(t_game *game);
 void	allocate_memory(t_game *game);
 void	load_sprites(t_game *game);
+
+// game_close_utils
+void	destroy_images(t_game *game);
 void	game_close(t_game *game);
 void	flush(char *err_msg, t_game *game);
 

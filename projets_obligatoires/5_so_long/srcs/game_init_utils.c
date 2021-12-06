@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_close_utils.c                                 :+:      :+:    :+:   */
+/*   game_init_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:44 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/06 19:43:07 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/06 20:56:38 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	allocate_memory(t_game *game)
 	if (game->map == NULL || game->window == NULL || game->player == NULL
 		|| game->collectible == NULL || game->player->pos == NULL
 		|| game->map->tile == NULL)
-		flush("Something wrong happened while allocating memory, closing game. . .", game);
+		flush("Memory allocation failed, closing game. . .", game);
 	return ;
 }
 
@@ -55,50 +55,4 @@ void	load_sprites(t_game *game)
 	game->collectible->sprite_path = "./resources/images/pokeball_64.xpm";
 	*(game->player->pos) = find_position('P', game);
 	return ;
-}
-
-void	game_close(t_game *game)
-{
-	int		i;
-
-	i = -1;
-	while(game->map->grid[++i])
-		free(game->map->grid[i]);
-	free(game->map->grid);
-	free(game->map->map_path);
-	free(game->map->tile);
-	mlx_destroy_image(game->mlx, game->map->floor_img);
-	mlx_destroy_image(game->mlx, game->map->wall_img);
-	mlx_destroy_image(game->mlx, game->map->exit_img);
-	mlx_destroy_image(game->mlx, game->collectible->img);
-	i = -1;
-	while(++i < 4)
-	{
-		mlx_destroy_image(game->mlx, game->player->img[i]);
-	}
-	free(game->player->img);
-	free(game->player->pos);
-	free(game->player->sprite_path);
-	free(game->player);
-	free(game->collectible);
-	free(game->map);
-	free(game->window);
-	mlx_destroy_display(game->mlx);
-	free(game->mlx);
-	return ;
-}
-
-void	flush(char *err_msg, t_game *game)
-{
-	// TODO: rever isso do flush, se ñ tá esquecendo de dar free em coisa q era pra dar !!!
-	printf("Error\n%s\n", err_msg);
-	if (game->map != NULL)
-		free(game->map);
-	if (game->window != NULL)
-		free(game->window);
-	if (game->player != NULL)
-		free(game->player);
-	if (game->collectible != NULL)
-		free(game->collectible);
-	exit(0);
 }
