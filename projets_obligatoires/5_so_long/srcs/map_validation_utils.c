@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:47 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/07 00:08:07 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/07 02:17:53 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,12 @@ static void	char_validation(char *map_str, t_game *game)
 		flush("Map has no collectibles", game);
 	if (game->map->e_count < 1)
 		flush("Map has no exit", game);
-	if (game->map->p_count != 1)
-		flush("Map must have no more and no less than one player", game);
+	if (game->map->e_count > 1)
+		flush("Map must have only one exit", game);
+	if (game->map->p_count < 1)
+		flush("Map has no player", game);
+	if (game->map->p_count > 1)
+		flush("Map must have only one player", game);
 	return ;
 }
 

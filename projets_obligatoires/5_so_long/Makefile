@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2021/12/06 20:56:25 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/12/07 02:07:01 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ OBJS_PATH = ./objs/
 LIBS_PATH = ./libs/
 BINS_PATH = ./bin/
 LOGS_PATH = ./logs/
-LEDGER = valgrind-out.txt
+LEDGER = valgrind_logs.txt
 
 # COMPILATION
 CC = gcc
@@ -26,8 +26,11 @@ FLAGS = -Wall -Wextra -Werror -O3 $(DEBUG)
 VALGRIND = valgrind --leak-check=full \
 			--show-leak-kinds=all \
 			--track-origins=yes \
-			--verbose \
+			-q \
 			--log-file=$(LOGS_PATH)$(LEDGER)
+# TODO: dar uma olhada aqui nessas flags dps: valgrind -q --leak-check=full --show-leak-kinds=all -s --track-fds=yes --trace-children=yes --error-exitcode=1 --track-origins=yes ./a.out
+# TODO: refatorar o makefile pra parar de criar biblioteca libso_long
+# TODO: refatorar makefile pra tirar a necessidade do main.c se pá e inclui a main() no so_long.c
 
 # BASH COMMANDS
 RM = rm -f
@@ -85,7 +88,6 @@ valgrind: all
 	@$(MKDIR) $(LOGS_PATH)
 	@$(TOUCH) $(LOGS_PATH)$(LEDGER)
 	@$(VALGRIND) $(BINS_PATH)$(EXECUTABLE) ./resources/maps/map1.ber
-	--log-file=valgrind-out.txt
 
 # SANITIZE
 # -> deletes all .o files; also runs libft's clean target

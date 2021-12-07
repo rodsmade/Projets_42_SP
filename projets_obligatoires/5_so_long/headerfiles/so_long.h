@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 19:15:15 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/07 00:09:31 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/07 02:04:07 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,6 @@ typedef struct s_player
 	char		**sprite_path;
 	void		**img;
 	int			direction;
-	int			top_tile;
-	int			bottom_tile;
-	int			left_tile;
-	int			right_tile;
 	int			width;
 	int			height;
 	int			collec_count;
@@ -112,15 +108,16 @@ typedef struct s_game
 void		so_long(int argc, char *argv[]);
 
 // game_init_utils
-void		initialise_values(t_game *game);
 void		allocate_memory(t_game *game);
-void		load_sprites(t_game *game);
 void		generate_images(t_game *game);
+void		initialise_minilibx(t_game *game);
+void		initialise_values(t_game *game);
+void		load_sprites(t_game *game);
 
 // game_close_utils
 void		destroy_images(t_game *game);
-void		game_close(t_game *game);
 void		flush(char *err_msg, t_game *game);
+void		game_close(t_game *game);
 
 // map_validation_utils
 void		map_validation(t_game *game);
@@ -133,19 +130,19 @@ void		move_up(t_game *game);
 
 // render_utils
 void		generate_collectibles_img(t_game *game);
+void		generate_exit_img(t_game *game);
 void		generate_floor_img(t_game *game);
 void		generate_player_img(t_game *game);
 void		generate_wall_img(t_game *game);
-void		generate_exit_img(t_game *game);
 
 // render_utils_2
 int			render_window(t_game *game);
 void		render_you_won(t_game *game);
 
 // hooks_utils
-void		set_hooks(t_game *game);
 int			close_window(t_game *game);
 int			detect_keystroke(int keycode, t_game *game);
+void		set_hooks(t_game *game);
 
 // other_utils
 t_coords	find_position(char obj, t_game *game);

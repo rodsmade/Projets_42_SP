@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:44 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/07 00:08:07 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/07 02:02:35 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,13 @@ void	generate_images(t_game *game)
 	generate_wall_img(game);
 	generate_exit_img(game);
 	generate_collectibles_img(game);
+	return ;
+}
+
+void	initialise_minilibx(t_game *game)
+{
+	game->mlx = mlx_init();
+	if (game->mlx == NULL)
+		flush("MLX_ERROR while initialising mlx", game);
 	return ;
 }
