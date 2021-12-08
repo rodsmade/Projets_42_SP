@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:47 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/08 22:40:26 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/08 22:48:43 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,14 +115,8 @@ void	map_validation(t_game *game)
 	if (game->map->grid == NULL)
 		flush("Error while allocating memory for map", 1, game);
 	if (!is_rectangular(game))
-	{
-		free_grid(game);
 		flush("Map must be square/rectangular", 1, game);
-	}
 	if (!surrounded_by_walls(game))
-	{
-		free_grid(game);
 		flush("Map must be surrounded by walls", 1, game);
-	}
 	return ;
 }
