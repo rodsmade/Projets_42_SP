@@ -1,0 +1,18 @@
+==1076== Invalid read of size 8
+==1076==    at 0x110A12: mlx_loop (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
+==1076==    by 0x10E9DC: so_long (so_long.c:28)
+==1076==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
+==1076==  Address 0x4e449a8 is 872 bytes inside a block of size 936 free'd
+==1076==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1076==    by 0x111C69: mlx_destroy_window (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
+==1076==    by 0x10EEA6: close_window (hooks_utils.c:29)
+==1076==    by 0x110A51: mlx_loop (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
+==1076==    by 0x10E9DC: so_long (so_long.c:28)
+==1076==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
+==1076==  Block was alloc'd at
+==1076==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1076==    by 0x1107C0: mlx_new_window (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
+==1076==    by 0x10F553: open_window (other_utils.c:50)
+==1076==    by 0x10E9C3: so_long (so_long.c:25)
+==1076==    by 0x10E94C: main (in /home/coder/Documents/Projects/Projets_42_SP/projets_obligatoires/5_so_long/bin/so_long)
+==1076== 

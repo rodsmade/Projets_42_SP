@@ -6,29 +6,19 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:42 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/07 00:05:02 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/07 18:58:19 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// hooks_utils.c maybe?
-
 #include "so_long.h"
-
-void	set_hooks(t_game *game)
-{
-	mlx_hook(game->window->win_ptr,
-		DestroyNotify, NoEventMask, &close_window, game);
-	mlx_hook(game->window->win_ptr,
-		KeyPress, KeyPressMask, &detect_keystroke, game);
-	mlx_loop_hook(game->mlx, &render_window, game);
-	return ;
-}
 
 int	close_window(t_game *game)
 {
+	// printf("paSSOU AQUI\n");
 	mlx_destroy_window(game->mlx, game->window->win_ptr);
 	game->window->win_ptr = NULL;
-	return (0);
+	game_close(game);
+	exit(0);
 }
 
 int	detect_keystroke(int keycode, t_game *game)
@@ -44,4 +34,14 @@ int	detect_keystroke(int keycode, t_game *game)
 	if (keycode == XK_Escape)
 		close_window(game);
 	return (0);
+}
+
+void	set_hooks(t_game *game)
+{
+	mlx_hook(game->window->win_ptr,
+		DestroyNotify, NoEventMask, &close_window, game);
+	mlx_hook(game->window->win_ptr,
+		KeyPress, KeyPressMask, &detect_keystroke, game);
+	mlx_loop_hook(game->mlx, &render_window, game);
+	return ;
 }

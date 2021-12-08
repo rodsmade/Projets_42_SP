@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2021/12/07 02:07:01 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/12/07 20:08:53 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,18 +16,16 @@ SRCS_PATH = ./srcs/
 OBJS_PATH = ./objs/
 LIBS_PATH = ./libs/
 BINS_PATH = ./bin/
-LOGS_PATH = ./logs/
-LEDGER = valgrind_logs.txt
 
 # COMPILATION
 CC = gcc
 DEBUG = -g
 FLAGS = -Wall -Wextra -Werror -O3 $(DEBUG)
+# VALGRIND = valgrind --leak-check=full --show-leak-kinds=all -s --track-fds=yes --trace-children=yes --error-exitcode=1 --track-origins=yes
 VALGRIND = valgrind --leak-check=full \
 			--show-leak-kinds=all \
 			--track-origins=yes \
-			-q \
-			--log-file=$(LOGS_PATH)$(LEDGER)
+			-q
 # TODO: dar uma olhada aqui nessas flags dps: valgrind -q --leak-check=full --show-leak-kinds=all -s --track-fds=yes --trace-children=yes --error-exitcode=1 --track-origins=yes ./a.out
 # TODO: refatorar o makefile pra parar de criar biblioteca libso_long
 # TODO: refatorar makefile pra tirar a necessidade do main.c se pá e inclui a main() no so_long.c
@@ -85,8 +83,6 @@ run: all
 	@$(MAKE_NOPRINT) fclean
 
 valgrind: all
-	@$(MKDIR) $(LOGS_PATH)
-	@$(TOUCH) $(LOGS_PATH)$(LEDGER)
 	@$(VALGRIND) $(BINS_PATH)$(EXECUTABLE) ./resources/maps/map1.ber
 
 # SANITIZE

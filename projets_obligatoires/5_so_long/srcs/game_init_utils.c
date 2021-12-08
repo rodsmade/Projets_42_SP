@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:44 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/07 02:02:35 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:33:44 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	allocate_memory(t_game *game)
 	game->player->pos = ft_calloc(1, sizeof(t_coords));
 	game->collectible = ft_calloc(1, sizeof(t_collectible));
 	game->map->tile = ft_calloc(1, sizeof(t_collectible));
-	if (game->map == NULL || game->window == NULL || game->player == NULL
-		|| game->collectible == NULL || game->player->pos == NULL
-		|| game->map->tile == NULL)
+	game->player->img = ft_calloc(4, sizeof(void *));
+	if (!game->map || !game->window || !game->player || !game->collectible
+		|| !game->player->pos || !game->map->tile || !game->player->img)
 		flush("Memory allocation failed, closing game. . .", game);
 	return ;
 }
@@ -33,10 +33,12 @@ void	initialise_values(t_game *game)
 	game->map->e_count = 0;
 	game->map->p_count = 0;
 	game->map->rows = 0;
-	game->map->tile_width = 64;
-	game->map->tile_height = 64;
 	game->player->direction = 'l';
 	game->player->moves_count = 0;
+	game->player->img[0] = NULL;
+	game->player->img[1] = NULL;
+	game->player->img[2] = NULL;
+	game->player->img[3] = NULL;
 	return ;
 }
 

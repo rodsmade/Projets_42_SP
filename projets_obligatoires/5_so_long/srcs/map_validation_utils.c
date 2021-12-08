@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:47 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/07 02:17:53 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/08 17:26:50 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ static int	is_rectangular(t_game *game)
 void	copy_map(char *linear_map, t_game *game)
 {
 	int		fd;
-	char	*buffer;
 	int		read_count;
+	char	*buffer;
 
 	fd = open(game->map->map_path, O_RDONLY);
 	if (fd < 0)
@@ -112,10 +112,19 @@ void	map_validation(t_game *game)
 	char_validation(linear_map, game);
 	game->map->grid = ft_split(linear_map, '\n');
 	if (game->map->grid == NULL)
+	{
+		free_grid(game);
 		flush("Error while allocating memory for map", game);
+	}
 	if (!is_rectangular(game))
+	{
+		free_grid(game);
 		flush("Map must be square/rectangular", game);
+	}
 	if (!surrounded_by_walls(game))
+	{
+		free_grid(game);
 		flush("Map must be surrounded by walls", game);
+	}
 	return ;
 }

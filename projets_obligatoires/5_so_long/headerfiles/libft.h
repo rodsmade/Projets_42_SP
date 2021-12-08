@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 19:11:12 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/10/08 19:11:15 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/07 20:42:12 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		contains_nl(char *string);
 int		ft_atoi(const char *nptr);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
+void	ft_free_ptr(void **ptr);
 char	*ft_get_next_line(int fd);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);

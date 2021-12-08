@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_free_ptr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/04 23:15:05 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/08 18:33:23 by roaraujo         ###   ########.fr       */
+/*   Created: 2021/12/07 20:40:41 by roaraujo          #+#    #+#             */
+/*   Updated: 2021/12/07 20:40:53 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[])
+void	ft_free_ptr(void **ptr)
 {
-	so_long(argc, argv);
-	return (0);
+	if (*ptr)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:11:48 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/07 02:03:06 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:32:43 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ void	so_long(int argc, char *argv[])
 	map_validation(&game);
 	load_sprites(&game);
 	initialise_minilibx(&game);
-	open_window(&game);
 	generate_images(&game);
+	open_window(&game);
 	set_hooks(&game);
 	mlx_loop(game.mlx);
-	game_close(&game);
 	return ;
 }

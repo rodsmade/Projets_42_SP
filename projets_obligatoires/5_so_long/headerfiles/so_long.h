@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 19:15:15 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/07 02:04:07 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/08 17:26:11 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@
 
 // ------------------------- DEFINES (constants) ----------------------------- |
 # define VALID_MAP_CHARS	"EPC10"
-# define MLX_ERROR			1
-# define TILE				50
+# define TILE_SIZE			64
 
 // ------------------------- TYPEDEFS (structs) ------------------------------ |
 typedef struct s_coords
@@ -107,6 +106,11 @@ typedef struct s_game
 // --------------------------- PROTOTYPES ------------------------------------ |
 void		so_long(int argc, char *argv[]);
 
+// hooks_utils
+int			close_window(t_game *game);
+int			detect_keystroke(int keycode, t_game *game);
+void		set_hooks(t_game *game);
+
 // game_init_utils
 void		allocate_memory(t_game *game);
 void		generate_images(t_game *game);
@@ -118,6 +122,7 @@ void		load_sprites(t_game *game);
 void		destroy_images(t_game *game);
 void		flush(char *err_msg, t_game *game);
 void		game_close(t_game *game);
+void	free_grid(t_game *game);
 
 // map_validation_utils
 void		map_validation(t_game *game);
@@ -127,6 +132,11 @@ void		move_down(t_game *game);
 void		move_left(t_game *game);
 void		move_right(t_game *game);
 void		move_up(t_game *game);
+
+// other_utils
+t_coords	find_position(char obj, t_game *game);
+void		input_validation(int argc, char *map_path, t_game *game);
+void		open_window(t_game *game);
 
 // render_utils
 void		generate_collectibles_img(t_game *game);
@@ -138,15 +148,5 @@ void		generate_wall_img(t_game *game);
 // render_utils_2
 int			render_window(t_game *game);
 void		render_you_won(t_game *game);
-
-// hooks_utils
-int			close_window(t_game *game);
-int			detect_keystroke(int keycode, t_game *game);
-void		set_hooks(t_game *game);
-
-// other_utils
-t_coords	find_position(char obj, t_game *game);
-void		input_validation(int argc, char *map_path, t_game *game);
-void		open_window(t_game *game);
 
 #endif
