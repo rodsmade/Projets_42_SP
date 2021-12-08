@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:44 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/08 19:33:31 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/08 22:35:12 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	destroy_images(t_game *game)
 	return ;
 }
 
-void	game_close(t_game *game)
+void	game_close(int breakpoint, t_game *game)
 {
 	destroy_images(game);
 	free_grid(game);
@@ -46,15 +46,18 @@ void	game_close(t_game *game)
 	ft_free_ptr((void *)&game->collectible);
 	ft_free_ptr((void *)&game->map);
 	ft_free_ptr((void *)&game->window);
-	mlx_destroy_display(game->mlx);
-	ft_free_ptr((void *)&game->mlx);
+	if (breakpoint != 1)
+	{
+		mlx_destroy_display(game->mlx);
+		ft_free_ptr((void *)&game->mlx);
+	}
 	return ;
 }
 
-void	flush(char *err_msg, t_game *game)
+void	flush(char *err_msg, int breakpoint, t_game *game)
 {
 	printf("Error\n%s\n", err_msg);
-	game_close(game);
+	game_close(breakpoint, game);
 	exit(0);
 }
 

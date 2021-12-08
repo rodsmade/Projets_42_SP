@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 19:15:15 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/08 17:26:11 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/08 22:35:59 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,9 @@ void		load_sprites(t_game *game);
 
 // game_close_utils
 void		destroy_images(t_game *game);
-void		flush(char *err_msg, t_game *game);
-void		game_close(t_game *game);
-void	free_grid(t_game *game);
+void		flush(char *err_msg, int breakpoint, t_game *game);
+void		free_grid(t_game *game);
+void		game_close(int breakpoint, t_game *game);
 
 // map_validation_utils
 void		map_validation(t_game *game);

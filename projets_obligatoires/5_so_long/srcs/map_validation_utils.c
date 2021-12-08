@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:47 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/08 17:26:50 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/08 22:40:26 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,19 @@ static void	char_validation(char *map_str, t_game *game)
 		if (*map_str == 'P')
 			game->map->p_count++;
 		if (*map_str != '\n' && !ft_strchr(VALID_MAP_CHARS, *map_str))
-			flush("Invalid char found, only EPC10 allowed", game);
+			flush("Invalid char found, only EPC10 allowed", 1, game);
 		map_str++;
 	}
 	if (game->map->c_count < 1)
-		flush("Map has no collectibles", game);
+		flush("Map has no collectibles", 1, game);
 	if (game->map->e_count < 1)
-		flush("Map has no exit", game);
+		flush("Map has no exit", 1, game);
 	if (game->map->e_count > 1)
-		flush("Map must have only one exit", game);
+		flush("Map must have only one exit", 1, game);
 	if (game->map->p_count < 1)
-		flush("Map has no player", game);
+		flush("Map has no player", 1, game);
 	if (game->map->p_count > 1)
-		flush("Map must have only one player", game);
+		flush("Map must have only one player", 1, game);
 	return ;
 }
 
@@ -83,10 +83,10 @@ void	copy_map(char *linear_map, t_game *game)
 
 	fd = open(game->map->map_path, O_RDONLY);
 	if (fd < 0)
-		flush("Error while opening file", game);
+		flush("Error while opening file", 1, game);
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (buffer == NULL)
-		flush("Error while allocating memory for map", game);
+		flush("Error while allocating memory for map", 1, game);
 	buffer[BUFFER_SIZE] = '\0';
 	ft_bzero(linear_map, 500);
 	read_count = read(fd, buffer, BUFFER_SIZE);
@@ -97,9 +97,9 @@ void	copy_map(char *linear_map, t_game *game)
 		read_count = read(fd, buffer, BUFFER_SIZE);
 	}
 	if (!*linear_map)
-		flush("Map is e m p t y !", game);
+		flush("Map is e m p t y !", 1, game);
 	if (close(fd) == -1)
-		flush("Error while closing fd", game);
+		flush("Error while closing fd", 1, game);
 	free(buffer);
 	return ;
 }
@@ -110,21 +110,19 @@ void	map_validation(t_game *game)
 
 	copy_map(linear_map, game);
 	char_validation(linear_map, game);
+	ft_free_ptr((void *)&game->map->grid);
 	game->map->grid = ft_split(linear_map, '\n');
 	if (game->map->grid == NULL)
-	{
-		free_grid(game);
-		flush("Error while allocating memory for map", game);
-	}
+		flush("Error while allocating memory for map", 1, game);
 	if (!is_rectangular(game))
 	{
 		free_grid(game);
-		flush("Map must be square/rectangular", game);
+		flush("Map must be square/rectangular", 1, game);
 	}
 	if (!surrounded_by_walls(game))
 	{
 		free_grid(game);
-		flush("Map must be surrounded by walls", game);
+		flush("Map must be surrounded by walls", 1, game);
 	}
 	return ;
 }

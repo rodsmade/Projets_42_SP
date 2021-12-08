@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:44 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/08 19:33:44 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/08 22:43:10 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@ void	allocate_memory(t_game *game)
 	game->window = ft_calloc(1, sizeof(t_window));
 	game->player = ft_calloc(1, sizeof(t_player));
 	game->player->pos = ft_calloc(1, sizeof(t_coords));
-	game->collectible = ft_calloc(1, sizeof(t_collectible));
-	game->map->tile = ft_calloc(1, sizeof(t_collectible));
 	game->player->img = ft_calloc(4, sizeof(void *));
+	game->collectible = ft_calloc(1, sizeof(t_collectible));
+	game->map->grid = ft_calloc(1, sizeof(char **));
+	game->map->tile = ft_calloc(1, sizeof(t_collectible));
 	if (!game->map || !game->window || !game->player || !game->collectible
-		|| !game->player->pos || !game->map->tile || !game->player->img)
-		flush("Memory allocation failed, closing game. . .", game);
+		|| !game->player->pos || !game->map->tile || !game->player->img
+		|| !game->map->grid)
+		flush("Memory allocation failed, closing game. . .", 0, game);
 	return ;
 }
 
@@ -46,7 +48,7 @@ void	load_sprites(t_game *game)
 {
 	game->player->sprite_path = ft_calloc(4, sizeof(char *));
 	if (game->player->sprite_path == NULL)
-		flush("Error allocating memory for player sprite paths", game);
+		flush("Error allocating memory for player sprite paths", 1, game);
 	game->player->sprite_path[0] = "./resources/images/pikachu_u1_64.xpm";
 	game->player->sprite_path[1] = "./resources/images/pikachu_l1_64.xpm";
 	game->player->sprite_path[2] = "./resources/images/pikachu_d1_64.xpm";
@@ -73,6 +75,6 @@ void	initialise_minilibx(t_game *game)
 {
 	game->mlx = mlx_init();
 	if (game->mlx == NULL)
-		flush("MLX_ERROR while initialising mlx", game);
+		flush("MLX_ERROR while initialising mlx", 1, game);
 	return ;
 }

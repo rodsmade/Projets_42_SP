@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:38 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/07 18:39:18 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/08 22:41:20 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ t_coords	find_position(char obj, t_game *game)
 void	input_validation(int argc, char *map_path, t_game *game)
 {
 	if (argc != 2)
-		flush("Invalid number of arguments (only one accepted)", game);
+		flush("Invalid number of arguments (only one accepted)", 1, game);
 	if (ft_strncmp(map_path + ft_strlen(map_path) - 4, ".ber", 4) != 0)
-		flush("Map format invalid (only .ber allowed)", game);
+		flush("Map format invalid (only .ber allowed)", 1, game);
 	game->map->map_path = ft_strdup(map_path);
 	return ;
 }
@@ -52,6 +52,6 @@ void	open_window(t_game *game)
 			game->window->height,
 			"ma fenetre");
 	if (game->window->win_ptr == NULL)
-		flush("MLX_ERROR while opening new window", game);
+		flush("MLX_ERROR while opening new window", 0, game);
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:42 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/07 18:58:19 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/08 22:44:58 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 int	close_window(t_game *game)
 {
-	// printf("paSSOU AQUI\n");
 	mlx_destroy_window(game->mlx, game->window->win_ptr);
 	game->window->win_ptr = NULL;
-	game_close(game);
+	game_close(0, game);
 	exit(0);
 }
 
