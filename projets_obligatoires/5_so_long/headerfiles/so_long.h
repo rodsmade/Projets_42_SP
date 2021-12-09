@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 19:15:15 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/08 22:35:59 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/09 02:16:11 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ typedef struct s_game
 }				t_game;
 
 // --------------------------- PROTOTYPES ------------------------------------ |
-void		so_long(int argc, char *argv[]);
 
 // hooks_utils
 int			close_window(t_game *game);

@@ -6,13 +6,13 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:11:48 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/08 19:32:43 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/09 02:15:50 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	so_long(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_game		game;
 
@@ -26,5 +26,5 @@ void	so_long(int argc, char *argv[])
 	open_window(&game);
 	set_hooks(&game);
 	mlx_loop(game.mlx);
-	return ;
+	return (0);
 }

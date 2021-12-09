@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2021/12/08 22:46:26 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/12/09 02:53:07 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ BINS_PATH = ./bin/
 # COMPILATION
 CC = gcc
 DEBUG = -g
-FLAGS = -Wall -Wextra -Werror -O3 $(DEBUG)
+CFLAGS = -Wall -Wextra -Werror -O3 $(DEBUG) -I $(HEADERS_PATH)
 # VALGRIND = valgrind --leak-check=full --show-leak-kinds=all -s --track-fds=yes --trace-children=yes --error-exitcode=1 --track-origins=yes
 VALGRIND = valgrind --leak-check=full \
 			--show-leak-kinds=all \
@@ -37,63 +37,60 @@ MAKE_NOPRINT = $(MAKE) --no-print-directory
 TOUCH = touch -a
 
 # FILES
-LIBNAME = libso_long.a
-SRC_FILES = so_long.c \
-			movement_utils.c \
-			render_utils.c \
-			render_utils_2.c \
-			game_close_utils.c \
+NAME = so_long
+SRC_FILES = game_close_utils.c \
 			game_init_utils.c \
 			hooks_utils.c \
 			map_validation_utils.c \
-			other_utils.c
+			movement_utils.c \
+			other_utils.c \
+			render_utils.c \
+			render_utils_2.c \
+			so_long.c
 SOURCES = $(addprefix $(SRCS_PATH), $(SRC_FILES))
 OBJ_FILES = $(patsubst %.c, %.o, $(SRC_FILES))
 OBJECTS = $(addprefix $(OBJS_PATH), $(OBJ_FILES))
-EXECUTABLE = so_long
 
 # TARGETS
-all: libft $(LIBNAME) main
+all: libft $(NAME)
 
 # -> compiles libft all over
 libft:
 	@cd $(LIBS_PATH)libft && $(MAKE_NOPRINT)
 
-# -> creates static library libso_long.a inside ./libs/
-$(LIBNAME): $(OBJECTS)
-	@cp $(LIBS_PATH)libft.a $(LIBS_PATH)$(LIBNAME)
-	@ar -rcs $(LIBS_PATH)$(LIBNAME) $(OBJECTS)
+# -> creates executable so_long inside ./bin/
+$(NAME): $(OBJECTS)
+	@$(MKDIR) $(BINS_PATH)
+	@$(CC) $(CFLAGS) -o $(BINS_PATH)$(NAME) $(OBJECTS) -lmlx -lXext -lX11 -L $(LIBS_PATH) -lft
 
-# -> creates object files for libso_long
-$(OBJS_PATH)%.o : $(SRCS_PATH)%.c $(HEADERS_PATH)*.h
+# -> creates object files for so_long
+$(OBJS_PATH)%.o : $(SRCS_PATH)%.c
 	@$(MKDIR) $(OBJS_PATH)
-	@$(CC) $(FLAGS) -c $< -I $(HEADERS_PATH) -o $@ -lmlx
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 # -> mandatory flag for project submission
 bonus: all
 
 # RUN
-# -> creates the executable file $(EXECUTABLE) to test development
-main:	./main.c
-	@$(MKDIR) $(BINS_PATH)
-	@$(CC) $(CFLAGS) $< -L$(LIBS_PATH) -lso_long -lmlx -lXext -lX11 -I $(HEADERS_PATH) -o $(BINS_PATH)$(EXECUTABLE)
 
 run: all
-	@$(BINS_PATH)$(EXECUTABLE) ./resources/maps/map1.ber
+	@$(BINS_PATH)$(NAME) ./resources/maps/map1.ber
 	@$(MAKE_NOPRINT) fclean
 
 valgrind: all
-	@$(VALGRIND) $(BINS_PATH)$(EXECUTABLE) ./resources/maps/map1.ber
+	@$(VALGRIND) $(BINS_PATH)$(NAME) ./resources/maps/map1.ber
+	@$(MAKE_NOPRINT) fclean
 
 # SANITIZE
 # -> deletes all .o files; also runs libft's clean target
 clean:
 	@$(RM) $(OBJECTS)
+	@$(MAKE_NOPRINT) clean -C $(LIBS_PATH)libft/
 
 # -> deletes .o files + static library file + executable; also runs libft's fclean target
 fclean: clean
-	@$(RM) $(BINS_PATH)$(EXECUTABLE)
-	@$(RM) $(LIBS_PATH)$(LIBNAME)
+	@$(RM) $(BINS_PATH)$(NAME)
+	@$(MAKE_NOPRINT) fclean -C $(LIBS_PATH)libft/
 
 # -> 
 re: fclean all
