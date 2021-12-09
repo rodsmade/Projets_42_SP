@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2021/12/09 02:53:07 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/12/09 15:58:57 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,13 +73,11 @@ bonus: all
 
 # RUN
 
-run: all
-	@$(BINS_PATH)$(NAME) ./resources/maps/map1.ber
-	@$(MAKE_NOPRINT) fclean
+run: $(BINS_PATH)$(NAME)
+	@$(BINS_PATH)$(NAME) $(MAP)
 
-valgrind: all
-	@$(VALGRIND) $(BINS_PATH)$(NAME) ./resources/maps/map1.ber
-	@$(MAKE_NOPRINT) fclean
+valgrind: $(BINS_PATH)$(NAME)
+	@$(VALGRIND) $(BINS_PATH)$(NAME) $(MAP)
 
 # SANITIZE
 # -> deletes all .o files; also runs libft's clean target
