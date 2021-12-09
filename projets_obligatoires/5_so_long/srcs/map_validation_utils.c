@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:47 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/09 17:03:23 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/09 23:11:10 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	char_validation(char *map_str, t_game *game)
 		if (*map_str == 'P')
 			game->map->p_count++;
 		if (*map_str != '\n' && !ft_strchr(VALID_MAP_CHARS, *map_str))
-			flush("Invalid char found, only EPC10M allowed", 1, game);
+			flush("Invalid char found, only EPC10MJ allowed", 1, game);
 		map_str++;
 	}
 	if (game->map->c_count < 1)
@@ -72,6 +72,8 @@ static int	is_rectangular(t_game *game)
 			return (0);
 		game->map->rows++;
 	}
+	if (game->map->cols > 20 || game->map->rows > 11)
+		flush("Map too big! (max 11 rows x 20 cols)", 1, game);
 	return (1);
 }
 

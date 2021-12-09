@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:54 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/09 17:28:38 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/09 23:01:51 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,22 @@ void	move_left(t_game *game)
 	{
 		game->player->pos->y--;
 		game->player->moves_count++;
+		print_moves_count(game);
 		render_you_won(game);
 	}
-	if (next_pos == 'M')
+	if (next_pos == 'T' || next_pos == 'J')
 		close_window(game);
 	if (next_pos != '1' && next_pos != 'E')
 	{
 		game->player->pos->y--;
 		game->player->moves_count++;
+		print_moves_count(game);
 		if (game->map->grid[game->player->pos->x][game->player->pos->y] == 'C')
 		{
 			game->map->grid[game->player->pos->x][game->player->pos->y] = '0';
 			game->player->collec_count++;
 		}
 	}
-	printf("Moves count: %i\n", game->player->moves_count);
 	return ;
 }
 
@@ -71,21 +72,22 @@ void	move_up(t_game *game)
 	{
 		game->player->pos->x--;
 		game->player->moves_count++;
+		print_moves_count(game);
 		render_you_won(game);
 	}
-	if (next_pos == 'M')
+	if (next_pos == 'T' || next_pos == 'J')
 		close_window(game);
 	if (next_pos != '1' && next_pos != 'E')
 	{
 		game->player->pos->x--;
 		game->player->moves_count++;
+		print_moves_count(game);
 		if (game->map->grid[game->player->pos->x][game->player->pos->y] == 'C')
 		{
 			game->map->grid[game->player->pos->x][game->player->pos->y] = '0';
 			game->player->collec_count++;
 		}
 	}
-	printf("Moves count: %i\n", game->player->moves_count);
 	return ;
 }
 
@@ -99,21 +101,22 @@ void	move_right(t_game *game)
 	{
 		game->player->pos->y++;
 		game->player->moves_count++;
+		print_moves_count(game);
 		render_you_won(game);
 	}
-	if (next_pos == 'M')
+	if (next_pos == 'T' || next_pos == 'J')
 		close_window(game);
 	if (next_pos != '1' && next_pos != 'E')
 	{
 		game->player->pos->y++;
 		game->player->moves_count++;
+		print_moves_count(game);
 		if (game->map->grid[game->player->pos->x][game->player->pos->y] == 'C')
 		{
 			game->map->grid[game->player->pos->x][game->player->pos->y] = '0';
 			game->player->collec_count++;
 		}
 	}
-	printf("Moves count: %i\n", game->player->moves_count);
 	return ;
 }
 
@@ -127,20 +130,21 @@ void	move_down(t_game *game)
 	{
 		game->player->pos->x++;
 		game->player->moves_count++;
+		print_moves_count(game);
 		render_you_won(game);
 	}
-	if (next_pos == 'M')
+	if (next_pos == 'T' || next_pos == 'J')
 		close_window(game);
 	if (next_pos != '1' && next_pos != 'E')
 	{
 		game->player->pos->x++;
 		game->player->moves_count++;
+		print_moves_count(game);
 		if (game->map->grid[game->player->pos->x][game->player->pos->y] == 'C')
 		{
 			game->map->grid[game->player->pos->x][game->player->pos->y] = '0';
 			game->player->collec_count++;
 		}
 	}
-	printf("Moves count: %i\n", game->player->moves_count);
 	return ;
 }

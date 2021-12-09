@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:44 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/09 17:29:55 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/09 22:48:05 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ void	destroy_images(t_game *game)
 		mlx_destroy_image(game->mlx, game->map->wall_img);
 	if (game->map->exit_img != NULL)
 		mlx_destroy_image(game->mlx, game->map->exit_img);
-	if (game->map->mewtwo_img != NULL)
-		mlx_destroy_image(game->mlx, game->map->mewtwo_img);
+	if (game->map->trainer_img[0] != NULL)
+		mlx_destroy_image(game->mlx, game->map->trainer_img[0]);
+	if (game->map->trainer_img[1] != NULL)
+		mlx_destroy_image(game->mlx, game->map->trainer_img[1]);
 	if (game->collectible->img != NULL)
 		mlx_destroy_image(game->mlx, game->collectible->img);
 	i = -1;
@@ -39,13 +41,15 @@ void	game_close(int breakpoint, t_game *game)
 {
 	destroy_images(game);
 	free_grid(game);
-	ft_free_ptr((void *)&game->map->map_path);
-	ft_free_ptr((void *)&game->map->tile);
 	ft_free_ptr((void *)&game->player->img);
 	ft_free_ptr((void *)&game->player->pos);
 	ft_free_ptr((void *)&game->player->sprite_path);
 	ft_free_ptr((void *)&game->player);
 	ft_free_ptr((void *)&game->collectible);
+	ft_free_ptr((void *)&game->map->map_path);
+	ft_free_ptr((void *)&game->map->tile);
+	ft_free_ptr((void *)&game->map->trainer_img);
+	ft_free_ptr((void *)&game->map->trainer_path);
 	ft_free_ptr((void *)&game->map);
 	ft_free_ptr((void *)&game->window);
 	if (breakpoint != 1)
