@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:44 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/08 22:35:12 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/09 17:29:55 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	destroy_images(t_game *game)
 		mlx_destroy_image(game->mlx, game->map->wall_img);
 	if (game->map->exit_img != NULL)
 		mlx_destroy_image(game->mlx, game->map->exit_img);
+	if (game->map->mewtwo_img != NULL)
+		mlx_destroy_image(game->mlx, game->map->mewtwo_img);
 	if (game->collectible->img != NULL)
 		mlx_destroy_image(game->mlx, game->collectible->img);
 	i = -1;

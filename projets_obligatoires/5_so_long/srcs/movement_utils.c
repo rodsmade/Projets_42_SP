@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:54 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/09 16:02:08 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/09 17:28:38 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	move_left(t_game *game)
 		game->player->moves_count++;
 		render_you_won(game);
 	}
+	if (next_pos == 'M')
+		close_window(game);
 	if (next_pos != '1' && next_pos != 'E')
 	{
 		game->player->pos->y--;
@@ -71,6 +73,8 @@ void	move_up(t_game *game)
 		game->player->moves_count++;
 		render_you_won(game);
 	}
+	if (next_pos == 'M')
+		close_window(game);
 	if (next_pos != '1' && next_pos != 'E')
 	{
 		game->player->pos->x--;
@@ -97,6 +101,8 @@ void	move_right(t_game *game)
 		game->player->moves_count++;
 		render_you_won(game);
 	}
+	if (next_pos == 'M')
+		close_window(game);
 	if (next_pos != '1' && next_pos != 'E')
 	{
 		game->player->pos->y++;
@@ -123,6 +129,8 @@ void	move_down(t_game *game)
 		game->player->moves_count++;
 		render_you_won(game);
 	}
+	if (next_pos == 'M')
+		close_window(game);
 	if (next_pos != '1' && next_pos != 'E')
 	{
 		game->player->pos->x++;

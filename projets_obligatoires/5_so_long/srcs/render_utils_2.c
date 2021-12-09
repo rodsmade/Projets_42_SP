@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:58 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/09 16:05:28 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/09 17:21:43 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,18 @@ int	render_window(t_game *game)
 			j = -1;
 			while (game->map->grid[i][++j])
 			{
-				if (game->map->grid[i][j] == 'E')
-					mlx_put_image_to_window(game->mlx, game->window->win_ptr,
-						game->map->exit_img, TILE_SIZE * j,
-						TILE_SIZE * i);
-				if (game->map->grid[i][j] == 'C')
-					mlx_put_image_to_window(game->mlx, game->window->win_ptr,
-						game->collectible->img, TILE_SIZE * j,
-						TILE_SIZE * i);
+					if (game->map->grid[i][j] == 'E')
+						mlx_put_image_to_window(game->mlx, game->window->win_ptr,
+							game->map->exit_img, TILE_SIZE * j,
+							TILE_SIZE * i);
+					if (game->map->grid[i][j] == 'C')
+						mlx_put_image_to_window(game->mlx, game->window->win_ptr,
+							game->collectible->img, TILE_SIZE * j,
+							TILE_SIZE * i);
+					if (game->map->grid[i][j] == 'M')
+						mlx_put_image_to_window(game->mlx, game->window->win_ptr,
+							game->map->mewtwo_img, TILE_SIZE * j,
+							TILE_SIZE * i);
 			}
 		}
 		render_player(game);

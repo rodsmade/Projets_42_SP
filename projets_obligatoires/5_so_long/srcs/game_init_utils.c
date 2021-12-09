@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:44 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/09 02:56:02 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/09 17:23:59 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	load_sprites(t_game *game)
 	game->player->sprite_path[2] = "./resources/images/pikachu_d1_64.xpm";
 	game->player->sprite_path[3] = "./resources/images/pikachu_r1_64.xpm";
 	game->map->floor_path = "./resources/images/floor_64.xpm";
+	game->map->mewtwo_path = "./resources/images/mewtwo_64.xpm";
 	game->map->wall_path = "./resources/images/stone_64.xpm";
 	game->map->exit_path = "./resources/images/exit_64.xpm";
 	game->collectible->sprite_path = "./resources/images/pokeball_64.xpm";
@@ -65,6 +66,7 @@ void	generate_images(t_game *game)
 {
 	generate_player_img(game);
 	generate_floor_img(game);
+	generate_mewtwo_img(game);
 	generate_wall_img(game);
 	generate_exit_img(game);
 	generate_collectibles_img(game);

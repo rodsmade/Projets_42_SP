@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 19:15:15 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/09 16:04:01 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/09 17:11:45 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # include <unistd.h>
 
 // ------------------------- DEFINES (constants) ----------------------------- |
-# define VALID_MAP_CHARS	"EPC10"
+# define VALID_MAP_CHARS	"EPC10M"
 # define TILE_SIZE			64
 
 // ------------------------- TYPEDEFS (structs) ------------------------------ |
@@ -89,6 +89,8 @@ typedef struct s_map
 	void		*floor_img;
 	char		*wall_path;
 	void		*wall_img;
+	char		*mewtwo_path;
+	void		*mewtwo_img;
 	char		**grid;
 	t_coords	*tile;
 	t_list		*rows_list;
@@ -147,5 +149,9 @@ void		generate_wall_img(t_game *game);
 void		open_window(t_game *game);
 int			render_window(t_game *game);
 void		render_you_won(t_game *game);
+
+// render_utils_3
+void		generate_mewtwo_img(t_game *game);
+void		render_ecm(int i, int j, t_game *game);
 
 #endif
