@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:42 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/08 22:44:58 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/09 15:41:01 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	detect_keystroke(int keycode, t_game *game)
 		move_right(game);
 	if (keycode == XK_Down || keycode == XK_s)
 		move_down(game);
-	if (keycode == XK_Escape)
+	if (keycode == XK_Escape || keycode == XK_q)
 		close_window(game);
 	return (0);
 }
