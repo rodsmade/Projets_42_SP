@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2021/12/09 15:58:57 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/12/09 16:31:18 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,13 +37,14 @@ MAKE_NOPRINT = $(MAKE) --no-print-directory
 TOUCH = touch -a
 
 # FILES
-NAME = so_long
+NAME = $(BINS_PATH)so_long
+LIBFT_A = $(LIBS_PATH)libft.a
 SRC_FILES = game_close_utils.c \
 			game_init_utils.c \
 			hooks_utils.c \
+			input_validation_utils.c \
 			map_validation_utils.c \
 			movement_utils.c \
-			other_utils.c \
 			render_utils.c \
 			render_utils_2.c \
 			so_long.c
@@ -52,32 +53,34 @@ OBJ_FILES = $(patsubst %.c, %.o, $(SRC_FILES))
 OBJECTS = $(addprefix $(OBJS_PATH), $(OBJ_FILES))
 
 # TARGETS
-all: libft $(NAME)
+all: make_dir $(NAME)
 
 # -> compiles libft all over
-libft:
+$(LIBFT_A):
 	@cd $(LIBS_PATH)libft && $(MAKE_NOPRINT)
 
+make_dir:
+	$(MKDIR) $(BINS_PATH)
+
 # -> creates executable so_long inside ./bin/
-$(NAME): $(OBJECTS)
-	@$(MKDIR) $(BINS_PATH)
-	@$(CC) $(CFLAGS) -o $(BINS_PATH)$(NAME) $(OBJECTS) -lmlx -lXext -lX11 -L $(LIBS_PATH) -lft
+$(NAME): $(LIBFT_A) $(OBJECTS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJECTS) -lmlx -lXext -lX11 -L $(LIBS_PATH) -lft
 
 # -> creates object files for so_long
 $(OBJS_PATH)%.o : $(SRCS_PATH)%.c
-	@$(MKDIR) $(OBJS_PATH)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(MKDIR) $(OBJS_PATH)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 # -> mandatory flag for project submission
 bonus: all
 
 # RUN
 
-run: $(BINS_PATH)$(NAME)
-	@$(BINS_PATH)$(NAME) $(MAP)
+run: $(NAME)
+	@$(NAME) $(MAP)
 
-valgrind: $(BINS_PATH)$(NAME)
-	@$(VALGRIND) $(BINS_PATH)$(NAME) $(MAP)
+valgrind: $(NAME)
+	@$(VALGRIND) $(NAME) $(MAP)
 
 # SANITIZE
 # -> deletes all .o files; also runs libft's clean target
@@ -87,7 +90,7 @@ clean:
 
 # -> deletes .o files + static library file + executable; also runs libft's fclean target
 fclean: clean
-	@$(RM) $(BINS_PATH)$(NAME)
+	@$(RM) $(NAME)
 	@$(MAKE_NOPRINT) fclean -C $(LIBS_PATH)libft/
 
 # -> 

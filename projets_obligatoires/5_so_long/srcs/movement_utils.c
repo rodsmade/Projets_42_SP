@@ -6,11 +6,32 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:54 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/07 00:07:50 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/09 16:02:08 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+t_coords	find_position(char obj, t_game *game)
+{
+	static t_coords	coords = (t_coords){.x = 0, .y = -1};
+
+	coords.y++;
+	while (game->map->grid[coords.x])
+	{
+		while (game->map->grid[coords.x][coords.y])
+		{
+			if (game->map->grid[coords.x][coords.y] == obj)
+				return (coords);
+			coords.y++;
+		}
+		coords.y = 0;
+		coords.x++;
+	}
+	coords.x = 0;
+	coords.y = -1;
+	return (coords);
+}
 
 void	move_left(t_game *game)
 {

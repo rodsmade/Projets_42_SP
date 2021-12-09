@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 19:15:15 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/09 02:16:11 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/09 16:04:01 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,15 +127,14 @@ void		game_close(int breakpoint, t_game *game);
 void		map_validation(t_game *game);
 
 // movement_utils
+t_coords	find_position(char obj, t_game *game);
 void		move_down(t_game *game);
 void		move_left(t_game *game);
 void		move_right(t_game *game);
 void		move_up(t_game *game);
 
 // other_utils
-t_coords	find_position(char obj, t_game *game);
 void		input_validation(int argc, char *map_path, t_game *game);
-void		open_window(t_game *game);
 
 // render_utils
 void		generate_collectibles_img(t_game *game);
@@ -145,6 +144,7 @@ void		generate_player_img(t_game *game);
 void		generate_wall_img(t_game *game);
 
 // render_utils_2
+void		open_window(t_game *game);
 int			render_window(t_game *game);
 void		render_you_won(t_game *game);
 

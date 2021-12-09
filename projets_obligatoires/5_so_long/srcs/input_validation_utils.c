@@ -6,32 +6,11 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:38 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/08 22:41:20 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/09 16:03:36 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-t_coords	find_position(char obj, t_game *game)
-{
-	static t_coords	coords = (t_coords){.x = 0, .y = -1};
-
-	coords.y++;
-	while (game->map->grid[coords.x])
-	{
-		while (game->map->grid[coords.x][coords.y])
-		{
-			if (game->map->grid[coords.x][coords.y] == obj)
-				return (coords);
-			coords.y++;
-		}
-		coords.y = 0;
-		coords.x++;
-	}
-	coords.x = 0;
-	coords.y = -1;
-	return (coords);
-}
 
 void	input_validation(int argc, char *map_path, t_game *game)
 {
@@ -40,18 +19,5 @@ void	input_validation(int argc, char *map_path, t_game *game)
 	if (ft_strncmp(map_path + ft_strlen(map_path) - 4, ".ber", 4) != 0)
 		flush("Map format invalid (only .ber allowed)", 1, game);
 	game->map->map_path = ft_strdup(map_path);
-	return ;
-}
-
-void	open_window(t_game *game)
-{
-	game->window->width = TILE_SIZE * game->map->cols;
-	game->window->height = TILE_SIZE * game->map->rows;
-	game->window->win_ptr = mlx_new_window(game->mlx,
-			game->window->width,
-			game->window->height,
-			"ma fenetre");
-	if (game->window->win_ptr == NULL)
-		flush("MLX_ERROR while opening new window", 0, game);
 	return ;
 }

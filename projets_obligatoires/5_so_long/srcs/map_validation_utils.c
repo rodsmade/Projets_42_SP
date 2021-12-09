@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:47 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/08 22:48:43 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/09 16:07:32 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static int	is_rectangular(t_game *game)
 	return (1);
 }
 
-void	copy_map(char *linear_map, t_game *game)
+static void	copy_map(char *linear_map, t_game *game)
 {
 	int		fd;
 	int		read_count;
