@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2021/12/09 16:31:18 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/12/09 16:54:07 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,7 @@ CFLAGS = -Wall -Wextra -Werror -O3 $(DEBUG) -I $(HEADERS_PATH)
 # VALGRIND = valgrind --leak-check=full --show-leak-kinds=all -s --track-fds=yes --trace-children=yes --error-exitcode=1 --track-origins=yes
 VALGRIND = valgrind --leak-check=full \
 			--show-leak-kinds=all \
-			--track-origins=yes \
-			-q
+			--track-origins=yes
 # TODO: dar uma olhada aqui nessas flags dps: valgrind -q --leak-check=full --show-leak-kinds=all -s --track-fds=yes --trace-children=yes --error-exitcode=1 --track-origins=yes ./a.out
 # TODO: refatorar o makefile pra parar de criar biblioteca libso_long
 # TODO: refatorar makefile pra tirar a necessidade do main.c se pá e inclui a main() no so_long.c
@@ -96,4 +95,4 @@ fclean: clean
 # -> 
 re: fclean all
 
-.PHONY: all run clean fclean re
+.PHONY: all run clean fclean re valgrind bonus make_dir
