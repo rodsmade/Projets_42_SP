@@ -6,68 +6,83 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:58 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/08 22:42:32 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/10 15:49:14 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	generate_player_img(t_game *game)
+static void	render_map(t_game *game)
 {
-	int	i;
+	int		i;
+	int		j;
 
 	i = -1;
-	while (++i < 4)
+	while (game->map->grid[++i])
 	{
-		game->player->img[i] = mlx_xpm_file_to_image(game->mlx,
-				game->player->sprite_path[i],
-				&game->player->width, &game->player->height);
-		if (game->player->img[i] == NULL)
-			flush("MLX_ERROR while creating player images", 0, game);
+		j = -1;
+		while (game->map->grid[i][++j])
+		{
+			if (game->map->grid[i][j] == '1')
+				mlx_put_image_to_window(game->mlx, game->window->win_ptr,
+					game->map->wall_img, TILE_SIZE * j,
+					TILE_SIZE * i);
+			else
+				mlx_put_image_to_window(game->mlx, game->window->win_ptr,
+					game->map->floor_img, TILE_SIZE * j,
+					TILE_SIZE * i);
+		}
 	}
 	return ;
 }
 
-void	generate_floor_img(t_game *game)
+static void	render_player(t_game *game)
 {
-	game->map->floor_img = mlx_xpm_file_to_image(game->mlx,
-			game->map->floor_path,
-			&game->map->tile->x,
-			&game->map->tile->y);
-	if (game->map->floor_img == NULL)
-		flush("MLX_ERROR while creating floor image", 0, game);
+	mlx_put_image_to_window(game->mlx, game->window->win_ptr,
+		game->player->img[game->player->direction - 'i'],
+		TILE_SIZE * game->player->pos->y,
+		TILE_SIZE * game->player->pos->x);
 	return ;
 }
 
-void	generate_wall_img(t_game *game)
+int	render_window(t_game *game)
 {
-	game->map->wall_img = mlx_xpm_file_to_image(game->mlx,
-			game->map->wall_path,
-			&game->map->tile->x,
-			&game->map->tile->y);
-	if (game->map->wall_img == NULL)
-		flush("MLX_ERROR while creating wall image", 0, game);
+	int		i;
+	int		j;
+
+	if (game->window->win_ptr != NULL)
+	{
+		render_map(game);
+		i = -1;
+		while (game->map->grid[++i])
+		{
+			j = -1;
+			while (game->map->grid[i][++j])
+			{
+				render_ectj(i, j, game);
+			}
+		}
+		render_player(game);
+		print_moves_count(game);
+	}
+	return (0);
+}
+
+void	render_you_won(t_game *game)
+{
+	close_window(game);
 	return ;
 }
 
-void	generate_exit_img(t_game *game)
+void	open_window(t_game *game)
 {
-	game->map->exit_img = mlx_xpm_file_to_image(game->mlx,
-			game->map->exit_path,
-			&game->map->tile->x,
-			&game->map->tile->y);
-	if (game->map->exit_img == NULL)
-		flush("MLX_ERROR while creating exit image", 0, game);
-	return ;
-}
-
-void	generate_collectibles_img(t_game *game)
-{
-	game->collectible->img = mlx_xpm_file_to_image(game->mlx,
-			game->collectible->sprite_path,
-			&game->collectible->width,
-			&game->collectible->height);
-	if (game->map->wall_img == NULL)
-		flush("MLX_ERROR while creating collectibles image", 0, game);
+	game->window->width = TILE_SIZE * game->map->cols;
+	game->window->height = TILE_SIZE * game->map->rows;
+	game->window->win_ptr = mlx_new_window(game->mlx,
+			game->window->width,
+			game->window->height,
+			"ma fenetre");
+	if (game->window->win_ptr == NULL)
+		flush("MLX_ERROR while opening new window", 0, game);
 	return ;
 }

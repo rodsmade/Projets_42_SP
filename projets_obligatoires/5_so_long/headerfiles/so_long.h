@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 19:15:15 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/09 22:59:18 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/10 15:46:08 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,21 @@ typedef struct s_map
 	t_list		*rows_list;
 }				t_map;
 
+typedef struct	s_draw{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_width;
+	int		endian;
+}				t_draw;
+
 typedef struct s_game
 {
 	void			*mlx;
 	t_window		*window;
 	t_player		*player;
 	t_collectible	*collectible;
+	t_draw			*draw;
 	t_map			*map;
 }				t_game;
 
@@ -139,20 +148,23 @@ void		move_up(t_game *game);
 void		input_validation(int argc, char *map_path, t_game *game);
 
 // render_utils
+void		open_window(t_game *game);
+int			render_window(t_game *game);
+void		render_you_won(t_game *game);
+
+// render_utils_2
 void		generate_collectibles_img(t_game *game);
 void		generate_exit_img(t_game *game);
 void		generate_floor_img(t_game *game);
 void		generate_player_img(t_game *game);
 void		generate_wall_img(t_game *game);
 
-// render_utils_2
-void		open_window(t_game *game);
-int			render_window(t_game *game);
-void		render_you_won(t_game *game);
-
 // render_utils_3
 void		generate_trainer_img(t_game *game);
 void		render_ectj(int i, int j, t_game *game);
 void		print_moves_count(t_game *game);
+void		generate_moves_img(t_game *game);
+void		my_mlx_pixel_put(t_draw *data, int x, int y, int color);
+
 
 #endif

@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2021/12/09 17:16:59 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/12/10 15:50:11 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,13 +22,8 @@ CC = gcc
 DEBUG = -g
 CFLAGS = -Wall -Wextra -Werror -O3 $(DEBUG) -I $(HEADERS_PATH)
 # VALGRIND = valgrind --leak-check=full --show-leak-kinds=all -s --track-fds=yes --trace-children=yes --error-exitcode=1 --track-origins=yes
-VALGRIND = valgrind --leak-check=full \
-			--show-leak-kinds=all \
-			--track-origins=yes \
-			-q
+VALGRIND = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -q --tool=memcheck
 # TODO: dar uma olhada aqui nessas flags dps: valgrind -q --leak-check=full --show-leak-kinds=all -s --track-fds=yes --trace-children=yes --error-exitcode=1 --track-origins=yes ./a.out
-# TODO: refatorar o makefile pra parar de criar biblioteca libso_long
-# TODO: refatorar makefile pra tirar a necessidade do main.c se pá e inclui a main() no so_long.c
 
 # BASH COMMANDS
 RM = rm -f
@@ -61,16 +56,16 @@ $(LIBFT_A):
 	@cd $(LIBS_PATH)libft && $(MAKE_NOPRINT)
 
 make_dir:
-	$(MKDIR) $(BINS_PATH)
+	@$(MKDIR) $(BINS_PATH)
 
 # -> creates executable so_long inside ./bin/
 $(NAME): $(LIBFT_A) $(OBJECTS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJECTS) -lmlx -lXext -lX11 -L $(LIBS_PATH) -lft
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJECTS) -lmlx -lXext -lX11 -L $(LIBS_PATH) -lft
 
 # -> creates object files for so_long
 $(OBJS_PATH)%.o : $(SRCS_PATH)%.c
-	$(MKDIR) $(OBJS_PATH)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(MKDIR) $(OBJS_PATH)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 # -> mandatory flag for project submission
 bonus: all
