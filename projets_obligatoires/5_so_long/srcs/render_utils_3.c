@@ -6,11 +6,36 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:58 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/10 15:59:48 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/10 20:41:00 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	generate_moves_img(t_game *game)
+{
+	int	x;
+	int	y;
+
+	game->draw->img = mlx_new_image(game->mlx, 56, 30);
+	if (game->draw->img == NULL)
+		flush("MLX_ERROR while creating moves image", 0, game);
+	game->draw->addr = mlx_get_data_addr(game->draw->img,
+			&game->draw->bits_per_pixel, &game->draw->line_width,
+			&game->draw->endian);
+	x = -1;
+	while (++x < 56)
+	{
+		y = -1;
+		while (++y < 30)
+		{
+			my_mlx_pixel_put(game->draw, x, y, 0xffffff);
+			if (x < 4 || x > 51 || y < 4 || y > 25)
+				my_mlx_pixel_put(game->draw, x, y, 0x000000);
+		}
+	}
+	return ;
+}
 
 void	generate_trainer_img(t_game *game)
 {
@@ -29,24 +54,30 @@ void	generate_trainer_img(t_game *game)
 	return ;
 }
 
-void	generate_moves_img(t_game *game)
+void	my_mlx_pixel_put(t_draw *data, int x, int y, int color)
 {
-	int	x;
-	int	y;
+	char	*dst;
 
-	game->draw->img = mlx_new_image(game->mlx, 120, 20);
-	if (game->draw->img == NULL)
-		flush("MLX_ERROR while creating moves image", 0, game);
-	game->draw->addr = mlx_get_data_addr(game->draw->img,
-		&game->draw->bits_per_pixel, &game->draw->line_width,
-		&game->draw->endian);
-	x = 0;
-	while (x++ < 120)
-	{
-		y = 0;
-		while (y++ < 20)
-			my_mlx_pixel_put(game->draw, x, y, 0x000000);
-	}
+	dst = data->addr + (y * data->line_width + x * (data->bits_per_pixel / 8));
+	*(unsigned int *) dst = color;
+	return ;
+}
+
+void	print_moves_count(t_game *game)
+{
+	char	*i_to_a;
+	char	*boilerplate;
+	char	*joint;
+
+	mlx_put_image_to_window(game->mlx, game->window->win_ptr,
+		game->draw->img, 68, 20);
+	boilerplate = ft_strdup("");
+	i_to_a = ft_itoa(game->player->moves_count);
+	joint = ft_strjoin(boilerplate, i_to_a);
+	mlx_string_put(game->mlx, game->window->win_ptr, 92, 40, 0xffca18, joint);
+	ft_free_ptr((void *)&i_to_a);
+	ft_free_ptr((void *)&boilerplate);
+	ft_free_ptr((void *)&joint);
 	return ;
 }
 
@@ -68,31 +99,5 @@ void	render_ectj(int i, int j, t_game *game)
 		mlx_put_image_to_window(game->mlx, game->window->win_ptr,
 			game->map->trainer_img[1], TILE_SIZE * j,
 			TILE_SIZE * i);
-	return ;
-}
-
-void	print_moves_count(t_game *game)
-{
-	char	*i_to_a;
-	char	*boilerplate;
-	char	*joint;
-
-	mlx_put_image_to_window(game->mlx, game->window->win_ptr, game->draw->img, 50, 35);
-	boilerplate = ft_strdup("Moves count: ");
-	i_to_a = ft_itoa(game->player->moves_count);
-	joint = ft_strjoin(boilerplate, i_to_a);
-	mlx_string_put(game->mlx, game->window->win_ptr, 55, 50, 0xFFFFFF, joint);
-	ft_free_ptr((void *)&i_to_a);
-	ft_free_ptr((void *)&boilerplate);
-	ft_free_ptr((void *)&joint);
-	return ;
-}
-
-void	my_mlx_pixel_put(t_draw *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_width + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:44 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/10 16:32:57 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/10 20:07:17 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,26 @@ void	allocate_memory(t_game *game)
 		|| !game->player->pos || !game->map->tile || !game->player->img
 		|| !game->map->grid || !game->map->trainer_img || !game->draw)
 		flush("Memory allocation failed, closing game. . .", 0, game);
+	return ;
+}
+
+void	generate_images(t_game *game)
+{
+	generate_player_img(game);
+	generate_floor_img(game);
+	generate_trainer_img(game);
+	generate_wall_img(game);
+	generate_exit_img(game);
+	generate_collectibles_img(game);
+	generate_moves_img(game);
+	return ;
+}
+
+void	initialise_minilibx(t_game *game)
+{
+	game->mlx = mlx_init();
+	if (game->mlx == NULL)
+		flush("MLX_ERROR while initialising mlx", 1, game);
 	return ;
 }
 
@@ -67,25 +87,5 @@ void	load_sprites(t_game *game)
 	game->map->exit_path = "./resources/images/stair_64.xpm";
 	game->collectible->sprite_path = "./resources/images/pokeball_64.xpm";
 	*(game->player->pos) = find_position('P', game);
-	return ;
-}
-
-void	generate_images(t_game *game)
-{
-	generate_player_img(game);
-	generate_floor_img(game);
-	generate_trainer_img(game);
-	generate_wall_img(game);
-	generate_exit_img(game);
-	generate_collectibles_img(game);
-	generate_moves_img(game);
-	return ;
-}
-
-void	initialise_minilibx(t_game *game)
-{
-	game->mlx = mlx_init();
-	if (game->mlx == NULL)
-		flush("MLX_ERROR while initialising mlx", 1, game);
 	return ;
 }

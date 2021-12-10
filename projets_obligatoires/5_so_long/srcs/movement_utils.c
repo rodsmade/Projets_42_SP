@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:54 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/10 02:44:06 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/10 20:09:15 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,33 @@ t_coords	find_position(char obj, t_game *game)
 	return (coords);
 }
 
+void	move_down(t_game *game)
+{
+	char	next_pos;
+
+	next_pos = game->map->grid[game->player->pos->x + 1][game->player->pos->y];
+	game->player->direction = 'k';
+	if (next_pos == 'E' && game->player->collec_count == game->map->c_count)
+	{
+		game->player->pos->x++;
+		game->player->moves_count++;
+		render_you_won(game);
+	}
+	if (next_pos == 'T' || next_pos == 'J')
+		close_window(game);
+	if (next_pos != '1' && next_pos != 'E')
+	{
+		game->player->pos->x++;
+		game->player->moves_count++;
+		if (game->map->grid[game->player->pos->x][game->player->pos->y] == 'C')
+		{
+			game->map->grid[game->player->pos->x][game->player->pos->y] = '0';
+			game->player->collec_count++;
+		}
+	}
+	return ;
+}
+
 void	move_left(t_game *game)
 {
 	char	next_pos;
@@ -50,33 +77,6 @@ void	move_left(t_game *game)
 	if (next_pos != '1' && next_pos != 'E')
 	{
 		game->player->pos->y--;
-		game->player->moves_count++;
-		if (game->map->grid[game->player->pos->x][game->player->pos->y] == 'C')
-		{
-			game->map->grid[game->player->pos->x][game->player->pos->y] = '0';
-			game->player->collec_count++;
-		}
-	}
-	return ;
-}
-
-void	move_up(t_game *game)
-{
-	char	next_pos;
-
-	next_pos = game->map->grid[game->player->pos->x - 1][game->player->pos->y];
-	game->player->direction = 'i';
-	if (next_pos == 'E' && game->player->collec_count == game->map->c_count)
-	{
-		game->player->pos->x--;
-		game->player->moves_count++;
-		render_you_won(game);
-	}
-	if (next_pos == 'T' || next_pos == 'J')
-		close_window(game);
-	if (next_pos != '1' && next_pos != 'E')
-	{
-		game->player->pos->x--;
 		game->player->moves_count++;
 		if (game->map->grid[game->player->pos->x][game->player->pos->y] == 'C')
 		{
@@ -114,15 +114,15 @@ void	move_right(t_game *game)
 	return ;
 }
 
-void	move_down(t_game *game)
+void	move_up(t_game *game)
 {
 	char	next_pos;
 
-	next_pos = game->map->grid[game->player->pos->x + 1][game->player->pos->y];
-	game->player->direction = 'k';
+	next_pos = game->map->grid[game->player->pos->x - 1][game->player->pos->y];
+	game->player->direction = 'i';
 	if (next_pos == 'E' && game->player->collec_count == game->map->c_count)
 	{
-		game->player->pos->x++;
+		game->player->pos->x--;
 		game->player->moves_count++;
 		render_you_won(game);
 	}
@@ -130,7 +130,7 @@ void	move_down(t_game *game)
 		close_window(game);
 	if (next_pos != '1' && next_pos != 'E')
 	{
-		game->player->pos->x++;
+		game->player->pos->x--;
 		game->player->moves_count++;
 		if (game->map->grid[game->player->pos->x][game->player->pos->y] == 'C')
 		{

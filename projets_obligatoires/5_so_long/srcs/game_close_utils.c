@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:44 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/10 02:46:36 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/10 20:06:36 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,24 @@ void	destroy_images(t_game *game)
 	return ;
 }
 
+void	flush(char *err_msg, int breakpoint, t_game *game)
+{
+	printf("Error\n%s\n", err_msg);
+	game_close(breakpoint, game);
+	exit(0);
+}
+
+void	free_grid(t_game *game)
+{
+	int	i;
+
+	i = -1;
+	while (game->map->grid[++i])
+		ft_free_ptr((void *)&game->map->grid[i]);
+	ft_free_ptr((void *)&game->map->grid);
+	return ;
+}
+
 void	game_close(int breakpoint, t_game *game)
 {
 	destroy_images(game);
@@ -60,23 +78,5 @@ void	game_close(int breakpoint, t_game *game)
 		mlx_destroy_display(game->mlx);
 		ft_free_ptr((void *)&game->mlx);
 	}
-	return ;
-}
-
-void	flush(char *err_msg, int breakpoint, t_game *game)
-{
-	printf("Error\n%s\n", err_msg);
-	game_close(breakpoint, game);
-	exit(0);
-}
-
-void	free_grid(t_game *game)
-{
-	int	i;
-
-	i = -1;
-	while (game->map->grid[++i])
-		ft_free_ptr((void *)&game->map->grid[i]);
-	ft_free_ptr((void *)&game->map->grid);
 	return ;
 }

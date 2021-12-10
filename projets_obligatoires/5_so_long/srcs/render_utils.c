@@ -6,11 +6,24 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:58 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/10 15:49:14 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/10 20:41:55 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	open_window(t_game *game)
+{
+	game->window->width = TILE_SIZE * game->map->cols;
+	game->window->height = TILE_SIZE * game->map->rows;
+	game->window->win_ptr = mlx_new_window(game->mlx,
+			game->window->width,
+			game->window->height,
+			"ma fenetre");
+	if (game->window->win_ptr == NULL)
+		flush("MLX_ERROR while opening new window", 0, game);
+	return ;
+}
 
 static void	render_map(t_game *game)
 {
@@ -71,18 +84,5 @@ int	render_window(t_game *game)
 void	render_you_won(t_game *game)
 {
 	close_window(game);
-	return ;
-}
-
-void	open_window(t_game *game)
-{
-	game->window->width = TILE_SIZE * game->map->cols;
-	game->window->height = TILE_SIZE * game->map->rows;
-	game->window->win_ptr = mlx_new_window(game->mlx,
-			game->window->width,
-			game->window->height,
-			"ma fenetre");
-	if (game->window->win_ptr == NULL)
-		flush("MLX_ERROR while opening new window", 0, game);
 	return ;
 }

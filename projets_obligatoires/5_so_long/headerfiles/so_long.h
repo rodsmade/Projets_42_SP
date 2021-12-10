@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 19:15:15 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/10 15:46:08 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/10 19:59:46 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ typedef struct s_map
 	t_list		*rows_list;
 }				t_map;
 
-typedef struct	s_draw{
+typedef struct s_draw{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -160,11 +160,10 @@ void		generate_player_img(t_game *game);
 void		generate_wall_img(t_game *game);
 
 // render_utils_3
-void		generate_trainer_img(t_game *game);
-void		render_ectj(int i, int j, t_game *game);
-void		print_moves_count(t_game *game);
 void		generate_moves_img(t_game *game);
+void		generate_trainer_img(t_game *game);
 void		my_mlx_pixel_put(t_draw *data, int x, int y, int color);
-
+void		print_moves_count(t_game *game);
+void		render_ectj(int i, int j, t_game *game);
 
 #endif
