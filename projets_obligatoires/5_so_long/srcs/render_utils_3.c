@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:58 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/10 20:41:00 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/12 23:25:55 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	print_moves_count(t_game *game)
 	boilerplate = ft_strdup("");
 	i_to_a = ft_itoa(game->player->moves_count);
 	joint = ft_strjoin(boilerplate, i_to_a);
-	mlx_string_put(game->mlx, game->window->win_ptr, 92, 40, 0xffca18, joint);
+	mlx_string_put(game->mlx, game->window->win_ptr, 92, 40, 0x5abdff, joint);
 	ft_free_ptr((void *)&i_to_a);
 	ft_free_ptr((void *)&boilerplate);
 	ft_free_ptr((void *)&joint);

@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:58 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/10 20:41:55 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/12 23:28:31 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	open_window(t_game *game)
 	game->window->win_ptr = mlx_new_window(game->mlx,
 			game->window->width,
 			game->window->height,
-			"ma fenetre");
+			"Pokemon Yellow-ish");
 	if (game->window->win_ptr == NULL)
 		flush("MLX_ERROR while opening new window", 0, game);
 	return ;

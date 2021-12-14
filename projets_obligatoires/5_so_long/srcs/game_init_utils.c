@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:14:44 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/10 20:07:17 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/12 23:21:16 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	load_sprites(t_game *game)
 	game->player->sprite_path[1] = "./resources/images/pikachu_l1_64.xpm";
 	game->player->sprite_path[2] = "./resources/images/pikachu_d1_64.xpm";
 	game->player->sprite_path[3] = "./resources/images/pikachu_r1_64.xpm";
-	game->map->trainer_path[0] = "./resources/images/jessie_64.xpm";
+	game->map->trainer_path[0] = "./resources/images/jessie_l_64.xpm";
 	game->map->trainer_path[1] = "./resources/images/james_64.xpm";
 	game->map->floor_path = "./resources/images/floor_64.xpm";
 	game->map->wall_path = "./resources/images/stone_64.xpm";
