@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: coder <coder@student.42.fr>                +#+  +:+       +#+         #
+#    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/04 19:44:22 by roaraujo          #+#    #+#              #
-#    Updated: 2021/10/08 02:07:37 by coder            ###   ########.fr        #
+#    Updated: 2021/12/07 20:41:40 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ LIBNAME = libft.a
 SRC_FILES =	ft_atoi.c \
 			ft_bzero.c \
 			ft_calloc.c \
+			ft_free_ptr.c \
 			ft_get_next_line.c \
 			ft_get_next_line_utils.c \
 			ft_isalnum.c \

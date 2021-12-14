@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_get_next_line.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 18:30:04 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/09/20 18:00:12 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/07 00:12:52 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ char	*ft_get_next_line(int fd)
 	char		*line;
 	int			chars_read;
 
-	// initialize variables
 	if (!rest)
 		rest = ft_strdup("");
 	line = ft_strdup(rest);
@@ -38,18 +37,12 @@ char	*ft_get_next_line(int fd)
 	if (buffer == NULL)
 		return (NULL);
 	chars_read = BUFFER_SIZE;
-
-	// loop using read() as long as no \n is found
 	while (chars_read == BUFFER_SIZE && !(contains_nl(line) >= 0))
 	{
 		chars_read = read(fd, buffer, BUFFER_SIZE);
-		
-		// terminate execution if file reading goes awry
 		if (chars_read < 0)
 			return (free_n_null(&line, &rest, &buffer));
 		buffer[chars_read] = '\0';
-
-		// concatenates buffer read with the line that's being built up
 		line = ft_strjoin(line, buffer);
 	}
 	return (return_line(&rest, &buffer, &line, chars_read));
@@ -146,4 +139,3 @@ static char	*return_line(char **rest, char **buffer, char **line, int i)
 	*line = copy_up_to_nl(*line);
 	return (*line);
 }
-
