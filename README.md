@@ -11,10 +11,11 @@ _[Official brochure](https://www.42.us.org/wp-content/uploads/2020/01/42-Booklet
 
 This constellation-like program is divided into two main parts: the core fundamentals program (inner layers), which eventually branches away for complementary specialization paths (outer layer). The core program comprises 16 levels to be beaten, each level granting you new skills and experience in order to progress towards the great Transcendence. From that point on, students are ready to choose a specialization path, or even choose to leave the school and enter the workforce.
 
-![image](https://user-images.githubusercontent.com/49699403/118574469-e319f180-b75a-11eb-98c3-86f9c84fb180.png)
+![curriculum42](https://user-images.githubusercontent.com/49699403/146021410-fdd95ceb-d3ce-436c-ba6f-c836d0d1a922.png)
 _(Projects under the same number are candidates for that level, students must pick only one.)_
 
-## Core - Phase 1
+## Core - Phase 1!
+
 
 ### Level 1 - **[libft](https://github.com/rodsmade/Projets_42_SP/tree/main/projets_obligatoires/1_libft)**
 Build your own basic C static library, which will be used throughout the rest of the program. The ```ft_*``` functions mostly mimic the behaviour of the traditional C functions, and must be written using at most ```write()``` and ```malloc()```.
