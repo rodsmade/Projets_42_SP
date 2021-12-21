@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 00:57:47 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/20 02:06:57 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/21 22:35:55 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/wait.h>
+#include <stdlib.h> // rand()
 
 /*
 int main()
@@ -92,7 +93,7 @@ int main()
 }
 */
 
-// USING PIPE TO SPLIT THE JOB BETWEEN TWO PROCESSES - NEXT STEP IS SPLITTING BETWEEN THREE (1 PAR 2 CHIL)
+/* // USING PIPE TO SPLIT THE JOB BETWEEN TWO PROCESSES - NEXT STEP IS SPLITTING BETWEEN THREE (1 PAR 2 CHIL)
 int main()
 {
 	int		myArray[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
@@ -137,6 +138,167 @@ int main()
 
 	return 0;
 }
+*/
 
-//TODO: exercício 1: rescrever esse trem daquele jeito que faz o double diamond kkkk n sei explica
+/*
+//TODO: exercício 1: mesmo algoritmo escrito daquele jeito que faz o double diamond kkkk n sei explica
+int	main()
+{
+	int		sum;
+	pid_t	pid;
+	int		pipefd[2];
+	int		myArray[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+	int		start, end;
+
+	if (pipe(pipefd) == -1)
+		return (-1);
+	sum = 0;
+	pid = fork();
+	if (pid == -1)
+		return (-2);
+	if (pid == 0) {
+		start = -1;
+		end = 5;
+	} else {
+		start = 4;
+		end = 10;
+	}
+	while (++start < end)
+		sum += myArray[start];
+	printf("Partial sum: %d\n", sum);
+	if (pid == 0) {
+		close(pipefd[0]);
+		write(pipefd[1], &sum, sizeof(int));
+		close(pipefd[1]);
+	} else {
+		wait(NULL);
+		close(pipefd[1]);
+		read(pipefd[0], &start, sizeof(int));
+		close(pipefd[0]);
+		sum += start;
+		printf("Total sum: %d\n", sum);
+	}
+	return 0;
+}
+*/
+
+/*
 //TODO: exercício 2: e se fossem 3 processos ???
+int main()
+{
+	int		my_array[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+	pid_t	pid;
+	int		pipefd[2];
+	int		start, end, sum;
+
+	if (pipe(pipefd) == -1)
+		return (-1);
+	sum = 0;
+	pid = fork();
+	if (pid == 0)
+	{
+		start = 4;
+		end = 10;
+		printf("1st child; pid = %d, ppid = %d\n", getpid(), getppid());
+	} else {
+		pid = fork();
+		if (pid == 0)
+		{
+			start = 9;
+			end = 15;
+			printf("2nd child; pid = %d, ppid = %d\n", getpid(), getppid());
+		} else {
+			start = -1;
+			end = 5;
+			printf("Parent; pid = %d, ppid = %d\n", getpid(), getppid());
+		}
+	}
+	while (++start < end)
+		sum += my_array[start];
+	printf("PID %d partial sum: %d\n", getpid(), sum);
+	// pipefd[0] => read;
+	// pipefd[1] => write;
+	if (pid == 0)
+	{
+		close(pipefd[0]);
+		write(pipefd[1], &sum, sizeof(sum));
+		close(pipefd[0]);
+		return (0);
+	}
+	if (pid != 0){
+		int wait_result = 0;
+		while (wait_result != -1)
+		{
+			if ((wait_result = wait(NULL)) != -1)
+			{
+				printf("Child %d terminated\n", wait_result);
+				close(pipefd[1]);
+				read(pipefd[0], &start, sizeof(sum));
+				printf("recuperou do pipe: %d\n", start);
+				close(pipefd[0]);
+				sum += start;
+			}
+		}
+		printf("Total sum: %d\n", sum);
+		// ñ deu bom aff ):
+	}
+	return 0;
+}
+*/
+
+#define PROCESS_NO 5
+
+void	do_as_a_child_must(int *pipefd)
+{
+	int my_value;
+
+	my_value = rand() % 10;
+	printf("I'm a child, pid: %d, ppid: %d\nmy_value: %d\n", getpid(), getppid(), my_value);
+	close(pipefd[0]);
+	write(pipefd[1], &my_value, sizeof(int));
+	close(pipefd[1]);
+	return ;
+}
+
+void	do_as_a_parent_must(int **pipefd)
+{
+	int	i;
+	int	value_read;
+
+	printf("I am the sole parent, my pid is %d\n", getpid());
+	i = -1;
+	while (++i < PROCESS_NO)
+	{
+		close(pipefd[i][1]);
+		read(pipefd[i][0], &value_read, sizeof(int));
+		close(pipefd[i][0]);
+		printf("Value read in iteration %d: %d\n", i, value_read);
+	}
+	return ;
+}
+
+int main()
+{
+	int i;
+	int pids;
+	int	pipefd[PROCESS_NO][2];
+
+	i = -1;
+	while (++i < PROCESS_NO)
+	{
+		pids = fork();
+		if (pids == -1)
+			return (-1);
+		if (pids == 0)
+		{
+			pipe(pipefd[i]);
+			do_as_a_child_must(pipefd[i]);
+			return (0) ;
+		}
+	}
+	i = -1;
+	while (++i < PROCESS_NO)
+		wait(NULL);
+	do_as_a_parent_must(pipefd);
+	return (0);
+}
