@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 00:57:47 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/21 22:35:55 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/21 23:49:41 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/wait.h>
-#include <stdlib.h> // rand()
 
 /*
 int main()
@@ -246,21 +245,21 @@ int main()
 }
 */
 
-#define PROCESS_NO 5
+#define PROCESS_NO 10
 
 void	do_as_a_child_must(int *pipefd)
 {
 	int my_value;
 
-	my_value = rand() % 10;
-	printf("I'm a child, pid: %d, ppid: %d\nmy_value: %d\n", getpid(), getppid(), my_value);
+	my_value = getpid() % PROCESS_NO;
+	printf("I'm a child, pid: %d, ppid: %d\n  my_value: %d\n  pipefd[0]: %d pipefd[1]: %d\n", getpid(), getppid(), my_value, pipefd[0], pipefd[1]);
 	close(pipefd[0]);
 	write(pipefd[1], &my_value, sizeof(int));
 	close(pipefd[1]);
 	return ;
 }
 
-void	do_as_a_parent_must(int **pipefd)
+void	do_as_a_parent_must(int pipefd[PROCESS_NO][2])
 {
 	int	i;
 	int	value_read;
@@ -286,12 +285,14 @@ int main()
 	i = -1;
 	while (++i < PROCESS_NO)
 	{
+		if (pipe(pipefd[i]) == -1)
+			return (-1);
+		printf("pipefd[%d]: [0]: %d, [1]: %d\n", i, pipefd[i][0], pipefd[i][1]);
 		pids = fork();
 		if (pids == -1)
 			return (-1);
 		if (pids == 0)
 		{
-			pipe(pipefd[i]);
 			do_as_a_child_must(pipefd[i]);
 			return (0) ;
 		}
