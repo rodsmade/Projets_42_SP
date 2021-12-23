@@ -17,25 +17,26 @@ _(Projects under the same number are candidates for that level, students must pi
 ## Core - Phase 1!
 
 
-### Level 1 - **[libft](https://github.com/rodsmade/Projets_42_SP/tree/main/projets_obligatoires/1_libft)**
+### Level 1 - **[libft](https://github.com/rodsmade/Projets_42_SP/tree/main/1_libft)**
 Build your own basic C static library, which will be used throughout the rest of the program. The ```ft_*``` functions mostly mimic the behaviour of the traditional C functions, and must be written using at most ```write()``` and ```malloc()```.
 
-### Level 2 - **[get_next_line](https://github.com/rodsmade/Projets_42_SP/tree/main/projets_obligatoires/2_get_next_line)**
+### Level 2 - **[get_next_line](https://github.com/rodsmade/Projets_42_SP/tree/main/2_get_next_line)**
 	Read from a file descriptor and deliver one line, that is, a ```\n```-terminated string of chars.
 	This project is later incorporated into Libft.
 
-### Level 3 - **[ft_printf](https://github.com/rodsmade/Projets_42_SP/tree/main/projets_obligatoires/3_printf)**
+### Level 3 - **[ft_printf](https://github.com/rodsmade/Projets_42_SP/tree/main/3_printf)**
 	Build your own version of ```printf```!
 	This project is later incorporated into Libft.
 
-### Level 4 - **[born2beroot](https://github.com/rodsmade/Projets_42_SP/tree/main/projets_obligatoires/4_born2beroot)**
+### Level 4 - **[born2beroot](https://github.com/rodsmade/Projets_42_SP/tree/main/4_born2beroot)**
 	Set up an SSH server running on Linux with basic system administration, strong password rules, encryption, and more.
 
-### Level 5 - **fractol / fdf / [so_long](https://github.com/rodsmade/Projets_42_SP/tree/main/projets_obligatoires/5_so_long)**
-	First steps intto rendering graphics on the screen! Choose to render either fractals, 3D wireframes or a 2D top-down video game.
+### Level 5 - **fractol / fdf / [so_long](https://github.com/rodsmade/Projets_42_SP/tree/main/5_so_long)**
+	First steps into rendering graphics on the screen! Choice between rendering either fractals, 3D wireframes or a 2D top-down video game.
 
-### Level 6 - **minitalk / pipex**
-	TBA.
+### Level 6 - **minitalk / [pipex](https://github.com/rodsmade/Projets_42_SP/tree/main/6_pipex)**
+	An intro to Unix Processes in C.
+	Choice between having a client/server pair of processes exchanging info (strings of characters), or simulating the pipe (|) command in bash using pipes and forks in C.
 
 ## Core - Phase 2
 ### Level 7 - **push_swap**
