@@ -18,7 +18,7 @@ _(Projects under the same number are candidates for that level, students must pi
 
 
 ### Level 1 - **[libft](https://github.com/rodsmade/Projets_42_SP/tree/main/1_libft)**
-Build your own basic C static library, which will be used throughout the rest of the program. The ```ft_*``` functions mostly mimic the behaviour of the traditional C functions, and must be written using at most ```write()``` and ```malloc()```.
+	Build your own basic C static library, which will be used throughout the rest of the program. The ```ft_*``` functions mostly mimic the behaviour of the traditional C functions, and must be written using at most ```write()``` and ```malloc()```.
 
 ### Level 2 - **[get_next_line](https://github.com/rodsmade/Projets_42_SP/tree/main/2_get_next_line)**
 	Read from a file descriptor and deliver one line, that is, a ```\n```-terminated string of chars.
