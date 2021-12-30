@@ -47,36 +47,34 @@ int main()
 #include <stdlib.h>
 #include "pipex.h"
 
-// size_t	ft_strlcat(char *dst, const char *src, size_t size)
-// {
-// 	size_t	srclen;
-// 	size_t	dstlen;
-// 	size_t	i;
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
+{
+	size_t	srclen;
+	size_t	dstlen;
+	size_t	i;
 
-// 	srclen = ft_strlen(src);
-// 	dstlen = 0;
-// 	while (dst[dstlen] && dstlen < size)
-// 		dstlen++;
-// 	i = 0;
-// 	if (dstlen < size)
-// 	{
-// 		while ((i + dstlen) < (size - 1) && src[i])
-// 		{
-// 			dst[i + dstlen] = src[i];
-// 			i++;
-// 		}
-// 		dst[i + dstlen] = '\0';
-// 	}
-// 	return (dstlen + srclen);
-// }
+	srclen = ft_strlen(src);
+	dstlen = 0;
+	while (dst[dstlen] && dstlen < size)
+		dstlen++;
+	i = 0;
+	if (dstlen < size)
+	{
+		while ((i + dstlen) < (size - 1) && src[i])
+		{
+			dst[i + dstlen] = src[i];
+			i++;
+		}
+		dst[i + dstlen] = '\0';
+	}
+	return (dstlen + srclen);
+}
 
 static char *find_path_variable(char **envp[])
 {
-	printf("DENTRO: envp: %p\n", envp);
-	printf("DENTRO: *envp: %p\n", *envp);
-	printf("DENTRO: **envp: %p\n", **envp);
-	while(*envp)
+	while(**envp)
 	{
+		// printf("entrou, envp[i]: %s\n", **envp);
 		if (ft_strncmp("PATH", **envp, 4) == 0)
 			return (ft_strdup(**envp + 5));
 		*envp = *envp + 1;
@@ -84,9 +82,26 @@ static char *find_path_variable(char **envp[])
 	return (NULL);
 }
 
+int	find_command(char *cmd, char **path_vars)
+{
+	int		i;
+	char	*cmd_path;
+
+	i = -1;
+	while (path_vars[++i])
+	{
+		cmd_path = ft_strlcat(path_vars[i], cmd, ft_strlen(cmd));
+		if (access(cmd_path, F_OK))
+			return (1);
+	}
+	return (0);
+}
+
 int	main(int argc, char *argv[], char *envp[])
 {
-	char *full_path_var;
+	char	*full_path_var;
+	char	**path_vars;
+	int		i;
 
 	if (argc != 5)
 	{
@@ -98,27 +113,27 @@ int	main(int argc, char *argv[], char *envp[])
 		printf("assim n da amig\n");
 		return (-2);
 	}
-	printf("envp: %p\n", envp);
-	printf("filho 1 de envp: %p -> %s\n", envp, *envp);
-	printf("filho 2 de envp: %p -> %s\n", envp + 1, *(envp + 1));
-	printf("endereço envp: %p\n", &envp);
 	full_path_var = find_path_variable(&envp);
 	if (full_path_var == NULL)
 	{
-		perror("PATH variable not found\n");
-		return (-3);
+		// TODO: why the heck is this printing "success" on terminal
+		perror("main: PATH variable not found\n");
+		return (-1);
 	}
-	char **path_split;
-	int i;
-	path_split = ft_split(full_path_var, ':');
+	path_vars = ft_split(full_path_var, ':');
 	i = 0;
-	while (path_split[i])
+	if (!find_command(argv[1], path_vars))
 	{
-		printf("env var: %s\n", path_split[i]);
-		free(path_split[i]);
-		i++;
+		printf("main: command %s not found\n", argv[1]);
+		return (-1);
 	}
+	if (!find_command(argv[3], path_vars))
+	{
+		printf("main: command %s not found\n", argv[3]);
+		return (-1);
+	}
+	// TODO: do_shit()
 	free(full_path_var);
-	free(path_split);
+	free(path_vars);
 	return (0);
 }
