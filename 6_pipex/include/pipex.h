@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 13:45:13 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/29 15:46:33 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/31 00:13:25 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	**ft_split(char const *s, char delimiter);
 // libft_utils.c
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
+char	*ft_slashcat(const char* str1, const char *str2);
 void	ft_free_ptr(void **ptr);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 char	*ft_strdup(const char *s);

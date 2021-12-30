@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2021/12/30 01:55:55 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/12/31 00:56:10 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,10 +60,10 @@ bonus: all
 
 # RUN
 run: $(NAME)
-	@$(NAME) cmd1 par1 cmd2 par2
+	@$(NAME) ls par1 grep par2
 
 valgrind: $(NAME)
-	@$(VALGRIND) $(NAME) cmd1 par1 cmd2 par2
+	@$(VALGRIND) $(NAME) ls par1 grep par2
 
 # SANITIZE
 # -> deletes all .o files; also runs libft's clean target

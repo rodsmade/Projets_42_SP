@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 15:00:23 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/29 15:45:31 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/31 00:14:18 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,6 @@ void	ft_free_ptr(void **ptr)
 		free(*ptr);
 		*ptr = NULL;
 	}
-}
-
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
-{
-	size_t	srclen;
-	size_t	dstlen;
-	size_t	i;
-
-	srclen = ft_strlen(src);
-	dstlen = 0;
-	while (dst[dstlen] && dstlen < size)
-		dstlen++;
-	i = 0;
-	if (dstlen < size)
-	{
-		while ((i + dstlen) < (size - 1) && src[i])
-		{
-			dst[i + dstlen] = src[i];
-			i++;
-		}
-		dst[i + dstlen] = '\0';
-	}
-	return (dstlen + srclen);
 }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
@@ -123,4 +100,30 @@ char	*ft_strdup(const char *s)
 		return (NULL);
 	newstr = ft_memcpy(newstr, s, strlength);
 	return (newstr);
+}
+
+char	*ft_slashcat(const char* str1, const char *str2)
+{
+	char	*concat;
+	int		i;
+
+	concat = ft_calloc(ft_strlen(str1) + ft_strlen(str2) + 2, sizeof(char));
+	if (concat == NULL || str1 == NULL || str2 == NULL)
+		return (NULL);
+	i = 0;
+	while(*str1)
+	{
+		concat[i] = *str1;
+		str1++;
+		i++;
+	}
+	concat[i++] = '/';
+	while (*str2)
+	{
+		concat[i] = *str2;
+		str2++;
+		i++;
+	}
+	concat[i] = '\0';
+	return (concat);
 }

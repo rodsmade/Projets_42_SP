@@ -47,29 +47,6 @@ int main()
 #include <stdlib.h>
 #include "pipex.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
-{
-	size_t	srclen;
-	size_t	dstlen;
-	size_t	i;
-
-	srclen = ft_strlen(src);
-	dstlen = 0;
-	while (dst[dstlen] && dstlen < size)
-		dstlen++;
-	i = 0;
-	if (dstlen < size)
-	{
-		while ((i + dstlen) < (size - 1) && src[i])
-		{
-			dst[i + dstlen] = src[i];
-			i++;
-		}
-		dst[i + dstlen] = '\0';
-	}
-	return (dstlen + srclen);
-}
-
 static char *find_path_variable(char **envp[])
 {
 	while(**envp)
@@ -90,9 +67,15 @@ int	find_command(char *cmd, char **path_vars)
 	i = -1;
 	while (path_vars[++i])
 	{
-		cmd_path = ft_strlcat(path_vars[i], cmd, ft_strlen(cmd));
-		if (access(cmd_path, F_OK))
+		cmd_path = ft_slashcat(path_vars[i], cmd);
+		// printf("cmd with path: %s\n", cmd_path);
+		// printf("path: %s; access: %i\n", cmd_path, access(cmd_path, F_OK));
+		if (access(cmd_path, F_OK) == 0)
+		{
+			ft_free_ptr((void *)&cmd_path);
 			return (1);
+		}
+		ft_free_ptr((void *)&cmd_path);
 	}
 	return (0);
 }
@@ -118,22 +101,36 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		// TODO: why the heck is this printing "success" on terminal
 		perror("main: PATH variable not found\n");
+		free(full_path_var);
 		return (-1);
 	}
 	path_vars = ft_split(full_path_var, ':');
-	i = 0;
 	if (!find_command(argv[1], path_vars))
 	{
 		printf("main: command %s not found\n", argv[1]);
+		free(full_path_var);
+		i = -1;
+		while (path_vars[++i])
+			free(path_vars[i]);
+		free(path_vars);
 		return (-1);
 	}
 	if (!find_command(argv[3], path_vars))
 	{
 		printf("main: command %s not found\n", argv[3]);
+		free(full_path_var);
+		i = -1;
+		while (path_vars[++i])
+			free(path_vars[i]);
+		free(path_vars);
 		return (-1);
 	}
 	// TODO: do_shit()
+	printf("Found both commands %s and %s!!\n", argv[1], argv[3]);
 	free(full_path_var);
+	i = -1;
+	while (path_vars[++i])
+		free(path_vars[i]);
 	free(path_vars);
 	return (0);
 }
