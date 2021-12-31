@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2021/12/31 00:56:10 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/12/31 01:28:38 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,12 @@ HEADERS_PATH = ./include/
 SRCS_PATH = ./src/
 OBJS_PATH = ./objs/
 BINS_PATH = ./bin/
+
+# TEST ARGS
+INPUT_FILE = ~/Documents/Projects/Projets_42_SP/6_pipex/input_file
+CMD1 = "ls -a" 
+CMD2 = "wc -l"
+OUTPUT_FILE = ~/Documents/Projects/Projets_42_SP/6_pipex/output_file
 
 # COMPILATION
 CC = gcc
@@ -60,10 +66,11 @@ bonus: all
 
 # RUN
 run: $(NAME)
-	@$(NAME) ls par1 grep par2
+# na vdd tem que ser  infile "ls -l" "wc -l" outfile
+	@$(NAME) $(INPUT_FILE) $(CMD1) $(CMD2) $(OUTPUT_FILE)
 
 valgrind: $(NAME)
-	@$(VALGRIND) $(NAME) ls par1 grep par2
+	@$(VALGRIND) $(NAME) $(INPUT_FILE) $(CMD1) $(CMD2) $(OUTPUT_FILE)
 
 # SANITIZE
 # -> deletes all .o files; also runs libft's clean target
