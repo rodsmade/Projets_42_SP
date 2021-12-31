@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 13:45:13 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/31 00:13:25 by roaraujo         ###   ########.fr       */
+/*   Updated: 2021/12/31 01:47:36 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdio.h>
 // exit()
 # include <stdlib.h>
+// access()
+# include <unistd.h>
 
 // -- PROTOTYPES --------------------------------------------------------------|
 // libft_utils_ftsplit.c

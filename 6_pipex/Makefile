@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2021/12/31 01:28:38 by roaraujo         ###   ########.fr        #
+#    Updated: 2021/12/31 01:55:21 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,8 +39,8 @@ TOUCH = touch -a
 # FILES
 NAME = $(BINS_PATH)pipex
 SRC_FILES = libft_utils_ftsplit.c \
-			teste.c \
-			libft_utils.c
+			libft_utils.c \
+			pipex.c
 SOURCES = $(addprefix $(SRCS_PATH), $(SRC_FILES))
 OBJ_FILES = $(patsubst %.c, %.o, $(SRC_FILES))
 OBJECTS = $(addprefix $(OBJS_PATH), $(OBJ_FILES))
