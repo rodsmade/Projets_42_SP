@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 13:45:13 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/31 01:47:36 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/04 19:52:11 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char	*ft_strdup(const char *s);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlen(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-
+char	*ft_strchr(const char *s, int c);
+char	*ft_strtrim(char *s1, char const *set);
 
 #endif
