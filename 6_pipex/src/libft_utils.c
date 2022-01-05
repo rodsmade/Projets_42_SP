@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 15:00:23 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/04 19:56:48 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/05 15:03:22 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,19 @@ void	ft_free_ptr(void **ptr)
 		free(*ptr);
 		*ptr = NULL;
 	}
+}
+
+void	ft_free_arr(void ***arr)
+{
+	int	i;
+
+	i = -1;
+	while ((*arr)[++i])
+	{
+		free((*arr)[i]);
+		(*arr)[i] = NULL;
+	}
+	free(*arr);
 }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)

@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2022/01/04 20:02:19 by roaraujo         ###   ########.fr        #
+#    Updated: 2022/01/05 15:40:51 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,10 @@ OBJS_PATH = ./objs/
 BINS_PATH = ./bin/
 
 # TEST ARGS
-INPUT_FILE = ~/Documents/Projects/Projets_42_SP/6_pipex/input_file
+INPUT_FILE = input_file
 CMD1 = "ls -a" 
 CMD2 = "wc -l"
-OUTPUT_FILE = ~/Documents/Projects/Projets_42_SP/6_pipex/output_file
+OUTPUT_FILE = output_file
 
 # COMPILATION
 CC = gcc
@@ -41,6 +41,7 @@ NAME = $(BINS_PATH)pipex
 SRC_FILES = libft_utils_ftsplit.c \
 			libft_utils.c \
 			pipex.c
+#			teste.c
 SOURCES = $(addprefix $(SRCS_PATH), $(SRC_FILES))
 OBJ_FILES = $(patsubst %.c, %.o, $(SRC_FILES))
 OBJECTS = $(addprefix $(OBJS_PATH), $(OBJ_FILES))

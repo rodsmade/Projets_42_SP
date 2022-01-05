@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 01:45:52 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/04 20:01:49 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/05 15:40:19 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,47 @@ static char **find_path_variable(char **envp[])
 	return (paths_arr);
 }
 
-int	find_command(char *cmd, char **path_vars)
+int	find_command(char *cmd, char **all_paths)
 {
 	int		i;
-	char	**cmd_path;
+	int		access_ok;
+	char	*cmd_fullpath;
 
-	printf("cmd: %s\n", cmd);
+	access_ok = 0;
 	i = -1;
-	while (path_vars[++i])
+	while (all_paths[++i])
 	{
-		cmd_path = ft_split(cmd, ' ');
-		cmd_path[0] = ft_slashcat(path_vars[i], cmd_path[0]);
-		if (access(cmd_path[0], F_OK) == 0)
-		{
-			ft_free_ptr((void *)&cmd_path[0]);
-			return (1);
-		}
-		ft_free_ptr((void *)&cmd_path[0]);
+		cmd_fullpath = ft_slashcat(all_paths[i], cmd);
+		if (access(cmd_fullpath, F_OK) == 0)
+			access_ok = 1;
+		ft_free_ptr((void *)&cmd_fullpath);
 	}
-	return (0);
+	return (access_ok);
+}
+
+void	free_all(char ***all_paths, char ***cmd1, char ***cmd2)
+{
+	ft_free_arr((void *)cmd1);
+	ft_free_arr((void *)cmd2);
+	ft_free_arr((void *)all_paths);
+	return ;
+}
+
+void	search_commands(char ***cmd1, char ***cmd2, char ***all_paths)
+{
+	if (!find_command((*cmd1)[0], *all_paths))
+	{
+		perror("main: command 1 not found");
+		free_all(cmd1, cmd2, all_paths);
+		exit(3);
+	}
+	if (!find_command((*cmd2)[0], *all_paths))
+	{
+		perror("main: command 2 not found");
+		free_all(cmd1, cmd2, all_paths);
+		exit(4);
+	}
+	return ;
 }
 
 /*
@@ -78,39 +100,20 @@ devrait être le même que "< infile ls -l | wc -l > outfile"
 */
 int	main(int argc, char *argv[], char *envp[])
 {
-	char	**path_vars;
+	char	**all_paths;
+	char	**cmd1;
+	char	**cmd2;
 	int		i;
 
 	basic_args_check(argc, argv);
-	path_vars = find_path_variable(&envp);
+	all_paths = find_path_variable(&envp);
 	i = 1;
 	while (++i < argc)
-	{
-		ft_strtrim(argv[i], " ");
-	}
-	if (!find_command(argv[2], path_vars))
-	{
-		printf("main: command %s not found\n", argv[2]);
-		i = -1;
-		while (path_vars[++i])
-			free(path_vars[i]);
-		free(path_vars);
-		return (-1);
-	}
-	if (!find_command(argv[3], path_vars))
-	{
-		printf("main: command %s not found\n", argv[3]);
-		i = -1;
-		while (path_vars[++i])
-			free(path_vars[i]);
-		free(path_vars);
-		return (-1);
-	}
-	// TODO: do_shit()
+		argv[i] = ft_strtrim(argv[i], " ");
+	cmd1 = ft_split(argv[2], ' ');
+	cmd2 = ft_split(argv[3], ' ');
+	search_commands(&cmd1, &cmd2, &all_paths);
 	printf("Found both commands %s and %s!!\n", argv[2], argv[3]);
-	i = -1;
-	while (path_vars[++i])
-		free(path_vars[i]);
-	free(path_vars);
+	free_all(&cmd1, &cmd2, &all_paths);
 	return (0);
 }
