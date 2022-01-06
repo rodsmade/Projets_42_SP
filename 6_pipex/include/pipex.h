@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 13:45:13 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/06 10:23:00 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/06 11:08:03 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@
 typedef struct s_pipe_cmds
 {
 	char	**all_paths;
-	char	**cmd1;
-	char	**cmd2;
-	char	**cmd1_full_path;
-	char	**cmd2_full_path;
+	char	**cmd1_w_flags;
+	char	**cmd2_w_flags;
+	char	*cmd1_full_path;
+	char	*cmd2_full_path;
 }	t_pipe_cmds;
 
 // -- PROTOTYPES --------------------------------------------------------------|
@@ -48,5 +48,9 @@ size_t	ft_strlen(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strtrim(char *s1, char const *set);
+
+// other_utils.c
+void	flush_all(t_pipe_cmds *pipe_cmds);
+void	perror_exit(char *err_msg, int err_nbr, t_pipe_cmds *pipe_cmds);
 
 #endif
