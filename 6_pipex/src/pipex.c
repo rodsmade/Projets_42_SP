@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 01:45:52 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/06 11:28:46 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/06 14:06:17 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,9 @@ void	basic_args_check(int argc, char *argv[])
 	return ;
 }
 
-static char **find_path_variable(char *envp[])
+static void	find_path_variable(char *envp[], t_pipe_cmds *pipe_cmds)
 {
 	char	*full_path_var;
-	char	**paths_arr;
 
 	full_path_var = NULL;
 	while(*envp)
@@ -41,14 +40,10 @@ static char **find_path_variable(char *envp[])
 		envp = envp + 1;
 	}
 	if (full_path_var == NULL)
-	{
-		// TODO: why the heck is this printing "success" on terminal
-		perror("main: PATH variable not found\n");
-		exit(3);
-	}
-	paths_arr = ft_split(full_path_var, ':');
+		perror_exit("main: PATH variable not found", 4, pipe_cmds);
+	pipe_cmds->all_paths = ft_split(full_path_var, ':');
 	ft_free_ptr((void *)&full_path_var);
-	return (paths_arr);
+	return ;
 }
 
 int	find_command(char *cmd, char **all_paths)
@@ -69,28 +64,12 @@ int	find_command(char *cmd, char **all_paths)
 	return (access_ok);
 }
 
-void	free_all(char ***all_paths, char ***cmd1, char ***cmd2)
+void	search_commands(t_pipe_cmds *pipe_cmds)
 {
-	ft_free_arr((void *)cmd1);
-	ft_free_arr((void *)cmd2);
-	ft_free_arr((void *)all_paths);
-	return ;
-}
-
-void	search_commands(char ***cmd1, char ***cmd2, char ***all_paths)
-{
-	if (!find_command((*cmd1)[0], *all_paths))
-	{
-		perror("main: command 1 not found");
-		free_all(cmd1, cmd2, all_paths);
-		exit(3);
-	}
-	if (!find_command((*cmd2)[0], *all_paths))
-	{
-		perror("main: command 2 not found");
-		free_all(cmd1, cmd2, all_paths);
-		exit(4);
-	}
+	if (!find_command((pipe_cmds->cmd1_w_flags)[0], pipe_cmds->all_paths))
+		perror_exit("main: command 1 not found", 5, pipe_cmds);
+	if (!find_command((pipe_cmds->cmd2_w_flags)[0], pipe_cmds->all_paths))
+		perror_exit("main: command 2 not found", 6, pipe_cmds);
 	return ;
 }
 
@@ -101,16 +80,23 @@ void	mem_alloc(t_pipe_cmds *pipe_cmds)
 	pipe_cmds->cmd2_w_flags = NULL;
 	pipe_cmds->cmd1_full_path = NULL;
 	pipe_cmds->cmd2_full_path = NULL;
-	pipe_cmds->all_paths = ft_calloc(1, sizeof(pipe_cmds->all_paths));
-	pipe_cmds->cmd1_w_flags = ft_calloc(1, sizeof(pipe_cmds->cmd1_w_flags));
-	pipe_cmds->cmd2_w_flags = ft_calloc(1, sizeof(pipe_cmds->cmd2_w_flags));
 	pipe_cmds->cmd1_full_path = ft_calloc(1, sizeof(pipe_cmds->cmd1_full_path));
 	pipe_cmds->cmd2_full_path = ft_calloc(1, sizeof(pipe_cmds->cmd2_full_path));
-	if (!pipe_cmds->all_paths || !pipe_cmds->cmd1_w_flags
-		|| !pipe_cmds->cmd2_w_flags || !pipe_cmds->cmd1_full_path
-		|| !pipe_cmds->cmd2_full_path)
+	if (!pipe_cmds->cmd1_full_path || !pipe_cmds->cmd2_full_path)
 		perror_exit("mem_alloc: error allocating memory", 3, pipe_cmds);
 	return ;
+}
+
+void	retrieve_cmds_from_input(int argc, char *argv[], t_pipe_cmds *pipe_cmds)
+{
+	int	i;
+
+	basic_args_check(argc, argv);
+	i = 1;
+	while (++i < argc)
+		argv[i] = ft_strtrim(argv[i], " ");
+	pipe_cmds->cmd1_w_flags = ft_split(argv[2], ' ');
+	pipe_cmds->cmd2_w_flags = ft_split(argv[3], ' ');
 }
 
 /*
@@ -119,26 +105,19 @@ devrait être le même que "< infile ls -l | wc -l > outfile"
 */
 int	main(int argc, char *argv[], char *envp[])
 {
-	int			i;
-	char		**cmd1;
-	char		**cmd2;
-	char		**all_paths;
 	t_pipe_cmds	pipe_cmds;
 
 	printf("DEBUG: passou 0\n");
 	mem_alloc(&pipe_cmds);
-	basic_args_check(argc, argv);
-	// mudar ao invés de find_path devolver, deixar montado no structzão
-	all_paths = find_path_variable(envp);
-	// retrieve_cmds_from_input(argc, argv, structzão);
-	i = 1;
-	while (++i < argc)
-		argv[i] = ft_strtrim(argv[i], " ");
-	cmd1 = ft_split(argv[2], ' ');
-	cmd2 = ft_split(argv[3], ' ');
-	search_commands(&cmd1, &cmd2, &all_paths);
+	printf("DEBUG: passou 1\n");
+	retrieve_cmds_from_input(argc, argv, &pipe_cmds);
+	printf("DEBUG: passou 2\n");
+	find_path_variable(envp, &pipe_cmds);
+	printf("DEBUG: passou 3\n");
+	search_commands(&pipe_cmds);
+	printf("DEBUG: passou 4\n");
 	printf("Found both commands %s and %s!!\n", argv[2], argv[3]);
 	// exec_chained_pipe(&cmd1, &cmd2, &all_paths);
-	free_all(&cmd1, &cmd2, &all_paths);
+	flush_all(&pipe_cmds);
 	return (0);
 }
