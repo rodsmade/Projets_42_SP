@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 00:57:47 by roaraujo          #+#    #+#             */
-/*   Updated: 2021/12/31 01:46:28 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/06 10:25:53 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -323,7 +323,7 @@ void	do_as_a_parent_must(int pipefd[PROCESS_NO][2])
 int main()
 {
 	int i;
-	int pids;
+	int pid;
 	int	pipefd[PROCESS_NO][2];
 
 	i = -1;
@@ -332,10 +332,10 @@ int main()
 		if (pipe(pipefd[i]) == -1)
 			return (-1);
 		printf("pipefd[%d]: [0]: %d, [1]: %d\n", i, pipefd[i][0], pipefd[i][1]);
-		pids = fork();
-		if (pids == -1)
+		pid = fork();
+		if (pid == -1)
 			return (-1);
-		if (pids == 0)
+		if (pid == 0)
 		{
 			do_as_a_child_must(pipefd[i]);
 			return (0) ;
