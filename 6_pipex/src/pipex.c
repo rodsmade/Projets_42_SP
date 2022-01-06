@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 01:45:52 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/05 15:40:19 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/06 10:23:24 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,17 @@ void	basic_args_check(int argc, char *argv[])
 	return ;
 }
 
-static char **find_path_variable(char **envp[])
+static char **find_path_variable(char *envp[])
 {
 	char	*full_path_var;
 	char	**paths_arr;
 
 	full_path_var = NULL;
-	while(**envp)
+	while(*envp)
 	{
-		if (ft_strncmp("PATH", **envp, 4) == 0)
-			full_path_var = ft_strdup(**envp + 5);
-		*envp = *envp + 1;
+		if (ft_strncmp("PATH", *envp, 4) == 0)
+			full_path_var = ft_strdup(*envp + 5);
+		envp = envp + 1;
 	}
 	if (full_path_var == NULL)
 	{
@@ -106,7 +106,9 @@ int	main(int argc, char *argv[], char *envp[])
 	int		i;
 
 	basic_args_check(argc, argv);
-	all_paths = find_path_variable(&envp);
+	// mudar ao invés de find_path devolver, deixar montado no structzão
+	all_paths = find_path_variable(envp);
+	// retrieve_cmds_from_input(argc, argv, structzão);
 	i = 1;
 	while (++i < argc)
 		argv[i] = ft_strtrim(argv[i], " ");
@@ -114,6 +116,7 @@ int	main(int argc, char *argv[], char *envp[])
 	cmd2 = ft_split(argv[3], ' ');
 	search_commands(&cmd1, &cmd2, &all_paths);
 	printf("Found both commands %s and %s!!\n", argv[2], argv[3]);
+	// exec_chained_pipe(&cmd1, &cmd2, &all_paths);
 	free_all(&cmd1, &cmd2, &all_paths);
 	return (0);
 }

@@ -6,19 +6,30 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 13:45:13 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/05 15:06:06 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/06 10:23:00 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
+// -- INCLUDE -----------------------------------------------------------------|
 // perror()
 # include <stdio.h>
 // exit()
 # include <stdlib.h>
 // access()
 # include <unistd.h>
+
+// -- TYPEDEFS (structs) ------------------------------------------------------|
+typedef struct s_pipe_cmds
+{
+	char	**all_paths;
+	char	**cmd1;
+	char	**cmd2;
+	char	**cmd1_full_path;
+	char	**cmd2_full_path;
+}	t_pipe_cmds;
 
 // -- PROTOTYPES --------------------------------------------------------------|
 // libft_utils_ftsplit.c
