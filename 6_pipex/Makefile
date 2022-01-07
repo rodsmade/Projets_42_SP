@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2022/01/06 11:07:21 by roaraujo         ###   ########.fr        #
+#    Updated: 2022/01/07 14:07:18 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,14 +18,15 @@ BINS_PATH = ./bin/
 
 # TEST ARGS
 INPUT_FILE = input_file
-CMD1 = "ls -a" 
-CMD2 = "wc -l"
+CMD1 = "cat -a" "grep"
+CMD2 = "wc -l" "wc"
 OUTPUT_FILE = output_file
 
 # COMPILATION
 CC = gcc
 DEBUG = -g
-CFLAGS = -Wall -Wextra -Werror -O3 $(DEBUG) -I $(HEADERS_PATH)
+CFLAGS = -O3 $(DEBUG) -I $(HEADERS_PATH)
+# CFLAGS = -Wall -Wextra -Werror -O3 $(DEBUG) -I $(HEADERS_PATH)
 # VALGRIND = valgrind --leak-check=full --show-leak-kinds=all -s --track-fds=yes --trace-children=yes --error-exitcode=1 --track-origins=yes
 VALGRIND = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -q --tool=memcheck
 # TODO: dar uma olhada aqui nessas flags dps: valgrind -q --leak-check=full --show-leak-kinds=all -s --track-fds=yes --trace-children=yes --error-exitcode=1 --track-origins=yes ./a.out
@@ -41,6 +42,7 @@ NAME = $(BINS_PATH)pipex
 SRC_FILES = libft_utils_ftsplit.c \
 			libft_utils.c \
 			other_utils.c \
+			exec_pipe_utils.c \
 			pipex.c
 #			teste.c
 SOURCES = $(addprefix $(SRCS_PATH), $(SRC_FILES))

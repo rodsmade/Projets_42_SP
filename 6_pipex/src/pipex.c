@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 01:45:52 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/06 14:06:17 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/07 14:09:04 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,9 @@ void	retrieve_cmds_from_input(int argc, char *argv[], t_pipe_cmds *pipe_cmds)
 	int	i;
 
 	basic_args_check(argc, argv);
+	pipe_cmds->cmd_count = argc - 3;
+	pipe_cmds->input_full_path = argv[1];
+	pipe_cmds->output_full_path = argv[argc];
 	i = 1;
 	while (++i < argc)
 		argv[i] = ft_strtrim(argv[i], " ");
@@ -107,17 +110,19 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	t_pipe_cmds	pipe_cmds;
 
-	printf("DEBUG: passou 0\n");
+	// printf("DEBUG: passou 0\n");
 	mem_alloc(&pipe_cmds);
-	printf("DEBUG: passou 1\n");
+	// printf("DEBUG: passou 1\n");
 	retrieve_cmds_from_input(argc, argv, &pipe_cmds);
-	printf("DEBUG: passou 2\n");
+	// printf("DEBUG: passou 2\n");
 	find_path_variable(envp, &pipe_cmds);
-	printf("DEBUG: passou 3\n");
+	// printf("DEBUG: passou 3\n");
 	search_commands(&pipe_cmds);
-	printf("DEBUG: passou 4\n");
+	// printf("DEBUG: passou 4\n");
 	printf("Found both commands %s and %s!!\n", argv[2], argv[3]);
-	// exec_chained_pipe(&cmd1, &cmd2, &all_paths);
+	exec_chained_pipe(&pipe_cmds, envp);
+	// printf("DEBUG: passou 5\n");
 	flush_all(&pipe_cmds);
+	// printf("DEBUG: passou 6\n");
 	return (0);
 }

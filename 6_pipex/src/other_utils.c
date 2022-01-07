@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:49:29 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/06 14:05:50 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/07 10:23:00 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	flush_all(t_pipe_cmds *pipe_cmds)
 	ft_free_arr((void *)&pipe_cmds->all_paths);
 	ft_free_ptr((void *)&pipe_cmds->cmd1_full_path);
 	ft_free_ptr((void *)&pipe_cmds->cmd2_full_path);
+	ft_free_arr((void *)&pipe_cmds->pipes);
 	return ;
 }
 

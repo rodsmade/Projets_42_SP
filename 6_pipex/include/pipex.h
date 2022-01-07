@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 13:45:13 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/06 11:08:03 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/07 09:56:39 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <stdlib.h>
 // access()
 # include <unistd.h>
+// open()
+# include <fcntl.h>
 
 // -- TYPEDEFS (structs) ------------------------------------------------------|
 typedef struct s_pipe_cmds
@@ -29,6 +31,13 @@ typedef struct s_pipe_cmds
 	char	**cmd2_w_flags;
 	char	*cmd1_full_path;
 	char	*cmd2_full_path;
+	char	*input_full_path;
+	char	*output_full_path;
+	int		input_fd;
+	int		output_fd;
+	int		**pipes;
+	int		cmd_count;
+	int		pipe_count;
 }	t_pipe_cmds;
 
 // -- PROTOTYPES --------------------------------------------------------------|
