@@ -6,27 +6,13 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 15:43:01 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/07 14:10:32 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/09 11:06:28 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-#define PROCESS_NO 2
-
-void	run_cmd(void)
-{
-	// int my_value;
-
-	// my_value = getpid() % PROCESS_NO;
-	// printf("I'm a child, pid: %d, ppid: %d\n  my_value: %d\n  pipefd[0]: %d pipefd[1]: %d\n", getpid(), getppid(), my_value, pipefd[0], pipefd[1]);
-	// close(pipefd[0]);
-	// write(pipefd[1], &my_value, sizeof(int));
-	// close(pipefd[1]);
-	return ;
-}
-
-void	make_pipes(t_pipe_cmds *pipe_cmds)
+static void	make_pipes(t_pipe_cmds *pipe_cmds)
 {
 	int	i;
 
@@ -50,46 +36,53 @@ void	make_pipes(t_pipe_cmds *pipe_cmds)
 	return ;
 }
 
+static void	open_files(t_pipe_cmds *pipe_cmds)
+{
+	pipe_cmds->input_fd = open(pipe_cmds->input_full_path, O_RDONLY);
+	if (pipe_cmds->is_here_doc)
+		pipe_cmds->output_fd = open(pipe_cmds->input_full_path,
+			O_CREAT | O_WRONLY | O_TRUNC, 0777);
+	else
+		pipe_cmds->output_fd = open(pipe_cmds->input_full_path,
+			O_CREAT | O_WRONLY, 0777);
+	return ;
+}
+
+static void	run_first_cmd(t_pipe_cmds *pipe_cmds, char *envp[])
+{
+	dup2(pipe_cmds->input_fd, STDIN_FILENO);
+	dup2(pipe_cmds->pipes[0][1], STDOUT_FILENO);
+	execve(pipe_cmds->cmds_full_path[0], pipe_cmds->cmds_w_flags[0], envp);
+}
+
+static void	run_nth_cmd(t_pipe_cmds *pipe_cmds, char *envp[], int i)
+{
+	dup2(pipe_cmds->pipes[i - 1][0], STDIN_FILENO);
+	dup2(pipe_cmds->pipes[i][1], STDOUT_FILENO);
+	execve(pipe_cmds->cmds_full_path[i], pipe_cmds->cmds_w_flags[i], envp);
+}
+
+static void	run_last_cmd(t_pipe_cmds *pipe_cmds, char *envp[])
+{
+	dup2(pipe_cmds->pipes[pipe_cmds->process_count - 1], STDIN_FILENO);
+	dup2(pipe_cmds->output_fd, STDOUT_FILENO);
+	execve(pipe_cmds->cmds_full_path[pipe_cmds->cmd_count - 1],
+		pipe_cmds->cmds_w_flags[pipe_cmds->cmd_count - 1], envp);
+}
+
 int exec_chained_pipe(t_pipe_cmds *pipe_cmds, char *envp[])
 {
-	int i;
-	// int pid;
-
+	int	i;
 	make_pipes(pipe_cmds);
-	pipe_cmds->input_fd = open(pipe_cmds->input_full_path, O_RDONLY);
-	pipe_cmds->output_fd = open(pipe_cmds->input_full_path,
-		O_CREAT | O_WRONLY | O_TRUNC, 0777);
-	// printf("input fd: %i\n", pipe_cmds->input_fd);
-	// printf("output fd: %i\n", pipe_cmds->output_fd);
-	// printf("pipe_cmds->pipes[0] era: [%i, %i]\n", pipe_cmds->pipes[0][0], pipe_cmds->pipes[0][1]);
-	pipe_cmds->pipes[0][0] = pipe_cmds->input_fd;
-	// printf("pipe_cmds->pipes[0] é:   [%i, %i]\n", pipe_cmds->pipes[0][0], pipe_cmds->pipes[0][1]);
-	i = -1;
-	while (++i < pipe_cmds->cmd_count - 1)
+	open_files(pipe_cmds);
+	//TODO:  na real acho que dá pra fazer 1 função só e não 3 pq não eh mta linha
+	run_first_cmd(pipe_cmds, envp);
+	i = 1;
+	while (i < pipe_cmds->cmd_count - 1)
 	{
-		// printf("pipe_cmds->pipes[%i] era: [%i, %i]\n", i, pipe_cmds->pipes[i][0], pipe_cmds->pipes[i][1]);
-		pipe_cmds->pipes[i][1] = pipe_cmds->pipes[i + 1][1];
-		// printf("pipe_cmds->pipes[%i] é:   [%i, %i]\n", i, pipe_cmds->pipes[i][0], pipe_cmds->pipes[i][1]);
+		run_nth_cmd(pipe_cmds, envp, i);
+		i++;
 	}
-	// printf("pipe_cmds->pipes[%i] era: [%i, %i]\n", i, pipe_cmds->pipes[i][0], pipe_cmds->pipes[i][1]);
-	pipe_cmds->pipes[pipe_cmds->cmd_count - 1][1] = pipe_cmds->output_fd;
-	// printf("pipe_cmds->pipes[%i] é:   [%i, %i]\n", i, pipe_cmds->pipes[i][0], pipe_cmds->pipes[i][1]);
-	
-	// i = -1;
-	// while (++i < PROCESS_NO)
-	// {
-	// 	pid = fork();
-	// 	if (pid == -1)
-	// 		return (-1);
-	// 	if (pid == 0)
-	// 	{
-	// 		run_cmd();
-	// 		return (0) ;
-	// 	}
-	// }
-	// // NO PROCESSO PAI TEM QUE FECHAR OS FDS PQ OS PROCESSOS FILHOS O EXEC NAO RETORNA (SE DER BOM)
-	// i = -1;
-	// while (++i < PROCESS_NO)
-	// 	wait(NULL);
+	run_last_cmd(pipe_cmds, envp);
 	return (0);
 }

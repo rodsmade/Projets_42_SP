@@ -6,11 +6,25 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 01:45:52 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/07 14:09:04 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/09 10:46:49 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	mem_alloc(t_pipe_cmds *pipe_cmds)
+{
+	pipe_cmds->all_paths = NULL;
+	pipe_cmds->cmd1_w_flags = NULL;
+	pipe_cmds->cmd2_w_flags = NULL;
+	pipe_cmds->cmd1_full_path = NULL;
+	pipe_cmds->cmd2_full_path = NULL;
+	pipe_cmds->cmd1_full_path = ft_calloc(1, sizeof(pipe_cmds->cmd1_full_path));
+	pipe_cmds->cmd2_full_path = ft_calloc(1, sizeof(pipe_cmds->cmd2_full_path));
+	if (!pipe_cmds->cmd1_full_path || !pipe_cmds->cmd2_full_path)
+		perror_exit("mem_alloc: error allocating memory", 3, pipe_cmds);
+	return ;
+}
 
 void	basic_args_check(int argc, char *argv[])
 {
@@ -70,20 +84,6 @@ void	search_commands(t_pipe_cmds *pipe_cmds)
 		perror_exit("main: command 1 not found", 5, pipe_cmds);
 	if (!find_command((pipe_cmds->cmd2_w_flags)[0], pipe_cmds->all_paths))
 		perror_exit("main: command 2 not found", 6, pipe_cmds);
-	return ;
-}
-
-void	mem_alloc(t_pipe_cmds *pipe_cmds)
-{
-	pipe_cmds->all_paths = NULL;
-	pipe_cmds->cmd1_w_flags = NULL;
-	pipe_cmds->cmd2_w_flags = NULL;
-	pipe_cmds->cmd1_full_path = NULL;
-	pipe_cmds->cmd2_full_path = NULL;
-	pipe_cmds->cmd1_full_path = ft_calloc(1, sizeof(pipe_cmds->cmd1_full_path));
-	pipe_cmds->cmd2_full_path = ft_calloc(1, sizeof(pipe_cmds->cmd2_full_path));
-	if (!pipe_cmds->cmd1_full_path || !pipe_cmds->cmd2_full_path)
-		perror_exit("mem_alloc: error allocating memory", 3, pipe_cmds);
 	return ;
 }
 
