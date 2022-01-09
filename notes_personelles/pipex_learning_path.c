@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 00:57:47 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/06 10:25:53 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/09 10:27:21 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <sys/wait.h>
 #include <string.h>
 #include <stdlib.h>
+#include <fcntl.h>
 
 /*
 int main()
@@ -34,20 +35,21 @@ int main()
 */
 
 // entendendo como pipes são criados (mais de um no msm pgm)
-// #define PROCESSES 5
+/*#define PROCESSES 5
 
-// int main()
-// {
-// 	int i;
-// 	int pipes[PROCESSES][2];
+int main()
+{
+	int i;
+	int pipes[PROCESSES][2];
 
-// 	i = -1;
-// 	while (++i < PROCESSES)
-// 	{
-// 		pipe(pipes[i]);
-// 		printf("pipe%d: [0]: %d, [1]: %d\n", i, pipes[i][0], pipes[i][1]);
-// 	}
-// }
+	i = -1;
+	while (++i < PROCESSES)
+	{
+		pipe(pipes[i]);
+		printf("pipe%d: [0]: %d, [1]: %d\n", i, pipes[i][0], pipes[i][1]);
+	}
+}
+*/
 
 /*
 // entendendo como o access() funciona e se ele funciona pra identificar se um comando existe
@@ -95,8 +97,8 @@ int main()
 }
 */
 
-/*
 // LEARNING TO PIPE PROPERLY
+/*
 int main()
 {
 	int		pipefd[2];
@@ -136,7 +138,8 @@ int main()
 }
 */
 
-/* // USING PIPE TO SPLIT THE JOB BETWEEN TWO PROCESSES - NEXT STEP IS SPLITTING BETWEEN THREE (1 PAR 2 CHIL)
+// USING PIPE TO SPLIT THE JOB BETWEEN TWO PROCESSES - NEXT STEP IS SPLITTING BETWEEN THREE (1 PAR 2 CHIL)
+/*
 int main()
 {
 	int		myArray[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
@@ -183,8 +186,8 @@ int main()
 }
 */
 
-/*
 //TODO: exercício 1: mesmo algoritmo escrito daquele jeito que faz o double diamond kkkk n sei explica
+/*
 int	main()
 {
 	int		sum;
@@ -225,8 +228,8 @@ int	main()
 }
 */
 
-/*
 //TODO: exercício 2: e se fossem 3 processos ???
+/*
 int main()
 {
 	int		my_array[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
@@ -289,6 +292,7 @@ int main()
 }
 */
 
+// CRIANDO N CHILD PROCESSES
 #define PROCESS_NO 10
 
 void	do_as_a_child_must(int *pipefd)
@@ -323,7 +327,7 @@ void	do_as_a_parent_must(int pipefd[PROCESS_NO][2])
 int main()
 {
 	int i;
-	int pid;
+	int pids;
 	int	pipefd[PROCESS_NO][2];
 
 	i = -1;
@@ -332,10 +336,10 @@ int main()
 		if (pipe(pipefd[i]) == -1)
 			return (-1);
 		printf("pipefd[%d]: [0]: %d, [1]: %d\n", i, pipefd[i][0], pipefd[i][1]);
-		pid = fork();
-		if (pid == -1)
+		pids = fork();
+		if (pids == -1)
 			return (-1);
-		if (pid == 0)
+		if (pids == 0)
 		{
 			do_as_a_child_must(pipefd[i]);
 			return (0) ;
@@ -345,5 +349,199 @@ int main()
 	while (++i < PROCESS_NO)
 		wait(NULL);
 	do_as_a_parent_must(pipefd);
+	return (0);
+}
+
+
+// RODANDO SHELL CMDS IN C
+/**
+ * OBSERVAÇÕES:
+ * o primeiro arg de execve tem que ser o PATH INTEIRO pro cmd
+ * o segundo arg de execve tem que TERMINAR EM NULL
+ * 		e por convenção, o primeiro item da lista é o nome do cmd
+ * 
+ */
+/*
+int main(int argc, char *argv[], char *envp[])
+{
+	char	*cmd[] = {"/usr/bin/ls", "ls", "-l", NULL};
+
+	if (execve(cmd[0], cmd + 1, envp) == -1)
+		printf("deu ruim\n");
+	printf("ahajfhkajhd\n");
+	return 0;
+}
+*/
+
+// RODANDO SHELL CMDS IN C E DEPOIS VOLTANDO PRA MAIN (fork)
+/*
+int main(int argc, char *argv[], char *envp[])
+{
+	int 	pid;
+	char	*cmd[] = {"/usr/bin/ls", "ls", "-l", NULL};
+
+
+	pid = fork();
+	if (pid == 0)
+	{
+		if (execve(cmd[0], cmd + 1, envp) == -1)
+			printf("deu ruim\n");
+		return (0);
+	}
+	wait(NULL);
+	printf("deu bom\n");
+}
+*/
+
+// RODANDO O COMANDO SHELL EM C E REDIRECIONANDO O OUTPUT PRA UM ARQUIVO
+
+// from man dup2: "after a successful return, the old and new file descriptors
+// may be used interchangeably"
+// então o fd1 é o arquivo stdout que é o arquivo que aparece no terminal.
+// quando faço dup2(meufd, STDOUT), eu fecho o arquivo que aparece no terminal,
+// e redireciono tudo o que as funções mandarem para esse fd (1) para o novo fd
+// e por isso ambos são usados interchangeably, sendo redirecionados para o
+// arquivo novo que eu criei.
+// a função printf, e tds os comandos shell, printam seu resultado no fd 1 por
+// padrão. só que quando eu faço dup2(novofd, STDOUT), tudo o que for direciona-
+// do pra fd1 será redirecionado automaticamente para o novofd.
+// also: "If  the file descriptor newfd was previously open,  
+// it  is silently closed before being reused." >> é o caso de STDOUT.
+// com o novo fd.
+// então o "arquivo" STDOUT fecha, e o fd 1 passa a apontar para o novo arquivo
+/*
+int main(int argc, char *argv[], char *envp[])
+{
+	int output;
+	char	*cmd1[] = {"/usr/bin/ls", "ls", NULL};
+	// char	*cmd2[] = {"/usr/bin/grep", "grep", "\"grep\"", NULL};
+	char	*cmd3[] = {"/usr/bin/wc", "wc", "-l", NULL};
+	int	pid;
+
+	output = open("output.txt", O_WRONLY | O_CREAT, 0777);
+	printf("output fd: %i\n", output);
+	dup2(output, 1);
+	printf("esse texto n vai ser printado no terminal, "
+	"mas sim dentro de output.txt, que é o arquivo que corresponde ao novo fd, "
+	"para o qual o fd STDOUT (1) foi redirecionado com a função dup2.\n");
+	close(output);
+	pid = fork();
+	if (pid == 0)
+		execve(cmd1[0], cmd1 + 1, envp);
+	dup2(1, 0);
+	execve(cmd3[0], cmd3 + 1, envp);
+}
+*/
+
+// TENTAR USAR DUP PRA MUDAR O FD 0 (STDIN) PRA UM ARQUIVO DE INPUT
+/*
+int main(int argc, char *argv[], char *envp[])
+{
+	char	*cmd3[] = {"/usr/bin/wc", "wc", "-l", NULL};
+	int inputfd;
+
+	inputfd = open("input.txt", O_RDONLY);
+	dup2(inputfd, STDIN_FILENO);
+	execve(cmd3[0], cmd3 + 1, envp);
+	// YES PORRA.
+}
+*/
+
+// USAR PIPE PRA RODAR DOIS COMANDOS EM SEGUIDA
+/*
+int main(int argc, char *argv[], char *envp[])
+{
+	char	*cmd_ls[] = {"/usr/bin/ls", "ls", "-l", NULL};
+	char	*cmd_wc[] = {"/usr/bin/wc", "wc", "-l", NULL};
+	int		pipe_fds[2];
+	int		pid;
+
+	int inputfd = open("input.txt", O_RDONLY);
+	int outputfd = open("output.txt", O_WRONLY | O_CREAT, 0777);
+	pipe(pipe_fds);
+	printf("pipe criado: [%i, %i]\n", pipe_fds[0], pipe_fds[1]);
+	pid = fork();
+	if (pid == 0)
+	{
+		close(pipe_fds[0]);
+		dup2(inputfd, STDIN_FILENO);
+		dup2(pipe_fds[1], STDOUT_FILENO);
+		execve(cmd_ls[0], cmd_ls + 1, envp);
+		close(pipe_fds[1]);
+	}
+	else
+	{
+		char buff[1000];
+		wait(NULL);
+		close(pipe_fds[1]);
+		dup2(pipe_fds[0], STDIN_FILENO);
+		dup2(outputfd, STDOUT_FILENO);
+		execve(cmd_wc[0], cmd_wc + 1, envp);
+		close(pipe_fds[0]);
+	}
+	return (0);
+}
+*/
+
+int main()
+{
+	int i;
+	int pids;
+	int	pipefd[PROCESS_NO][2];
+
+	i = -1;
+	while (++i < PROCESS_NO)
+	{
+		if (pipe(pipefd[i]) == -1)
+			return (-1);
+		printf("pipefd[%d]: [0]: %d, [1]: %d\n", i, pipefd[i][0], pipefd[i][1]);
+		pids = fork();
+		if (pids == -1)
+			return (-1);
+		if (pids == 0)
+		{
+			do_as_a_child_must(pipefd[i]);
+			return (0) ;
+		}
+	}
+	i = -1;
+	while (++i < PROCESS_NO)
+		wait(NULL);
+	do_as_a_parent_must(pipefd);
+	return (0);
+}
+int main(int argc, char *argv[], char *envp[])
+{
+	char	*cmd_ls[] = {"/usr/bin/ls", "ls", "-l", NULL};
+	char	*cmd_wc[] = {"/usr/bin/wc", "wc", "-l", NULL};
+	int		pipefd[pipe_count][2];
+	int		pid;
+	int		i;
+
+	int inputfd = open("input.txt", O_RDONLY);
+	int outputfd = open("output.txt", O_WRONLY | O_CREAT, 0777);
+	i = -1;
+	while (++i < process_count)
+	{
+		if (pipe(pipefd[i]) == -1)
+			return (-1);
+		printf("pipefd[%d]: [0]: %d, [1]: %d\n", i, pipefd[i][0], pipefd[i][1]);
+		pid = fork();
+		if (pid == -1)
+			return (-1);
+		else if (pid == 0)
+		{
+			close(pipefd[i][0]);
+			dup2(pipefd[i - 1][0], STDIN_FILENO);
+			dup2(pipefd[i][1], STDOUT_FILENO);
+			execve(cmd[i][0], cmd[i] + 1, envp);
+			close(pipefd[i][1]); // n chega aqui, será q dá leak?
+		}
+	}
+	i = -1;
+	while (++i < process_count)
+		wait(NULL);
+	dup2(pipefd[pipe_count - 1], STDIN_FILENO);
+	dup2(outputfd, STDOUT_FILENO);
 	return (0);
 }
