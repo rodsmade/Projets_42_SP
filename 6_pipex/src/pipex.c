@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 01:45:52 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/11 15:16:58 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/11 16:41:38 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,20 @@
 void	mem_alloc(t_pipe_cmds *pipe_cmds)
 {
 	pipe_cmds->all_paths = NULL;
-	pipe_cmds->cmd1_w_flags = NULL;
-	pipe_cmds->cmd2_w_flags = NULL;
-	pipe_cmds->cmd1_full_path = NULL;
-	pipe_cmds->cmd2_full_path = NULL;
-	pipe_cmds->cmd1_full_path = ft_calloc(1, sizeof(pipe_cmds->cmd1_full_path));
-	pipe_cmds->cmd2_full_path = ft_calloc(1, sizeof(pipe_cmds->cmd2_full_path));
-	if (!pipe_cmds->cmd1_full_path || !pipe_cmds->cmd2_full_path)
+	pipe_cmds->pipes = NULL;
+	pipe_cmds->cmds_full_path = ft_calloc(pipe_cmds->cmd_count + 1,
+		sizeof(pipe_cmds->cmds_full_path));
+	pipe_cmds->cmds_w_flags = ft_calloc(pipe_cmds->cmd_count + 1,
+		sizeof(pipe_cmds->cmds_w_flags));
+	if (!pipe_cmds->cmds_full_path
+		|| !pipe_cmds->cmds_w_flags)
 		perror_exit("mem_alloc: error allocating memory", 1, pipe_cmds);
+	pipe_cmds->cmds_full_path[pipe_cmds->cmd_count] = NULL;
+	pipe_cmds->cmds_w_flags[pipe_cmds->cmd_count] = NULL;
 	return ;
 }
 
-void	basic_args_check(int argc, char *argv[])
+void	basic_args_check(int argc, char *argv[], t_pipe_cmds *pipe_cmds)
 {
 	if (argc < 5)
 	{
@@ -39,6 +41,10 @@ void	basic_args_check(int argc, char *argv[])
 		perror("basic_args_check: input file not found!");
 		exit(3);
 	}
+	pipe_cmds->cmd_count = argc - 3;
+	pipe_cmds->pipe_count = pipe_cmds->cmd_count - 1;
+	pipe_cmds->input_full_path = argv[1];
+	pipe_cmds->output_full_path = argv[argc - 1];
 	return ;
 }
 
@@ -47,7 +53,6 @@ void	mask_spaces(char **arg)
 	int	i;
 
 	i = -1;
-	printf("DEBUG: arg: %s\n", *arg);
 	while ((*arg)[++i])
 	{
 		if ((*arg)[i] == '\"')
@@ -55,7 +60,7 @@ void	mask_spaces(char **arg)
 			while ((*arg)[++i] != '\"')
 			{
 				if ((*arg)[i] == ' ')
-					(*arg)[i] = '%';
+					(*arg)[i] = 1;
 			}
 		}
 		if ((*arg)[i] == '\'')
@@ -63,26 +68,26 @@ void	mask_spaces(char **arg)
 			while ((*arg)[++i] != '\'')
 			{
 				if ((*arg)[i] == ' ')
-					(*arg)[i] = '%';
+					(*arg)[i] = 1;
 			}
 		}
 	}
-	printf("DEBUG: arg: %s\n", *arg);
 }
 
 void	revert_spaces(char ***cmd_w_flags)
 {
 	int	i;
+	int	j;
 
-	while (*cmd_w_flags != NULL)
+	i = -1;
+	while ((*cmd_w_flags)[++i] != NULL)
 	{
-		i = -1;
-		while (**cmd_w_flags[++i])
+		j = -1;
+		while ((*cmd_w_flags)[i][++j])
 		{
-			if (**cmd_w_flags[i] == 1)
-				**cmd_w_flags[i] = ' ';
+			if ((*cmd_w_flags)[i][j] == 1)
+				(*cmd_w_flags)[i][j] = ' ';
 		}
-		cmd_w_flags++;
 	}
 }
 
@@ -93,6 +98,7 @@ char	**split_cmd(char *arg)
 	mask_spaces(&arg);
 	cmd_w_flags = ft_split(arg, ' ');
 	revert_spaces(&cmd_w_flags);
+	printf("DEBUG: fim split cmd\n");
 	return (cmd_w_flags);
 }
 
@@ -100,15 +106,16 @@ void	retrieve_cmds_from_input(int argc, char *argv[], t_pipe_cmds *pipe_cmds)
 {
 	int	i;
 
-	basic_args_check(argc, argv);
-	pipe_cmds->cmd_count = argc - 3;
-	pipe_cmds->input_full_path = argv[1];
-	pipe_cmds->output_full_path = argv[argc - 1];
 	i = 1;
+	printf("argc - 1: %i\n", argc - 1);
 	while (++i < argc - 1)
 	{
 		argv[i] = ft_strtrim(argv[i], " ");
 		pipe_cmds->cmds_w_flags[i - 2] = split_cmd(argv[i]);
+		printf("pipe_cmds->cmds_w_flags[i - 2]: %s\n", pipe_cmds->cmds_w_flags[i - 2][0]);
+		printf("pipe_cmds->cmds_w_flags[i - 2]: %s\n", pipe_cmds->cmds_w_flags[i - 2][1]);
+		printf("pipe_cmds->cmds_w_flags[i - 2]: %s\n", pipe_cmds->cmds_w_flags[i - 2][2]);
+		printf("DEBUG: ué\n");
 	}
 	return ;
 }
@@ -151,10 +158,15 @@ int	find_command(char *cmd, char **all_paths)
 
 void	search_cmds_in_paths(t_pipe_cmds *pipe_cmds)
 {
-	if (!find_command((pipe_cmds->cmd1_w_flags)[0], pipe_cmds->all_paths))
-		perror_exit("main: command 1 not found", 5, pipe_cmds);
-	if (!find_command((pipe_cmds->cmd2_w_flags)[0], pipe_cmds->all_paths))
-		perror_exit("main: command 2 not found", 6, pipe_cmds);
+	int	i;
+
+	i = -1;
+	while (pipe_cmds->cmds_w_flags[++i])
+	{
+		if (!find_command((pipe_cmds->cmds_w_flags[i])[0],
+			pipe_cmds->all_paths))
+			perror_exit("main: command not found", 5, pipe_cmds);
+	}
 	return ;
 }
 
@@ -166,6 +178,7 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	t_pipe_cmds	pipe_cmds;
 
+	basic_args_check(argc, argv, &pipe_cmds);
 	printf("DEBUG: passou 0\n");
 	mem_alloc(&pipe_cmds);
 	printf("DEBUG: passou 1\n");

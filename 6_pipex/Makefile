@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2022/01/11 15:18:01 by roaraujo         ###   ########.fr        #
+#    Updated: 2022/01/11 15:32:25 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ BINS_PATH = ./bin/
 
 # TEST ARGS
 INPUT_FILE = input_file
-CMD1 = "cat -a '   a   a a ' \" \""
+CMD1 = "cat -a"
 CMD2 = "wc -l"
 OUTPUT_FILE = output_file
 

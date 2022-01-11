@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 13:45:13 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/11 10:47:58 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/11 15:59:02 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,16 @@
 // -- TYPEDEFS (structs) ------------------------------------------------------|
 typedef struct s_pipe_cmds
 {
-	char	**all_paths;
-	char	**cmd1_w_flags;
-	char	**cmd2_w_flags;
-	char	*cmd1_full_path;
-	char	*cmd2_full_path;
+	int		cmd_count;
+	int		pipe_count; // = cmd_count - 1;
 	char	*input_full_path;
+	int		input_fd;
 	char	*output_full_path;
+	int		output_fd;
+	char	**all_paths;	
 	char	**cmds_full_path;
 	char	***cmds_w_flags;
-	int		input_fd;
-	int		output_fd;
 	int		**pipes;
-	int		cmd_count;
-	int		process_count; // = cmd_count - 1;
-	int		pipe_count; // = cmd_count - 1;
 	int		is_here_doc;
 }	t_pipe_cmds;
 
