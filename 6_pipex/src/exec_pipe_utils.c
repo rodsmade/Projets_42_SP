@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 15:43:01 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/11 10:47:21 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:39:01 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ static void	make_pipes(t_pipe_cmds *pipe_cmds)
 {
 	int	i;
 
-	pipe_cmds->pipes = ft_calloc(pipe_cmds->cmd_count + 1, 2 * sizeof(int));
+	pipe_cmds->pipes = ft_calloc(pipe_cmds->pipe_count + 1,
+		sizeof(pipe_cmds->pipes));
 	if (pipe_cmds->pipes == NULL)
 		perror_exit("make_pipes: error allocating memory for pipes pointer",
 			7, pipe_cmds);
-	pipe_cmds->pipes[pipe_cmds->cmd_count] = NULL;
+	pipe_cmds->pipes[pipe_cmds->pipe_count] = NULL;
 	i = -1;
-	// printf("cmd count: %i\n", pipe_cmds->cmd_count);
-	while (++i < pipe_cmds->cmd_count)
+	while (++i < pipe_cmds->pipe_count)
 	{
 		pipe_cmds->pipes[i] = ft_calloc(2, sizeof(int));
 		if (pipe_cmds->pipes[i] == NULL)
@@ -31,9 +31,7 @@ static void	make_pipes(t_pipe_cmds *pipe_cmds)
 				8, pipe_cmds);
 		if (pipe(pipe_cmds->pipes[i]) == -1)
 			perror_exit("make_pipes: error creating pipes", 9, pipe_cmds);
-		// printf("pipe criado: [%i, %i]\n", pipe_cmds->pipes[i][0], pipe_cmds->pipes[i][1]);
 	}
-	printf("chegou aqui\n");
 	return ;
 }
 
@@ -107,33 +105,42 @@ static void	run_nth_cmd(t_pipe_cmds *pipe_cmds, char *envp[], int i)
 
 static void	run_last_cmd(t_pipe_cmds *pipe_cmds, char *envp[])
 {
-	if (dup2(pipe_cmds->pipes[pipe_cmds->process_count - 1][0],
+	close(pipe_cmds->pipes[pipe_cmds->pipe_count - 1][1]);
+	if (dup2(pipe_cmds->pipes[pipe_cmds->pipe_count - 1][0],
 		STDIN_FILENO) == -1)
 		perror_exit("run_last_cmd: error duplicating file descriptor",
 			22, pipe_cmds);
+	printf("output fd: %i\n", pipe_cmds->output_fd);
+	printf("input fd: %i\n", pipe_cmds->input_fd);
+	printf("STDOUT: %i\n", STDOUT_FILENO);
 	if (dup2(pipe_cmds->output_fd, STDOUT_FILENO) == -1)
 		perror_exit("run_last_cmd: error duplicating file descriptor",
 			23, pipe_cmds);
+	printf("3\n");
 	if (execve(pipe_cmds->cmds_full_path[pipe_cmds->cmd_count - 1],
 		pipe_cmds->cmds_w_flags[pipe_cmds->cmd_count - 1], envp) == -1)
 		perror_exit("run_last_child: error in exec function",
 			24, pipe_cmds);
+	printf("4\n");
 }
 
 int exec_chained_pipe(t_pipe_cmds *pipe_cmds, char *envp[])
 {
 	int	i;
+
 	make_pipes(pipe_cmds);
 	open_files(pipe_cmds);
-	//TODO:  na real acho que dá pra fazer 1 função só e não 3 pq não eh mta linha
 	run_first_cmd(pipe_cmds, envp);
+	printf("chegou aqui 1\n");
 	i = 1;
 	while (i < pipe_cmds->cmd_count - 1)
 	{
+		printf("chegou aqui 2\n");
 		run_nth_cmd(pipe_cmds, envp, i);
 		i++;
 	}
+	printf("chegou aqui 3\n");
 	run_last_cmd(pipe_cmds, envp);
-	printf("chegou aqui2\n");
+	printf("chegou aqui 4\n");
 	return (0);
 }
