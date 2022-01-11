@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 01:45:52 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/09 10:46:49 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/11 15:16:58 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	mem_alloc(t_pipe_cmds *pipe_cmds)
 	pipe_cmds->cmd1_full_path = ft_calloc(1, sizeof(pipe_cmds->cmd1_full_path));
 	pipe_cmds->cmd2_full_path = ft_calloc(1, sizeof(pipe_cmds->cmd2_full_path));
 	if (!pipe_cmds->cmd1_full_path || !pipe_cmds->cmd2_full_path)
-		perror_exit("mem_alloc: error allocating memory", 3, pipe_cmds);
+		perror_exit("mem_alloc: error allocating memory", 1, pipe_cmds);
 	return ;
 }
 
@@ -32,12 +32,83 @@ void	basic_args_check(int argc, char *argv[])
 	{
 		perror("basic_args_check: 4 arguments needed "
 		"(e.g.: input_file \"cmd1\" \"cmd2\" output_file)");
-		exit(1);
+		exit(2);
 	}
 	if (access(argv[1], F_OK) != 0)
 	{
 		perror("basic_args_check: input file not found!");
-		exit(2);
+		exit(3);
+	}
+	return ;
+}
+
+void	mask_spaces(char **arg)
+{
+	int	i;
+
+	i = -1;
+	printf("DEBUG: arg: %s\n", *arg);
+	while ((*arg)[++i])
+	{
+		if ((*arg)[i] == '\"')
+		{
+			while ((*arg)[++i] != '\"')
+			{
+				if ((*arg)[i] == ' ')
+					(*arg)[i] = '%';
+			}
+		}
+		if ((*arg)[i] == '\'')
+		{
+			while ((*arg)[++i] != '\'')
+			{
+				if ((*arg)[i] == ' ')
+					(*arg)[i] = '%';
+			}
+		}
+	}
+	printf("DEBUG: arg: %s\n", *arg);
+}
+
+void	revert_spaces(char ***cmd_w_flags)
+{
+	int	i;
+
+	while (*cmd_w_flags != NULL)
+	{
+		i = -1;
+		while (**cmd_w_flags[++i])
+		{
+			if (**cmd_w_flags[i] == 1)
+				**cmd_w_flags[i] = ' ';
+		}
+		cmd_w_flags++;
+	}
+}
+
+char	**split_cmd(char *arg)
+{
+	char	**cmd_w_flags;
+
+	mask_spaces(&arg);
+	cmd_w_flags = ft_split(arg, ' ');
+	revert_spaces(&cmd_w_flags);
+	return (cmd_w_flags);
+}
+
+void	retrieve_cmds_from_input(int argc, char *argv[], t_pipe_cmds *pipe_cmds)
+{
+	int	i;
+
+	basic_args_check(argc, argv);
+	pipe_cmds->cmd_count = argc - 3;
+	pipe_cmds->input_full_path = argv[1];
+	pipe_cmds->output_full_path = argv[argc - 1];
+	i = 1;
+	while (++i < argc - 1)
+	{
+		argv[i] = ft_strtrim(argv[i], " ");
+		pipe_cmds->cmds_w_flags[i - 2] = split_cmd(argv[i]);
 	}
 	return ;
 }
@@ -78,28 +149,13 @@ int	find_command(char *cmd, char **all_paths)
 	return (access_ok);
 }
 
-void	search_commands(t_pipe_cmds *pipe_cmds)
+void	search_cmds_in_paths(t_pipe_cmds *pipe_cmds)
 {
 	if (!find_command((pipe_cmds->cmd1_w_flags)[0], pipe_cmds->all_paths))
 		perror_exit("main: command 1 not found", 5, pipe_cmds);
 	if (!find_command((pipe_cmds->cmd2_w_flags)[0], pipe_cmds->all_paths))
 		perror_exit("main: command 2 not found", 6, pipe_cmds);
 	return ;
-}
-
-void	retrieve_cmds_from_input(int argc, char *argv[], t_pipe_cmds *pipe_cmds)
-{
-	int	i;
-
-	basic_args_check(argc, argv);
-	pipe_cmds->cmd_count = argc - 3;
-	pipe_cmds->input_full_path = argv[1];
-	pipe_cmds->output_full_path = argv[argc];
-	i = 1;
-	while (++i < argc)
-		argv[i] = ft_strtrim(argv[i], " ");
-	pipe_cmds->cmd1_w_flags = ft_split(argv[2], ' ');
-	pipe_cmds->cmd2_w_flags = ft_split(argv[3], ' ');
 }
 
 /*
@@ -110,19 +166,19 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	t_pipe_cmds	pipe_cmds;
 
-	// printf("DEBUG: passou 0\n");
+	printf("DEBUG: passou 0\n");
 	mem_alloc(&pipe_cmds);
-	// printf("DEBUG: passou 1\n");
+	printf("DEBUG: passou 1\n");
 	retrieve_cmds_from_input(argc, argv, &pipe_cmds);
-	// printf("DEBUG: passou 2\n");
+	printf("DEBUG: passou 2\n");
 	find_path_variable(envp, &pipe_cmds);
-	// printf("DEBUG: passou 3\n");
-	search_commands(&pipe_cmds);
-	// printf("DEBUG: passou 4\n");
+	printf("DEBUG: passou 3\n");
+	search_cmds_in_paths(&pipe_cmds);
+	printf("DEBUG: passou 4\n");
 	printf("Found both commands %s and %s!!\n", argv[2], argv[3]);
 	exec_chained_pipe(&pipe_cmds, envp);
-	// printf("DEBUG: passou 5\n");
+	printf("DEBUG: passou 5\n");
 	flush_all(&pipe_cmds);
-	// printf("DEBUG: passou 6\n");
+	printf("DEBUG: passou 6\n");
 	return (0);
 }

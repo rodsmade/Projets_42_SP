@@ -57,39 +57,49 @@
 // 	return 0;
 // }
 
-void	foo(char ***duplo)
+// void	foo(char ***duplo)
+// {
+// 	printf("duplo: %p\n", *duplo);
+// 	printf("duplo[0]: %s\n", (*duplo)[0]);
+// 	printf("duplo[0]: %s\n", (*duplo)[1]);
+// 	printf("duplo[0]: %s\n", (*duplo)[2]);
+// 	printf("duplo[0]: %s\n", (*duplo)[3]);
+// 	printf("duplo[0]: %s\n", (*duplo)[4]);
+// 	return;
+// }
+
+// void	ft_free_arr(void ***arr)
+// {
+// 	int	i;
+
+// 	i = -1;
+// 	while ((*arr)[++i])
+// 	{
+// 		free((*arr)[i]);
+// 		(*arr)[i] = NULL;
+// 	}
+// 	free(*arr);
+// }
+
+// int main()
+// {
+// 	char **duplo;
+// 	char um[] = "um dois tres quatro";
+
+// 	duplo = ft_split(um, ' ');
+
+// 	foo(&duplo);
+
+// 	ft_free_arr((void *)&duplo);
+// 	return 0;
+// }
+
+int main(int argc, char *argv[], char *envp[])
 {
-	printf("duplo: %p\n", *duplo);
-	printf("duplo[0]: %s\n", (*duplo)[0]);
-	printf("duplo[0]: %s\n", (*duplo)[1]);
-	printf("duplo[0]: %s\n", (*duplo)[2]);
-	printf("duplo[0]: %s\n", (*duplo)[3]);
-	printf("duplo[0]: %s\n", (*duplo)[4]);
-	return;
-}
+	char *aloque;
+	char	*cmd_ls[] = {"/usr/bin/ls", "ls", "-l", NULL};
 
-void	ft_free_arr(void ***arr)
-{
-	int	i;
-
-	i = -1;
-	while ((*arr)[++i])
-	{
-		free((*arr)[i]);
-		(*arr)[i] = NULL;
-	}
-	free(*arr);
-}
-
-int main()
-{
-	char **duplo;
-	char um[] = "um dois tres quatro";
-
-	duplo = ft_split(um, ' ');
-
-	foo(&duplo);
-
-	ft_free_arr((void *)&duplo);
-	return 0;
+	aloque = malloc(sizeof(aloque));
+	printf("alocou\n");
+	execve(cmd_ls[0], cmd_ls + 1, envp);
 }

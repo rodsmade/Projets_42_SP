@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 13:45:13 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/09 11:03:31 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/11 10:47:58 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # include <unistd.h>
 // open()
 # include <fcntl.h>
+// wait()
+# include <sys/types.h>
+# include <sys/wait.h>
 
 // -- TYPEDEFS (structs) ------------------------------------------------------|
 typedef struct s_pipe_cmds
@@ -34,7 +37,7 @@ typedef struct s_pipe_cmds
 	char	*input_full_path;
 	char	*output_full_path;
 	char	**cmds_full_path;
-	char	**cmds_w_flags;
+	char	***cmds_w_flags;
 	int		input_fd;
 	int		output_fd;
 	int		**pipes;
@@ -65,5 +68,8 @@ char	*ft_strtrim(char *s1, char const *set);
 // other_utils.c
 void	flush_all(t_pipe_cmds *pipe_cmds);
 void	perror_exit(char *err_msg, int err_nbr, t_pipe_cmds *pipe_cmds);
+
+// exec_pipe_utils.c
+int exec_chained_pipe(t_pipe_cmds *pipe_cmds, char *envp[]);
 
 #endif
