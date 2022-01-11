@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 13:45:13 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/11 15:59:02 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/11 17:41:04 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strtrim(char *s1, char const *set);
 
-// other_utils.c
+// exit_utils.c
 void	flush_all(t_pipe_cmds *pipe_cmds);
 void	perror_exit(char *err_msg, int err_nbr, t_pipe_cmds *pipe_cmds);
 

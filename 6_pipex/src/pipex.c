@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 01:45:52 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/11 16:41:38 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/11 17:50:14 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ char	**split_cmd(char *arg)
 	mask_spaces(&arg);
 	cmd_w_flags = ft_split(arg, ' ');
 	revert_spaces(&cmd_w_flags);
-	printf("DEBUG: fim split cmd\n");
 	return (cmd_w_flags);
 }
 
@@ -107,15 +106,10 @@ void	retrieve_cmds_from_input(int argc, char *argv[], t_pipe_cmds *pipe_cmds)
 	int	i;
 
 	i = 1;
-	printf("argc - 1: %i\n", argc - 1);
 	while (++i < argc - 1)
 	{
 		argv[i] = ft_strtrim(argv[i], " ");
 		pipe_cmds->cmds_w_flags[i - 2] = split_cmd(argv[i]);
-		printf("pipe_cmds->cmds_w_flags[i - 2]: %s\n", pipe_cmds->cmds_w_flags[i - 2][0]);
-		printf("pipe_cmds->cmds_w_flags[i - 2]: %s\n", pipe_cmds->cmds_w_flags[i - 2][1]);
-		printf("pipe_cmds->cmds_w_flags[i - 2]: %s\n", pipe_cmds->cmds_w_flags[i - 2][2]);
-		printf("DEBUG: ué\n");
 	}
 	return ;
 }
@@ -138,22 +132,24 @@ static void	find_path_variable(char *envp[], t_pipe_cmds *pipe_cmds)
 	return ;
 }
 
-int	find_command(char *cmd, char **all_paths)
+int	find_command(t_pipe_cmds *pipe_cmds, int j)
 {
 	int		i;
-	int		access_ok;
 	char	*cmd_fullpath;
 
-	access_ok = 0;
 	i = -1;
-	while (all_paths[++i])
+	while (pipe_cmds->all_paths[++i])
 	{
-		cmd_fullpath = ft_slashcat(all_paths[i], cmd);
+		cmd_fullpath = ft_slashcat(pipe_cmds->all_paths[i],
+			pipe_cmds->cmds_w_flags[j][0]);
 		if (access(cmd_fullpath, F_OK) == 0)
-			access_ok = 1;
+		{
+			pipe_cmds->cmds_full_path[j] = cmd_fullpath;
+			return (1);
+		}
 		ft_free_ptr((void *)&cmd_fullpath);
 	}
-	return (access_ok);
+	return (0);
 }
 
 void	search_cmds_in_paths(t_pipe_cmds *pipe_cmds)
@@ -163,8 +159,7 @@ void	search_cmds_in_paths(t_pipe_cmds *pipe_cmds)
 	i = -1;
 	while (pipe_cmds->cmds_w_flags[++i])
 	{
-		if (!find_command((pipe_cmds->cmds_w_flags[i])[0],
-			pipe_cmds->all_paths))
+		if (!find_command(pipe_cmds, i))
 			perror_exit("main: command not found", 5, pipe_cmds);
 	}
 	return ;
@@ -177,6 +172,8 @@ devrait être le même que "< infile ls -l | wc -l > outfile"
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_pipe_cmds	pipe_cmds;
+	int	debug_i;
+	int	debug_j;
 
 	basic_args_check(argc, argv, &pipe_cmds);
 	printf("DEBUG: passou 0\n");
@@ -187,8 +184,24 @@ int	main(int argc, char *argv[], char *envp[])
 	find_path_variable(envp, &pipe_cmds);
 	printf("DEBUG: passou 3\n");
 	search_cmds_in_paths(&pipe_cmds);
+	printf("cmds found:\n");
+	debug_i = -1;
+	while (pipe_cmds.cmds_w_flags[++debug_i])
+	{
+		printf("cmd %i:", debug_i);
+		debug_j = -1;
+		while(pipe_cmds.cmds_w_flags[debug_i][++debug_j])
+			printf(" %s", pipe_cmds.cmds_w_flags[debug_i][debug_j]);
+		printf("\n");
+	}
+	printf("paths found:\n");
+	debug_i = -1;
+	while (pipe_cmds.cmds_full_path[++debug_i])
+	{
+		printf("path %i: %s\n", debug_i, pipe_cmds.cmds_full_path[debug_i]);
+	}
+	// perror_exit("so de zoas", 14554, &pipe_cmds);
 	printf("DEBUG: passou 4\n");
-	printf("Found both commands %s and %s!!\n", argv[2], argv[3]);
 	exec_chained_pipe(&pipe_cmds, envp);
 	printf("DEBUG: passou 5\n");
 	flush_all(&pipe_cmds);

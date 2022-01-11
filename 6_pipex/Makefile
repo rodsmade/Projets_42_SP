@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2022/01/11 15:32:25 by roaraujo         ###   ########.fr        #
+#    Updated: 2022/01/11 17:50:43 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,8 @@ BINS_PATH = ./bin/
 
 # TEST ARGS
 INPUT_FILE = input_file
-CMD1 = "cat -a"
-CMD2 = "wc -l"
+CMD1 = "ls -l" "cat -a"
+CMD2 = "wc -l" "tr ' ' \" \""
 OUTPUT_FILE = output_file
 
 # COMPILATION
@@ -41,7 +41,7 @@ TOUCH = touch -a
 NAME = $(BINS_PATH)pipex
 SRC_FILES = libft_utils_ftsplit.c \
 			libft_utils.c \
-			other_utils.c \
+			exit_utils.c \
 			exec_pipe_utils.c \
 			pipex.c
 #			teste.c
