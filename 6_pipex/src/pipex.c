@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 01:45:52 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/11 17:50:14 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/11 20:47:13 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	mem_alloc(t_pipe_cmds *pipe_cmds)
 {
+	pipe_cmds->is_here_doc = 0;
 	pipe_cmds->all_paths = NULL;
 	pipe_cmds->pipes = NULL;
 	pipe_cmds->cmds_full_path = ft_calloc(pipe_cmds->cmd_count + 1,
@@ -57,7 +58,7 @@ void	mask_spaces(char **arg)
 	{
 		if ((*arg)[i] == '\"')
 		{
-			while ((*arg)[++i] != '\"')
+			while ((*arg)[++i] != '\"' && (*arg)[++i] != '\0')
 			{
 				if ((*arg)[i] == ' ')
 					(*arg)[i] = 1;
@@ -65,7 +66,7 @@ void	mask_spaces(char **arg)
 		}
 		if ((*arg)[i] == '\'')
 		{
-			while ((*arg)[++i] != '\'')
+			while ((*arg)[++i] != '\'' && (*arg)[++i] != '\0')
 			{
 				if ((*arg)[i] == ' ')
 					(*arg)[i] = 1;
@@ -203,8 +204,5 @@ int	main(int argc, char *argv[], char *envp[])
 	// perror_exit("so de zoas", 14554, &pipe_cmds);
 	printf("DEBUG: passou 4\n");
 	exec_chained_pipe(&pipe_cmds, envp);
-	printf("DEBUG: passou 5\n");
-	flush_all(&pipe_cmds);
-	printf("DEBUG: passou 6\n");
 	return (0);
 }

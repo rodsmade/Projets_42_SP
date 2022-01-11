@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 15:43:01 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/11 18:39:01 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/11 20:46:50 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ static void	open_files(t_pipe_cmds *pipe_cmds)
 		perror_exit("open_files: error opening input file", 10, pipe_cmds);
 	if (pipe_cmds->is_here_doc)
 	{
-		pipe_cmds->output_fd = open(pipe_cmds->input_full_path,
+		pipe_cmds->output_fd = open(pipe_cmds->output_full_path,
 			O_CREAT | O_WRONLY | O_TRUNC, 0777);
 		if (pipe_cmds->output_fd == -1)
 			perror_exit("open_files: error opening output file", 11, pipe_cmds);
 	}
 	else
 	{
-		pipe_cmds->output_fd = open(pipe_cmds->input_full_path,
+		pipe_cmds->output_fd = open(pipe_cmds->output_full_path,
 			O_CREAT | O_WRONLY, 0777);
 		if (pipe_cmds->output_fd == -1)
 			perror_exit("open_files: error opening output file", 12, pipe_cmds);
@@ -63,9 +63,10 @@ static void	run_first_cmd(t_pipe_cmds *pipe_cmds, char *envp[])
 
 	pid = fork();
 	if (pid == -1)
-		perror_exit("run_first_cmd: error while fork", 13, pipe_cmds);
+		perror_exit("run_first_cmd: error while forking", 13, pipe_cmds);
 	if (pid == 0)
 	{
+		close(pipe_cmds->pipes[0][0]);
 		if (dup2(pipe_cmds->input_fd, STDIN_FILENO) == -1)
 			perror_exit("run_first_cmd: error duplicating file descriptor",
 				14, pipe_cmds);
@@ -77,7 +78,10 @@ static void	run_first_cmd(t_pipe_cmds *pipe_cmds, char *envp[])
 			perror_exit("run_first_cmd: error in exec function", 16, pipe_cmds);
 	}
 	else
+	{
 		wait(NULL);
+		close(pipe_cmds->pipes[0][1]);
+	}
 }
 
 static void	run_nth_cmd(t_pipe_cmds *pipe_cmds, char *envp[], int i)
@@ -89,6 +93,8 @@ static void	run_nth_cmd(t_pipe_cmds *pipe_cmds, char *envp[], int i)
 		perror_exit("run_nth_cmd: error while forking", 17, pipe_cmds);
 	if (pid == 0)
 	{
+		close(pipe_cmds->pipes[i - 1][1]);
+		close(pipe_cmds->pipes[i][0]);
 		if (dup2(pipe_cmds->pipes[i - 1][0], STDIN_FILENO) == -1)
 			perror_exit("run_nth_cmd: error duplicating file descriptor",
 				18, pipe_cmds);
@@ -110,18 +116,13 @@ static void	run_last_cmd(t_pipe_cmds *pipe_cmds, char *envp[])
 		STDIN_FILENO) == -1)
 		perror_exit("run_last_cmd: error duplicating file descriptor",
 			22, pipe_cmds);
-	printf("output fd: %i\n", pipe_cmds->output_fd);
-	printf("input fd: %i\n", pipe_cmds->input_fd);
-	printf("STDOUT: %i\n", STDOUT_FILENO);
 	if (dup2(pipe_cmds->output_fd, STDOUT_FILENO) == -1)
 		perror_exit("run_last_cmd: error duplicating file descriptor",
 			23, pipe_cmds);
-	printf("3\n");
 	if (execve(pipe_cmds->cmds_full_path[pipe_cmds->cmd_count - 1],
 		pipe_cmds->cmds_w_flags[pipe_cmds->cmd_count - 1], envp) == -1)
 		perror_exit("run_last_child: error in exec function",
 			24, pipe_cmds);
-	printf("4\n");
 }
 
 int exec_chained_pipe(t_pipe_cmds *pipe_cmds, char *envp[])
@@ -131,16 +132,12 @@ int exec_chained_pipe(t_pipe_cmds *pipe_cmds, char *envp[])
 	make_pipes(pipe_cmds);
 	open_files(pipe_cmds);
 	run_first_cmd(pipe_cmds, envp);
-	printf("chegou aqui 1\n");
 	i = 1;
 	while (i < pipe_cmds->cmd_count - 1)
 	{
-		printf("chegou aqui 2\n");
 		run_nth_cmd(pipe_cmds, envp, i);
 		i++;
 	}
-	printf("chegou aqui 3\n");
 	run_last_cmd(pipe_cmds, envp);
-	printf("chegou aqui 4\n");
 	return (0);
 }
