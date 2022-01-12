@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2022/01/11 20:38:46 by roaraujo         ###   ########.fr        #
+#    Updated: 2022/01/11 21:37:02 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ BINS_PATH = ./bin/
 
 # TEST ARGS
 INPUT_FILE = input_file
-CMD1 = "ls -l" "grep teste"
+CMD1 = "ls -l"
 CMD2 = "wc -l"
 OUTPUT_FILE = output_file
 
@@ -39,10 +39,14 @@ TOUCH = touch -a
 
 # FILES
 NAME = $(BINS_PATH)pipex
-SRC_FILES = libft_utils_ftsplit.c \
-			libft_utils.c \
+SRC_FILES = exec_pipe_utils.c \
 			exit_utils.c \
-			exec_pipe_utils.c \
+			init_utils.c \
+			libft_utils_1.c \
+			libft_utils_2.c \
+			libft_utils_3.c \
+			libft_utils_ftsplit.c \
+			parsing_utils.c \
 			pipex.c
 #			teste.c
 SOURCES = $(addprefix $(SRCS_PATH), $(SRC_FILES))
