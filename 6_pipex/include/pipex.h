@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 13:45:13 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/12 19:30:40 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/13 11:45:35 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ char	*ft_strdup(const char *s);
 // libft_utils_3.c
 char	*ft_strtrim(char *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 // libft_utils_ftsplit.c
 char	**ft_split(char const *s, char delimiter);

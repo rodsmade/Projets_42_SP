@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_utils.c                                       :+:      :+:    :+:   */
+/*   init_utils_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 21:13:59 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/12 19:31:13 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/13 11:52:51 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	basic_args_check(int argc, char *argv[], t_pipe_cmds *pipe_cmds)
 {
+	char	*errmsg;
+
 	if (argc < 5)
 	{
 		perror("basic_args_check: 4 arguments needed "
@@ -22,8 +24,10 @@ void	basic_args_check(int argc, char *argv[], t_pipe_cmds *pipe_cmds)
 	}
 	if (access(argv[1], F_OK) != 0)
 	{
-		perror(strerror(errno));
-		exit(errno);
+		errmsg = ft_strjoin("bash: ", argv[1]);
+		perror(errmsg);
+		free(errmsg);
+		exit(1);
 	}
 	pipe_cmds->cmd_count = argc - 3;
 	pipe_cmds->pipe_count = pipe_cmds->cmd_count - 1;

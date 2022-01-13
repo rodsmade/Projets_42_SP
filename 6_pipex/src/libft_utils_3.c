@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 20:54:55 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/11 20:58:41 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/13 11:45:25 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,26 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	substring[len] = '\0';
 	return (substring);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*joint;
+	int		i;
+	int		length_s1;
+	int		length_s2;
+
+	length_s1 = ft_strlen(s1);
+	length_s2 = ft_strlen(s2);
+	joint = malloc((length_s1 + length_s2 + 1) * sizeof(char));
+	if (joint == NULL)
+		return (NULL);
+	i = -1;
+	while (s1[++i])
+		joint[i] = s1[i];
+	i = -1;
+	while (s2[++i])
+		joint[i + length_s1] = s2[i];
+	joint[length_s1 + length_s2] = '\0';
+	return (joint);
 }
