@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 21:13:59 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/13 12:39:44 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/13 18:38:23 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	open_files(t_pipe_cmds *pipe_cmds)
 	if (pipe_cmds->input_fd == -1)
 	{
 		pipe_cmds->errmsg = ft_strjoin("bash: ", pipe_cmds->input_full_path);
-		printf("err msg: %s\n", pipe_cmds->errmsg);
 		perror_exit(pipe_cmds->errmsg, 0, pipe_cmds);
 	}
 	pipe_cmds->output_fd = open(pipe_cmds->output_full_path,

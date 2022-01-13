@@ -6,11 +6,24 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 15:43:01 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/11 21:21:08 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/13 18:54:23 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	flush_cmd(t_pipe_cmds *pipe_cmds, int i)
+{
+	int	len;
+
+	pipe_cmds->errmsg = ft_strjoin(pipe_cmds->cmds_w_flags[i][0],
+			": command not found\n");
+	len = ft_strlen(pipe_cmds->errmsg);
+	i = write(2, pipe_cmds->errmsg, len);
+	flush_all(pipe_cmds);
+	exit(127);
+	return ;
+}
 
 static void	run_first_cmd(t_pipe_cmds *pipe_cmds, char *envp[])
 {
@@ -22,6 +35,8 @@ static void	run_first_cmd(t_pipe_cmds *pipe_cmds, char *envp[])
 	if (pid == 0)
 	{
 		close(pipe_cmds->pipes[0][0]);
+		if (!find_command(pipe_cmds, 0))
+			flush_cmd(pipe_cmds, 0);
 		if (dup2(pipe_cmds->input_fd, STDIN_FILENO) == -1)
 			perror_exit("run_first_cmd: error duplicating file descriptor",
 				14, pipe_cmds);
@@ -50,6 +65,8 @@ static void	run_nth_cmd(t_pipe_cmds *pipe_cmds, char *envp[], int i)
 	{
 		close(pipe_cmds->pipes[i - 1][1]);
 		close(pipe_cmds->pipes[i][0]);
+		if (!find_command(pipe_cmds, i))
+			flush_cmd(pipe_cmds, i);
 		if (dup2(pipe_cmds->pipes[i - 1][0], STDIN_FILENO) == -1)
 			perror_exit("run_nth_cmd: error duplicating file descriptor",
 				18, pipe_cmds);
@@ -67,6 +84,8 @@ static void	run_nth_cmd(t_pipe_cmds *pipe_cmds, char *envp[], int i)
 static void	run_last_cmd(t_pipe_cmds *pipe_cmds, char *envp[])
 {
 	close(pipe_cmds->pipes[pipe_cmds->pipe_count - 1][1]);
+	if (!find_command(pipe_cmds, pipe_cmds->cmd_count - 1))
+		flush_cmd(pipe_cmds, pipe_cmds->cmd_count - 1);
 	if (dup2(pipe_cmds->pipes[pipe_cmds->pipe_count - 1][0],
 		STDIN_FILENO) == -1)
 		perror_exit("run_last_cmd: error duplicating file descriptor",

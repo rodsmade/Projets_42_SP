@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 01:45:52 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/13 18:03:13 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/13 18:21:23 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,6 @@ int	find_command(t_pipe_cmds *pipe_cmds, int j)
 	return (0);
 }
 
-void	search_cmds_in_paths(t_pipe_cmds *pipe_cmds)
-{
-	int	i;
-
-	i = -1;
-	while (pipe_cmds->cmds_w_flags[++i])
-	{
-		if (!find_command(pipe_cmds, i))
-			perror_exit("main: command not found", 5, pipe_cmds);
-	}
-	return ;
-}
-
 /*
 $> ./pipex infile "ls -l" "wc -l" outfile
 devrait être le même que "< infile ls -l | wc -l > outfile"
@@ -75,7 +62,6 @@ int	main(int argc, char *argv[], char *envp[])
 	mem_alloc(&pipe_cmds);
 	retrieve_cmds_from_input(argc, argv, &pipe_cmds);
 	find_path_variable(envp, &pipe_cmds);
-	search_cmds_in_paths(&pipe_cmds);
 	exec_chained_pipe(&pipe_cmds, envp);
 	return (0);
 }

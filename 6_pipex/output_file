@@ -1,1 +1,10 @@
-0
+total 96
+-rw-r--r-- 1 rods rods  3779 Jan 13 18:46 Makefile
+drwxr-xr-x 2 rods rods  4096 Jan 13 18:53 bin
+drwxr-xr-x 2 rods rods  4096 Jan  7 08:53 include
+-rwxrwxrwx 1 rods rods   168 Jan 12 16:49 input_file
+drwxr-xr-x 2 rods rods  4096 Jan 13 18:53 objs
+-rw-r--r-- 1 rods rods   459 Jan 13 18:41 output_file
+-rwxr-xr-x 1 rods rods 62904 Jan 13 18:39 pipex
+drwxr-xr-x 4 rods rods  4096 Jan 13 18:39 pipex-tester
+drwxr-xr-x 2 rods rods  4096 Jan 13 11:31 src
