@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 13:45:13 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/13 11:45:35 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/13 18:03:25 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_pipe_cmds
 	char	***cmds_w_flags;
 	int		**pipes;
 	int		is_here_doc;
+	char	*errmsg;
 }	t_pipe_cmds;
 
 // -- PROTOTYPES --------------------------------------------------------------|
@@ -84,5 +85,10 @@ char	**ft_split(char const *s, char delimiter);
 // parsing_utils.c
 void	retrieve_cmds_from_input(int argc, char *argv[],
 			t_pipe_cmds *pipe_cmds);
+
+// pipex.c
+void	find_path_variable(char *envp[], t_pipe_cmds *pipe_cmds);
+void	search_cmds_in_paths(t_pipe_cmds *pipe_cmds);
+int		find_command(t_pipe_cmds *pipe_cmds, int j);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 21:13:59 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/13 11:54:26 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/13 12:39:44 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	mem_alloc(t_pipe_cmds *pipe_cmds)
 	pipe_cmds->is_here_doc = 0;
 	pipe_cmds->all_paths = NULL;
 	pipe_cmds->pipes = NULL;
+	pipe_cmds->errmsg = NULL;
 	pipe_cmds->cmds_full_path = ft_calloc(pipe_cmds->cmd_count + 1,
 			sizeof(pipe_cmds->cmds_full_path));
 	pipe_cmds->cmds_w_flags = ft_calloc(pipe_cmds->cmd_count + 1,
@@ -80,10 +81,17 @@ void	open_files(t_pipe_cmds *pipe_cmds)
 {
 	pipe_cmds->input_fd = open(pipe_cmds->input_full_path, O_RDONLY);
 	if (pipe_cmds->input_fd == -1)
-		perror_exit("open_files: error opening input file", 10, pipe_cmds);
+	{
+		pipe_cmds->errmsg = ft_strjoin("bash: ", pipe_cmds->input_full_path);
+		printf("err msg: %s\n", pipe_cmds->errmsg);
+		perror_exit(pipe_cmds->errmsg, 0, pipe_cmds);
+	}
 	pipe_cmds->output_fd = open(pipe_cmds->output_full_path,
 			O_CREAT | O_WRONLY, 0777);
 	if (pipe_cmds->output_fd == -1)
-		perror_exit("open_files: error opening output file", 12, pipe_cmds);
+	{
+		pipe_cmds->errmsg = ft_strjoin("bash: ", pipe_cmds->output_full_path);
+		perror_exit(pipe_cmds->errmsg, 1, pipe_cmds);
+	}
 	return ;
 }

@@ -6,13 +6,13 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 01:45:52 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/11 21:18:19 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/13 18:03:13 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static void	find_path_variable(char *envp[], t_pipe_cmds *pipe_cmds)
+void	find_path_variable(char *envp[], t_pipe_cmds *pipe_cmds)
 {
 	char	*full_path_var;
 
