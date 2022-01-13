@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2022/01/13 18:46:23 by roaraujo         ###   ########.fr        #
+#    Updated: 2022/01/13 19:45:43 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ BINS_PATH = ./bin/
 # TEST ARGS
 INPUT_FILE = input_file
 CMD1 = "ls -l"
-CMD2 = "wc -l"
+CMD2 = "tr x '\''"
 OUTPUT_FILE = output_file
 
 # COMPILATION

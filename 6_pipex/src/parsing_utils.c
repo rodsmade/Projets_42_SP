@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 21:17:25 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/12 17:52:40 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/13 19:49:39 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,26 @@ static void	revert_spaces(char ***cmd_w_flags)
 	}
 }
 
+static void	remove_quotes(char ***cmd_w_flags)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while ((*cmd_w_flags)[++i] != NULL)
+	{
+		if ((*cmd_w_flags)[i][ft_strlen((*cmd_w_flags)[i]) - 1] == '\'')
+			(*cmd_w_flags)[i][ft_strlen((*cmd_w_flags)[i]) - 1] = '\0';
+		if ((*cmd_w_flags)[i][0] == '\'')
+		{
+			j = 0;
+			while ((*cmd_w_flags)[i][++j])
+				(*cmd_w_flags)[i][j - 1] = (*cmd_w_flags)[i][j];
+			(*cmd_w_flags)[i][j - 1] = '\0';
+		}
+	}
+}
+
 static char	**split_cmd(char *arg)
 {
 	char	**cmd_w_flags;
@@ -63,6 +83,7 @@ static char	**split_cmd(char *arg)
 	mask_spaces(&arg);
 	cmd_w_flags = ft_split(arg, ' ');
 	revert_spaces(&cmd_w_flags);
+	remove_quotes(&cmd_w_flags);
 	return (cmd_w_flags);
 }
 
