@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 21:17:25 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/13 19:49:39 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/13 19:54:31 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,11 @@ static void	remove_quotes(char ***cmd_w_flags)
 	i = -1;
 	while ((*cmd_w_flags)[++i] != NULL)
 	{
-		if ((*cmd_w_flags)[i][ft_strlen((*cmd_w_flags)[i]) - 1] == '\'')
+		if ((*cmd_w_flags)[i][ft_strlen((*cmd_w_flags)[i]) - 1] == '\''
+			|| (*cmd_w_flags)[i][ft_strlen((*cmd_w_flags)[i]) - 1] == '\"')
 			(*cmd_w_flags)[i][ft_strlen((*cmd_w_flags)[i]) - 1] = '\0';
-		if ((*cmd_w_flags)[i][0] == '\'')
+		if ((*cmd_w_flags)[i][0] == '\''
+			|| (*cmd_w_flags)[i][0] == '\"')
 		{
 			j = 0;
 			while ((*cmd_w_flags)[i][++j])
