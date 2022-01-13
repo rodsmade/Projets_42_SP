@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 13:45:13 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/11 21:31:37 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/12 19:30:40 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 // -- INCLUDE -----------------------------------------------------------------|
 // perror()
 # include <stdio.h>
+# include <errno.h>
+// strerror()
+# include <string.h>
 // exit()
 # include <stdlib.h>
 // access()

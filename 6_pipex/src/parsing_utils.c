@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 21:17:25 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/11 21:28:32 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/12 17:52:40 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,16 @@ static void	mask_spaces(char **arg)
 	{
 		if ((*arg)[i] == '\"')
 		{
-			while ((*arg)[++i] != '\"' && (*arg)[++i] != '\0')
+			while ((*arg)[++i] != '"' && (*arg)[i] != '\0')
 			{
 				if ((*arg)[i] == ' ')
 					(*arg)[i] = 1;
+				i++;
 			}
 		}
 		if ((*arg)[i] == '\'')
 		{
-			while ((*arg)[++i] != '\'' && (*arg)[++i] != '\0')
+			while ((*arg)[++i] != 39 && (*arg)[i] != '\0')
 			{
 				if ((*arg)[i] == ' ')
 					(*arg)[i] = 1;

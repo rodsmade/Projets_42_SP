@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 21:13:59 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/13 11:23:04 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/12 19:31:13 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	basic_args_check(int argc, char *argv[], t_pipe_cmds *pipe_cmds)
 {
-	if (argc != 5)
+	if (argc < 5)
 	{
-		perror("basic_args_check: invalid number of arguments "
-			"(use: input_file \"cmd1\" \"cmd2\" output_file)");
+		perror("basic_args_check: 4 arguments needed "
+			"(e.g.: input_file \"cmd1\" \"cmd2\" output_file)");
 		exit(2);
 	}
 	if (access(argv[1], F_OK) != 0)
@@ -77,9 +77,19 @@ void	open_files(t_pipe_cmds *pipe_cmds)
 	pipe_cmds->input_fd = open(pipe_cmds->input_full_path, O_RDONLY);
 	if (pipe_cmds->input_fd == -1)
 		perror_exit("open_files: error opening input file", 10, pipe_cmds);
-	pipe_cmds->output_fd = open(pipe_cmds->output_full_path,
-			O_CREAT | O_WRONLY, 0777);
-	if (pipe_cmds->output_fd == -1)
-		perror_exit("open_files: error opening output file", 12, pipe_cmds);
+	if (pipe_cmds->is_here_doc)
+	{
+		pipe_cmds->output_fd = open(pipe_cmds->output_full_path,
+				O_CREAT | O_WRONLY | O_TRUNC, 0777);
+		if (pipe_cmds->output_fd == -1)
+			perror_exit("open_files: error opening output file", 11, pipe_cmds);
+	}
+	else
+	{
+		pipe_cmds->output_fd = open(pipe_cmds->output_full_path,
+				O_CREAT | O_WRONLY, 0777);
+		if (pipe_cmds->output_fd == -1)
+			perror_exit("open_files: error opening output file", 12, pipe_cmds);
+	}
 	return ;
 }
