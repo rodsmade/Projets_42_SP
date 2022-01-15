@@ -1,5 +1,9 @@
 # so_long
-Bask in late-90's gaming nostalgia! This is my first 2D game, built with a custom graphic interface library that allows for window drawing and events handling. The sprites (from Game Freak/Nintendo's classic Pokémon Yellow) were retrieved from the internet, although I did the colouring myself.
+Bask in late-90's gaming nostalgia!
+
+![2022-01-15 11-40-40](https://user-images.githubusercontent.com/49699403/149626600-089dc518-8d8e-4f39-a3a4-fd35f82169b9.gif)
+
+This is my first 2D game, built with a custom graphic interface library that allows for window drawing and events handling. The sprites (from Game Freak/Nintendo's classic Pokémon Yellow) were retrieved from the internet, although I did the colouring myself.
 
 The game is initiated by a map file in the ```.ber``` format containing only the following valid characters:
 ``` c
@@ -54,4 +58,4 @@ make run MAP=<path to map>
 ```
 You can use one of the preset maps in ```./resources/maps```, or you could even make a map of your own!
 
-![2022-01-15 11-40-40](https://user-images.githubusercontent.com/49699403/149626600-089dc518-8d8e-4f39-a3a4-fd35f82169b9.gif)
+Game on! :)
