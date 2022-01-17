@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/04 19:44:22 by roaraujo          #+#    #+#              #
-#    Updated: 2021/12/07 20:41:40 by roaraujo         ###   ########.fr        #
+#    Updated: 2022/01/17 17:57:59 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ LIBNAME = libft.a
 SRC_FILES =	ft_atoi.c \
 			ft_bzero.c \
 			ft_calloc.c \
+			ft_free_arr.c \
 			ft_free_ptr.c \
 			ft_get_next_line.c \
 			ft_get_next_line_utils.c \
