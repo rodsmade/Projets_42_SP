@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:14:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/19 16:44:43 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/19 16:54:37 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,6 +223,58 @@ void	push_b(t_stacks *stacks)
 	return ;
 }
 
+void	rotate_a(t_stacks *stacks)
+{
+	t_dbl_list_i	*detach;
+
+	if (stacks->size_a <= 1)
+		return ;
+	detach = stacks->stack_a;
+	stacks->stack_a = stacks->stack_a->next;
+	if (stacks->stack_a)
+		stacks->stack_a->prev = NULL;
+	ft_dbl_lst_i_add_back(&stacks->stack_a, detach);
+	ft_putendl_fd("ra", 1);
+	return ;
+}
+
+void	rotate_b(t_stacks *stacks)
+{
+	t_dbl_list_i	*detach;
+
+	if (stacks->size_b <= 1)
+		return ;
+	detach = stacks->stack_b;
+	stacks->stack_b = stacks->stack_b->next;
+	if (stacks->stack_b)
+		stacks->stack_b->prev = NULL;
+	ft_dbl_lst_i_add_back(&stacks->stack_b, detach);
+	ft_putendl_fd("rb", 1);
+	return ;
+}
+
+void	rotate_ab(t_stacks *stacks)
+{
+	t_dbl_list_i	*detach;
+
+	if (stacks->size_a <= 1)
+		return ;
+	detach = stacks->stack_a;
+	stacks->stack_a = stacks->stack_a->next;
+	if (stacks->stack_a)
+		stacks->stack_a->prev = NULL;
+	ft_dbl_lst_i_add_back(&stacks->stack_a, detach);
+	if (stacks->size_b <= 1)
+		return ;
+	detach = stacks->stack_b;
+	stacks->stack_b = stacks->stack_b->next;
+	if (stacks->stack_b)
+		stacks->stack_b->prev = NULL;
+	ft_dbl_lst_i_add_back(&stacks->stack_b, detach);
+	ft_putendl_fd("rr", 1);
+	return ;
+}
+
 int	main(int argc, char *argv[])
 {
 	t_stacks		stacks;
@@ -243,20 +295,9 @@ int	main(int argc, char *argv[])
 	stacks.size_b = ft_dbl_lst_i_size(stacks.stack_b);
 	// printa as stacks
 	print_stacks(&stacks);
-	push_b(&stacks);
-	push_b(&stacks);
-	push_b(&stacks);
-	push_b(&stacks);
-	push_b(&stacks);
-	push_b(&stacks);
-	push_b(&stacks);
-	push_b(&stacks);
-	push_b(&stacks);
-	push_b(&stacks);
-	push_b(&stacks);
-	push_b(&stacks);
-	push_b(&stacks);
-	push_b(&stacks);
+	rotate_ab(&stacks);
+	rotate_ab(&stacks);
+	rotate_ab(&stacks);
 	print_stacks(&stacks);
 	// dá free nas stacks
 	free_stack(stacks.stack_a);
