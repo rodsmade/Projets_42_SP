@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:14:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/19 16:54:37 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/19 20:30:11 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,31 @@ void	ft_dbl_lst_i_add_back(t_dbl_list_i **lst, t_dbl_list_i *new)
 	t_dbl_list_i	*last_element;
 
 	if (*lst == NULL)
+	{
 		*lst = new;
+		new->prev = NULL;
+		new->next = NULL;
+	}
 	else
 	{
 		last_element = ft_dbl_lst_i_last(*lst);
 		last_element->next = new;
+		new->prev = last_element;
 		new->next = NULL;
 	}
 }
 
 void	ft_dbl_lst_i_add_front(t_dbl_list_i **lst, t_dbl_list_i *new)
 {
+	if (*lst == NULL)
+	{
+		*lst = new;
+		new->prev = NULL;
+		new->next = NULL;
+	}
+	new->prev = NULL;
 	new->next = *lst;
+	(*lst)->prev = new;
 	*lst = new;
 	return ;
 }
@@ -108,7 +121,7 @@ void	print_stacks(t_stacks *stacks)
 	// printa stack a
 	pivot = stacks->stack_a;
 	i = -1;
-	printf("stack a:\n");
+	printf("stack a:\t(size: %i)\n", stacks->size_a);
 	while (++i < stacks->size_a)
 	{
 		printf("%i\n", pivot->content);
@@ -117,7 +130,7 @@ void	print_stacks(t_stacks *stacks)
 	// printa stack b
 	pivot = stacks->stack_b;
 	i = -1;
-	printf("stack b:\n");
+	printf("stack b:\t(size: %i)\n", stacks->size_b);
 	while (++i < stacks->size_b)
 	{
 		printf("%i\n", pivot->content);
@@ -227,7 +240,7 @@ void	rotate_a(t_stacks *stacks)
 {
 	t_dbl_list_i	*detach;
 
-	if (stacks->size_a <= 1)
+	if (stacks->size_a <= 1 || stacks->stack_a == NULL)
 		return ;
 	detach = stacks->stack_a;
 	stacks->stack_a = stacks->stack_a->next;
@@ -242,7 +255,7 @@ void	rotate_b(t_stacks *stacks)
 {
 	t_dbl_list_i	*detach;
 
-	if (stacks->size_b <= 1)
+	if (stacks->size_b <= 1 || stacks->stack_a == NULL)
 		return ;
 	detach = stacks->stack_b;
 	stacks->stack_b = stacks->stack_b->next;
@@ -257,14 +270,14 @@ void	rotate_ab(t_stacks *stacks)
 {
 	t_dbl_list_i	*detach;
 
-	if (stacks->size_a <= 1)
+	if (stacks->size_a <= 1 || stacks->stack_a == NULL)
 		return ;
 	detach = stacks->stack_a;
 	stacks->stack_a = stacks->stack_a->next;
 	if (stacks->stack_a)
 		stacks->stack_a->prev = NULL;
 	ft_dbl_lst_i_add_back(&stacks->stack_a, detach);
-	if (stacks->size_b <= 1)
+	if (stacks->size_b <= 1 || stacks->stack_a == NULL)
 		return ;
 	detach = stacks->stack_b;
 	stacks->stack_b = stacks->stack_b->next;
@@ -272,6 +285,54 @@ void	rotate_ab(t_stacks *stacks)
 		stacks->stack_b->prev = NULL;
 	ft_dbl_lst_i_add_back(&stacks->stack_b, detach);
 	ft_putendl_fd("rr", 1);
+	return ;
+}
+
+void	reverse_rotate_a(t_stacks *stacks)
+{
+	t_dbl_list_i	*detach;
+
+	if (stacks->size_a <= 1 || stacks->stack_a == NULL)
+		return ;
+	detach = ft_dbl_lst_i_last(stacks->stack_a);
+	if (detach->prev)
+		(detach->prev)->next = NULL;
+	ft_dbl_lst_i_add_front(&stacks->stack_a, detach);
+	ft_putendl_fd("rra", 1);
+	return ;
+}
+
+void	reverse_rotate_b(t_stacks *stacks)
+{
+	t_dbl_list_i	*detach;
+
+	if (stacks->size_b <= 1 || stacks->stack_b == NULL)
+		return ;
+	detach = ft_dbl_lst_i_last(stacks->stack_b);
+	if (detach->prev)
+		(detach->prev)->next = NULL;
+	ft_dbl_lst_i_add_front(&stacks->stack_b, detach);
+	ft_putendl_fd("rrb", 1);
+	return ;
+}
+
+void	reverse_rotate_ab(t_stacks *stacks)
+{
+	t_dbl_list_i	*detach;
+
+	if (stacks->size_a <= 1 || stacks->stack_a == NULL)
+		return ;
+	detach = ft_dbl_lst_i_last(stacks->stack_a);
+	if (detach->prev)
+		(detach->prev)->next = NULL;
+	ft_dbl_lst_i_add_front(&stacks->stack_a, detach);
+	if (stacks->size_b <= 1 || stacks->stack_b == NULL)
+		return ;
+	detach = ft_dbl_lst_i_last(stacks->stack_b);
+	if (detach->prev)
+		(detach->prev)->next = NULL;
+	ft_dbl_lst_i_add_front(&stacks->stack_b, detach);
+	ft_putendl_fd("rrr", 1);
 	return ;
 }
 
@@ -295,9 +356,13 @@ int	main(int argc, char *argv[])
 	stacks.size_b = ft_dbl_lst_i_size(stacks.stack_b);
 	// printa as stacks
 	print_stacks(&stacks);
-	rotate_ab(&stacks);
-	rotate_ab(&stacks);
-	rotate_ab(&stacks);
+	reverse_rotate_ab(&stacks);
+	reverse_rotate_ab(&stacks);
+	reverse_rotate_ab(&stacks);
+	reverse_rotate_ab(&stacks);
+	reverse_rotate_ab(&stacks);
+	reverse_rotate_ab(&stacks);
+	reverse_rotate_ab(&stacks);
 	print_stacks(&stacks);
 	// dá free nas stacks
 	free_stack(stacks.stack_a);
