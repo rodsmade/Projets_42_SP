@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2022/01/17 18:14:19 by roaraujo         ###   ########.fr        #
+#    Updated: 2022/01/19 01:49:27 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,9 @@ SRCS_PATH = ./src/
 
 # COMPILATION
 CC = gcc
-DEBUG = -g
-# CFLAGS = -O3 $(DEBUG) -I $(HEADERS_PATH)
-CFLAGS = -Wall -Wextra -Werror -O3 -I $(HEADERS_PATH)
+DEBUG = -g -O3
+CFLAGS = -Wall -Wextra -Werror $(DEBUG) -I $(HEADERS_PATH)
+# CFLAGS = -Wall -Wextra -Werror -O3 -I $(HEADERS_PATH)
 VALGRIND = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -q --tool=memcheck
 
 # BASH COMMANDS
@@ -42,20 +42,20 @@ all: libft make_dir $(NAME)
 
 # -> compiles libft all over
 libft:
-	@cd $(LIBS_PATH)libft && $(MAKE_NOPRINT)
+	cd $(LIBS_PATH)libft && $(MAKE)
 
 # -> creates folder if it doesn't already exist
 make_dir:
-	@$(MKDIR) $(BINS_PATH)
-	@$(MKDIR) $(OBJS_PATH)
+	$(MKDIR) $(BINS_PATH)
+	$(MKDIR) $(OBJS_PATH)
 
 # -> creates executable push_swap inside ./bin/
 $(NAME): $(OBJECTS)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJECTS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJECTS) -L $(LIBS_PATH) -lft
 
 # -> creates object files for push_swap
 $(OBJS_PATH)%.o : $(SRCS_PATH)%.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 # -> mandatory flag for project submission
 bonus: all
@@ -63,19 +63,20 @@ bonus: all
 # RUN
 run: $(NAME)
 # 
-	@$(NAME) $$ARG
+	$(NAME) $$ARG
 
 valgrind: $(NAME)
-	@$(VALGRIND) $(NAME) $$ARG
+	$(VALGRIND) $(NAME) $$ARG
 
 # SANITIZE
 # -> deletes all .o files; also runs libft's clean target
 clean:
-	@$(RM) $(OBJECTS) $(OBJECTS_BONUS)
+	$(RM) $(OBJECTS) $(OBJECTS_BONUS)
 
 # -> deletes .o files + static library file + executable; also runs libft's fclean target
 fclean: clean
-	@$(RM) $(NAME) $(NAME_BONUS)
+	cd $(LIBS_PATH)libft && $(MAKE) fclean
+	$(RM) $(NAME) $(NAME_BONUS)
 
 # -> full clean, recompile
 re: fclean all
