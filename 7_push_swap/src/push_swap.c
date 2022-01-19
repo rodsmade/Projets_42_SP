@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:14:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/19 01:38:44 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/19 04:39:22 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ typedef struct s_dbl_list_i
 	struct s_dbl_list_i	*prev;
 	struct s_dbl_list_i	*next;
 }					t_dbl_list_i;
+
+typedef struct s_stacks
+{
+	t_dbl_list_i	*stack_a;
+	int				size_a;
+	t_dbl_list_i	*stack_b;
+	int				size_b;
+}					t_stacks;
 
 t_dbl_list_i	*ft_dbl_lst_i_new(int content)
 {
@@ -104,26 +112,39 @@ void	free_stack(t_dbl_list_i *lst)
 }
 
 int	main(int argc, char *argv[])
+// TODO: FAZER VARIÁVEL 'GLOBAL' QUE GUARDA AS STACKS E TAL.
 {
+	t_stacks		stacks;
 	int				i;
-	int				lst_size;
-	t_dbl_list_i	*stack_a;
 	t_dbl_list_i	*pivot;
 
 	if (argc < 2)
 		return (0);
-	stack_a = NULL;
+	stacks.stack_a = NULL;
 	i = 0;
 	while (++i < argc)
-		ft_dbl_lst_i_add_back(&stack_a, ft_dbl_lst_i_new(ft_atoi(argv[i])));
-	lst_size = ft_dbl_lst_i_size(stack_a);
+		ft_dbl_lst_i_add_back(&stacks.stack_a, ft_dbl_lst_i_new(ft_atoi(argv[i])));
+	pivot = stacks.stack_a;
+	stacks.size_a = ft_dbl_lst_i_size(stacks.stack_a);
 	i = -1;
-	pivot = stack_a;
-	while (++i < lst_size)
+	printf("stack a:\n");
+	while (++i < stacks.size_a)
 	{
-		printf("Element %i: %i\n", i, pivot->content);
+		printf("%i\n", pivot->content);
 		pivot = pivot->next;
 	}
-	free_stack(stack_a);
+	free_stack(stacks.stack_a);
+	stacks.stack_b = NULL;
+	ft_dbl_lst_i_add_back(&stacks.stack_b, ft_dbl_lst_i_new(42));
+	pivot = stacks.stack_b;
+	stacks.size_b = ft_dbl_lst_i_size(stacks.stack_b);
+	i = -1;
+	printf("stack b:\n");
+	while (++i < stacks.size_b)
+	{
+		printf("%i\n", pivot->content);
+		pivot = pivot->next;
+	}
+	free_stack(stacks.stack_b);
 	return (0);
 }
