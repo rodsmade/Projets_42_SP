@@ -6,26 +6,13 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:14:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/19 04:39:22 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/19 19:27:42 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
 #include <stdio.h>
-
-typedef struct s_dlist
-{
-	void			*content;
-	struct s_list	*prev;
-	struct s_list	*next;
-}					t_dlist;
-
-typedef struct s_list_i
-{
-	int				content;
-	struct s_list_i	*next;
-}					t_list_i;
 
 typedef struct s_dbl_list_i
 {
@@ -111,40 +98,67 @@ void	free_stack(t_dbl_list_i *lst)
 	free (lst);
 }
 
+void	print_stacks(t_stacks *stacks)
+{
+	int	i;
+	t_dbl_list_i	*pivot;
+
+	// printa stack a
+	pivot = stacks->stack_a;
+	i = -1;
+	printf("stack a:\n");
+	while (++i < stacks->size_a)
+	{
+		printf("%i\n", pivot->content);
+		pivot = pivot->next;
+	}
+	// printa stack b
+	pivot = stacks->stack_b;
+	i = -1;
+	printf("stack b:\n");
+	while (++i < stacks->size_b)
+	{
+		printf("%i\n", pivot->content);
+		pivot = pivot->next;
+	}
+	return ;
+}
+
+void	swap_a(t_stacks *stacks)
+{
+	t_dbl_list_i	temp;
+
+	if (stacks->size_a < 2)
+		return ;
+	temp = *(stacks->stack_a->next);
+	stacks->stack_a->prev = temp;
+	stacks->stack_a->next = temp->next;
+	
+
+}
+
 int	main(int argc, char *argv[])
-// TODO: FAZER VARIÁVEL 'GLOBAL' QUE GUARDA AS STACKS E TAL.
 {
 	t_stacks		stacks;
 	int				i;
-	t_dbl_list_i	*pivot;
 
 	if (argc < 2)
 		return (0);
+	// cria stack a
 	stacks.stack_a = NULL;
 	i = 0;
 	while (++i < argc)
 		ft_dbl_lst_i_add_back(&stacks.stack_a, ft_dbl_lst_i_new(ft_atoi(argv[i])));
-	pivot = stacks.stack_a;
 	stacks.size_a = ft_dbl_lst_i_size(stacks.stack_a);
-	i = -1;
-	printf("stack a:\n");
-	while (++i < stacks.size_a)
-	{
-		printf("%i\n", pivot->content);
-		pivot = pivot->next;
-	}
-	free_stack(stacks.stack_a);
+	// cria stack b
 	stacks.stack_b = NULL;
 	ft_dbl_lst_i_add_back(&stacks.stack_b, ft_dbl_lst_i_new(42));
-	pivot = stacks.stack_b;
+	ft_dbl_lst_i_add_back(&stacks.stack_b, ft_dbl_lst_i_new(24));
 	stacks.size_b = ft_dbl_lst_i_size(stacks.stack_b);
-	i = -1;
-	printf("stack b:\n");
-	while (++i < stacks.size_b)
-	{
-		printf("%i\n", pivot->content);
-		pivot = pivot->next;
-	}
+	// printa as stacks
+	print_stacks(&stacks);
+	// dá free nas stacks
+	free_stack(stacks.stack_a);
 	free_stack(stacks.stack_b);
 	return (0);
 }
