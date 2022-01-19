@@ -6,12 +6,12 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/04 19:44:22 by roaraujo          #+#    #+#              #
-#    Updated: 2022/01/19 01:46:34 by roaraujo         ###   ########.fr        #
+#    Updated: 2022/01/19 01:57:20 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # PATH VARIABLES
-HEADERS_PATH = ../../includes/
+HEADERS_PATH = ../../include/
 SRCS_PATH = ./srcs/
 OBJS_PATH = ./objs/
 LIBS_PATH = ../
