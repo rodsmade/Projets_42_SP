@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:14:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/19 19:27:42 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/19 16:20:03 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,14 +126,63 @@ void	print_stacks(t_stacks *stacks)
 
 void	swap_a(t_stacks *stacks)
 {
-	t_dbl_list_i	temp;
+	t_dbl_list_i	*new_first;
+	t_dbl_list_i	*new_second;
 
 	if (stacks->size_a < 2)
 		return ;
-	temp = *(stacks->stack_a->next);
-	stacks->stack_a->prev = temp;
-	stacks->stack_a->next = temp->next;
-	
+	new_first = stacks->stack_a->next;
+	new_second = stacks->stack_a;
+	stacks->stack_a = new_first;
+	new_second->prev = new_first;
+	new_first->prev = NULL;
+	new_second->next = new_first->next;
+	new_first->next = new_second;
+	ft_putendl_fd("sa", 1);
+	return ;
+}
+
+void	swap_b(t_stacks *stacks)
+{
+	t_dbl_list_i	*new_first;
+	t_dbl_list_i	*new_second;
+
+	if (stacks->size_b < 2)
+		return ;
+	new_first = stacks->stack_b->next;
+	new_second = stacks->stack_b;
+	stacks->stack_b = new_first;
+	new_second->prev = new_first;
+	new_first->prev = NULL;
+	new_second->next = new_first->next;
+	new_first->next = new_second;
+	ft_putendl_fd("sb", 1);
+	return ;
+}
+
+void	swap_ab(t_stacks *stacks)
+{
+	t_dbl_list_i	*new_first;
+	t_dbl_list_i	*new_second;
+
+	if (stacks->size_a < 2)
+		return ;
+	new_first = stacks->stack_a->next;
+	new_second = stacks->stack_a;
+	stacks->stack_a = new_first;
+	new_second->prev = new_first;
+	new_first->prev = NULL;
+	new_second->next = new_first->next;
+	new_first->next = new_second;
+	new_first = stacks->stack_b->next;
+	new_second = stacks->stack_b;
+	stacks->stack_b = new_first;
+	new_second->prev = new_first;
+	new_first->prev = NULL;
+	new_second->next = new_first->next;
+	new_first->next = new_second;
+	ft_putendl_fd("ss", 1);
+	return ;
 
 }
 
@@ -156,6 +205,8 @@ int	main(int argc, char *argv[])
 	ft_dbl_lst_i_add_back(&stacks.stack_b, ft_dbl_lst_i_new(24));
 	stacks.size_b = ft_dbl_lst_i_size(stacks.stack_b);
 	// printa as stacks
+	print_stacks(&stacks);
+	swap_ab(&stacks);
 	print_stacks(&stacks);
 	// dá free nas stacks
 	free_stack(stacks.stack_a);

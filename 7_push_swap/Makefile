@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2022/01/19 01:49:27 by roaraujo         ###   ########.fr        #
+#    Updated: 2022/01/19 15:57:21 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,8 @@ SRCS_PATH = ./src/
 
 # COMPILATION
 CC = gcc
-DEBUG = -g -O3
+DEBUG = -g
 CFLAGS = -Wall -Wextra -Werror $(DEBUG) -I $(HEADERS_PATH)
-# CFLAGS = -Wall -Wextra -Werror -O3 -I $(HEADERS_PATH)
 VALGRIND = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -q --tool=memcheck
 
 # BASH COMMANDS
