@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2022/01/19 15:57:21 by roaraujo         ###   ########.fr        #
+#    Updated: 2022/01/19 20:49:09 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,12 @@ TOUCH = touch -a
 
 # FILES
 NAME = $(BINS_PATH)push_swap
-SRC_FILES = push_swap.c
+SRC_FILES = double_list_utils.c \
+			operations_utils_push.c \
+			operations_utils_reverse_rotate.c \
+			operations_utils_rotate.c \
+			operations_utils_swap.c \
+			push_swap.c
 SOURCES = $(addprefix $(SRCS_PATH), $(SRC_FILES))
 OBJ_FILES = $(patsubst %.c, %.o, $(SRC_FILES))
 OBJECTS = $(addprefix $(OBJS_PATH), $(OBJ_FILES))
