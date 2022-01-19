@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:14:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/19 16:20:03 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/19 16:44:43 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ void	free_stack(t_dbl_list_i *lst)
 {
 	t_dbl_list_i	*aux;
 
+	if (lst == NULL)
+		return ;
 	while (lst->next)
 	{
 		aux = lst->next;
@@ -183,7 +185,42 @@ void	swap_ab(t_stacks *stacks)
 	new_first->next = new_second;
 	ft_putendl_fd("ss", 1);
 	return ;
+}
 
+void	push_a(t_stacks *stacks)
+// detaches stack b's head and inserts it on top of stack a
+{
+	t_dbl_list_i	*detach;
+
+	if (stacks->size_b <= 0)
+		return ;
+	detach = stacks->stack_b;
+	stacks->stack_b = stacks->stack_b->next;
+	if (stacks->stack_b)
+		stacks->stack_b->prev = NULL;
+	stacks->size_b--;
+	ft_dbl_lst_i_add_front(&stacks->stack_a, detach);
+	stacks->size_a++;
+	ft_putendl_fd("pa", 1);
+	return ;
+}
+
+void	push_b(t_stacks *stacks)
+// detaches stack a's head and inserts it on top of stack b
+{
+	t_dbl_list_i	*detach;
+
+	if (stacks->size_a == 0)
+		return ;
+	detach = stacks->stack_a;
+	stacks->stack_a = stacks->stack_a->next;
+	if (stacks->stack_a)
+		stacks->stack_a->prev = NULL;
+	stacks->size_a--;
+	ft_dbl_lst_i_add_front(&stacks->stack_b, detach);
+	stacks->size_b++;
+	ft_putendl_fd("pb", 1);
+	return ;
 }
 
 int	main(int argc, char *argv[])
@@ -206,7 +243,20 @@ int	main(int argc, char *argv[])
 	stacks.size_b = ft_dbl_lst_i_size(stacks.stack_b);
 	// printa as stacks
 	print_stacks(&stacks);
-	swap_ab(&stacks);
+	push_b(&stacks);
+	push_b(&stacks);
+	push_b(&stacks);
+	push_b(&stacks);
+	push_b(&stacks);
+	push_b(&stacks);
+	push_b(&stacks);
+	push_b(&stacks);
+	push_b(&stacks);
+	push_b(&stacks);
+	push_b(&stacks);
+	push_b(&stacks);
+	push_b(&stacks);
+	push_b(&stacks);
 	print_stacks(&stacks);
 	// dá free nas stacks
 	free_stack(stacks.stack_a);
