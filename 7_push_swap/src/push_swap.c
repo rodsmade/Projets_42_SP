@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:14:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/19 22:35:47 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/20 19:10:07 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	initialise(t_stacks *stacks)
 {
 	stacks->stack_a = NULL;
 	stacks->stack_b = NULL;
-	stacks->size_a = ft_dbl_lst_i_size(stacks->stack_a);
-	stacks->size_b = ft_dbl_lst_i_size(stacks->stack_b);
+	stacks->size_a = 0;
+	stacks->size_b = 0;
 	return ;
 }
 
@@ -64,29 +64,49 @@ void	print_stacks(t_stacks *stacks)
 	return ;
 }
 
-int	validate(char *argv, t_stacks *stacks)
+void	error_exit(t_stacks *stacks)
 {
-	// int	i;
-	
-	// i = 0;
-	// while (++i < argc)
-	// {
-	// 	if (is_valid_input(argv[i], &stacks))
-	// 		ft_dbl_lst_i_add_back(&stacks.stack_a,
-	// 				ft_dbl_lst_i_new(ft_atoi(argv[i])));
-	// }
-	// stacks.size_a = ft_dbl_lst_i_size(stacks.stack_a);
-	if (!ft_isdigit_str(argv))
-	{
-		free_stack(stacks->stack_a);
-		ft_putendl_fd("Error\n", 1);
-		exit(-1);
-	}
+	free_stack(stacks->stack_a);
+	ft_putendl_fd("Error", 2);
+	exit(0);
+}
 
+void	validate_input(char *argv[], t_stacks *stacks)
+{
+	int	i;
+
+	initialise(stacks);
+	i = 0;
+	while (argv[++i])
+	{
+		if (!ft_isnumeric_s(argv[i]))
+			error_exit(stacks);
+		if (ft_atoli(argv[i]) > INT_MAX)
+			error_exit(stacks);
+		ft_dbl_lst_i_add_back(&stacks->stack_a,
+					ft_dbl_lst_i_new(ft_atoi(argv[i])));
+		stacks->size_a++;
+	}
+}
+
+int	is_sorted(t_stacks *stacks)
+{
+	t_dbl_list_i	*pivot;
+
+	pivot = stacks->stack_a;
+	while(pivot->next != NULL)
+	{
+		if (pivot->content > pivot->next->content)
+			return (0);
+		pivot = pivot->next;
+	}
+	free_stack(stacks->stack_a);
+	return (1);
 }
 
 void	sort(t_stacks *stacks)
 {
+	ft_putendl_fd("stack needs sorting!\n. . . starting sorting RN", 1);
 	free_stack(stacks->stack_a);
 	free_stack(stacks->stack_b);
 }
@@ -95,15 +115,11 @@ int	main(int argc, char *argv[])
 {
 	t_stacks		stacks;
 
-	if (argc == 2)
-	{
-		ft_putendl_fd("Error", 1);
-		exit(-1);
-	}
 	if (argc > 2)
 	{
-		validate(argv, &stacks);
-		sort(&stacks);
+		validate_input(argv, &stacks);
+		if(!is_sorted(&stacks))
+			sort(&stacks);
 	}
 	return (0);
 }
