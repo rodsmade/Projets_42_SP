@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:14:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/20 19:10:07 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/20 19:40:41 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,30 @@ void	error_exit(t_stacks *stacks)
 	exit(0);
 }
 
+int	checks_duplicates(t_stacks *stacks)
+{
+	t_dbl_list_i	*pivot;
+	t_dbl_list_i	*duplicate;
+
+	pivot = stacks->stack_a;
+	while (pivot->next != NULL)
+	{
+		duplicate = pivot->next;
+		while (duplicate->next != NULL)
+		{
+			if (pivot->content == duplicate->content)
+				return (0);
+			duplicate = duplicate->next;
+		}
+		if (pivot->content == duplicate->content)
+			return (0);
+		pivot = pivot->next;
+	}
+	if (pivot->content == pivot->prev->content)
+		return (0);
+	return (1);
+}
+
 void	validate_input(char *argv[], t_stacks *stacks)
 {
 	int	i;
@@ -87,6 +111,11 @@ void	validate_input(char *argv[], t_stacks *stacks)
 					ft_dbl_lst_i_new(ft_atoi(argv[i])));
 		stacks->size_a++;
 	}
+	printf("all args passed check\n");
+	if (!checks_duplicates(stacks))
+		error_exit(stacks);
+	printf("no duplicates found\n");
+	return ;
 }
 
 int	is_sorted(t_stacks *stacks)
