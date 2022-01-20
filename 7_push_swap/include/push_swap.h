@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:15:13 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/19 20:55:04 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/19 21:45:31 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <stdlib.h>
 // write(), read()
 # include <unistd.h>
+// macro INT_MAX
+# include <limits.h>
 
 // -- TYPEDEFS (structs) ------------------------------------------------------|
 typedef struct s_dbl_list_i
