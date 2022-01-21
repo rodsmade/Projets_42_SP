@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2022/01/19 20:49:09 by roaraujo         ###   ########.fr        #
+#    Updated: 2022/01/20 21:08:39 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ TOUCH = touch -a
 
 # FILES
 NAME = $(BINS_PATH)push_swap
-SRC_FILES = double_list_utils.c \
+SRC_FILES = double_list_utils_1.c \
+			double_list_utils_2.c \
 			operations_utils_push.c \
 			operations_utils_reverse_rotate.c \
 			operations_utils_rotate.c \

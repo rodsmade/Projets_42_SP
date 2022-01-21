@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:15:13 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/19 21:45:31 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/20 21:08:17 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,13 @@ typedef struct s_stacks
 }					t_stacks;
 
 // -- PROTOTYPES --------------------------------------------------------------|
-// double_list_utils.c
+// double_list_utils_1.c
 t_dbl_list_i	*ft_dbl_lst_i_new(int content);
 int				ft_dbl_lst_i_size(t_dbl_list_i *lst);
 t_dbl_list_i	*ft_dbl_lst_i_last(t_dbl_list_i *lst);
+t_dbl_list_i	*ft_dbl_lst_i_first(t_dbl_list_i *lst);
+
+// double_list_utils_2.c
 void			ft_dbl_lst_i_add_back(t_dbl_list_i **lst, t_dbl_list_i *new);
 void			ft_dbl_lst_i_add_front(t_dbl_list_i **lst, t_dbl_list_i *new);
 

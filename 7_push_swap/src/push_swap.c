@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:14:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/20 19:40:41 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/20 21:14:16 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	free_stack(t_dbl_list_i *lst)
 
 void	print_stacks(t_stacks *stacks)
 {
-	int	i;
+	int				i;
 	t_dbl_list_i	*pivot;
 
 	// prints stack a
@@ -108,7 +108,7 @@ void	validate_input(char *argv[], t_stacks *stacks)
 		if (ft_atoli(argv[i]) > INT_MAX)
 			error_exit(stacks);
 		ft_dbl_lst_i_add_back(&stacks->stack_a,
-					ft_dbl_lst_i_new(ft_atoi(argv[i])));
+			ft_dbl_lst_i_new(ft_atoi(argv[i])));
 		stacks->size_a++;
 	}
 	printf("all args passed check\n");
@@ -123,7 +123,7 @@ int	is_sorted(t_stacks *stacks)
 	t_dbl_list_i	*pivot;
 
 	pivot = stacks->stack_a;
-	while(pivot->next != NULL)
+	while (pivot->next != NULL)
 	{
 		if (pivot->content > pivot->next->content)
 			return (0);
@@ -135,7 +135,8 @@ int	is_sorted(t_stacks *stacks)
 
 void	sort(t_stacks *stacks)
 {
-	ft_putendl_fd("stack needs sorting!\n. . . starting sorting RN", 1);
+	print_stacks(stacks);
+	printf("stack needs sorting!\n. . . starting sorting RN\n");
 	free_stack(stacks->stack_a);
 	free_stack(stacks->stack_b);
 }
@@ -147,7 +148,7 @@ int	main(int argc, char *argv[])
 	if (argc > 2)
 	{
 		validate_input(argv, &stacks);
-		if(!is_sorted(&stacks))
+		if (!is_sorted(&stacks))
 			sort(&stacks);
 	}
 	return (0);
