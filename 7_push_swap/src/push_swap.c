@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:14:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/20 21:14:16 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/22 16:13:21 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	initialise(t_stacks *stacks)
 {
 	stacks->stack_a = NULL;
 	stacks->stack_b = NULL;
-	stacks->size_a = 0;
-	stacks->size_b = 0;
 	return ;
 }
 
@@ -40,23 +38,20 @@ void	free_stack(t_dbl_list_i *lst)
 
 void	print_stacks(t_stacks *stacks)
 {
-	int				i;
 	t_dbl_list_i	*pivot;
 
 	// prints stack a
 	pivot = stacks->stack_a;
-	i = -1;
-	printf("stack a:\t(size: %i)\n", stacks->size_a);
-	while (++i < stacks->size_a)
+	printf("stack a:\t(size: %i)\n", ft_dbl_lst_i_size(stacks->stack_a));
+	while (pivot)
 	{
 		printf("%i\n", pivot->content);
 		pivot = pivot->next;
 	}
 	// prints stack b
 	pivot = stacks->stack_b;
-	i = -1;
-	printf("stack b:\t(size: %i)\n", stacks->size_b);
-	while (++i < stacks->size_b)
+	printf("stack b:\t(size: %i)\n", ft_dbl_lst_i_size(stacks->stack_b));
+	while (pivot)
 	{
 		printf("%i\n", pivot->content);
 		pivot = pivot->next;
@@ -109,7 +104,6 @@ void	validate_input(char *argv[], t_stacks *stacks)
 			error_exit(stacks);
 		ft_dbl_lst_i_add_back(&stacks->stack_a,
 			ft_dbl_lst_i_new(ft_atoi(argv[i])));
-		stacks->size_a++;
 	}
 	printf("all args passed check\n");
 	if (!checks_duplicates(stacks))

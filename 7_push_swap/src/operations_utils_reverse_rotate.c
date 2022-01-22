@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 20:45:47 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/19 20:46:09 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/22 16:07:03 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	reverse_rotate_a(t_stacks *stacks)
 {
 	t_dbl_list_i	*detach;
 
-	if (stacks->size_a <= 1 || stacks->stack_a == NULL)
+	if (stacks->stack_a == NULL || stacks->stack_a->next == NULL)
 		return ;
 	detach = ft_dbl_lst_i_last(stacks->stack_a);
 	if (detach->prev)
@@ -30,7 +30,7 @@ void	reverse_rotate_b(t_stacks *stacks)
 {
 	t_dbl_list_i	*detach;
 
-	if (stacks->size_b <= 1 || stacks->stack_b == NULL)
+	if (stacks->stack_b == NULL || stacks->stack_b->next == NULL)
 		return ;
 	detach = ft_dbl_lst_i_last(stacks->stack_b);
 	if (detach->prev)
@@ -44,13 +44,13 @@ void	reverse_rotate_ab(t_stacks *stacks)
 {
 	t_dbl_list_i	*detach;
 
-	if (stacks->size_a <= 1 || stacks->stack_a == NULL)
+	if (stacks->stack_a == NULL || stacks->stack_a->next == NULL)
 		return ;
 	detach = ft_dbl_lst_i_last(stacks->stack_a);
 	if (detach->prev)
 		(detach->prev)->next = NULL;
 	ft_dbl_lst_i_add_front(&stacks->stack_a, detach);
-	if (stacks->size_b <= 1 || stacks->stack_b == NULL)
+	if (stacks->stack_b == NULL || stacks->stack_b->next == NULL)
 		return ;
 	detach = ft_dbl_lst_i_last(stacks->stack_b);
 	if (detach->prev)
