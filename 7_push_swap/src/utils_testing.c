@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 15:30:19 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/23 15:31:28 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/23 15:44:03 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	print_stacks(t_stacks *stacks)
 {
 	t_dbl_list_i	*pivot;
 
+	printf("vvvvvvvvvvvvvvvvvvvvvvvvv\n");
 	// prints stack a
 	pivot = stacks->stack_a;
 	printf("stack a:\t(size: %i)\n", ft_dbl_lst_i_size(stacks->stack_a));
@@ -33,6 +34,7 @@ void	print_stacks(t_stacks *stacks)
 		printf("%i\n", pivot->content);
 		pivot = pivot->next;
 	}
+	printf("^^^^^^^^^^^^^^^^^^^^^^^^^\n");
 	return ;
 }
 

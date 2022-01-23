@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:17:07 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/23 14:34:13 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/23 15:35:29 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,8 @@ void	sort_three_elements_b(t_stacks *stacks)
 	third = stacks->stack_b->next->next->content;
 	if (first < second && first < third && second < third)
 	{
-		print_stacks_ptrs(stacks);
 		swap_b(stacks);
-		print_stacks_ptrs(stacks);
 		reverse_rotate_b(stacks);
-		print_stacks_ptrs(stacks);
 	}
 	if (first < second && first < third && second > third)
 		rotate_b(stacks);
