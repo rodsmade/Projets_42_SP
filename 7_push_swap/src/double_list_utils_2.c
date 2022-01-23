@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 20:42:27 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/20 21:07:37 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/22 22:10:15 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_dbl_lst_i_add_back(t_dbl_list_i **lst, t_dbl_list_i *new)
 		*lst = new;
 		new->prev = NULL;
 		new->next = NULL;
+		return ;
 	}
 	else
 	{
@@ -40,6 +41,7 @@ void	ft_dbl_lst_i_add_front(t_dbl_list_i **lst, t_dbl_list_i *new)
 		*lst = new;
 		new->prev = NULL;
 		new->next = NULL;
+		return ;
 	}
 	first_element = ft_dbl_lst_i_first(*lst);
 	first_element->prev = new;

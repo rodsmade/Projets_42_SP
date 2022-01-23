@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 20:43:30 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/22 16:01:32 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/22 17:28:47 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ void	push_a(t_stacks *stacks)
 
 void	push_b(t_stacks *stacks)
 // detaches stack a's head and inserts it on top of stack b
+// TODO: PUSH B TÁ ZOANDO A STACK A, O PRINT FICA EM LOOP INFINITO.
 {
 	t_dbl_list_i	*detach;
 
-	if (stacks->stack_a)
+	if (!stacks->stack_a)
 		return ;
 	detach = stacks->stack_a;
 	stacks->stack_a = stacks->stack_a->next;
