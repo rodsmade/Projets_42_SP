@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:14:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/22 22:41:31 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/23 14:37:35 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,32 @@ void	print_stacks(t_stacks *stacks)
 		printf("%i\n", pivot->content);
 		pivot = pivot->next;
 	}
+	return ;
+}
+
+void	print_stacks_ptrs(t_stacks *stacks)
+{
+	t_dbl_list_i	*pivot;
+
+	// prints stack a
+	pivot = stacks->stack_a;
+	printf("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv\n");
+	printf("stack a:\t(size: %i)\n", ft_dbl_lst_i_size(stacks->stack_a));
+	printf("prev:\t\tcurr (cont)\tnext:\n");
+	while (pivot)
+	{
+		printf("%p\t%p(%i)\t%p\n", pivot->prev, pivot, pivot->content, pivot->next);
+		pivot = pivot->next;
+	}
+	// prints stack b
+	pivot = stacks->stack_b;
+	printf("stack b:\t(size: %i)\n", ft_dbl_lst_i_size(stacks->stack_b));
+	while (pivot)
+	{
+		printf("%p\t%p(%i)\t%p\n", pivot->prev, pivot, pivot->content, pivot->next);
+		pivot = pivot->next;
+	}
+	printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
 	return ;
 }
 
