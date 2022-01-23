@@ -6,13 +6,11 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:14:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/23 14:37:35 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/23 15:34:38 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft.h"
-#include <stdio.h>
 
 void	initialise(t_stacks *stacks)
 {
@@ -34,55 +32,6 @@ void	free_stack(t_dbl_list_i *lst)
 		lst = aux;
 	}
 	free (lst);
-}
-
-void	print_stacks(t_stacks *stacks)
-{
-	t_dbl_list_i	*pivot;
-
-	// prints stack a
-	pivot = stacks->stack_a;
-	printf("stack a:\t(size: %i)\n", ft_dbl_lst_i_size(stacks->stack_a));
-	while (pivot)
-	{
-		printf("%i\n", pivot->content);
-		pivot = pivot->next;
-	}
-	// prints stack b
-	pivot = stacks->stack_b;
-	printf("stack b:\t(size: %i)\n", ft_dbl_lst_i_size(stacks->stack_b));
-	while (pivot)
-	{
-		printf("%i\n", pivot->content);
-		pivot = pivot->next;
-	}
-	return ;
-}
-
-void	print_stacks_ptrs(t_stacks *stacks)
-{
-	t_dbl_list_i	*pivot;
-
-	// prints stack a
-	pivot = stacks->stack_a;
-	printf("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv\n");
-	printf("stack a:\t(size: %i)\n", ft_dbl_lst_i_size(stacks->stack_a));
-	printf("prev:\t\tcurr (cont)\tnext:\n");
-	while (pivot)
-	{
-		printf("%p\t%p(%i)\t%p\n", pivot->prev, pivot, pivot->content, pivot->next);
-		pivot = pivot->next;
-	}
-	// prints stack b
-	pivot = stacks->stack_b;
-	printf("stack b:\t(size: %i)\n", ft_dbl_lst_i_size(stacks->stack_b));
-	while (pivot)
-	{
-		printf("%p\t%p(%i)\t%p\n", pivot->prev, pivot, pivot->content, pivot->next);
-		pivot = pivot->next;
-	}
-	printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
-	return ;
 }
 
 void	error_exit(t_stacks *stacks)
@@ -131,10 +80,10 @@ void	validate_input(char *argv[], t_stacks *stacks)
 		ft_dbl_lst_i_add_back(&stacks->stack_a,
 			ft_dbl_lst_i_new(ft_atoi(argv[i])));
 	}
-	printf("all args passed check\n");
+	ft_putendl_fd("all args passed check", 1);
 	if (!checks_duplicates(stacks))
 		error_exit(stacks);
-	printf("no duplicates found\n");
+	ft_putendl_fd("no duplicates found", 1);
 	return ;
 }
 
@@ -156,7 +105,7 @@ int	is_sorted(t_stacks *stacks)
 void	sort(t_stacks *stacks)
 {
 	print_stacks(stacks);
-	printf("stack needs sorting!\n. . . starting sorting RN\n");
+	ft_putendl_fd("stack needs sorting!\n. . . starting sorting RN", 1);
 	push_b(stacks);
 	push_b(stacks);
 	push_b(stacks);
