@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2022/01/22 22:16:14 by roaraujo         ###   ########.fr        #
+#    Updated: 2022/01/22 22:36:54 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ SRC_FILES = push_swap.c \
 			utils_operations_push.c \
 			utils_operations_reverse_rotate.c \
 			utils_operations_rotate.c \
-			utils_operations_swap.c
+			utils_operations_swap.c \
+			utils_sorting.c
 SOURCES = $(addprefix $(SRCS_PATH), $(SRC_FILES))
 OBJ_FILES = $(patsubst %.c, %.o, $(SRC_FILES))
 OBJECTS = $(addprefix $(OBJS_PATH), $(OBJ_FILES))

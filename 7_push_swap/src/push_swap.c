@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:14:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/22 16:15:53 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/22 22:41:31 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,8 @@ void	sort(t_stacks *stacks)
 	push_b(stacks);
 	push_b(stacks);
 	push_b(stacks);
+	print_stacks(stacks);
+	sort_three_elements_b(stacks);
 	print_stacks(stacks);
 	free_stack(stacks->stack_a);
 	free_stack(stacks->stack_b);

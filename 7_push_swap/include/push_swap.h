@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:15:13 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/22 22:16:41 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/22 22:36:20 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ void			rotate_ab(t_stacks *stacks);
 void			swap_a(t_stacks *stacks);
 void			swap_b(t_stacks *stacks);
 void			swap_ab(t_stacks *stacks);
+
+// utils_sorting.c
+void	sort_three_elements_b(t_stacks *stacks);
 
 // push_swap.c
 void			free_stack(t_dbl_list_i *lst);
