@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:17:07 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/23 15:35:29 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/23 17:53:31 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,39 @@ void	sort_three_elements_b(t_stacks *stacks)
 		rotate_b(stacks);
 	}	
 	return;
+}
+
+void	strategy_part_one(t_stacks *stacks)
+{
+	push_b(stacks);
+	push_b(stacks);
+	push_b(stacks);
+	sort_three_elements_b(stacks);
+}
+
+// TODO: DELETAR ESSE TREM																					a
+#include <stdio.h>
+void	strategy_part_two(t_stacks *stacks)
+{
+	int	moves_allowed;
+
+	moves_allowed = ft_dbl_lst_i_size(stacks->stack_b);
+	while (ft_dbl_lst_i_size(stacks->stack_a) > 0 && moves_allowed > 0)
+	{
+		while (moves_allowed > 0 && ft_dbl_lst_i_size(stacks->stack_a) > 0)
+		{
+			if (stacks->stack_a->content > stacks->stack_b->content)
+			{
+				push_b(stacks);
+				moves_allowed++;
+			}
+			else
+			{
+				rotate_b(stacks);
+				moves_allowed--;
+			}
+		}
+		push_b(stacks);
+		moves_allowed++;
+	}
 }

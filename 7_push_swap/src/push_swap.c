@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:14:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/23 15:34:38 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/23 16:10:11 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,10 @@ void	sort(t_stacks *stacks)
 {
 	print_stacks(stacks);
 	ft_putendl_fd("stack needs sorting!\n. . . starting sorting RN", 1);
-	push_b(stacks);
-	push_b(stacks);
-	push_b(stacks);
+	strategy_part_one(stacks);
+	ft_putendl_fd("strategy part one completed", 1);
 	print_stacks(stacks);
-	sort_three_elements_b(stacks);
+	strategy_part_two(stacks);
 	print_stacks(stacks);
 	free_stack(stacks->stack_a);
 	free_stack(stacks->stack_b);

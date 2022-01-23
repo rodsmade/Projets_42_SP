@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 15:30:19 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/23 15:44:03 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/23 17:53:00 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	print_stacks_ptrs(t_stacks *stacks)
 
 	// prints stack a
 	pivot = stacks->stack_a;
-	printf("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv\n");
-	printf("stack a:\t(size: %i)\n", ft_dbl_lst_i_size(stacks->stack_a));
+	printf("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv\n");
+	printf("stack a:\t(size: %i)\n\t", ft_dbl_lst_i_size(stacks->stack_a));
 	printf("prev:\t\tcurr (cont)\tnext:\n");
 	while (pivot)
 	{
@@ -54,13 +54,30 @@ void	print_stacks_ptrs(t_stacks *stacks)
 	}
 	// prints stack b
 	pivot = stacks->stack_b;
-	printf("stack b:\t(size: %i)\n", ft_dbl_lst_i_size(stacks->stack_b));
+	printf("stack b:\t(size: %i)\n\t", ft_dbl_lst_i_size(stacks->stack_b));
 	while (pivot)
 	{
 		printf("%p\t%p(%i)\t%p\n", pivot->prev, pivot, pivot->content, pivot->next);
 		pivot = pivot->next;
 	}
-	printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+	printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+	return ;
+}
+
+void	print_stack_b_ptrs(t_stacks *stacks)
+{
+	t_dbl_list_i	*pivot;
+
+	// prints stack b
+	printf("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv\n");
+	pivot = stacks->stack_b;
+	printf("stack b:\t(size: %i)\n\t", ft_dbl_lst_i_size(stacks->stack_b));
+	while (pivot)
+	{
+		printf("%p\t%p(%i)\t%p\n", pivot->prev, pivot, pivot->content, pivot->next);
+		pivot = pivot->next;
+	}
+	printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
 	return ;
 }
 
