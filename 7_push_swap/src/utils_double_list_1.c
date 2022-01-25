@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   double_list_utils_1.c                              :+:      :+:    :+:   */
+/*   utils_double_list_1.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 20:42:27 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/20 21:07:26 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/25 13:50:33 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,24 @@ int	ft_dbl_lst_i_size(t_dbl_list_i *lst)
 
 t_dbl_list_i	*ft_dbl_lst_i_last(t_dbl_list_i *lst)
 {
+	t_dbl_list_i	*pivot;
+
 	if (lst == NULL)
 		return (NULL);
-	while (lst->next != NULL)
-		lst = lst->next;
-	return (lst);
+	pivot = lst;
+	while (pivot->next != NULL)
+		pivot = pivot->next;
+	return (pivot);
 }
 
 t_dbl_list_i	*ft_dbl_lst_i_first(t_dbl_list_i *lst)
 {
+	t_dbl_list_i	*pivot;
+
 	if (lst == NULL)
 		return (NULL);
-	while (lst->prev != NULL)
-		lst = lst->prev;
-	return (lst);
+	pivot = lst;
+	while (pivot->prev != NULL)
+		pivot = pivot->prev;
+	return (pivot);
 }

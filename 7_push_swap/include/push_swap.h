@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:15:13 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/23 16:13:10 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/25 13:24:20 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void			swap_ab(t_stacks *stacks);
 void			sort_three_elements_b(t_stacks *stacks);
 void			strategy_part_one(t_stacks *stacks);
 void			strategy_part_two(t_stacks *stacks);
+void			strategy_part_three(t_stacks *stacks);
+int				is_sorted_asc(t_dbl_list_i *stack);
 
 // utils_testing.c
 void			print_stack_b_ptrs(t_stacks *stacks);
@@ -78,6 +80,6 @@ void			print_stacks(t_stacks *stacks);
 void			print_stacks_ptrs(t_stacks *stacks);
 
 // push_swap.c
-void			free_stack(t_dbl_list_i *lst);
+void			free_stacks(t_stacks *stacks);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:14:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/23 16:10:11 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/25 14:17:41 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	initialise(t_stacks *stacks)
 	return ;
 }
 
-void	free_stack(t_dbl_list_i *lst)
+static void	free_stack(t_dbl_list_i *lst)
 {
 	t_dbl_list_i	*aux;
 
@@ -31,12 +31,20 @@ void	free_stack(t_dbl_list_i *lst)
 		free(lst);
 		lst = aux;
 	}
-	free (lst);
+	free(lst);
+	return ;
+}
+
+void	free_stacks(t_stacks *stacks)
+{
+	free_stack(stacks->stack_a);
+	free_stack(stacks->stack_b);
+	return ;
 }
 
 void	error_exit(t_stacks *stacks)
 {
-	free_stack(stacks->stack_a);
+	free_stacks(stacks);
 	ft_putendl_fd("Error", 2);
 	exit(0);
 }
@@ -87,32 +95,15 @@ void	validate_input(char *argv[], t_stacks *stacks)
 	return ;
 }
 
-int	is_sorted(t_stacks *stacks)
-{
-	t_dbl_list_i	*pivot;
-
-	pivot = stacks->stack_a;
-	while (pivot->next != NULL)
-	{
-		if (pivot->content > pivot->next->content)
-			return (0);
-		pivot = pivot->next;
-	}
-	free_stack(stacks->stack_a);
-	return (1);
-}
-
 void	sort(t_stacks *stacks)
 {
 	print_stacks(stacks);
-	ft_putendl_fd("stack needs sorting!\n. . . starting sorting RN", 1);
 	strategy_part_one(stacks);
-	ft_putendl_fd("strategy part one completed", 1);
 	print_stacks(stacks);
 	strategy_part_two(stacks);
 	print_stacks(stacks);
-	free_stack(stacks->stack_a);
-	free_stack(stacks->stack_b);
+	strategy_part_three(stacks);
+	print_stacks(stacks);
 }
 
 int	main(int argc, char *argv[])
@@ -122,8 +113,9 @@ int	main(int argc, char *argv[])
 	if (argc > 2)
 	{
 		validate_input(argv, &stacks);
-		if (!is_sorted(&stacks))
+		if (!is_sorted_asc(stacks.stack_a))
 			sort(&stacks);
 	}
+	free_stacks(&stacks);
 	return (0);
 }
