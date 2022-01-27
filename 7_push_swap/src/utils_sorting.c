@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:17:07 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/25 14:15:42 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/27 19:03:07 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 /*
  * top = list's first element
  * bottom = list's last element
- * ascending order = ascending bottom up
+ * ascending order = ascending top down
  */
 int	is_sorted_asc(t_dbl_list_i *stack)
 {
@@ -35,7 +35,6 @@ int	is_sorted_asc(t_dbl_list_i *stack)
 
 /*
  * top = list's first element
- * bottom = list's last element
  * descending order = descending top down
  */
 int	is_sorted_desc(t_dbl_list_i *stack)
@@ -76,7 +75,7 @@ void	sort_three_elements_b(t_stacks *stacks)
 	{
 		swap_b(stacks);
 		rotate_b(stacks);
-	}	
+	}
 	return;
 }
 
@@ -88,26 +87,36 @@ void	strategy_part_one(t_stacks *stacks)
 	sort_three_elements_b(stacks);
 }
 
-void	check_if_b_is_sorted_and_reposition(t_stacks *stacks)
+void	rotate_b_biggest_element_on_top(t_stacks *stacks)
 {
-	int				count;
-	t_dbl_list_i	*pivot;
+	int	position;
+	int	halfway;
+	int list_size;
+	t_dbl_list_i *pivot;
 
-	count = 0;
-	if (stacks->stack_b->content > ft_dbl_lst_i_last(stacks->stack_b)->content)
-		count++;
+	position = 1;
+	halfway = ft_dbl_lst_i_size(stacks->stack_b)/2;
+	list_size = ft_dbl_lst_i_size(stacks->stack_b);
 	pivot = stacks->stack_b;
-	while (pivot->next)
+	while (pivot->content != stacks->biggest_element)
 	{
-		if (pivot->content < pivot->next->content)
-			count++;
+		position++;
 		pivot = pivot->next;
 	}
-	pivot = stacks->stack_b;
-	if (count == 1)
+	if (position == 1)
+		return ;
+	if (position <= halfway)
 	{
-		while (stacks->stack_b->content < stacks->stack_b->next->content)
+		while (--position)
 			rotate_b(stacks);
+	}
+	else
+	{
+		while ((list_size - position) >= 0)
+		{
+			reverse_rotate_b(stacks);
+			position++;
+		}
 	}
 	return ;
 }
@@ -133,9 +142,10 @@ void	strategy_part_two(t_stacks *stacks)
 			}
 		}
 		push_b(stacks);
-		moves_allowed++;
+		if (ft_dbl_lst_i_size(stacks->stack_a) > 0)
+			moves_allowed++;
 	}
-	check_if_b_is_sorted_and_reposition(stacks);
+	rotate_b_biggest_element_on_top(stacks);
 }
 
 void	strategy_part_three(t_stacks *stacks)

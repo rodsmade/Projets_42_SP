@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:14:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/27 16:24:25 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/27 17:02:12 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void	find_both_ends_of_list(t_stacks *stacks)
 			stacks->smallest_element = pivot->content;
 		pivot = pivot->next;
 	}
-	printf("smallest: %i, biggest: %i\n", stacks->smallest_element, stacks->biggest_element);
 	return ;
 }
 
