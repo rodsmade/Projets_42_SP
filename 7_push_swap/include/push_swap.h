@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:15:13 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/25 13:24:20 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/27 16:17:55 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct s_stacks
 {
 	t_dbl_list_i	*stack_a;
 	t_dbl_list_i	*stack_b;
+	int				biggest_element;
+	int				smallest_element;
 }					t_stacks;
 
 // -- PROTOTYPES --------------------------------------------------------------|

@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:14:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/25 14:17:41 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/27 16:24:25 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,25 @@ int	checks_duplicates(t_stacks *stacks)
 	return (1);
 }
 
+void	find_both_ends_of_list(t_stacks *stacks)
+{
+	t_dbl_list_i	*pivot;
+
+	stacks->biggest_element = stacks->stack_a->content;
+	stacks->smallest_element = stacks->stack_a->content;
+	pivot = stacks->stack_a->next;
+	while (pivot)
+	{
+		if (pivot->content > stacks->biggest_element)
+			stacks->biggest_element = pivot->content;
+		if (pivot->content < stacks->smallest_element)
+			stacks->smallest_element = pivot->content;
+		pivot = pivot->next;
+	}
+	printf("smallest: %i, biggest: %i\n", stacks->smallest_element, stacks->biggest_element);
+	return ;
+}
+
 void	validate_input(char *argv[], t_stacks *stacks)
 {
 	int	i;
@@ -92,6 +111,7 @@ void	validate_input(char *argv[], t_stacks *stacks)
 	if (!checks_duplicates(stacks))
 		error_exit(stacks);
 	ft_putendl_fd("no duplicates found", 1);
+	find_both_ends_of_list(stacks);
 	return ;
 }
 
@@ -99,10 +119,8 @@ void	sort(t_stacks *stacks)
 {
 	print_stacks(stacks);
 	strategy_part_one(stacks);
-	print_stacks(stacks);
 	strategy_part_two(stacks);
-	print_stacks(stacks);
-	strategy_part_three(stacks);
+	// strategy_part_three(stacks);
 	print_stacks(stacks);
 }
 
