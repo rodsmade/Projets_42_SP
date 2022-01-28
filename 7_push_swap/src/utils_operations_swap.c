@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 20:47:10 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/23 15:37:09 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/28 16:09:48 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,32 @@
 
 void	swap_a(t_stacks *stacks)
 {
-	t_dbl_list_i	*new_first;
-	t_dbl_list_i	*new_second;
-	t_dbl_list_i	*third;
+	t_dbl_list_i	*temp;
 
 	if (ft_dbl_lst_i_size(stacks->stack_a) < 2)
 		return ;
-	new_first = stacks->stack_a->next;
-	new_second = stacks->stack_a;
-	third = stacks->stack_a->next->next;
-	stacks->stack_a = new_first;
-	new_first->prev = NULL;
-	new_first->next = new_second;
-	new_second->prev = new_first;
-	new_second->next = third;
-	third->prev = new_second;
+	temp = stacks->stack_a;
+	stacks->stack_a = stacks->stack_a->next;
+	stacks->stack_a->prev = NULL;
+	stacks->stack_a->next = temp;
+	temp->next = NULL;
+	temp->prev = stacks->stack_a;
 	ft_putendl_fd("sa", 1);
 	return ;
 }
 
 void	swap_b(t_stacks *stacks)
 {
-	t_dbl_list_i	*new_first;
-	t_dbl_list_i	*new_second;
-	t_dbl_list_i	*third;
+	t_dbl_list_i	*temp;
 
 	if (ft_dbl_lst_i_size(stacks->stack_b) < 2)
 		return ;
-	new_first = stacks->stack_b->next;
-	new_second = stacks->stack_b;
-	third = stacks->stack_b->next->next;
-	stacks->stack_b = new_first;
-	new_first->prev = NULL;
-	new_first->next = new_second;
-	new_second->prev = new_first;
-	new_second->next = third;
-	third->prev = new_second;
+	temp = stacks->stack_b;
+	stacks->stack_b = stacks->stack_b->next;
+	stacks->stack_b->prev = NULL;
+	stacks->stack_b->next = temp;
+	temp->next = NULL;
+	temp->prev = stacks->stack_b;
 	ft_putendl_fd("sb", 1);
 	return ;
 }
