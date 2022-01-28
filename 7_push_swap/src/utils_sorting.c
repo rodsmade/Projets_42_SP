@@ -6,14 +6,12 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:17:07 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/28 13:37:48 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/28 13:49:45 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// TODO: DELETAR ESSE TREM																					a
-#include <stdio.h>
 /*
  * top = list's first element
  * ascending order = ascending top down
@@ -81,7 +79,7 @@ void	sort_three_elements_b(t_stacks *stacks)
 		swap_b(stacks);
 		rotate_b(stacks);
 	}
-	return;
+	return ;
 }
 
 void	strategy_part_one(t_stacks *stacks)
@@ -94,13 +92,13 @@ void	strategy_part_one(t_stacks *stacks)
 
 void	rotate_b_biggest_element_on_top(t_stacks *stacks)
 {
-	int	position;
-	int	halfway;
-	int list_size;
-	t_dbl_list_i *pivot;
+	int				position;
+	int				halfway;
+	int				list_size;
+	t_dbl_list_i	*pivot;
 
 	position = 1;
-	halfway = ft_dbl_lst_i_size(stacks->stack_b)/2;
+	halfway = ft_dbl_lst_i_size(stacks->stack_b) / 2;
 	list_size = ft_dbl_lst_i_size(stacks->stack_b);
 	pivot = stacks->stack_b;
 	while (pivot->content != stacks->biggest_element)
@@ -153,7 +151,7 @@ void	strategy_part_two(t_stacks *stacks)
 	rotate_b_biggest_element_on_top(stacks);
 }
 
-int		done_sorting_b(t_stacks *stacks)
+int	done_sorting_b(t_stacks *stacks)
 {
 	if (is_sorted_desc(stacks->stack_b))
 	{
@@ -173,7 +171,7 @@ void	strategy_part_three(t_stacks *stacks)
 		else if (stacks->stack_a->content > stacks->stack_b->content)
 		{
 			if (stacks->stack_b->next
-					&& stacks->stack_b->content < stacks->stack_b->next->content)
+				&& stacks->stack_b->content < stacks->stack_b->next->content)
 			{
 				swap_b(stacks);
 				if (stacks->stack_a->content < stacks->stack_b->content)

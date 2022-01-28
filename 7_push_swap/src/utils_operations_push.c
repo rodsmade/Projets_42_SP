@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations_utils_push.c                            :+:      :+:    :+:   */
+/*   utils_operations_push.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 20:43:30 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/22 17:28:47 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/28 13:51:32 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push_a(t_stacks *stacks)
 // detaches stack b's head and inserts it on top of stack a
+void	push_a(t_stacks *stacks)
 {
 	t_dbl_list_i	*detach;
 
@@ -28,9 +28,8 @@ void	push_a(t_stacks *stacks)
 	return ;
 }
 
-void	push_b(t_stacks *stacks)
 // detaches stack a's head and inserts it on top of stack b
-// TODO: PUSH B TÁ ZOANDO A STACK A, O PRINT FICA EM LOOP INFINITO.
+void	push_b(t_stacks *stacks)
 {
 	t_dbl_list_i	*detach;
 
