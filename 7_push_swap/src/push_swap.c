@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:14:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/27 17:02:12 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/28 13:45:03 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,8 @@ void	sort(t_stacks *stacks)
 	print_stacks(stacks);
 	strategy_part_one(stacks);
 	strategy_part_two(stacks);
-	// strategy_part_three(stacks);
+	if (!done_sorting_b(stacks))
+		strategy_part_three(stacks);
 	print_stacks(stacks);
 }
 

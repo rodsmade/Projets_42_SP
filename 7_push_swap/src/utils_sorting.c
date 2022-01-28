@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:17:07 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/27 19:03:07 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/28 13:37:48 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@
 #include <stdio.h>
 /*
  * top = list's first element
- * bottom = list's last element
  * ascending order = ascending top down
+ * an empty stack is considered unsorted
  */
 int	is_sorted_asc(t_dbl_list_i *stack)
 {
 	t_dbl_list_i	*pivot;
 
+	if (!stack)
+		return (0);
 	pivot = stack;
 	while (pivot->next != NULL)
 	{
@@ -36,11 +38,14 @@ int	is_sorted_asc(t_dbl_list_i *stack)
 /*
  * top = list's first element
  * descending order = descending top down
+ * an empty stack is considered unsorted
  */
 int	is_sorted_desc(t_dbl_list_i *stack)
 {
 	t_dbl_list_i	*pivot;
 
+	if (!stack)
+		return (0);
 	pivot = stack;
 	while (pivot->next != NULL)
 	{
@@ -148,19 +153,41 @@ void	strategy_part_two(t_stacks *stacks)
 	rotate_b_biggest_element_on_top(stacks);
 }
 
-void	strategy_part_three(t_stacks *stacks)
+int		done_sorting_b(t_stacks *stacks)
 {
 	if (is_sorted_desc(stacks->stack_b))
 	{
 		while (stacks->stack_b)
 			push_a(stacks);
-		return ;
+		return (1);
 	}
-	// if (ft_dbl_lst_i_size(stacks->stack_a) == 0)
-	// while (ft_dbl_lst_i_size(stacks->stack_b))
-	// {
-	// 	if (stacks->stack_b->content < stacks->stack_a->content)
-	// 		push_a(stacks);
-	// }
+	return (0);
+}
+
+void	strategy_part_three(t_stacks *stacks)
+{
+	while (stacks->stack_b)
+	{
+		if (!stacks->stack_a)
+			push_a(stacks);
+		else if (stacks->stack_a->content > stacks->stack_b->content)
+		{
+			if (stacks->stack_b->next
+					&& stacks->stack_b->content < stacks->stack_b->next->content)
+			{
+				swap_b(stacks);
+				if (stacks->stack_a->content < stacks->stack_b->content)
+					break ;
+			}
+			push_a(stacks);
+		}
+		else
+		{
+			push_b(stacks);
+			swap_b(stacks);
+		}
+	}
+	if (stacks->stack_b)
+		strategy_part_three(stacks);
 	return ;
 }
