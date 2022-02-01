@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 22:17:07 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/28 13:49:45 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/31 21:39:22 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	is_sorted_desc(t_dbl_list_i *stack)
 	return (1);
 }
 
-void	sort_three_elements_b(t_stacks *stacks)
+void	sort_three_elements_b_desc(t_stacks *stacks)
 {
 	int	first;
 	int	second;
@@ -68,26 +68,70 @@ void	sort_three_elements_b(t_stacks *stacks)
 		swap_b(stacks);
 		reverse_rotate_b(stacks);
 	}
-	if (first < second && first < third && second > third)
+	else if (first < second && first < third && second > third)
 		rotate_b(stacks);
-	if (first > second && first < third && second < third)
+	else if (first > second && first < third && second < third)
 		reverse_rotate_b(stacks);
-	if (first < second && first > third && second > third)
+	else if (first < second && first > third && second > third)
 		swap_b(stacks);
-	if (first > second && first > third && second < third)
+	else if (first > second && first > third && second < third)
 	{
 		swap_b(stacks);
 		rotate_b(stacks);
 	}
+	// else
+	// 	return ;
+	return ;
+}
+
+void	sort_three_elements_a_asc(t_stacks *stacks)
+{
+	int	first;
+	int	second;
+	int	third;
+
+	first = stacks->stack_a->content;
+	second = stacks->stack_a->next->content;
+	third = stacks->stack_a->next->next->content;
+	if (first > second && first > third && second > third)
+	{
+		swap_a(stacks);
+		reverse_rotate_a(stacks);
+	}
+	else if (first < second && first < third && second > third)
+	{
+		swap_a(stacks);
+		rotate_a(stacks);
+	}
+	else if (first > second && first < third && second < third)
+		swap_a(stacks);
+	else if (first < second && first > third && second > third)
+		reverse_rotate_a(stacks);
+	else if (first > second && first > third && second < third)
+		rotate_a(stacks);
 	return ;
 }
 
 void	strategy_part_one(t_stacks *stacks)
 {
-	push_b(stacks);
-	push_b(stacks);
-	push_b(stacks);
-	sort_three_elements_b(stacks);
+	int	stack_a_size;
+
+	stack_a_size = ft_dbl_lst_i_size(stacks->stack_a);
+	if (stack_a_size == 2)
+	{
+		if (is_sorted_desc(stacks->stack_a))
+			swap_a(stacks);
+		return ;
+	}
+	if (stack_a_size == 3)
+		sort_three_elements_a_asc(stacks);
+	else
+	{
+		push_b(stacks);
+		push_b(stacks);
+		push_b(stacks);
+		sort_three_elements_b_desc(stacks);
+	}
 }
 
 void	rotate_b_biggest_element_on_top(t_stacks *stacks)

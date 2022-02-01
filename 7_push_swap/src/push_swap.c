@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:14:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/31 19:31:14 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/31 21:14:55 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,10 @@ void	validate_input(char *argv[], t_stacks *stacks)
 void	sort(t_stacks *stacks)
 {
 	// print_stacks(stacks);
+	// strat pt 1 should handle 3 or less args
 	strategy_part_one(stacks);
-	strategy_part_two(stacks);
+	if (stacks->stack_a && stacks->stack_b)
+		strategy_part_two(stacks);
 	if (!done_sorting_b(stacks))
 		strategy_part_three(stacks);
 	// print_stacks(stacks);

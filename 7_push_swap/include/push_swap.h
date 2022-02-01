@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:15:13 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/28 13:02:20 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/31 21:17:51 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ void			swap_ab(t_stacks *stacks);
 
 // utils_sorting.c
 int				done_sorting_b(t_stacks *stacks);
-void			sort_three_elements_b(t_stacks *stacks);
+void			sort_three_elements_a_asc(t_stacks *stacks);
+void			sort_three_elements_b_desc(t_stacks *stacks);
 void			strategy_part_one(t_stacks *stacks);
 void			strategy_part_two(t_stacks *stacks);
 void			strategy_part_three(t_stacks *stacks);
