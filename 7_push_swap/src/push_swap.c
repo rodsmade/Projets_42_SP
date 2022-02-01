@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:14:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/28 13:45:03 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/01/31 19:31:14 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void	validate_input(char *argv[], t_stacks *stacks)
 {
 	int	i;
 
-	initialise(stacks);
 	i = 0;
 	while (argv[++i])
 	{
@@ -106,28 +105,29 @@ void	validate_input(char *argv[], t_stacks *stacks)
 		ft_dbl_lst_i_add_back(&stacks->stack_a,
 			ft_dbl_lst_i_new(ft_atoi(argv[i])));
 	}
-	ft_putendl_fd("all args passed check", 1);
+	// ft_putendl_fd("all args passed check", 1);
 	if (!checks_duplicates(stacks))
 		error_exit(stacks);
-	ft_putendl_fd("no duplicates found", 1);
+	// ft_putendl_fd("no duplicates found", 1);
 	find_both_ends_of_list(stacks);
 	return ;
 }
 
 void	sort(t_stacks *stacks)
 {
-	print_stacks(stacks);
+	// print_stacks(stacks);
 	strategy_part_one(stacks);
 	strategy_part_two(stacks);
 	if (!done_sorting_b(stacks))
 		strategy_part_three(stacks);
-	print_stacks(stacks);
+	// print_stacks(stacks);
 }
 
 int	main(int argc, char *argv[])
 {
 	t_stacks		stacks;
 
+	initialise(&stacks);
 	if (argc > 2)
 	{
 		validate_input(argv, &stacks);
