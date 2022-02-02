@@ -6,7 +6,7 @@
 #    By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 18:18:37 by roaraujo          #+#    #+#              #
-#    Updated: 2022/01/23 15:33:52 by roaraujo         ###   ########.fr        #
+#    Updated: 2022/02/02 04:09:21 by roaraujo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ NAME = $(BINS_PATH)push_swap
 SRC_FILES = push_swap.c \
 			utils_double_list_1.c \
 			utils_double_list_2.c \
+			utils_init_and_exit.c \
 			utils_operations_push.c \
 			utils_operations_reverse_rotate.c \
 			utils_operations_rotate.c \

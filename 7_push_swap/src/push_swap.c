@@ -6,50 +6,13 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:14:21 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/31 21:14:55 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/02/02 04:08:06 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	initialise(t_stacks *stacks)
-{
-	stacks->stack_a = NULL;
-	stacks->stack_b = NULL;
-	return ;
-}
-
-static void	free_stack(t_dbl_list_i *lst)
-{
-	t_dbl_list_i	*aux;
-
-	if (lst == NULL)
-		return ;
-	while (lst->next)
-	{
-		aux = lst->next;
-		free(lst);
-		lst = aux;
-	}
-	free(lst);
-	return ;
-}
-
-void	free_stacks(t_stacks *stacks)
-{
-	free_stack(stacks->stack_a);
-	free_stack(stacks->stack_b);
-	return ;
-}
-
-void	error_exit(t_stacks *stacks)
-{
-	free_stacks(stacks);
-	ft_putendl_fd("Error", 2);
-	exit(0);
-}
-
-int	checks_duplicates(t_stacks *stacks)
+static int	check_for_duplicates(t_stacks *stacks)
 {
 	t_dbl_list_i	*pivot;
 	t_dbl_list_i	*duplicate;
@@ -73,7 +36,7 @@ int	checks_duplicates(t_stacks *stacks)
 	return (1);
 }
 
-void	find_both_ends_of_list(t_stacks *stacks)
+static void	find_both_ends_of_list(t_stacks *stacks)
 {
 	t_dbl_list_i	*pivot;
 
@@ -91,7 +54,7 @@ void	find_both_ends_of_list(t_stacks *stacks)
 	return ;
 }
 
-void	validate_input(char *argv[], t_stacks *stacks)
+static void	validate_input(char *argv[], t_stacks *stacks)
 {
 	int	i;
 
@@ -105,24 +68,18 @@ void	validate_input(char *argv[], t_stacks *stacks)
 		ft_dbl_lst_i_add_back(&stacks->stack_a,
 			ft_dbl_lst_i_new(ft_atoi(argv[i])));
 	}
-	// ft_putendl_fd("all args passed check", 1);
-	if (!checks_duplicates(stacks))
+	if (!check_for_duplicates(stacks))
 		error_exit(stacks);
-	// ft_putendl_fd("no duplicates found", 1);
 	find_both_ends_of_list(stacks);
 	return ;
 }
 
 void	sort(t_stacks *stacks)
 {
-	// print_stacks(stacks);
-	// strat pt 1 should handle 3 or less args
-	strategy_part_one(stacks);
-	if (stacks->stack_a && stacks->stack_b)
-		strategy_part_two(stacks);
-	if (!done_sorting_b(stacks))
-		strategy_part_three(stacks);
-	// print_stacks(stacks);
+	//TODO: make a whole new mess again
+	if (stacks->stack_a)
+		ft_putendl_fd("WIP eheh", 1);
+	return ;
 }
 
 int	main(int argc, char *argv[])

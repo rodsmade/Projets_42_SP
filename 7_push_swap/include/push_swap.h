@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:15:13 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/31 21:17:51 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/02/02 04:06:05 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ t_dbl_list_i	*ft_dbl_lst_i_first(t_dbl_list_i *lst);
 void			ft_dbl_lst_i_add_back(t_dbl_list_i **lst, t_dbl_list_i *new);
 void			ft_dbl_lst_i_add_front(t_dbl_list_i **lst, t_dbl_list_i *new);
 
+// utils_init_and_exit.c
+void			initialise(t_stacks *stacks);
+void			free_stacks(t_stacks *stacks);
+void			error_exit(t_stacks *stacks);
+
 // utils_operations_push.c
 void			push_a(t_stacks *stacks);
 void			push_b(t_stacks *stacks);
@@ -70,13 +75,8 @@ void			swap_b(t_stacks *stacks);
 void			swap_ab(t_stacks *stacks);
 
 // utils_sorting.c
-int				done_sorting_b(t_stacks *stacks);
-void			sort_three_elements_a_asc(t_stacks *stacks);
-void			sort_three_elements_b_desc(t_stacks *stacks);
-void			strategy_part_one(t_stacks *stacks);
-void			strategy_part_two(t_stacks *stacks);
-void			strategy_part_three(t_stacks *stacks);
 int				is_sorted_asc(t_dbl_list_i *stack);
+int				is_sorted_desc(t_dbl_list_i *stack);
 
 // utils_testing.c
 void			print_stack_b_ptrs(t_stacks *stacks);
