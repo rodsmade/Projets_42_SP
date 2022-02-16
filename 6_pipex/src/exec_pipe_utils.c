@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 15:43:01 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/13 18:54:23 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/02/16 17:07:50 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	flush_cmd(t_pipe_cmds *pipe_cmds, int i)
 static void	run_first_cmd(t_pipe_cmds *pipe_cmds, char *envp[])
 {
 	int	pid;
+	int	exit_code;
 
 	pid = fork();
 	if (pid == -1)
@@ -49,7 +50,7 @@ static void	run_first_cmd(t_pipe_cmds *pipe_cmds, char *envp[])
 	}
 	else
 	{
-		wait(NULL);
+		waitpid(pid, &exit_code, WNOHANG);
 		close(pipe_cmds->pipes[0][1]);
 	}
 }
@@ -57,6 +58,7 @@ static void	run_first_cmd(t_pipe_cmds *pipe_cmds, char *envp[])
 static void	run_nth_cmd(t_pipe_cmds *pipe_cmds, char *envp[], int i)
 {
 	int	pid;
+	int	exit_code;
 
 	pid = fork();
 	if (pid == -1)
@@ -78,7 +80,7 @@ static void	run_nth_cmd(t_pipe_cmds *pipe_cmds, char *envp[], int i)
 			perror_exit("run_nth_cmd: error in exec function", 20, pipe_cmds);
 	}
 	else
-		wait(NULL);
+		waitpid(pid, &exit_code, WNOHANG);
 }
 
 static void	run_last_cmd(t_pipe_cmds *pipe_cmds, char *envp[])
