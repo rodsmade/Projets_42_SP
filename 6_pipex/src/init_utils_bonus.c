@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 21:13:59 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/01/13 17:24:15 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/02/16 16:59:31 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,6 @@ void	open_files(t_pipe_cmds *pipe_cmds)
 		pipe_cmds->errmsg = ft_strjoin("bash: ", pipe_cmds->input_full_path);
 		perror_exit(pipe_cmds->errmsg, 0, pipe_cmds);
 	}
+	open_output(pipe_cmds);
 	return ;
 }
