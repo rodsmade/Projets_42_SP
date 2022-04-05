@@ -10,7 +10,7 @@ The virtual machine was set up in Oracle Virtualbox. The chosen operating system
 
 This project also covered the basics of **criptography**, **networking**, **hard disk partitioning**, and **shell scripting** (lots of output formatting!)
 
-_You can find more about the making of this project [over here](https://beryl-allium-579.notion.site/Acelera-Born2BeRoot-99adac7a7bdc4bbf81b4eaf977625d5c) (in Portuguese 🇧🇷)_
+_You can find more about the making of this project [over here](https://rodsmade.notion.site/Acelera-Born2BeRoot-99adac7a7bdc4bbf81b4eaf977625d5c) (in Portuguese 🇧🇷)_
 
 ## Summary
 Password policies:
