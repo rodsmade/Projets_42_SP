@@ -20,7 +20,7 @@ The player must guide Pikachu around the map (movement constrained by walls); th
 
 This project is not meant to be a fully-fledged game, rather an introduction to a minimal, event-wise graphic library, developed over the course of 2-3 weeks.
 
-_You can find more about the making of this project [over here](https://beryl-allium-579.notion.site/Acelera-So_long-e5caded24d7b434aa1cb5daf73636fb9) (in Portuguese 🇧🇷)_
+_You can find more about the making of this project [over here](https://rodsmade.notion.site/Acelera-So_long-e5caded24d7b434aa1cb5daf73636fb9) (in Portuguese 🇧🇷)_
 
 ## Directories
 * ```bin/```
