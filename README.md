@@ -3,6 +3,8 @@ English 💂 | [Français 🥐](https://github.com/rodsmade/Projets_42_SP/blob/m
 # 42SP Projects
 All projects developed at 42 school São Paulo since May 2021.
 
+[![roaraujo's 42 stats](https://badge42.vercel.app/api/v2/cl1rzz1es023009l2v061r4ou/stats?cursusId=21&coalitionId=undefined)](https://github.com/JaeSeoKim/badge42)
+
 > "The 42 program is a college-level software engineering/coding program in a professional environment. There are no classes, teachers, or courses: we use project-based learning, skills mastery, peer-to-peer correction, and gamification to foster learning. Major learning milestones are expressed as levels of experience rather than years; your individual experience sets the pace for learning."
 _[Official brochure](https://www.42.us.org/wp-content/uploads/2020/01/42-Booklet-Spring-2020.pdf)_
 
