@@ -5,4 +5,4 @@
 [x] supprimer les commentaires
 	find . -type f -name '*.c' | xargs sed -i " /\s\/\/.*/ d; /\/\/.*/ d"
 [x] changer les noms des fonctions
-	rename 's/^OK//g' *.c
+	for i in *.log; do mv -- "$i" "${i%.log}.txt"; done
