@@ -19,7 +19,7 @@ All projects developed at 42 school in São Paulo, Brazil.
 > "The 42 program is a college-level software engineering/coding program in a professional environment. There are no classes, teachers, or courses: we use **project-based learning**, skills mastery, **peer-to-peer correction**, and **gamification** to foster learning. Major learning milestones are expressed as levels of experience rather than years; your individual experience sets the pace for learning."
 _[Official brochure](https://www.42.us.org/wp-content/uploads/2020/01/42-Booklet-Spring-2020.pdf)_
 
-![42 Galaxy - the programme](https://user-images.githubusercontent.com/49699403/143270052-c0215136-3d13-480c-944b-94a6d36d2ee2.png)
+![42 Galaxy - the holy graph](https://user-images.githubusercontent.com/49699403/209717594-ea05be2d-14d7-42e1-a4db-22ea612d251c.png)
 
 
 This constellation-like programme is divided into two main parts: the core branch of fundamentals (inner layers - a.k.a. the **common core**), and the complementary **specialization** paths (outermost layer) branching out into infinity and beyond.
