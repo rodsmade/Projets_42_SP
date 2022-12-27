@@ -1,0 +1,30 @@
+[submodule "04_Born2BeRoot-42sp"]
+	path = 04_Born2BeRoot-42sp
+	url = https://github.com/rodsmade/Born2BeRoot-42sp
+[submodule "01_Libft-42sp"]
+	path = 01_Libft-42sp
+	url = https://github.com/rodsmade/Libft-42sp
+[submodule "02_Get_Next_Line-42sp"]
+	path = 02_Get_Next_Line-42sp
+	url = https://github.com/rodsmade/Get_Next_Line-42sp
+[submodule "03_Ft_Printf-42sp"]
+	path = 03_Ft_Printf-42sp
+	url = https://github.com/rodsmade/Ft_Printf-42sp.git
+[submodule "05_So_long-42sp"]
+	path = 05_So_long-42sp
+	url = https://github.com/rodsmade/So_long-42sp
+[submodule "06_Pipex-42sp"]
+	path = 06_Pipex-42sp
+	url = https://github.com/rodsmade/Pipex-42sp
+[submodule "07_Push_Swap-42sp"]
+	path = 07_Push_Swap-42sp
+	url = https://github.com/rodsmade/Push_Swap-42sp.git
+[submodule "08_Minishell-42sp"]
+	path = 08_Minishell-42sp
+	url = https://github.com/rodsmade/Minishell-42sp
+[submodule "09_Philosophers-42sp"]
+	path = 09_Philosophers-42sp
+	url = https://github.com/rodsmade/Philosophers-42sp
+[submodule "11_Cub3D-42sp"]
+	path = 11_Cub3D-42sp
+	url = https://github.com/rodsmade/Cub3D-42sp
