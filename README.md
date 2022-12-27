@@ -5,6 +5,14 @@ All projects developed at 42 school in São Paulo, Brazil.
 
 [![roaraujo's 42 stats](https://badge42.vercel.app/api/v2/cl1rzz1es023009l2v061r4ou/stats?cursusId=21&coalitionId=undefined)](https://github.com/JaeSeoKim/badge42)
 
+- [42sp Projects](#42sp-projects)
+- [What is 42](#what-is-42)
+- [Programme Overview](#programme-overview)
+	- [Phase 1](#phase-1)
+	- [Phase 2](#phase-2)
+	- [Phase 3](#phase-3)
+- [How to clone this repo](#how-to-clone-this-repo)
+
 
 # What is 42
 
@@ -24,7 +32,7 @@ _(Projects under the same number are candidates for that level, students must pi
 From that point on, students are orbiting the outermost reaches of the galaxy, free to choose which path to get a specialization at, or even create their own specialization path for other students to follow once they've cleared the common core.
 
 
-# Syllabus
+# Programme Overview
 
 At 42 São Paulo, the common core is split in 3 main parts, the first two being entirely built using C/Shell scripts, moving on to Object-Oriented Programming (OOP) with C++ and complementary front-end, back-end and containerisation technologies in the last phase.
 
@@ -57,3 +65,15 @@ At 42 São Paulo, the common core is split in 3 main parts, the first two being 
 | **inception**	| TBA.	| -	|
 | **webservices / ft_irc**	| TBA.	| -	|
 | **Transcendence**	| TBA.	| -	|
+
+
+# How to clone this repo
+This repository contains git submodules, that is, links to other repositories where the source code for each project is stored separately. Simply `git clone`-ing this project leads to an almost empty folder. If you wish to clone this repo and all the contents from the other repos as well, add the `--recurse-submodules` flag to your `git clone` command, like so:
+
+```
+git clone --recurse-submodules https://github.com/rodsmade/Projets_42_SP.git
+```
+
+If you wish to clone the code for a specific project, simply click on the desired project's link in the folder structure above, and then clone it locally.
+
+Thank you for being here! :wink:
