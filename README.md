@@ -5,7 +5,6 @@ All projects developed at 42 school in São Paulo, Brazil.
 
 [![roaraujo's 42 stats](https://badge42.vercel.app/api/v2/cl1rzz1es023009l2v061r4ou/stats?cursusId=21&coalitionId=undefined)](https://github.com/JaeSeoKim/badge42)
 
-- [42sp Projects](#42sp-projects)
 - [What is 42](#what-is-42)
 - [Programme Overview](#programme-overview)
 	- [Phase 1](#phase-1)
@@ -34,7 +33,7 @@ From that point on, students are orbiting the outermost reaches of the galaxy, f
 
 # Programme Overview
 
-At 42 São Paulo, the common core is split in 3 main parts, the first two being entirely built using C/Shell scripts, moving on to Object-Oriented Programming (OOP) with C++ and complementary front-end, back-end and containerisation technologies in the last phase.
+At 42 São Paulo, the common core is split in 3 main parts, the first two being entirely built using C/Shell scripts, moving on in the 3rd part to Object-Oriented Programming (OOP) with C++ and complementary front-end, back-end and containerisation technologies.
 
 ## Phase 1
 
@@ -45,26 +44,26 @@ At 42 São Paulo, the common core is split in 3 main parts, the first two being 
 | **[ft_printf](https://github.com/rodsmade/Ft_Printf-42sp.git)** 	| Formatting string and variable args. 	| Build your own version of ```printf```! This project is later incorporated into Libft.	|
 | **[Born2BeRoot](https://github.com/rodsmade/Born2BeRoot-42sp)** 	| Virtualisation. 	| Set up an SSH server running on Linux with basic system administration, strong password rules, encryption, and more.	|
 | **[So_Long](https://github.com/rodsmade/So_long-42sp)** / fractol / fdf 	| Window rendering and keyboard+mouse events management. 	| First steps into rendering graphics on the screen! A choice between rendering either fractals (`fractol`), 3D wireframes (`fdf`) or a 2D top-down video game (`so_long`).	|
-| minitalk / **[pipex](https://github.com/rodsmade/Pipex-42sp)** 	| An intro to Unix Processes in C. 	| A choice between having a client/server pair of processes exchanging data (`minitalk`), or simulating the pipe operator (`\|`) in Bash using C pipes and forks (`pipex`).	|
+| **[pipex](https://github.com/rodsmade/Pipex-42sp)**/minitalk 	| An intro to Unix Processes in C. 	| A choice between having a client/server pair of processes exchanging data (`minitalk`), or simulating the pipe operator (`\|`) in Bash using C pipes and forks (`pipex`).	|
 
 
 ## Phase 2
 |   	|   	|   	|
 |---	|---	|---	|
 | **[Push_Swap](https://github.com/rodsmade/Push_Swap-42sp.git)** 	| Sorting algorithms and stacks. 	| A list of unordered numbers must be taken in and sorted out, with a twist: the numbers must be sorted by means of using exactly `two stacks`, and a set of 11 stipulated stack operations.	|
-| **[Minishell](https://github.com/rodsmade/Minishell-42sp)** 	| A minified version of a Bash shell written in C. 	| Including basic parsing of pipes and redirections, built-ins, and support for commands execution via $PATH or absolute paths.	|
+| **[Minishell](https://github.com/rodsmade/Minishell-42sp)** 	| A minified version of a Bash shell written in C. 	| Including basic parsing of pipes and redirections, built-ins, and support for commands execution via $PATH or absolute paths. :restroom: This is a group project.	|
 | **[Philosophers](https://github.com/rodsmade/Philosophers-42sp)** 	| Multithreading in C. 	| Solving the famous dining philosophers problem proposed by Dijkstra.	|
 | **Netpractice** 	| Networking and routing. 	| A set of problems simulating LAN's and networks with internet access. A basic understanding of IP addresses and routing tables is needed to solve each and every problem in under 15 minutes altogether.	|
-| **[Cub3d](https://github.com/rodsmade/Cub3D-42sp)** / minirt 	| Raycasting (cub3d) and Raytracing (miniRT). 	| Deeper study of graphics computing using a LibX interface to code either of a raycasting or a raytracing engine.	|
+| **[Cub3d](https://github.com/rodsmade/Cub3D-42sp)** / miniRT 	| Raycasting and Raytracing 	| Deeper study of graphics computing using a LibX interface to code either of a raycasting (`cub3d`) or a raytracing (`miniRT`) engine. :restroom: This is a group project.	|
 
 ## Phase 3
 |   	|   	|   	|
 |---	|---	|---	|
-| **CPP Modules (OOP)**	| TBA.	| -	|
-| **ft_containers**	| TBA.	| -	|
-| **inception**	| TBA.	| -	|
-| **webservices / ft_irc**	| TBA.	| -	|
-| **Transcendence**	| TBA.	| -	|
+| **CPP**	| Object Oriented Programming.	| 9 sets of exercises to guide a hands-on study on classical POO concepts.	|
+| **ft_containers**	| Classical data structures	| Build your own replica of selected C++ Standard Library containers: vectors, maps and stacks (:star: **bonus** red-black binary tree), implementing class definitions, iterators, operators overload and more.	|
+| **inception**	| Containerisation of a simple web application.	| Using `docker-compose` and `Dockerfile`, students must set up a network with services needed to run a Wordpress server (including static html files and a database). :restroom: This is a group project.	|
+| **webserv / ft_irc**	| Internet Protocols in C++.	| Either build an HTTP server to serve a static file (`webserv`) or build an IRC server running over TCP/IP (`ft_irc`). :restroom: This is a group project. 	|
+| **Transcendence**	| Play the renowned Pong game online with friends!	| TBA. :restroom: This is a group project.	|
 
 
 # How to clone this repo
