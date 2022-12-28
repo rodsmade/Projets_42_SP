@@ -63,7 +63,7 @@ At 42 São Paulo, the common core is split in 3 main parts, the first two being 
 | **ft_containers**	| Classical data structures	| Build your own replica of selected C++ Standard Library containers: vectors, maps and stacks (:star: **bonus** red-black binary tree), implementing class definitions, iterators, operators overload and more.	|
 | **inception**	| Containerisation of a simple web application.	| Using `docker-compose` and `Dockerfile`, students must set up a network with services needed to run a Wordpress server (including static html files and a database). :restroom: This is a group project.	|
 | **webserv / ft_irc**	| Internet Protocols in C++.	| Either build an HTTP server to serve a static file (`webserv`) or build an IRC server running over TCP/IP (`ft_irc`). :restroom: This is a group project. 	|
-| **Transcendence**	| Play the renowned Pong game online with friends!	| TBA. :restroom: This is a group project.	|
+| **Transcendence**	| Play the renowned Pong game online with friends!	| Teams must deploy a web application where any 42 student can log in and pair up with another student to play a live Pong match. The webapp must also broadcast current matches and allow for friends lists, achievements and more. :restroom: This is a group project.	|
 
 
 # How to clone this repo
