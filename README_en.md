@@ -64,7 +64,7 @@ All projects in phase 1 are individual deliberables. Starting in phase 2, for so
 |---	|---	|---	|
 | **CPP**	| Object Oriented Programming.	| 9 sets of exercises to guide a hands-on study on classical OOP concepts.	|
 | **ft_containers**	| Classical data structures	| Build your own replica of selected C++ Standard Library containers: vectors, maps, stacks and black-red binary trees, implementing class definitions, iterators, operators overload and more.	|
-| **inception** :restroom:	| Containerisation of a simple web application.	| Using `docker-compose` and `Dockerfile`, students must set up a network with services needed to run a Wordpress server (including static html files and a database).	|
+| **inception**	| Containerisation of a simple web application.	| Using `docker-compose` and `Dockerfile`, students must set up a network with services needed to run a Wordpress server (including static html files and a database).	|
 | **webserv / ft_irc** :restroom:	| Internet Protocols in C++.	| Either build an HTTP server to serve a static file (`webserv`) or build an IRC server running over TCP/IP (`ft_irc`). 	|
 | **Transcendence** :restroom:	| Play the renowned Pong game online with friends!	| Teams must deploy a web application where any 42 student can log in and pair up with another student to play a live Pong match. The webapp must also broadcast current matches and allow for friends lists, achievements and more.	|
 
