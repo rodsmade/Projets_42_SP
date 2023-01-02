@@ -63,7 +63,7 @@ Todos os projetos da fase 1 são individuais. A partir da fase 2, tripulantes da
 |---	|---	|---	|
 | **CPP**	| Programação Orientada a Objetos.	| 9 listas de exercícios para guiar o aprendizado mão-na-massa sobre conceitos clássicos da POO.	|
 | **ft_containers**	| Estruturas de dados clássicas.	| Cosntrua sua própria réplica de alguns *containers* (estruturas de dados) da biblioteca padrão de C++: *vectors*, *maps*, *stacks* e árvore binária rubro-negra, implementando classes, iteradores, *overload* de operadores e mais.	|
-| **inception** :restroom:	| Containerização de uma aplicação web.	| Usando `docker-compose` e `Dockerfile`, configure uma rede de containers que contém os serviços necessários para rodar um servidor de Wordpress (servindo arquivos estáticos HTML e com banco de dados).	|
+| **inception**	| Containerização de uma aplicação web.	| Usando `docker-compose` e `Dockerfile`, configure uma rede de containers que contém os serviços necessários para rodar um servidor de Wordpress (servindo arquivos estáticos HTML e com banco de dados).	|
 | **webserv / ft_irc** :restroom:	| Protocolos da Internet em C++.	| Escolha entre construir um servidor HTTP que recebe requisições e serve um arquivo estático (`webserv`) ou um serviço de bate-papo IRC que segue o protocolo TCP/IP (`ft_irc`). 	|
 | **Transcendence** :restroom:	| Jogue o renomado *Pong* online com as amizades!	| Em time, faça a implantação de uma aplicação web em que qualquer tripulante da 42 pode logar e arranjar uma dupla para jogar uma partida de *Pong*. A aplicação deve ser capaz de transmitir partidas ao vivo, permitir que tripulantes se adicionem em listas de amizades, *achievements* e mais.	|
 
