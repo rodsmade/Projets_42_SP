@@ -1,4 +1,4 @@
-English 💂 | [Français 🥐 - IN PROGRESS](https://github.com/rodsmade/Projets_42_SP/blob/main/README_fr.md) | [Português 🌵 - IN PROGRESS](https://github.com/rodsmade/Projets_42_SP/blob/main/README_ptbr.md)
+English 💂 | [Português 🌵 - IN PROGRESS](https://github.com/rodsmade/Projets_42_SP/blob/main/README_ptbr.md)
 
 # 42sp Projects
 All projects developed at 42 school in São Paulo, Brazil.
