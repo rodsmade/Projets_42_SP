@@ -16,7 +16,7 @@ All projects developed at 42 school in São Paulo, Brazil.
 
 # What is 42
 
-> "The 42 program is a college-level software engineering/coding program in a professional environment. There are no classes, teachers, or courses: we use **project-based learning**, skills mastery, **peer-to-peer correction**, and **gamification** to foster learning. Major learning milestones are expressed as levels of experience rather than years; your individual experience sets the pace for learning."
+> *"There are no classes, teachers, or courses: we use **project-based learning**, skills **mastery**, **peer-to-peer correction**, and **gamification** to foster learning. Major learning milestones are expressed as levels of experience rather than years; your individual experience sets the pace for learning."*
 _[Official brochure](https://www.42.us.org/wp-content/uploads/2020/01/42-Booklet-Spring-2020.pdf)_
 
 ![42 Galaxy - the holy graph](https://user-images.githubusercontent.com/49699403/209717594-ea05be2d-14d7-42e1-a4db-22ea612d251c.png)
@@ -42,11 +42,11 @@ All projects in phase 1 are individual deliberables. Starting in phase 2, for so
 
 |   	|   	|   	|
 |---	|---	|---	|
-| **[libft](https://github.com/rodsmade/Libft-42sp)** 	| Static library, Makefile. 	| Build your own basic C static library, which will be used throughout the rest of the programme. The ```ft_*``` functions mostly mimic the behaviour of the traditional C functions, and must be written using at most ```write()``` and ```malloc()```.	|
+| **[libft](https://github.com/rodsmade/Libft-42sp)** 	| Static library, Makefile. 	| Build your own basic C static library, which will be used throughout the rest of the programme. Some of the ```ft_*``` functions mostly mimic the behaviour of the traditional C functions, while others are custom-made. All functions must be written using at most ```write()``` and ```malloc()```.	|
 | **[get_next_line](https://github.com/rodsmade/Get_Next_Line-42sp)** 	| File descriptors and static+dynamic memory allocation. 	| Read from a file descriptor and deliver one line, that is, a ```\n```-terminated string of chars. This project is later incorporated into Libft.	|
 | **[ft_printf](https://github.com/rodsmade/Ft_Printf-42sp.git)** 	| Formatting string and variable args. 	| Build your own version of ```printf```! This project is later incorporated into Libft.	|
 | **[Born2BeRoot](https://github.com/rodsmade/Born2BeRoot-42sp)** 	| Virtualisation. 	| Set up an SSH server running on Linux with basic system administration, strong password rules, encryption, and more.	|
-| **[So_Long](https://github.com/rodsmade/So_long-42sp)** / fractol / fdf 	| Window rendering and keyboard+mouse events management. 	| First steps into rendering graphics on the screen! A choice between rendering either fractals (`fractol`), 3D wireframes (`fdf`) or a 2D top-down video game (`so_long`).	|
+| **[So_Long](https://github.com/rodsmade/So_long-42sp)** / fractol / fdf 	| Window rendering and keyboard+mouse events management. 	| First steps into rendering graphics on the screen! A choice between rendering either fractals (`fractol`), 3D wireframes (`fdf`) or a 2D top-down video game (`so_long`). The proprietary Minilibx library (an X11 API) is used in these projects.	|
 | **[pipex](https://github.com/rodsmade/Pipex-42sp)** / minitalk 	| An intro to Unix Processes in C. 	| A choice between having a client/server pair of processes exchanging data (`minitalk`), or simulating the pipe operator (`\|`) in Bash using C pipes and forks (`pipex`).	|
 
 
@@ -54,15 +54,15 @@ All projects in phase 1 are individual deliberables. Starting in phase 2, for so
 |   	|   	|   	|
 |---	|---	|---	|
 | **[Push_Swap](https://github.com/rodsmade/Push_Swap-42sp.git)** 	| Sorting algorithms and stacks. 	| A list of unordered numbers must be taken in and sorted out, with a twist: the numbers must be sorted by means of using exactly `two stacks`, and a set of 11 stipulated stack operations.	|
-| **[Minishell](https://github.com/rodsmade/Minishell-42sp)** :restroom: 	| A minified version of a Bash shell written in C. 	| Including basic parsing of pipes and redirections, built-ins, and support for commands execution via $PATH or absolute paths.	|
-| **[Philosophers](https://github.com/rodsmade/Philosophers-42sp)** 	| Multithreading in C. 	| Solving the famous dining philosophers problem proposed by Dijkstra.	|
-| **Netpractice** 	| Networking and routing. 	| A set of problems simulating LAN's and networks with internet access. A basic understanding of IP addresses and routing tables is needed to solve each and every problem in under 15 minutes altogether.	|
+| **[Minishell](https://github.com/rodsmade/Minishell-42sp)** :restroom: 	| A minified version of a Bash shell written in C. 	| Including basic parsing of pipes and redirections, built-ins, and support for commands execution via `$PATH` or absolute paths.	|
+| **[Philosophers](https://github.com/rodsmade/Philosophers-42sp)** 	| Multithreading in C. 	| Solving the famous dining philosophers problem proposed by Dijkstra, avoiding data races and deadlocks.	|
+| **Netpractice** 	| Networking and routing. 	| A set of problems simulating LAN's and networks with Internet access. A basic understanding of IP addresses and routing tables is needed to solve each and every problem in under 15 minutes altogether.	|
 | **[Cub3d](https://github.com/rodsmade/Cub3D-42sp)** / miniRT :restroom: 	| Raycasting and Raytracing 	| Deeper study of graphics computing using a LibX interface to code either of a raycasting (`cub3d`) or a raytracing (`miniRT`) engine.	|
 
 ## Phase 3
 |   	|   	|   	|
 |---	|---	|---	|
-| **CPP**	| Object Oriented Programming.	| 9 sets of exercises to guide a hands-on study on classical POO concepts.	|
+| **CPP**	| Object Oriented Programming.	| 9 sets of exercises to guide a hands-on study on classical OOP concepts.	|
 | **ft_containers**	| Classical data structures	| Build your own replica of selected C++ Standard Library containers: vectors, maps, stacks and black-red binary trees, implementing class definitions, iterators, operators overload and more.	|
 | **inception** :restroom:	| Containerisation of a simple web application.	| Using `docker-compose` and `Dockerfile`, students must set up a network with services needed to run a Wordpress server (including static html files and a database).	|
 | **webserv / ft_irc** :restroom:	| Internet Protocols in C++.	| Either build an HTTP server to serve a static file (`webserv`) or build an IRC server running over TCP/IP (`ft_irc`). 	|
