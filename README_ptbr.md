@@ -1,4 +1,4 @@
-[English 💂](https://github.com/rodsmade/Projets_42_SP/blob/main/README.md) | [Français 🥐](https://github.com/rodsmade/Projets_42_SP/blob/main/README_fr.md) | Português 🌵
+[English 💂](https://github.com/rodsmade/Projets_42_SP/blob/main/README.md) | [Français 🥐 - EM CONSTRUÇÃO](https://github.com/rodsmade/Projets_42_SP/blob/main/README_fr.md) | Português 🌵
 
 # Projetos na 42sp
 Todos os projetos desenvolvidos na escola 42 São Paulo.
