@@ -43,7 +43,7 @@ Todos os projetos da fase 1 são individuais. A partir da fase 2, tripulantes da
 
 ## Fase 1
 
-|   	|   	|   	|
+|   nome	|   assunto	|   resumo	|
 |---	|---	|---	|
 | **[libft](https://github.com/rodsmade/Libft-42sp)** 	| Biblioteca estática, Makefile. 	| Construa sua própria biblioteca de funções básicas em C, que será utilizada por todo o resto do *common core*. Algumas funções ```ft_*``` são réplicas de funções tradicionais da libC, outras são personalizadas, e todas devem ser escritas usando no máximo ```write()``` e ```malloc()```.	|
 | **[get_next_line](https://github.com/rodsmade/Get_Next_Line-42sp)** 	| *File descriptors* e alocação estática/dinâmica de memória. 	| Escreva uma função que lê o conteúdo de um *file descriptor* e retorna uma linha, ou seja, uma sequência de caracteres terminada em ```\n```. Este projeto é subsequentemente incorporado à Libft.	|
@@ -54,16 +54,16 @@ Todos os projetos da fase 1 são individuais. A partir da fase 2, tripulantes da
 
 
 ## Fase 2
-|   	|   	|   	|
+|   nome	|   assunto	|   resumo	|
 |---	|---	|---	|
 | **[Push_Swap](https://github.com/rodsmade/Push_Swap-42sp.git)** 	| Algoritmos de ordenação e pilhas. 	| Uma lista de números desordenados deve ser ordenada, com um detalhe: para serem ordenados, devem-se utilizar exatamente `duas pilhas`, e 11 operações de pilhas pré-determinadas.	|
 | **[Minishell](https://github.com/rodsmade/Minishell-42sp)** :restroom: 	| Uma versão mini de uma shell Bash escrita em C. 	| Inclui a análise léxica e semântica necessária para operar pipelines e redirecionamentos, determinados built-ins, e a estrutura necessária para executar comandos via `$PATH` ou caminhos absolutos.	|
-| **[Philosophers](https://github.com/rodsmade/Philosophers-42sp)** 	| Multithreading in C. 	| Paralelismo com *threads* em C. 	| Resolva o famoso problema do Jantar de Filósofes proposto por Dijkstra, evitando concorrência de dados (*data racing*) e impasses (*deadlocks*).	|
+| **[Philosophers](https://github.com/rodsmade/Philosophers-42sp)** 	| Paralelismo com *threads* em C. 	| Resolva o famoso problema do Jantar de Filósofes proposto por Dijkstra, evitando concorrência de dados (*data racing*) e impasses (*deadlocks*).	|
 | **Netpractice** 	| Redes e roteamento. 	| Uma série de problemas simulando LAN's e redes conectadas à internet. Para resolvê-los (em menos de 15 minutos!) é necessário conhecimento de *endereços IP* e *tabelas de roteamento*.	|
 | **[Cub3d](https://github.com/rodsmade/Cub3D-42sp)** / miniRT :restroom: 	| Renderização 3D 	| Estudo aprofundado sobre computação gráfica para construir um motor de renderização em janelas utilizando a Minilibx. Escolha entre a renderização de perspectivas 3D por meio de raios projetados (*raycasting*, projeto `cub3d`), ou de renderização de objetos 3D com a técnica de contorno por luz e sombra (*raycasting*, projeto `miniRT`).	|
 
 ## Fase 3
-|   	|   	|   	|
+|   nome	|   assunto	|   resumo	|
 |---	|---	|---	|
 | **CPP**	| Programação Orientada a Objetos.	| 9 listas de exercícios para guiar o aprendizado mão-na-massa sobre conceitos clássicos da POO.	|
 | **ft_containers**	| Estruturas de dados clássicas.	| Cosntrua sua própria réplica de alguns *containers* (estruturas de dados) da biblioteca padrão de C++: *vectors*, *maps*, *stacks* e árvore binária rubro-negra, implementando classes, iteradores, *overload* de operadores e mais.	|
