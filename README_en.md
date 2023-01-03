@@ -34,6 +34,10 @@ From that point on, students are orbiting the outermost reaches of the galaxy, f
 
 # Programme Overview
 
+![image](https://user-images.githubusercontent.com/49699403/210290764-7fe036d4-cd88-482f-8a3d-77f5c5b403f7.png)
+
+At its core, the 42 programme intends to train the students not only on the fundamental principles of computer science, but also on how to learn fast and efficiently, so that every student will be able to learn on demand any novel language, framework or paradign, in an ever-changing world.
+
 At 42 São Paulo, the common core is split in 3 main parts, the first two being entirely built using C/Shell scripts, moving on in the 3rd part to Object-Oriented Programming (OOP) with C++ and complementary front-end, back-end and containerisation technologies.
 
 All projects in phase 1 are individual deliberables. Starting in phase 2, for some projects students must team up in pairs or groups and work together to learn and solve problems. Group projects are marked with a :restroom:.
