@@ -33,6 +33,10 @@ A partir deste ponto, tripulantes da nave mãe passam a orbitar os anéis mais d
 
 # Visão geral do currículo
 
+![image](https://user-images.githubusercontent.com/49699403/210290764-7fe036d4-cd88-482f-8a3d-77f5c5b403f7.png)
+
+Fundamentalmente o grande objetivo de aprendizado da 42 é aprender a base e aprender a aprender, de maneira que a trilha básica de fundamentos forma pessoas capazes de aprender rápido qualquer linguagem, framework ou paradigma novo de programação, em um mundo em constante evolução.
+
 Na 42 São Paulo, o *common core* se divide em 3 partes principais. As primeiras duas são desenvolvidas inteiramente em C e Shell Scripts. Na terceira parte há uma mudança para a linguagem C++ e o paradigma de Programação Orientada a Objetos (POO), e tecnologias complementares de front-end, back-end e containerização.
 
 Todos os projetos da fase 1 são individuais. A partir da fase 2, tripulantes da nave-mãe devem se juntar para trabalhar em pares ou em grupos, para trabalhar, aprender e resolver problemas juntes. Os projetos em grupo estão sinalizados com um :restroom:.
