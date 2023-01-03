@@ -44,7 +44,7 @@ All projects in phase 1 are individual deliberables. Starting in phase 2, for so
 
 ## Phase 1
 
-|   	|   	|   	|
+|   name	|   subject	|   synopsis	|
 |---	|---	|---	|
 | **[libft](https://github.com/rodsmade/Libft-42sp)** 	| Static library, Makefile. 	| Build your own basic C static library, which will be used throughout the rest of the programme. Some of the ```ft_*``` functions mostly mimic the behaviour of the traditional C functions, while others are custom-made. All functions must be written using at most ```write()``` and ```malloc()```.	|
 | **[get_next_line](https://github.com/rodsmade/Get_Next_Line-42sp)** 	| File descriptors and static+dynamic memory allocation. 	| Read from a file descriptor and deliver one line, that is, a ```\n```-terminated string of chars. This project is later incorporated into Libft.	|
@@ -55,7 +55,8 @@ All projects in phase 1 are individual deliberables. Starting in phase 2, for so
 
 
 ## Phase 2
-|   	|   	|   	|
+
+|   name	|   subject	|   synopsis	|
 |---	|---	|---	|
 | **[Push_Swap](https://github.com/rodsmade/Push_Swap-42sp.git)** 	| Sorting algorithms and stacks. 	| A list of unordered numbers must be taken in and sorted out, with a twist: the numbers must be sorted by means of using exactly `two stacks`, and a set of 11 stipulated stack operations.	|
 | **[Minishell](https://github.com/rodsmade/Minishell-42sp)** :restroom: 	| A minified version of a Bash shell written in C. 	| Including basic parsing of pipes and redirections, built-ins, and support for commands execution via `$PATH` or absolute paths.	|
@@ -64,7 +65,8 @@ All projects in phase 1 are individual deliberables. Starting in phase 2, for so
 | **[Cub3d](https://github.com/rodsmade/Cub3D-42sp)** / miniRT :restroom: 	| Raycasting and Raytracing 	| Deeper study of graphics computing using a LibX interface to code either of a raycasting (`cub3d`) or a raytracing (`miniRT`) engine.	|
 
 ## Phase 3
-|   	|   	|   	|
+
+|   name	|   subject	|   synopsis	|
 |---	|---	|---	|
 | **CPP**	| Object Oriented Programming.	| 9 sets of exercises to guide a hands-on study on classical OOP concepts.	|
 | **ft_containers**	| Classical data structures	| Build your own replica of selected C++ Standard Library containers: vectors, maps, stacks and black-red binary trees, implementing class definitions, iterators, operators overload and more.	|
